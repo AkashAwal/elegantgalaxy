@@ -212,7 +212,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between max-w-[1440px] mx-auto px-8 lg:px-16 xl:px-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-7 h-7 bg-neutral-900 flex items-center justify-center">
+            <div className="w-7 h-7 bg-neutral-900 rounded-sm flex items-center justify-center">
               <span className="text-white text-[9px] font-bold tracking-wider">EG</span>
             </div>
             <span className="text-[13px] font-semibold text-neutral-900 tracking-[0.07em]">
@@ -252,7 +252,7 @@ export function Navbar() {
             </Link>
             <Link
               href="/store"
-              className="px-5 py-2 text-[12.5px] font-semibold bg-neutral-900 text-white hover:bg-neutral-700 transition-colors duration-200"
+              className="px-5 py-2 text-[12.5px] font-semibold bg-neutral-900 text-white hover:bg-neutral-700 transition-colors duration-200 rounded-md"
             >
               Shop Now
             </Link>
@@ -322,7 +322,7 @@ export function Navbar() {
                       <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400 mb-5">
                         {menuEntry.featured.eyebrow}
                       </p>
-                      <div className="w-full h-28 bg-neutral-100 mb-5 flex items-center justify-center border border-neutral-200">
+                      <div className="w-full h-28 bg-neutral-100 mb-5 flex items-center justify-center border border-neutral-200 rounded-sm">
                         <div className="w-16 h-10 bg-neutral-300 rounded-sm" />
                       </div>
                       <h4 className="text-[14px] font-semibold text-neutral-900 mb-2">
@@ -363,7 +363,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.32, ease }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm bg-white overflow-y-auto pt-16"
+              className="fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm bg-white overflow-y-auto pt-16 rounded-l-md"
             >
               <div className="px-7 py-8">
                 {NAV_ITEMS.map((item) => (
@@ -389,7 +389,7 @@ export function Navbar() {
                 <div className="mt-8">
                   <Link
                     href="/store"
-                    className="block w-full py-3.5 text-center text-[14px] font-semibold bg-neutral-900 text-white"
+                    className="block w-full py-3.5 text-center text-[14px] font-semibold bg-neutral-900 text-white rounded-md"
                   >
                     Shop Now
                   </Link>

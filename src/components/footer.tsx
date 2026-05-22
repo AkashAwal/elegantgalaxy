@@ -166,7 +166,7 @@ export default function Footer() {
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-6 h-6 bg-neutral-900 flex items-center justify-center">
+              <div className="w-6 h-6 bg-neutral-900 rounded-sm flex items-center justify-center">
                 <span className="text-white text-[8px] font-bold tracking-wider">EG</span>
               </div>
               <span className="text-[12.5px] font-semibold text-neutral-700 tracking-[0.07em]">

@@ -46,8 +46,8 @@ function TVSilhouette({ className = "" }: { className?: string }) {
           ))}
         </div>
       </div>
-      <div className="w-8 h-5 bg-neutral-300" />
-      <div className="w-20 h-1.5 bg-neutral-200" />
+      <div className="w-8 h-5 bg-neutral-300 rounded-sm" />
+      <div className="w-20 h-1.5 bg-neutral-200 rounded-full" />
     </div>
   );
 }
@@ -170,7 +170,7 @@ function ProductCard({
 
   return (
     <motion.div
-      className={`relative overflow-hidden cursor-pointer ${product.bg} ${large ? "min-h-[460px]" : "min-h-[240px]"}`}
+      className={`relative overflow-hidden cursor-pointer rounded-sm ${product.bg} ${large ? "min-h-[460px]" : "min-h-[240px]"}`}
       initial="rest"
       whileHover="hover"
       animate="rest"
@@ -335,13 +335,13 @@ export default function Home() {
             >
               <Link
                 href="/store"
-                className="px-8 py-3.5 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200"
+                className="px-8 py-3.5 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200 rounded-md"
               >
                 Shop Products
               </Link>
               <Link
                 href="/televisions"
-                className="px-8 py-3.5 border border-neutral-200 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-300 hover:bg-neutral-50 transition-colors duration-200"
+                className="px-8 py-3.5 border border-neutral-200 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-300 hover:bg-neutral-50 transition-colors duration-200 rounded-md"
               >
                 Explore Televisions
               </Link>
@@ -357,7 +357,7 @@ export default function Home() {
           >
             {/* Main TV */}
             <div className="relative w-full max-w-[420px]">
-              <div className="aspect-video w-full border-2 border-neutral-200 bg-neutral-100 relative overflow-hidden">
+              <div className="aspect-video w-full border-2 border-neutral-200 bg-neutral-100 relative overflow-hidden rounded-sm">
                 <div className="absolute inset-[8%] border border-neutral-200 bg-neutral-50" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-3 opacity-40">
                   <div className="w-8 h-8 border border-neutral-400 rounded-full flex items-center justify-center">
@@ -372,8 +372,8 @@ export default function Home() {
               </div>
               {/* Stand */}
               <div className="flex flex-col items-center">
-                <div className="w-10 h-5 bg-neutral-200" />
-                <div className="w-28 h-1.5 bg-neutral-200" />
+                <div className="w-10 h-5 bg-neutral-200 rounded-sm" />
+                <div className="w-28 h-1.5 bg-neutral-200 rounded-full" />
               </div>
             </div>
 
@@ -487,7 +487,7 @@ export default function Home() {
             </div>
             <Link
               href="/contact"
-              className="shrink-0 px-8 py-3.5 border border-neutral-300 text-[13.5px] font-medium text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 transition-colors duration-250"
+              className="shrink-0 px-8 py-3.5 border border-neutral-300 text-[13.5px] font-medium text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 transition-colors duration-250 rounded-md"
             >
               Contact Sales
             </Link>
@@ -517,7 +517,7 @@ export default function Home() {
               return (
                 <FadeIn key={tech.title} delay={i * 0.08}>
                   <div className="bg-neutral-100 p-8 h-full hover:bg-white transition-colors duration-300 group">
-                    <div className="w-10 h-10 border border-neutral-300 bg-white flex items-center justify-center mb-6 group-hover:border-neutral-400 transition-colors duration-300">
+                    <div className="w-10 h-10 border border-neutral-300 bg-white rounded-sm flex items-center justify-center mb-6 group-hover:border-neutral-400 transition-colors duration-300">
                       <Icon className="w-4.5 h-4.5 text-neutral-500" />
                     </div>
                     <h4 className="text-[14.5px] font-semibold text-neutral-900 mb-3">
@@ -562,13 +562,13 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/about"
-                  className="px-8 py-3.5 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200"
+                  className="px-8 py-3.5 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200 rounded-md"
                 >
                   Our Story
                 </Link>
                 <Link
                   href="/technology"
-                  className="px-8 py-3.5 border border-neutral-200 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-300 transition-colors duration-200"
+                  className="px-8 py-3.5 border border-neutral-200 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-300 transition-colors duration-200 rounded-md"
                 >
                   Engineering Standards
                 </Link>
@@ -672,13 +672,13 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/store"
-                className="px-10 py-4 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200"
+                className="px-10 py-4 bg-neutral-900 text-white text-[13.5px] font-semibold hover:bg-neutral-700 transition-colors duration-200 rounded-md"
               >
                 View All Products
               </Link>
               <Link
                 href="/contact"
-                className="px-10 py-4 border border-neutral-300 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-400 transition-colors duration-200"
+                className="px-10 py-4 border border-neutral-300 text-neutral-700 text-[13.5px] font-medium hover:border-neutral-400 transition-colors duration-200 rounded-md"
               >
                 Find a Store
               </Link>
