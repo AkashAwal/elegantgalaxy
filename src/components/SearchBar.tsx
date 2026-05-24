@@ -139,7 +139,7 @@ export default function SearchBar() {
   const isSuggested = query.trim().length < 2;
 
   return (
-    <section className="w-full bg-brand-cream border-b border-black/8 py-5 px-4">
+    <section className="w-full bg-[#f5f5f7] border-b border-[#e8e8ed] py-5 px-4">
       <div className="relative mx-auto max-w-2xl">
         {/* Input */}
         <div className="relative flex items-center">
