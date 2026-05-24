@@ -68,6 +68,32 @@ export default function Navbar() {
           })}
         </div>
 
+        {/* Right-side CTA buttons — desktop */}
+        <div className="hidden lg:flex items-center gap-2 shrink-0 ml-6">
+          <Link
+            href="/distributors"
+            className="
+              h-7 px-3.5 rounded-full text-[12px] font-medium whitespace-nowrap
+              border border-[#0F1B3D]/25 text-[#0F1B3D]/75
+              hover:border-[#0F1B3D]/50 hover:text-[#0F1B3D]
+              transition-colors
+            "
+          >
+            Find Distributor
+          </Link>
+          <Link
+            href="/distributors/apply"
+            className="
+              h-7 px-3.5 rounded-full text-[12px] font-medium whitespace-nowrap
+              bg-[#0F1B3D] text-white
+              hover:bg-[#1a2d5a]
+              transition-colors
+            "
+          >
+            Become Distributor
+          </Link>
+        </div>
+
         {/* Spacer on small screens */}
         <div className="flex-1 lg:hidden" />
 
@@ -101,6 +127,36 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* CTA buttons at bottom of mobile menu */}
+          <div className="flex gap-3 px-6 py-4">
+            <Link
+              href="/distributors"
+              onClick={() => setMenuOpen(false)}
+              className="
+                flex-1 h-10 flex items-center justify-center rounded-full
+                text-[13px] font-medium
+                border border-[#0F1B3D]/25 text-[#0F1B3D]/75
+                hover:border-[#0F1B3D]/50 hover:text-[#0F1B3D]
+                transition-colors
+              "
+            >
+              Find Distributor
+            </Link>
+            <Link
+              href="/distributors/apply"
+              onClick={() => setMenuOpen(false)}
+              className="
+                flex-1 h-10 flex items-center justify-center rounded-full
+                text-[13px] font-medium
+                bg-[#0F1B3D] text-white
+                hover:bg-[#1a2d5a]
+                transition-colors
+              "
+            >
+              Become Distributor
+            </Link>
+          </div>
         </nav>
       )}
     </header>
