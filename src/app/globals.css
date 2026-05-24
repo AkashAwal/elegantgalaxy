@@ -185,38 +185,43 @@
   --radius-sm:            4px;
 }
 
-/* ── Base HTML reset (matches Apple's html/body declarations) ───────────── */
-html {
-  /*
-   * Apple sets 106.25% on <html> so 1 rem = 17 px.
-   * This aligns rem units with Apple's 17 px body-text baseline.
-   */
-  font-size: 106.25%;
-}
+/*
+ * ── Base HTML reset ────────────────────────────────────────────────────────
+ * Placed in @layer base so Tailwind utility classes (in @layer utilities)
+ * always win — e.g. text-[#0F1B3D] on nav links overrides a { color }.
+ */
+@layer base {
+  html {
+    /*
+     * Apple sets 106.25% on <html> so 1 rem = 17 px.
+     * This aligns rem units with Apple's 17 px body-text baseline.
+     */
+    font-size: 106.25%;
+  }
 
-body {
-  background-color: var(--fill);
-  color:            var(--glyph-primary);
-  font-family:      var(--font-sans, "SF Pro Text", -apple-system, BlinkMacSystemFont,
-                    "Helvetica Neue", Helvetica, Arial, sans-serif);
-  /* Apple uses subpixel antialiasing globally */
-  -webkit-font-smoothing:  antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    background-color: var(--fill);
+    color:            var(--glyph-primary);
+    font-family:      var(--font-sans, "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                      "Helvetica Neue", Helvetica, Arial, sans-serif);
+    -webkit-font-smoothing:  antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* ── Links (Apple default) ──────────────────────────────────────────────── */
-a {
-  color:           var(--glyph-blue, #06c);
-  text-decoration: none;
-}
+  /* Default link style — only applies when no colour utility is on the element */
+  a {
+    color:           var(--glyph-blue, #06c);
+    text-decoration: none;
+  }
 
-a:hover {
-  text-decoration: underline;
-}
+  a:hover {
+    text-decoration: underline;
+  }
 
-/* ── Focus ring (Apple style) ───────────────────────────────────────────── */
-:focus-visible {
-  outline:        2px solid var(--focus-color, #0071e3);
-  outline-offset: var(--focus-offset, 1px);
-  border-radius:  var(--radius-sm, 4px);
+  /* Focus ring */
+  :focus-visible {
+    outline:        2px solid var(--focus-color, #0071e3);
+    outline-offset: var(--focus-offset, 1px);
+    border-radius:  var(--radius-sm, 4px);
+  }
 }
