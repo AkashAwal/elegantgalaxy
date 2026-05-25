@@ -1,0 +1,285 @@
+"use client";
+
+import Link from "next/link";
+import { useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { ReactNode, CSSProperties } from "react";
+
+// ── Icons ──────────────────────────────────────────────────────────────────────
+
+function IconWarranty() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path d="M18 3L5 8v10c0 8.28 5.6 16.02 13 18 7.4-1.98 13-9.72 13-18V8L18 3z"
+        fill="#C8A951" fillOpacity="0.15" stroke="#C8A951" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M13 18l3.5 3.5L23 14" stroke="#C8A951" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconEnergy() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#bbf7d0" />
+      <path d="M20 6l-8 14h7l-3 10 8-14h-7l3-10z" fill="#16a34a" />
+    </svg>
+  );
+}
+function IconEMI() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect x="4" y="9" width="28" height="18" rx="4" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.6" />
+      <rect x="4" y="14" width="28" height="5" fill="#3b82f6" fillOpacity="0.25" />
+      <rect x="8" y="21" width="8" height="2.5" rx="1.25" fill="#3b82f6" />
+      <rect x="20" y="21" width="4" height="2.5" rx="1.25" fill="#3b82f6" />
+      <rect x="26" y="21" width="4" height="2.5" rx="1.25" fill="#3b82f6" />
+    </svg>
+  );
+}
+function IconInstall() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#fef3c7" />
+      <path d="M23.5 12.5a5 5 0 0 0-7 7l-5 5 2 2 5-5a5 5 0 0 0 7-7l-3 3-2-2 3-3z"
+        fill="#d97706" />
+    </svg>
+  );
+}
+function IconService() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#ede9fe" />
+      <path d="M18 9a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" fill="#7c3aed" />
+      <path d="M9 27c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconCertified() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#fce7f3" />
+      <path d="M18 6l2.5 6.5H27l-5.5 4 2 6.5L18 19l-5.5 4 2-6.5L9 12.5h6.5L18 6z"
+        fill="#db2777" />
+    </svg>
+  );
+}
+function IconSupport() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#ccfbf1" />
+      <path d="M10 18a8 8 0 0 1 16 0" stroke="#0d9488" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      <rect x="8" y="18" width="4" height="6" rx="2" fill="#0d9488" />
+      <rect x="24" y="18" width="4" height="6" rx="2" fill="#0d9488" />
+    </svg>
+  );
+}
+function IconReturns() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#fff7ed" />
+      <path d="M11 18a7 7 0 0 1 12-4.9" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <path d="M25 18a7 7 0 0 1-12 4.9" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <path d="M9 13l2 5 5-2" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M27 23l-2-5-5 2" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function IconDelivery() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="14" fill="#dbeafe" />
+      <rect x="7" y="14" width="14" height="10" rx="2" fill="#2563eb" />
+      <path d="M21 16h4l4 4v4h-8V16z" fill="#1d4ed8" />
+      <circle cx="12" cy="26" r="2.5" fill="#1e40af" />
+      <circle cx="26" cy="26" r="2.5" fill="#1e40af" />
+    </svg>
+  );
+}
+function IconAward() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="16" r="10" fill="#fef9c3" stroke="#ca8a04" strokeWidth="1.6" />
+      <path d="M18 10l1.8 5.4h5.7l-4.6 3.4 1.8 5.4L18 21l-4.7 3.2 1.8-5.4-4.6-3.4h5.7L18 10z"
+        fill="#ca8a04" />
+      <path d="M13 25l-2 7h14l-2-7" stroke="#ca8a04" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
+
+// ── Card data ──────────────────────────────────────────────────────────────────
+
+type DiffCard = {
+  icon:     ReactNode;
+  title:    string;
+  desc:     string;
+  href:     string;
+};
+
+const CARDS: DiffCard[] = [
+  { icon:<IconWarranty />,  title:"5-Year Warranty",         desc:"Every product backed by our industry-leading 5-year warranty.",          href:"/support/warranty"              },
+  { icon:<IconEnergy />,    title:"Energy Efficient",         desc:"5-star rated appliances that save electricity without sacrificing power.", href:"/products"                      },
+  { icon:<IconEMI />,       title:"No-Cost EMI",              desc:"Split your purchase into easy monthly instalments at zero extra cost.",    href:"/distributors/financing"        },
+  { icon:<IconInstall />,   title:"Free Installation",        desc:"Expert technicians set everything up — free of charge, at your doorstep.",href:"/support"                       },
+  { icon:<IconService />,   title:"200+ Service Centres",     desc:"Nationwide network so expert help is always close to home.",              href:"/support/service-centres"       },
+  { icon:<IconCertified />, title:"ISI Certified",            desc:"Safety and quality certified by the Bureau of Indian Standards.",         href:"/products"                      },
+  { icon:<IconSupport />,   title:"24 / 7 Support",           desc:"Our customer care team is available around the clock, every day.",        href:"/contact"                       },
+  { icon:<IconReturns />,   title:"30-Day Returns",           desc:"Not happy? Return any product within 30 days, no questions asked.",       href:"/support"                       },
+  { icon:<IconDelivery />,  title:"Pan-India Delivery",       desc:"Fast, tracked delivery to every pin code across the country.",            href:"/distributors"                  },
+  { icon:<IconAward />,     title:"Award-Winning Design",     desc:"Recognised for design excellence at national and international forums.",   href:"/about"                         },
+];
+
+const LOOPED = [...CARDS, ...CARDS];
+
+// ── 3D tilt card (lighter tilt for the shorter card height) ───────────────────
+
+function TiltCard({
+  href,
+  children,
+  style,
+}: {
+  href: string;
+  children: ReactNode;
+  style?: CSSProperties;
+}) {
+  const cardRef  = useRef<HTMLAnchorElement>(null);
+  const glossRef = useRef<HTMLDivElement>(null);
+  const rafRef   = useRef<number | null>(null);
+
+  const onMouseEnter = () => {
+    const el = cardRef.current;
+    const gl = glossRef.current;
+    if (el) {
+      el.style.transition = "transform 0.22s ease-out, box-shadow 0.22s ease-out";
+      el.style.transform  = "translateY(-6px) scale(1.02)";
+      el.style.boxShadow  = "0 16px 40px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.07)";
+    }
+    if (gl) gl.style.opacity = "0";
+  };
+
+  const onMouseLeave = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const el = cardRef.current;
+    const gl = glossRef.current;
+    if (el) {
+      el.style.transition = "transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease";
+      el.style.transform  = "translateY(0) scale(1)";
+      el.style.boxShadow  = "0 2px 10px rgba(0,0,0,0.07)";
+    }
+    if (gl) gl.style.opacity = "0";
+  };
+
+  return (
+    <Link
+      ref={cardRef}
+      href={href}
+      className="relative flex-shrink-0 overflow-hidden rounded-[18px]"
+      style={{ willChange: "transform", boxShadow: "0 2px 10px rgba(0,0,0,0.07)", ...style }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {children}
+      <div ref={glossRef} className="absolute inset-0 pointer-events-none rounded-[18px]"
+           style={{ opacity: 0, transition: "opacity 0.35s ease" }} />
+    </Link>
+  );
+}
+
+// ── Section ────────────────────────────────────────────────────────────────────
+
+export default function DifferenceSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const half = el.scrollWidth / 2;
+      if (el.scrollLeft >= half) el.scrollLeft -= half;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollRight = () => scrollRef.current?.scrollBy({ left:  300, behavior: "smooth" });
+  const scrollLeft  = () => scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+
+  return (
+    <section className="w-full pb-16">
+
+      {/* Heading */}
+      <div className="mx-auto max-w-[1440px] px-8 mb-7">
+        <h2 style={{ fontSize: 28, fontWeight: 600, letterSpacing: "-0.02em" }}>
+          <span className="text-[#1d1d1f]">The Elegant difference.&nbsp;</span>
+          <span className="text-[#6e6e73]">Even more reasons to shop with us.</span>
+        </h2>
+      </div>
+
+      {/* Full-width carousel */}
+      <div className="relative w-full">
+        <div
+          ref={scrollRef}
+          className="flex gap-3 overflow-x-auto"
+          style={{
+            scrollbarWidth:  "none",
+            msOverflowStyle: "none",
+            paddingLeft:     "calc(max((100vw - 1440px) / 2, 0px) + 2rem)",
+            paddingRight:    "2rem",
+            paddingTop:      "16px",
+            paddingBottom:   "36px",
+            marginTop:       "-16px",
+            marginBottom:    "-36px",
+          }}
+        >
+          {LOOPED.map((card, i) => (
+            <TiltCard
+              key={i}
+              href={card.href}
+              style={{ minWidth: 280, height: 250, background: "#fff" }}
+            >
+              {/* Card content */}
+              <div className="flex flex-col h-full px-7 pt-7 pb-6">
+                <div className="mb-4">{card.icon}</div>
+                <p
+                  className="text-[#1d1d1f] font-semibold mb-2 leading-snug"
+                  style={{ fontSize: 17, letterSpacing: "-0.01em" }}
+                >
+                  {card.title}
+                </p>
+                <p
+                  className="text-[#6e6e73] leading-snug"
+                  style={{ fontSize: 13 }}
+                >
+                  {card.desc}
+                </p>
+              </div>
+            </TiltCard>
+          ))}
+        </div>
+
+        {/* Left arrow */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-3 top-1/2 -translate-y-1/2
+                     w-12 h-12 rounded-full flex items-center justify-center
+                     bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
+                     transition-colors duration-150 shadow-sm"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={22} strokeWidth={2} />
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-3 top-1/2 -translate-y-1/2
+                     w-12 h-12 rounded-full flex items-center justify-center
+                     bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
+                     transition-colors duration-150 shadow-sm"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={22} strokeWidth={2} />
+        </button>
+      </div>
+
+    </section>
+  );
+}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useLayoutEffect } from "react";
 import { Search, X, ArrowRight, Menu } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -199,6 +199,7 @@ const QUICK_LINKS: MegaLink[] = [
 export default function Navbar() {
   const pathname                = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [searchOpen, setSearch] = useState(false);
   const [mobileOpen, setMobile] = useState(false);
   const [query, setQuery]       = useState("");
@@ -251,13 +252,31 @@ export default function Navbar() {
   const activeMega = NAV.find((n) => n.id === activeId)?.mega ?? null;
   const panelOpen  = !!activeMega || searchOpen;
 
+  // Keep last known mega content around so the exit animation has something to fade out
+  const lastMegaRef = useRef<MegaColumn[] | null>(null);
+  if (activeMega) lastMegaRef.current = activeMega;
+  const displayMega = activeMega ?? lastMegaRef.current;
+
+  // Refs for smooth height animation between panels of different heights
+  const megaPanelRef = useRef<HTMLDivElement>(null);
+  const megaInnerRef = useRef<HTMLDivElement>(null);
+
+  // Runs synchronously after every render — reads the new content height and
+  // updates the outer panel's explicit height so the CSS transition can animate it.
+  useLayoutEffect(() => {
+    const panel = megaPanelRef.current;
+    const inner = megaInnerRef.current;
+    if (!panel || !inner) return;
+    panel.style.height = activeMega ? `${inner.scrollHeight}px` : "0px";
+  }, [activeMega]);
+
   // ── render ───────────────────────────────────────────────────────────────
 
   return (
     <>
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header
-        className="sticky top-0 z-50"
+        className="sticky top-0 z-50 relative"
         onMouseLeave={scheduleMegaClose}
         onMouseEnter={cancelClose}
         style={{
@@ -269,12 +288,17 @@ export default function Navbar() {
         }}
       >
         {/* ── Top nav bar ──────────────────────────────────────────────────── */}
-        <div className="mx-auto max-w-[1024px] px-4 flex items-center h-11 gap-0">
+        {/*
+          The nav is position:absolute so it centres in the full container width
+          completely independently of the logo or button sizes.
+          Logo and buttons stay in normal flow (z-10) and never compete.
+        */}
+        <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between h-11">
 
-          {/* Logo */}
+          {/* ── Logo — extreme left ───────────────────────────────────────── */}
           <Link
             href="/"
-            className="shrink-0 flex items-center gap-[7px] mr-auto lg:mr-0"
+            className="shrink-0 flex items-center gap-[7px]"
             aria-label="Elegant Galaxy home"
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -291,15 +315,20 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop links */}
-          <nav className="hidden lg:flex items-center flex-1 justify-center">
-            {NAV.map((item) => {
-              const isActive = item.id === activeId;
-              // dim all items when a panel is open and this one isn't the active
-              const dimmed   = panelOpen && !isActive;
+          {/* ── Nav links + search — middle (desktop only) ───────────────── */}
+          {/* justify-between on the parent gives equal gap left and right of this element */}
+          <nav
+            className="hidden lg:flex items-center"
+            onMouseLeave={() => { scheduleMegaClose(); setHoveredId(null); }}
+            onMouseEnter={cancelClose}
+          >
+            {/* "Home" excluded — the logo already links to "/" */}
+            {NAV.filter((item) => item.id !== "home").map((item) => {
+              // dim every item that isn't the one currently under the cursor
+              const dimmed = hoveredId !== null && item.id !== hoveredId;
 
               const linkCls = `
-                relative px-[10px] h-11 inline-flex items-center
+                relative px-[9px] h-11 inline-flex items-center
                 text-[14px] text-[#1d1d1f] whitespace-nowrap
                 cursor-pointer select-none
                 transition-opacity duration-150
@@ -310,7 +339,7 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   className={linkCls}
-                  onMouseEnter={() => openMega(item.id)}
+                  onMouseEnter={() => { openMega(item.id); setHoveredId(item.id); }}
                 >
                   {item.label}
                 </button>
@@ -319,71 +348,22 @@ export default function Navbar() {
                   key={item.id}
                   href={item.href}
                   className={linkCls}
-                  onMouseEnter={closeMega}
+                  onMouseEnter={() => { closeMega(); setHoveredId(item.id); }}
                 >
                   {item.label}
                 </Link>
               );
             })}
-          </nav>
 
-          {/* Desktop — distributor buttons + search */}
-          <div className="hidden lg:flex items-center gap-2.5 ml-4" onMouseEnter={closeMega}>
-
-            {/* Ghost glass pill */}
-            <Link
-              href="/distributors"
-              className="relative flex items-center h-[30px] px-4 rounded-full overflow-hidden
-                         whitespace-nowrap select-none transition-all duration-200
-                         hover:scale-[1.03] active:scale-[0.98]"
-              style={{ fontSize: 13, fontWeight: 500, color: "rgba(29,29,31,0.78)" }}
-            >
-              {/* glass layer */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: "rgba(255,255,255,0.62)",
-                  backdropFilter: "blur(12px) saturate(160%)",
-                  WebkitBackdropFilter: "blur(12px) saturate(160%)",
-                  border: "1px solid rgba(255,255,255,0.85)",
-                  boxShadow:
-                    "0 1px 3px rgba(0,0,0,0.07), 0 0 0 0.5px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.95)",
-                }}
-              />
-              <span className="relative">Find a Distributor</span>
-            </Link>
-
-            {/* Filled glass pill — slightly more opaque */}
-            <Link
-              href="/distributors/apply"
-              className="relative flex items-center h-[30px] px-4 rounded-full overflow-hidden
-                         whitespace-nowrap select-none transition-all duration-200
-                         hover:scale-[1.03] active:scale-[0.98]"
-              style={{ fontSize: 13, fontWeight: 600, color: "rgba(29,29,31,0.9)" }}
-            >
-              {/* glass layer — denser white */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: "rgba(255,255,255,0.82)",
-                  backdropFilter: "blur(16px) saturate(180%)",
-                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                  border: "1px solid rgba(255,255,255,0.95)",
-                  boxShadow:
-                    "0 1px 4px rgba(0,0,0,0.09), 0 0 0 0.5px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,1)",
-                }}
-              />
-              <span className="relative">Become a Distributor</span>
-            </Link>
-
-            {/* Search icon */}
+            {/* Search icon — also participates in the fade-others effect */}
             <button
               onClick={toggleSearch}
-              className="flex items-center justify-center w-9 h-9 rounded-full
-                         text-[#1d1d1f] opacity-70 hover:opacity-100
-                         transition-opacity duration-150 ml-1"
+              onMouseEnter={() => { closeMega(); setHoveredId("__search__"); }}
+              className={`flex items-center justify-center w-9 h-9 rounded-full
+                         text-[#1d1d1f] transition-opacity duration-150 ml-1
+                         ${hoveredId !== null && hoveredId !== "__search__"
+                           ? "opacity-35"
+                           : "opacity-70 hover:opacity-100"}`}
               aria-label={searchOpen ? "Close search" : "Search"}
             >
               {searchOpen
@@ -391,140 +371,214 @@ export default function Navbar() {
                 : <Search size={17} strokeWidth={1.75} />
               }
             </button>
+          </nav>
+
+          {/* ── Right side — buttons (desktop) + controls (mobile) ────────── */}
+          <div className="flex items-center gap-2.5">
+
+            {/* Desktop buttons */}
+            <div className="hidden lg:flex items-center gap-2.5" onMouseEnter={closeMega}>
+
+              {/* Ghost blue pill */}
+              <Link
+                href="/distributors"
+                className="flex items-center h-[30px] px-4 rounded-full
+                           whitespace-nowrap select-none transition-all duration-200
+                           "
+                style={{
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: "#0071e3",
+                  border: "1.5px solid #0071e3",
+                }}
+              >
+                Find a Distributor
+              </Link>
+
+              {/* Solid blue pill */}
+              <Link
+                href="/distributors/apply"
+                className="flex items-center h-[30px] px-4 rounded-full
+                           whitespace-nowrap select-none transition-all duration-200
+                           hover:brightness-110"
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: "#ffffff",
+                  background: "#0071e3",
+                }}
+              >
+                Become a Distributor
+              </Link>
+            </div>
+
+            {/* Mobile controls */}
+            <button
+              onClick={toggleSearch}
+              className="lg:hidden flex items-center justify-center w-10 h-11 text-[#1d1d1f] opacity-80"
+              aria-label="Search"
+            >
+              <Search size={18} strokeWidth={1.75} />
+            </button>
+            <button
+              onClick={() => setMobile((o) => !o)}
+              className="lg:hidden flex items-center justify-center w-10 h-11 text-[#1d1d1f] opacity-80"
+              aria-label="Menu"
+            >
+              {mobileOpen ? <X size={18} strokeWidth={1.75} /> : <Menu size={18} strokeWidth={1.75} />}
+            </button>
           </div>
 
-          {/* Mobile search */}
-          <button
-            onClick={toggleSearch}
-            className="lg:hidden flex items-center justify-center w-10 h-11 text-[#1d1d1f] opacity-80"
-            aria-label="Search"
-          >
-            <Search size={18} strokeWidth={1.75} />
-          </button>
-
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobile((o) => !o)}
-            className="lg:hidden flex items-center justify-center w-10 h-11 text-[#1d1d1f] opacity-80"
-            aria-label="Menu"
-          >
-            {mobileOpen ? <X size={18} strokeWidth={1.75} /> : <Menu size={18} strokeWidth={1.75} />}
-          </button>
         </div>
 
         {/* ── Bottom border ────────────────────────────────────────────────── */}
         <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
 
-        {/* ── Mega-menu panel ──────────────────────────────────────────────── */}
-        {activeMega && (
-          <div onMouseEnter={cancelClose}>
-            <div className="mx-auto max-w-[1024px] px-4 py-12">
-              <div className="grid gap-8" style={{ gridTemplateColumns: "2fr 1.1fr 1.1fr" }}>
-                {activeMega.map((col, ci) => (
-                  <div key={ci}>
-                    {/* Column heading */}
-                    <p
-                      className="mb-4 text-[#6e6e73]"
-                      style={{ fontSize: 13 }}
-                    >
-                      {col.heading}
-                    </p>
+        {/* ── Mega-menu panel — always mounted, fades in/out via CSS transition ── */}
+        <div
+          ref={megaPanelRef}
+          className="absolute left-0 right-0 overflow-hidden"
+          style={{
+            top: "100%",
+            zIndex: 50,
+            background: "rgba(251,251,253,1)",
+            height: 0,  /* JS-managed; useLayoutEffect animates this */
+            opacity:   activeMega ? 1 : 0,
+            transform: activeMega ? "translateY(0)" : "translateY(-6px)",
+            transition: "height 0.28s ease, opacity 0.22s ease, transform 0.22s ease",
+            pointerEvents: activeMega ? "auto" : "none",
+          }}
+          onMouseEnter={cancelClose}
+        >
+          {/* inner ref is what useLayoutEffect measures for scrollHeight */}
+          <div ref={megaInnerRef}>
+          {displayMega && (
+            <>
+              <div className="mx-auto max-w-[1440px] px-6 py-12">
+                <div className="grid gap-8" style={{ gridTemplateColumns: "2fr 1.1fr 1.1fr" }}>
+                  {displayMega.map((col, ci) => (
+                    <div key={ci}>
+                      <p className="mb-4 text-[#6e6e73]" style={{ fontSize: 13 }}>
+                        {col.heading}
+                      </p>
 
-                    {/* Primary links — large bold (col 0 only) */}
-                    {col.primary && (
-                      <div className="flex flex-col mb-5">
-                        {col.primary.map((lnk) => (
+                      {col.primary && (
+                        <div className="flex flex-col mb-5">
+                          {col.primary.map((lnk) => (
+                            <Link
+                              key={lnk.href}
+                              href={lnk.href}
+                              onClick={closeMega}
+                              className="text-[#1d1d1f] font-semibold leading-snug py-[3px]
+                                         hover:text-[#1d1d1f]/50 transition-colors"
+                              style={{ fontSize: 24 }}
+                            >
+                              {lnk.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="flex flex-col gap-[10px]">
+                        {col.links.map((lnk) => (
                           <Link
                             key={lnk.href}
                             href={lnk.href}
                             onClick={closeMega}
-                            className="text-[#1d1d1f] font-semibold leading-snug py-[3px]
-                                       hover:text-[#1d1d1f]/50 transition-colors"
-                            style={{ fontSize: 24 }}
+                            className="text-[#1d1d1f] font-semibold hover:text-[#1d1d1f]/50 transition-colors"
+                            style={{ fontSize: 15 }}
                           >
                             {lnk.label}
                           </Link>
                         ))}
                       </div>
-                    )}
-
-                    {/* Regular links */}
-                    <div className="flex flex-col gap-[10px]">
-                      {col.links.map((lnk) => (
-                        <Link
-                          key={lnk.href}
-                          href={lnk.href}
-                          onClick={closeMega}
-                          className="text-[#1d1d1f] font-semibold hover:text-[#1d1d1f]/50 transition-colors"
-                          style={{ fontSize: 15 }}
-                        >
-                          {lnk.label}
-                        </Link>
-                      ))}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
-          </div>
-        )}
+              <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
+            </>
+          )}
+          </div>{/* end megaInnerRef */}
+        </div>
 
-        {/* ── Search panel ─────────────────────────────────────────────────── */}
-        {searchOpen && (
-          <div>
-            <div className="mx-auto max-w-[1024px] px-4 pt-5 pb-10">
-              {/* Input row */}
-              <div className="flex items-center gap-3 mb-6 pb-px border-b border-[rgba(0,0,0,0)]">
-                <Search size={20} className="text-[#6e6e73] shrink-0" strokeWidth={1.75} />
-                <input
-                  ref={searchRef}
-                  type="search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search elegant-galaxy.com"
-                  className="flex-1 bg-transparent outline-none text-[#1d1d1f] placeholder:text-[#6e6e73]"
-                  style={{ fontSize: 26 }}
-                  autoComplete="off"
-                />
-                {query && (
-                  <button
-                    onClick={() => { setQuery(""); searchRef.current?.focus(); }}
-                    className="text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
-                  >
-                    <X size={16} strokeWidth={1.75} />
-                  </button>
-                )}
-              </div>
-
-              {/* Quick links */}
-              <p className="text-[#6e6e73] mb-4" style={{ fontSize: 13 }}>
-                Quick Links
-              </p>
-              <div className="flex flex-col">
-                {QUICK_LINKS.map((lnk) => (
-                  <Link
-                    key={lnk.href}
-                    href={lnk.href}
-                    onClick={() => setSearch(false)}
-                    className="flex items-center gap-2 py-2 text-[#1d1d1f] font-semibold
-                               hover:text-[#1d1d1f]/50 transition-colors group"
-                    style={{ fontSize: 16 }}
-                  >
-                    <ArrowRight
-                      size={13}
-                      strokeWidth={2}
-                      className="text-[#6e6e73] group-hover:translate-x-0.5 transition-transform"
-                    />
-                    {lnk.label}
-                  </Link>
-                ))}
-              </div>
+        {/* ── Search panel — always mounted, fades in/out via CSS transition ─── */}
+        <div
+          className="absolute left-0 right-0"
+          style={{
+            top: "100%",
+            zIndex: 50,
+            background: "rgba(251,251,253,1)",
+            opacity:   searchOpen ? 1 : 0,
+            transform: searchOpen ? "translateY(0)" : "translateY(-6px)",
+            transition: "opacity 0.22s ease, transform 0.22s ease",
+            pointerEvents: searchOpen ? "auto" : "none",
+          }}
+        >
+          <div className="mx-auto max-w-[1440px] px-6 pt-5 pb-10">
+            <div className="flex items-center gap-3 mb-6 pb-px border-b border-[rgba(0,0,0,0)]">
+              <Search size={20} className="text-[#6e6e73] shrink-0" strokeWidth={1.75} />
+              <input
+                ref={searchRef}
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search elegant-galaxy.com"
+                className="flex-1 bg-transparent outline-none text-[#1d1d1f] placeholder:text-[#6e6e73]"
+                style={{ fontSize: 26 }}
+                autoComplete="off"
+              />
+              {query && (
+                <button
+                  onClick={() => { setQuery(""); searchRef.current?.focus(); }}
+                  className="text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+                >
+                  <X size={16} strokeWidth={1.75} />
+                </button>
+              )}
             </div>
-            <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
+
+            <p className="text-[#6e6e73] mb-4" style={{ fontSize: 13 }}>
+              Quick Links
+            </p>
+            <div className="flex flex-col">
+              {QUICK_LINKS.map((lnk) => (
+                <Link
+                  key={lnk.href}
+                  href={lnk.href}
+                  onClick={() => setSearch(false)}
+                  className="flex items-center gap-2 py-2 text-[#1d1d1f] font-semibold
+                             hover:text-[#1d1d1f]/50 transition-colors group"
+                  style={{ fontSize: 16 }}
+                >
+                  <ArrowRight
+                    size={13}
+                    strokeWidth={2}
+                    className="text-[#6e6e73] group-hover:translate-x-0.5 transition-transform"
+                  />
+                  {lnk.label}
+                </Link>
+              ))}
+            </div>
           </div>
-        )}
+          <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
+        </div>
       </header>
+
+      {/* ── Page blur backdrop — always mounted, fades in/out via CSS transition ── */}
+      <div
+        className="fixed inset-0 z-40"
+        style={{
+          top: 45, /* nav bar (44px) + border (1px) */
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          background: "rgba(0,0,0,0.12)",
+          opacity:     panelOpen ? 1 : 0,
+          transition:  "opacity 0.22s ease",
+          pointerEvents: panelOpen ? "auto" : "none",
+        }}
+        onClick={() => { setActiveId(null); setSearch(false); }}
+      />
 
       {/* ── Mobile menu overlay ──────────────────────────────────────────────── */}
       {mobileOpen && (
@@ -554,39 +608,27 @@ export default function Navbar() {
             <div className="flex flex-col gap-3 pt-6 pb-2">
               <Link
                 href="/distributors"
-                className="relative flex items-center justify-center h-11 rounded-full overflow-hidden"
-                style={{ fontSize: 15, fontWeight: 500, color: "rgba(29,29,31,0.8)" }}
+                className="flex items-center justify-center h-11 rounded-full"
+                style={{
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: "#0071e3",
+                  border: "1.5px solid #0071e3",
+                }}
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: "rgba(255,255,255,0.62)",
-                    backdropFilter: "blur(12px) saturate(160%)",
-                    WebkitBackdropFilter: "blur(12px) saturate(160%)",
-                    border: "1px solid rgba(255,255,255,0.85)",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.95)",
-                  }}
-                />
-                <span className="relative">Find a Distributor</span>
+                Find a Distributor
               </Link>
               <Link
                 href="/distributors/apply"
-                className="relative flex items-center justify-center h-11 rounded-full overflow-hidden"
-                style={{ fontSize: 15, fontWeight: 600, color: "rgba(29,29,31,0.9)" }}
+                className="flex items-center justify-center h-11 rounded-full"
+                style={{
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color: "#ffffff",
+                  background: "#0071e3",
+                }}
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: "rgba(255,255,255,0.82)",
-                    backdropFilter: "blur(16px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                    border: "1px solid rgba(255,255,255,0.95)",
-                    boxShadow: "0 1px 4px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,1)",
-                  }}
-                />
-                <span className="relative">Become a Distributor</span>
+                Become a Distributor
               </Link>
             </div>
           </div>
