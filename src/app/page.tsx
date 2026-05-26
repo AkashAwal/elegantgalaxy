@@ -2,6 +2,7 @@ import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
 import ProductSection from "@/components/ProductSection";
+import TVShowcase from "@/components/TVShowcase";
 
 // ── Placeholder product silhouettes (swap with real <Image /> later) ──────────
 
@@ -114,7 +115,10 @@ export default function Home() {
   return (
     <main className="bg-[#f5f5f7] min-h-screen">
 
-      {/* ── Store hero ────────────────────────────────────────────────── */}
+      {/* ── TV Showcase hero ─────────────────────────────────────────── */}
+      <TVShowcase />
+
+      {/* ── Store intro ───────────────────────────────────────────────── */}
       <section className="mx-auto max-w-[1440px] px-8 pt-12 pb-8">
         <div className="flex items-start justify-between">
 
@@ -167,22 +171,15 @@ export default function Home() {
               href={cat.href}
               className="flex flex-col items-center group"
             >
-              {/* Product image — bottom-aligned so different heights feel grounded */}
               <div
                 className="flex items-end justify-center mb-6"
                 style={{ height: 200 }}
               >
                 {cat.icon}
               </div>
-
-              {/* Premium label */}
               <span
                 className="text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors duration-150"
-                style={{
-                  fontSize: 15,
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
-                }}
+                style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}
               >
                 {cat.label}
               </span>

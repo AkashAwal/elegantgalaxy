@@ -247,19 +247,19 @@ const PRODUCTS: Product[] = [
 // ── Single tile ────────────────────────────────────────────────────────────────
 
 function ProductTile({ product }: { product: Product }) {
-  const [idx, setIdx]       = useState(0);
-  const [lifted, setLifted] = useState(false);
+  const [idx, setIdx] = useState(0);
+  const [hovered, setHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const onEnter = () => {
-    setLifted(true);
+    setHovered(true);
     timerRef.current = setInterval(() => {
       setIdx(prev => (prev + 1) % product.slides.length);
     }, 700);
   };
 
   const onLeave = () => {
-    setLifted(false);
+    setHovered(false);
     if (timerRef.current) clearInterval(timerRef.current);
     setIdx(0);
   };
@@ -274,11 +274,7 @@ function ProductTile({ product }: { product: Product }) {
         background:    "#ffffff",
         borderRadius:  16,
         overflow:      "hidden",
-        boxShadow:     lifted
-          ? "0 20px 48px rgba(0,0,0,0.14), 0 6px 16px rgba(0,0,0,0.08)"
-          : "0 2px 12px rgba(0,0,0,0.07)",
-        transform:     lifted ? "translateY(-6px)" : "translateY(0)",
-        transition:    "box-shadow 0.3s ease, transform 0.3s ease",
+        boxShadow:  "0 2px 12px rgba(0,0,0,0.07)",
         display:       "flex",
         flexDirection: "column",
       }}
@@ -313,23 +309,6 @@ function ProductTile({ product }: { product: Product }) {
           ))}
         </div>
 
-        {/* Badge */}
-        {product.badge && (
-          <div style={{
-            position:     "absolute",
-            top:          12,
-            left:         12,
-            background:   product.badge === "NEW" ? "#ff3b30" : "#0071e3",
-            color:        "#fff",
-            fontSize:      10,
-            fontWeight:    700,
-            letterSpacing: "0.08em",
-            padding:       "3px 9px",
-            borderRadius:  20,
-          }}>
-            {product.badge}
-          </div>
-        )}
 
         {/* Slide dots */}
         <div style={{
@@ -341,7 +320,7 @@ function ProductTile({ product }: { product: Product }) {
           justifyContent:  "center",
           alignItems:      "center",
           gap:             5,
-          opacity:         lifted ? 1 : 0,
+          opacity:         hovered ? 1 : 0,
           transition:      "opacity 0.25s ease",
         }}>
           {product.slides.map((_, i) => (

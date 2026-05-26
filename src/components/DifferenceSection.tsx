@@ -224,7 +224,7 @@ export default function DifferenceSection() {
             <LiftCard
               key={i}
               href={card.href}
-              style={{ width: 274, flexShrink: 0, height: 350, background: "#fff" }}
+              style={{ width: 274, flexShrink: 0, height: 244, background: "#fff" }}
             >
               <div className="flex flex-col h-full px-7 pt-7 pb-6" style={{ minWidth: 0 }}>
                 <div className="mb-4">{card.icon}</div>
