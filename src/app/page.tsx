@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
+import ProductSection from "@/components/ProductSection";
 
 // ── Placeholder product silhouettes (swap with real <Image /> later) ──────────
 
@@ -192,6 +193,10 @@ export default function Home() {
 
       {/* ── Latest products section ────────────────────────────────────── */}
       <LatestSection />
+
+      {/* ── Product tiles ─────────────────────────────────────────────────── */}
+      <ProductSection />
+
       <DifferenceSection />
 
     </main>

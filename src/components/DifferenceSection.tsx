@@ -108,30 +108,30 @@ function IconAward() {
 // ── Card data ──────────────────────────────────────────────────────────────────
 
 type DiffCard = {
-  icon:     ReactNode;
-  title:    string;
-  desc:     string;
-  href:     string;
+  icon:  ReactNode;
+  title: string;
+  desc:  string;
+  href:  string;
 };
 
 const CARDS: DiffCard[] = [
-  { icon:<IconWarranty />,  title:"5-Year Warranty",         desc:"Every product backed by our industry-leading 5-year warranty.",          href:"/support/warranty"              },
-  { icon:<IconEnergy />,    title:"Energy Efficient",         desc:"5-star rated appliances that save electricity without sacrificing power.", href:"/products"                      },
-  { icon:<IconEMI />,       title:"No-Cost EMI",              desc:"Split your purchase into easy monthly instalments at zero extra cost.",    href:"/distributors/financing"        },
-  { icon:<IconInstall />,   title:"Free Installation",        desc:"Expert technicians set everything up — free of charge, at your doorstep.",href:"/support"                       },
-  { icon:<IconService />,   title:"200+ Service Centres",     desc:"Nationwide network so expert help is always close to home.",              href:"/support/service-centres"       },
-  { icon:<IconCertified />, title:"ISI Certified",            desc:"Safety and quality certified by the Bureau of Indian Standards.",         href:"/products"                      },
-  { icon:<IconSupport />,   title:"24 / 7 Support",           desc:"Our customer care team is available around the clock, every day.",        href:"/contact"                       },
-  { icon:<IconReturns />,   title:"30-Day Returns",           desc:"Not happy? Return any product within 30 days, no questions asked.",       href:"/support"                       },
-  { icon:<IconDelivery />,  title:"Pan-India Delivery",       desc:"Fast, tracked delivery to every pin code across the country.",            href:"/distributors"                  },
-  { icon:<IconAward />,     title:"Award-Winning Design",     desc:"Recognised for design excellence at national and international forums.",   href:"/about"                         },
+  { icon: <IconWarranty />,  title: "5-Year Warranty",       desc: "Every product backed by our industry-leading 5-year warranty.",          href: "/support/warranty"        },
+  { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power.", href: "/products"                },
+  { icon: <IconEMI />,       title: "No-Cost EMI",            desc: "Split your purchase into easy monthly instalments at zero extra cost.",    href: "/distributors/financing"  },
+  { icon: <IconInstall />,   title: "Free Installation",      desc: "Expert technicians set everything up — free of charge, at your doorstep.",href: "/support"                 },
+  { icon: <IconService />,   title: "200+ Service Centres",   desc: "Nationwide network so expert help is always close to home.",              href: "/support/service-centres" },
+  { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards.",         href: "/products"                },
+  { icon: <IconSupport />,   title: "24 / 7 Support",         desc: "Our customer care team is available around the clock, every day.",        href: "/contact"                 },
+  { icon: <IconReturns />,   title: "30-Day Returns",         desc: "Not happy? Return any product within 30 days, no questions asked.",       href: "/support"                 },
+  { icon: <IconDelivery />,  title: "Pan-India Delivery",     desc: "Fast, tracked delivery to every pin code across the country.",            href: "/distributors"            },
+  { icon: <IconAward />,     title: "Award-Winning Design",   desc: "Recognised for design excellence at national and international forums.",   href: "/about"                   },
 ];
 
 const LOOPED = [...CARDS, ...CARDS];
 
-// ── 3D tilt card (lighter tilt for the shorter card height) ───────────────────
+// ── Card with flat lift on hover ───────────────────────────────────────────────
 
-function TiltCard({
+function LiftCard({
   href,
   children,
   style,
@@ -140,31 +140,24 @@ function TiltCard({
   children: ReactNode;
   style?: CSSProperties;
 }) {
-  const cardRef  = useRef<HTMLAnchorElement>(null);
-  const glossRef = useRef<HTMLDivElement>(null);
-  const rafRef   = useRef<number | null>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
 
   const onMouseEnter = () => {
     const el = cardRef.current;
-    const gl = glossRef.current;
     if (el) {
       el.style.transition = "transform 0.22s ease-out, box-shadow 0.22s ease-out";
       el.style.transform  = "translateY(-6px) scale(1.02)";
       el.style.boxShadow  = "0 16px 40px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.07)";
     }
-    if (gl) gl.style.opacity = "0";
   };
 
   const onMouseLeave = () => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     const el = cardRef.current;
-    const gl = glossRef.current;
     if (el) {
       el.style.transition = "transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease";
       el.style.transform  = "translateY(0) scale(1)";
       el.style.boxShadow  = "0 2px 10px rgba(0,0,0,0.07)";
     }
-    if (gl) gl.style.opacity = "0";
   };
 
   return (
@@ -177,8 +170,6 @@ function TiltCard({
       onMouseLeave={onMouseLeave}
     >
       {children}
-      <div ref={glossRef} className="absolute inset-0 pointer-events-none rounded-[18px]"
-           style={{ opacity: 0, transition: "opacity 0.35s ease" }} />
     </Link>
   );
 }
@@ -230,13 +221,12 @@ export default function DifferenceSection() {
           }}
         >
           {LOOPED.map((card, i) => (
-            <TiltCard
+            <LiftCard
               key={i}
               href={card.href}
-              style={{ minWidth: 280, height: 250, background: "#fff" }}
+              style={{ width: 274, flexShrink: 0, height: 350, background: "#fff" }}
             >
-              {/* Card content */}
-              <div className="flex flex-col h-full px-7 pt-7 pb-6">
+              <div className="flex flex-col h-full px-7 pt-7 pb-6" style={{ minWidth: 0 }}>
                 <div className="mb-4">{card.icon}</div>
                 <p
                   className="text-[#1d1d1f] font-semibold mb-2 leading-snug"
@@ -251,7 +241,7 @@ export default function DifferenceSection() {
                   {card.desc}
                 </p>
               </div>
-            </TiltCard>
+            </LiftCard>
           ))}
         </div>
 
