@@ -39,14 +39,24 @@ const FAQS = [
 // ── Single item ───────────────────────────────────────────────────────────────
 
 function FAQItem({
-  q, a, isOpen, onToggle,
+  q, a, isOpen, onToggle, idx,
 }: {
-  q: string; a: string; isOpen: boolean; onToggle: () => void;
+  q: string; a: string; isOpen: boolean; onToggle: () => void; idx: number;
 }) {
+  const triggerId = `faq-trigger-${idx}`;
+  const panelId   = `faq-panel-${idx}`;
+
   return (
     <div style={{ borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+      {/*
+        Native <button> already carries role="button" implicitly — no need to
+        add it explicitly. aria-expanded + aria-controls are what matters here.
+      */}
       <button
+        id={triggerId}
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         style={{
           width:          "100%",
           display:        "flex",
@@ -69,7 +79,7 @@ function FAQItem({
         }}>
           {q}
         </span>
-        <span style={{
+        <span aria-hidden style={{
           flexShrink:     0,
           width:          24,
           height:         24,
@@ -87,12 +97,18 @@ function FAQItem({
         </span>
       </button>
 
-      {/* Answer — animates with max-height */}
-      <div style={{
-        maxHeight:  isOpen ? 300 : 0,
-        overflow:   "hidden",
-        transition: "max-height 0.32s ease",
-      }}>
+      {/* Answer panel — role="region" makes it a named landmark associated
+          with its trigger heading via aria-labelledby.                      */}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
+        style={{
+          maxHeight:  isOpen ? 300 : 0,
+          overflow:   "hidden",
+          transition: "max-height 0.32s ease",
+        }}
+      >
         <p style={{
           fontSize:     14.5,
           lineHeight:   1.75,
@@ -118,15 +134,16 @@ export default function FAQSection() {
         className="mx-auto max-w-[1440px] px-8"
         style={{ paddingTop: 88, paddingBottom: 88 }}
       >
-        <div style={{ display: "flex", gap: 80, alignItems: "flex-start" }}>
+        {/* Stack on mobile, side-by-side on md+ */}
+        <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start">
 
           {/* ── Left: heading ─────────────────────────────────────────── */}
-          <div style={{ flexShrink: 0, width: 300, paddingTop: 4 }}>
+          <div className="w-full md:w-[300px] md:shrink-0" style={{ paddingTop: 4 }}>
             <p style={{
               fontSize:      11,
               fontWeight:    600,
               letterSpacing: "0.1em",
-              color:         "#aeaeb2",
+              color:         "#6e6e73",
               marginBottom:  18,
               textTransform: "uppercase",
             }}>
@@ -154,11 +171,12 @@ export default function FAQSection() {
           </div>
 
           {/* ── Right: accordion ──────────────────────────────────────── */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="flex-1 min-w-0 w-full">
             <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }}>
               {FAQS.map((faq, i) => (
                 <FAQItem
                   key={i}
+                  idx={i}
                   q={faq.q}
                   a={faq.a}
                   isOpen={openIdx === i}

@@ -343,7 +343,7 @@ function ProductTile({ product }: { product: Product }) {
         <p style={{
           fontSize:      10.5,
           fontWeight:     600,
-          color:          "#aeaeb2",
+          color:          "#6e6e73",
           letterSpacing:  "0.07em",
           marginBottom:   5,
         }}>
@@ -430,13 +430,7 @@ export default function ProductSection() {
         </h2>
       </div>
 
-      <div
-        style={{
-          display:             "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap:                  20,
-        }}
-      >
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
         {PRODUCTS.map(p => <ProductTile key={p.id} product={p} />)}
       </div>
 

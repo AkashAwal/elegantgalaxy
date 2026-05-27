@@ -246,7 +246,8 @@ function RelatedArticles({ article }: { article: SupportArticle }) {
       <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", letterSpacing: "-0.015em", marginBottom: 18 }}>
         Related guides
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+      {/* 1-col on mobile, 2 on sm, 3 on lg */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {related.map(r => {
           const meta = CATEGORIES[r.category];
           return (
@@ -292,7 +293,7 @@ export default async function ArticlePage(
   const meta = CATEGORIES[article.category];
 
   return (
-    <main className="bg-[#f5f5f7] min-h-screen">
+    <main id="main-content" className="bg-[#f5f5f7] min-h-screen">
       <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 40, paddingBottom: 88 }}>
 
         {/* ── Breadcrumb ──────────────────────────────────────────────────── */}
@@ -310,22 +311,24 @@ export default async function ArticlePage(
               ) : (
                 <span style={{ fontSize: 13, color: "#6e6e73" }}>{crumb.label}</span>
               )}
-              {i < arr.length - 1 && <ChevronRight size={13} color="#aeaeb2" strokeWidth={2} />}
+              {i < arr.length - 1 && <ChevronRight size={13} color="#6e6e73" strokeWidth={2} />}
             </span>
           ))}
         </nav>
 
-        {/* ── Two-column layout ────────────────────────────────────────────── */}
-        <div style={{ display: "flex", gap: 48, alignItems: "flex-start" }}>
+        {/* ── Two-column layout — stacks on mobile, side-by-side on lg+ ──── */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
 
           {/* ── Article body ──────────────────────────────────────────────── */}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{
-              background:   "#fff",
-              borderRadius: 20,
-              padding:      "40px 44px",
-              boxShadow:    "0 2px 16px rgba(0,0,0,0.06)",
-            }}>
+          <div className="flex-1 min-w-0 w-full">
+            <div
+              className="p-6 sm:p-9 lg:p-11"
+              style={{
+                background:   "#fff",
+                borderRadius: 20,
+                boxShadow:    "0 2px 16px rgba(0,0,0,0.06)",
+              }}
+            >
               {/* Header */}
               <span style={{
                 fontSize: 10, fontWeight: 700, letterSpacing: "0.08em",
@@ -365,8 +368,8 @@ export default async function ArticlePage(
             <RelatedArticles article={article} />
           </div>
 
-          {/* ── Sidebar ───────────────────────────────────────────────────── */}
-          <div style={{ flexShrink: 0, width: 260, position: "sticky", top: 72 }}>
+          {/* ── Sidebar — full width on mobile, fixed 260px on lg+ ────────── */}
+          <div className="w-full lg:w-[260px] lg:shrink-0 lg:sticky lg:top-[72px]">
 
             {/* Need more help */}
             <div style={{

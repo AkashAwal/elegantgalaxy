@@ -14,7 +14,7 @@ export default function DistributorSection() {
             fontSize:      11,
             fontWeight:    600,
             letterSpacing: "0.1em",
-            color:         "#aeaeb2",
+            color:         "#6e6e73",
             marginBottom:  18,
             textTransform: "uppercase",
           }}>

@@ -448,7 +448,7 @@ function ParallaxSection({
         transition: "opacity 0.72s ease 0.42s, transform 0.72s ease 0.42s",
       }}>
         <div>
-          <p style={{ fontSize: 12, color: "#aeaeb2", marginBottom: 3, letterSpacing: "0.03em" }}>From</p>
+          <p style={{ fontSize: 12, color: "#6e6e73", marginBottom: 3, letterSpacing: "0.03em" }}>From</p>
           <p style={{ fontSize: 32, fontWeight: 700, letterSpacing: "-0.026em", color: "#1d1d1f" }}>
             {price}
           </p>
@@ -673,7 +673,7 @@ function SpecsSection({
             transform:  inView ? "translateY(0)" : "translateY(18px)",
             transition: "opacity 0.72s ease 0.3s, transform 0.72s ease 0.3s",
           }}>
-            <p style={{ fontSize: 12, color: "#aeaeb2", marginBottom: 4, letterSpacing: "0.03em" }}>
+            <p style={{ fontSize: 12, color: "#6e6e73", marginBottom: 4, letterSpacing: "0.03em" }}>
               {name}
             </p>
             <p style={{
@@ -720,7 +720,7 @@ function SpecsSection({
             fontSize:      10,
             fontWeight:    600,
             letterSpacing: "0.12em",
-            color:         "#aeaeb2",
+            color:         "#6e6e73",
             marginBottom:  8,
             textTransform: "uppercase",
             opacity:       inView ? 1 : 0,

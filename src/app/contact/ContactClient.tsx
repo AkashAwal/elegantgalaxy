@@ -31,11 +31,17 @@ const FAQS = [
 ];
 
 // Exact same FAQ item style as the homepage FAQSection
-function FAQItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
+function FAQItem({ q, a, open, onToggle, idx }: { q: string; a: string; open: boolean; onToggle: () => void; idx: number }) {
+  const triggerId = `contact-faq-trigger-${idx}`;
+  const panelId   = `contact-faq-panel-${idx}`;
+
   return (
     <div style={{ borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
       <button
+        id={triggerId}
         onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={panelId}
         style={{
           width: "100%", display: "flex", alignItems: "center",
           justifyContent: "space-between", gap: 20,
@@ -46,7 +52,7 @@ function FAQItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         <span style={{ fontSize: 15.5, fontWeight: 500, color: "#1d1d1f", letterSpacing: "-0.01em", lineHeight: 1.4 }}>
           {q}
         </span>
-        <span style={{
+        <span aria-hidden style={{
           flexShrink: 0, width: 24, height: 24, borderRadius: "50%",
           background: open ? "#0071e3" : "#e8e8ed",
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -58,7 +64,12 @@ function FAQItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
           }
         </span>
       </button>
-      <div style={{ maxHeight: open ? 240 : 0, overflow: "hidden", transition: "max-height 0.3s ease" }}>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
+        style={{ maxHeight: open ? 240 : 0, overflow: "hidden", transition: "max-height 0.3s ease" }}
+      >
         <p style={{ fontSize: 14.5, lineHeight: 1.75, color: "#6e6e73", paddingBottom: 22 }}>
           {a}
         </p>
@@ -205,12 +216,13 @@ export default function ContactClient() {
   // ── Main layout ───────────────────────────────────────────────────────────
   return (
     <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 64, paddingBottom: 88 }}>
-      <div style={{ display: "flex", gap: 72, alignItems: "flex-start" }}>
+      {/* Stack on mobile; side-by-side on md+ */}
+      <div className="flex flex-col md:flex-row gap-10 lg:gap-[72px] items-start">
 
-        {/* ── Left: heading + phones + FAQs ──────────────────────────── */}
-        <div style={{ flexShrink: 0, width: 380 }}>
+        {/* ── Left: heading + phones ─────────────────────────────────── */}
+        <div className="w-full md:w-[380px] md:shrink-0">
 
-          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#aeaeb2", marginBottom: 16, textTransform: "uppercase" }}>
+          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#6e6e73", marginBottom: 16, textTransform: "uppercase" }}>
             Get in touch
           </p>
           <h1 style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1, color: "#1d1d1f", marginBottom: 12 }}>
@@ -240,11 +252,11 @@ export default function ContactClient() {
                   </svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: "#aeaeb2", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 1 }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 1 }}>
                     {item.label}
                   </p>
                   <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 1 }}>{item.number}</p>
-                  <p style={{ fontSize: 11.5, color: "#aeaeb2" }}>{item.sub}</p>
+                  <p style={{ fontSize: 11.5, color: "#6e6e73" }}>{item.sub}</p>
                 </div>
               </div>
             </a>
@@ -253,7 +265,7 @@ export default function ContactClient() {
         </div>
 
         {/* ── Right: form card ─────────────────────────────────────────── */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="w-full min-w-0 md:flex-1">
           <div style={{
             background: "#fff", borderRadius: 20,
             padding: "32px 32px 36px",
@@ -279,8 +291,8 @@ export default function ContactClient() {
             <form onSubmit={handleSubmit} noValidate>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-                {/* Row 1: Name + Email */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                {/* Row 1: Name + Email — stack on mobile */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
                     <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
                       Full Name <span style={{ color: "#ef4444" }}>*</span>
@@ -311,8 +323,8 @@ export default function ContactClient() {
                   </div>
                 </div>
 
-                {/* Row 2: Phone + Location */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                {/* Row 2: Phone + Location — stack on mobile */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
                     <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
                       Phone Number <span style={{ color: "#ef4444" }}>*</span>
@@ -403,7 +415,7 @@ export default function ContactClient() {
                   ) : "Send Message →"}
                 </button>
 
-                <p style={{ fontSize: 11.5, color: "#aeaeb2", textAlign: "center", marginTop: -4 }}>
+                <p style={{ fontSize: 11.5, color: "#6e6e73", textAlign: "center", marginTop: -4 }}>
                   By submitting you agree to our{" "}
                   <Link href="/legal/privacy" style={{ color: "#0071e3", textDecoration: "none" }}>
                     Privacy Policy
@@ -419,13 +431,14 @@ export default function ContactClient() {
 
       {/* ── FAQ — full width, same layout as homepage ─────────────────── */}
       <div style={{ marginTop: 64, paddingTop: 56, borderTop: "1px solid rgba(0,0,0,0.08)" }}>
-        <div style={{ display: "flex", gap: 80, alignItems: "flex-start" }}>
+        {/* Stack on mobile; side-by-side on md+ */}
+        <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start">
 
           {/* Left: heading */}
-          <div style={{ flexShrink: 0, width: 300, paddingTop: 4 }}>
+          <div className="w-full md:w-[300px] md:shrink-0" style={{ paddingTop: 4 }}>
             <p style={{
               fontSize: 11, fontWeight: 600, letterSpacing: "0.1em",
-              color: "#aeaeb2", marginBottom: 18, textTransform: "uppercase",
+              color: "#6e6e73", marginBottom: 18, textTransform: "uppercase",
             }}>
               FAQs
             </p>
@@ -444,11 +457,11 @@ export default function ContactClient() {
           </div>
 
           {/* Right: accordion */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="flex-1 min-w-0 w-full">
             <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }}>
               {FAQS.map((faq, i) => (
                 <FAQItem
-                  key={i} q={faq.q} a={faq.a}
+                  key={i} idx={i} q={faq.q} a={faq.a}
                   open={openFaq === i}
                   onToggle={() => setOpenFaq(openFaq === i ? null : i)}
                 />

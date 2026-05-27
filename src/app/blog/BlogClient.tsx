@@ -107,7 +107,7 @@ function ArticleCard({ post }: { post: BlogPost }) {
         </p>
 
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#aeaeb2", fontWeight: 500 }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#6e6e73", fontWeight: 500 }}>
             <Clock size={11} />
             {post.readTime} min read
           </span>
@@ -132,17 +132,19 @@ function ArticleCard({ post }: { post: BlogPost }) {
 function FeaturedPost({ post }: { post: BlogPost }) {
   const meta = BLOG_CATEGORIES[post.category];
   return (
-    <Link href={`/blog/${post.slug}`} style={{
-      display:        "flex",
-      textDecoration: "none",
-      background:     "#fff",
-      borderRadius:   20,
-      overflow:       "hidden",
-      border:         "1.5px solid #e8e8ed",
-      marginBottom:   48,
-    }}>
+    <Link
+      href={`/blog/${post.slug}`}
+      className="flex flex-col sm:flex-row overflow-hidden"
+      style={{
+        textDecoration: "none",
+        background:     "#fff",
+        borderRadius:   20,
+        border:         "1.5px solid #e8e8ed",
+        marginBottom:   48,
+      }}
+    >
       {/* Left: text */}
-      <div style={{ flex: 1, padding: "40px 44px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div className="flex-1 flex flex-col justify-center p-8 sm:p-10">
         <span style={{
           display:       "inline-block",
           fontSize:      10,
@@ -199,16 +201,11 @@ function FeaturedPost({ post }: { post: BlogPost }) {
         </div>
       </div>
 
-      {/* Right: gradient panel */}
-      <div style={{
-        width:      280,
-        flexShrink: 0,
-        background: meta.gradient,
-        display:    "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding:    32,
-      }}>
+      {/* Right: gradient panel — hidden on mobile */}
+      <div
+        className="hidden sm:flex w-[280px] shrink-0 items-center justify-center"
+        style={{ background: meta.gradient, padding: 32 }}
+      >
         <div style={{ textAlign: "center" }}>
           <div style={{
             width:        80,
@@ -270,7 +267,7 @@ export default function BlogClient() {
           padding:      "0 16px",
           boxShadow:    "0 2px 12px rgba(0,0,0,0.06)",
         }}>
-          <Search size={18} color="#aeaeb2" strokeWidth={1.75} style={{ flexShrink: 0 }} />
+          <Search size={18} color="#6e6e73" strokeWidth={1.75} style={{ flexShrink: 0 }} />
           <input
             type="search"
             placeholder="Search articles…"
@@ -283,13 +280,13 @@ export default function BlogClient() {
               color:      "#1d1d1f",
               background: "transparent",
               border:     "none",
-              outline:    "none",
             }}
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              style={{ border: "none", background: "none", cursor: "pointer", color: "#aeaeb2", display: "flex" }}
+              aria-label="Clear search"
+              style={{ border: "none", background: "none", cursor: "pointer", color: "#6e6e73", display: "flex" }}
             >
               <X size={16} />
             </button>
@@ -332,7 +329,8 @@ export default function BlogClient() {
           <h2 style={{ fontSize: 20, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em", marginBottom: 20 }}>
             More articles
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {/* 1-col on mobile, 2 on sm, 3 on lg */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {nonFeatured.map(p => <ArticleCard key={p.slug} post={p} />)}
           </div>
         </>
@@ -344,7 +342,7 @@ export default function BlogClient() {
             {query ? ` for "${query}"` : ""}
           </p>
           {results.length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {results.map(p => <ArticleCard key={p.slug} post={p} />)}
             </div>
           ) : (

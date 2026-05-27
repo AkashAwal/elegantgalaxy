@@ -121,7 +121,7 @@ const PRINCIPLES = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main-content">
       {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
@@ -141,15 +141,17 @@ export default function AboutPage() {
           }}>
             About Elegant Galaxy
           </p>
-          <h1 style={{
-            fontSize:      60,
-            fontWeight:    700,
-            letterSpacing: "-0.035em",
-            lineHeight:    1.06,
-            color:         "#f5f5f7",
-            maxWidth:      680,
-            marginBottom:  24,
-          }}>
+          <h1
+            className="text-[34px] sm:text-[48px] lg:text-[60px]"
+            style={{
+              fontWeight:    700,
+              letterSpacing: "-0.035em",
+              lineHeight:    1.06,
+              color:         "#f5f5f7",
+              maxWidth:      680,
+              marginBottom:  24,
+            }}
+          >
             Built for Indian homes.{" "}
             <span style={{ color: "rgba(245,245,247,0.35)" }}>Since 2012.</span>
           </h1>
@@ -167,10 +169,11 @@ export default function AboutPage() {
       {/* ── Our story ────────────────────────────────────────────────────────── */}
       <section style={{ background: "#fff", paddingTop: 80, paddingBottom: 80 }}>
         <div className="mx-auto max-w-[1440px] px-8">
-          <div style={{ display: "flex", gap: 80, alignItems: "flex-start" }}>
+          {/* Stack on mobile; sticky label left + content right on md+ */}
+          <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start">
 
             {/* Left: sticky label */}
-            <div style={{ width: 220, flexShrink: 0, position: "sticky", top: 80 }}>
+            <div className="md:w-[220px] md:shrink-0 md:sticky md:top-20">
               <p style={{
                 fontSize:      11,
                 fontWeight:    700,
@@ -185,7 +188,7 @@ export default function AboutPage() {
             </div>
 
             {/* Right: story content */}
-            <div style={{ flex: 1, maxWidth: 680 }}>
+            <div className="flex-1 min-w-0" style={{ maxWidth: 680 }}>
               <p style={{ fontSize: 17, lineHeight: 1.8, color: "#3a3a3c", marginBottom: 28 }}>
                 Elegant Galaxy was founded in 2012 with a straightforward conviction: Indian households deserve home appliances that are honestly engineered, genuinely durable, and priced for real life — not the showroom floor. The company started with a focused range of LED televisions and expanded deliberately over the following decade into washing machines, air coolers, and infrared cooktops.
               </p>
@@ -204,14 +207,11 @@ export default function AboutPage() {
       {/* ── Stats ────────────────────────────────────────────────────────────── */}
       <section style={{ background: "#f5f5f7", paddingTop: 64, paddingBottom: 64 }}>
         <div className="mx-auto max-w-[1440px] px-8">
-          <div style={{
-            display:             "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap:                 1,
-            background:          "#e8e8ed",
-            borderRadius:        18,
-            overflow:            "hidden",
-          }}>
+          {/* 2-col on mobile, 4-col on lg */}
+          <div
+            className="grid grid-cols-2 lg:grid-cols-4 gap-px"
+            style={{ background: "#e8e8ed", borderRadius: 18, overflow: "hidden" }}
+          >
             {STATS.map(s => (
               <div key={s.label} style={{
                 background:  "#fff",
@@ -231,7 +231,7 @@ export default function AboutPage() {
                 <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 4 }}>
                   {s.label}
                 </p>
-                <p style={{ fontSize: 12, color: "#aeaeb2" }}>
+                <p style={{ fontSize: 12, color: "#6e6e73" }}>
                   {s.sub}
                 </p>
               </div>
@@ -265,7 +265,8 @@ export default function AboutPage() {
             Four categories. One standard.
           </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+          {/* 1-col on mobile, 2-col on md+ */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {PRODUCTS.map(p => (
               <Link key={p.name} href={p.href} style={{
                 display:        "block",
@@ -344,7 +345,8 @@ export default function AboutPage() {
             Our principles
           </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}>
+          {/* 1-col on mobile, 2-col on sm, 3-col on lg */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {PRINCIPLES.map(pr => (
               <div key={pr.number} style={{
                 padding:      "36px 32px",
@@ -382,13 +384,8 @@ export default function AboutPage() {
       {/* ── Distribution note ────────────────────────────────────────────────── */}
       <section style={{ background: "#f5f5f7", paddingTop: 64, paddingBottom: 64 }}>
         <div className="mx-auto max-w-[1440px] px-8">
-          <div style={{
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "space-between",
-            gap:            40,
-            flexWrap:       "wrap",
-          }}>
+          {/* Stack on mobile */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-10">
             <div style={{ maxWidth: 600 }}>
               <h2 style={{
                 fontSize:      28,

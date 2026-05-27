@@ -117,25 +117,26 @@ const CATEGORIES = [
 
 export default function Home() {
   return (
-    <main className="bg-[#f5f5f7] min-h-screen">
+    <main id="main-content" className="bg-[#f5f5f7] min-h-screen">
 
       {/* ── TV Showcase hero ─────────────────────────────────────────── */}
       <TVShowcase />
 
       {/* ── Store intro ───────────────────────────────────────────────── */}
       <section className="mx-auto max-w-[1440px] px-8 pt-12 pb-8">
-        <div className="flex items-start justify-between">
+        {/* Stack on mobile; side-by-side on sm+ */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
 
           {/* Left — page title */}
           <h1
-            className="font-semibold text-[#1d1d1f] leading-none"
-            style={{ fontSize: 64, letterSpacing: "-0.003em" }}
+            className="font-semibold text-[#1d1d1f] leading-none text-[40px] sm:text-[52px] lg:text-[64px]"
+            style={{ letterSpacing: "-0.003em" }}
           >
             Store
           </h1>
 
           {/* Right — tagline + links */}
-          <div className="text-right pt-3" style={{ maxWidth: 300 }}>
+          <div className="text-left sm:text-right pt-0 sm:pt-3" style={{ maxWidth: 300 }}>
             <p
               className="font-semibold text-[#1d1d1f] leading-snug mb-4"
               style={{ fontSize: 19 }}
@@ -167,13 +168,21 @@ export default function Home() {
       </div>
 
       {/* ── Category carousel ─────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1440px] px-8 py-12">
-        <div className="flex justify-center gap-16">
+      {/*
+        On mobile the icons are too wide to fit in a single row —
+        overflow-x-auto gives a horizontal scroll, same pattern as the
+        LatestSection/DifferenceSection carousels.
+      */}
+      <section className="mx-auto max-w-[1440px] px-8 py-12 overflow-hidden">
+        <div
+          className="flex gap-8 md:gap-16 md:justify-center overflow-x-auto pb-2 md:pb-0"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+        >
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.href}
               href={cat.href}
-              className="flex flex-col items-center group"
+              className="flex flex-col items-center group shrink-0"
             >
               <div
                 className="flex items-end justify-center mb-6"

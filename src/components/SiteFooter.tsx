@@ -48,29 +48,24 @@ export default function SiteFooter() {
   return (
     <footer style={{ background: "#1d1d1f" }}>
 
-      {/* ── CTA band ───────────────────────────────────────────────────────── */}
+      {/* ── CTA band ─────────────────────────────────────────────────────────── */}
       <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div
-          className="mx-auto max-w-[1440px] px-8"
-          style={{
-            paddingTop:     72,
-            paddingBottom:  72,
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "space-between",
-            gap:            40,
-          }}
+          className="mx-auto max-w-[1440px] px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-10"
+          style={{ paddingTop: 72, paddingBottom: 72 }}
         >
           {/* Left — copy */}
           <div>
-            <h2 style={{
-              fontSize:      40,
-              fontWeight:    700,
-              letterSpacing: "-0.03em",
-              lineHeight:    1.1,
-              color:         "#f5f5f7",
-              marginBottom:  10,
-            }}>
+            <h2
+              className="text-[26px] sm:text-[34px] lg:text-[40px]"
+              style={{
+                fontWeight:    700,
+                letterSpacing: "-0.03em",
+                lineHeight:    1.1,
+                color:         "#f5f5f7",
+                marginBottom:  10,
+              }}
+            >
               Ready to upgrade your home?
             </h2>
             <p style={{ fontSize: 16, color: "rgba(245,245,247,0.45)", lineHeight: 1.6 }}>
@@ -118,19 +113,16 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      {/* ── Link grid ──────────────────────────────────────────────────────── */}
+      {/* ── Link grid ────────────────────────────────────────────────────────── */}
       <div
         className="mx-auto max-w-[1440px] px-8"
         style={{ paddingTop: 48, paddingBottom: 0 }}
       >
-        <div style={{
-          display:             "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
-          gap:                 40,
-        }}>
+        {/* Brand column spans full width on mobile; 4-col grid on lg */}
+        <div className="grid grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 lg:gap-10">
 
-          {/* Brand column */}
-          <div>
+          {/* Brand column — spans 2 on mobile, 1 on desktop */}
+          <div className="col-span-2 lg:col-span-1">
             {/* Logo mark */}
             <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14 }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -191,7 +183,7 @@ export default function SiteFooter() {
             </div>
           </div>
 
-          {/* Link columns */}
+          {/* Link columns — 2-per-row on mobile, each its own col on desktop */}
           {COLS.map(col => (
             <div key={col.heading}>
               <p style={{
@@ -228,24 +220,16 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      {/* ── Bottom bar ─────────────────────────────────────────────────────── */}
+      {/* ── Bottom bar ───────────────────────────────────────────────────────── */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", marginTop: 48 }}>
         <div
-          className="mx-auto max-w-[1440px] px-8"
-          style={{
-            paddingTop:     18,
-            paddingBottom:  18,
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "space-between",
-            gap:            16,
-            flexWrap:       "wrap",
-          }}
+          className="mx-auto max-w-[1440px] px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4"
+          style={{ paddingTop: 18, paddingBottom: 18 }}
         >
           <p style={{ fontSize: 12, color: "rgba(245,245,247,0.28)" }}>
             Copyright © {new Date().getFullYear()} Elegant Galaxy Pvt Ltd. All rights reserved.
           </p>
-          <div style={{ display: "flex", gap: 20 }}>
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
             {[
               { label: "Privacy Policy",    href: "/legal/privacy"    },
               { label: "Terms of Use",      href: "/legal/terms"      },

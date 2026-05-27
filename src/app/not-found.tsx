@@ -44,7 +44,7 @@ export default function NotFound() {
   }, []);
 
   return (
-    <main style={{
+    <main id="main-content" style={{
       minHeight:      "100vh",
       background:     "#1d1d1f",
       display:        "flex",

@@ -206,6 +206,19 @@ export default function Navbar() {
   const closeTimer              = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchRef               = useRef<HTMLInputElement>(null);
 
+  // ── Keyboard navigation refs ──────────────────────────────────────────────
+  // triggerRef  — stores the nav button that opened the current mega menu so
+  //               Escape can return focus to it.
+  // activeIdRef — stable snapshot of activeId for the document-level Escape
+  //               handler (avoids stale closure without adding a dependency).
+  const triggerRef              = useRef<HTMLButtonElement | null>(null);
+  const activeIdRef             = useRef<string | null>(null);
+
+  // Declared before callbacks so TypeScript can see them in scope.
+  // (useRef returns a stable object; callbacks read .current at call time.)
+  const megaPanelRef            = useRef<HTMLDivElement>(null);
+  const megaInnerRef            = useRef<HTMLDivElement>(null);
+
   // ── helpers ──────────────────────────────────────────────────────────────
 
   const cancelClose = useCallback(() => {
@@ -237,10 +250,92 @@ export default function Navbar() {
     setQuery("");
   }, [closeMega]);
 
-  // Escape key closes everything
+  // ── Keyboard navigation helpers ───────────────────────────────────────────
+
+  /**
+   * Open a mega menu triggered by keyboard and focus the first link inside it
+   * (or the last link when focusLast=true, i.e. ArrowUp on the trigger).
+   * Saves the trigger element so Escape can return focus to it later.
+   */
+  const openMegaFromKeyboard = useCallback((
+    id:       string,
+    el:       HTMLButtonElement,
+    focusLast = false,
+  ) => {
+    cancelClose();
+    setSearch(false);
+    setActiveId(id);
+    triggerRef.current = el;
+    // rAF waits for the panel to become non-inert and visible before focusing.
+    requestAnimationFrame(() => {
+      const links = megaInnerRef.current?.querySelectorAll<HTMLElement>("a[href]");
+      if (!links?.length) return;
+      (focusLast ? links[links.length - 1] : links[0]).focus();
+    });
+  }, [cancelClose]);
+
+  /** Close the mega menu and return keyboard focus to the button that opened it. */
+  const closeMegaReturnFocus = useCallback(() => {
+    cancelClose();
+    setActiveId(null);
+    triggerRef.current?.focus();
+    triggerRef.current = null;
+  }, [cancelClose]);
+
+  /**
+   * Keydown handler attached to the mega panel container.
+   *
+   * ArrowDown / ArrowUp — cycle focus through all <a> links in the panel.
+   * Escape             — close panel and return focus to the trigger button.
+   *
+   * Tab is intentionally NOT intercepted: the browser's natural tab order
+   * moves through links, and the onBlur handler on the panel closes it when
+   * focus eventually leaves.
+   */
+  const handleMegaKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!megaInnerRef.current) return;
+    const links = Array.from(
+      megaInnerRef.current.querySelectorAll<HTMLElement>("a[href]")
+    );
+    if (!links.length) return;
+    const idx = links.indexOf(document.activeElement as HTMLElement);
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        links[(idx + 1) % links.length].focus();
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        links[(idx - 1 + links.length) % links.length].focus();
+        break;
+      case "Escape":
+        // stopPropagation prevents the document-level handler from also
+        // firing and attempting a second focus-restoration.
+        e.stopPropagation();
+        closeMegaReturnFocus();
+        break;
+    }
+  }, [closeMegaReturnFocus]);
+
+  // ── effects ──────────────────────────────────────────────────────────────
+
+  // Keep activeIdRef current so the document-level Escape handler can read
+  // the latest value without a stale closure.
+  useEffect(() => { activeIdRef.current = activeId; }, [activeId]);
+
+  // Escape key closes everything. If a mega was opened via keyboard, return
+  // focus to its trigger button so the user's position is preserved.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setActiveId(null); setSearch(false); setMobile(false); }
+      if (e.key !== "Escape") return;
+      setSearch(false);
+      setMobile(false);
+      setActiveId(null);
+      if (activeIdRef.current) {
+        triggerRef.current?.focus();
+        triggerRef.current = null;
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -255,6 +350,19 @@ export default function Navbar() {
     setQuery("");
   }, [pathname]);
 
+  // Keep the mega panel inert (invisible to the keyboard and assistive tech)
+  // while it is closed so Tab cannot accidentally land on links inside a
+  // visually-hidden menu.
+  useEffect(() => {
+    const panel = megaPanelRef.current;
+    if (!panel) return;
+    if (activeId) {
+      panel.removeAttribute("inert");
+    } else {
+      panel.setAttribute("inert", "");
+    }
+  }, [activeId]);
+
   const activeMega = NAV.find((n) => n.id === activeId)?.mega ?? null;
   const panelOpen  = !!activeMega || searchOpen;
 
@@ -262,10 +370,6 @@ export default function Navbar() {
   const lastMegaRef = useRef<MegaColumn[] | null>(null);
   if (activeMega) lastMegaRef.current = activeMega;
   const displayMega = activeMega ?? lastMegaRef.current;
-
-  // Refs for smooth height animation between panels of different heights
-  const megaPanelRef = useRef<HTMLDivElement>(null);
-  const megaInnerRef = useRef<HTMLDivElement>(null);
 
   // Runs synchronously after every render — reads the new content height and
   // updates the outer panel's explicit height so the CSS transition can animate it.
@@ -330,6 +434,14 @@ export default function Navbar() {
           >
             {/* "Home" excluded — the logo already links to "/" */}
             {NAV.filter((item) => item.id !== "home").map((item) => {
+              // Active when the current URL matches this item's section.
+              // "/" is exact-only; everything else prefix-matches so sub-pages
+              // (e.g. /blog/some-post) keep the "Blog" link highlighted.
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
+
               // dim every item that isn't the one currently under the cursor
               const dimmed = hoveredId !== null && item.id !== hoveredId;
 
@@ -338,16 +450,49 @@ export default function Navbar() {
                 text-[14px] text-[#1d1d1f] whitespace-nowrap
                 cursor-pointer select-none
                 transition-opacity duration-150
-                ${dimmed ? "opacity-35" : "opacity-90 hover:opacity-100"}
+                ${dimmed ? "opacity-35" : isActive ? "opacity-100" : "opacity-75 hover:opacity-100"}
               `;
+
+              // Small pill indicator sitting on the bottom edge of the bar
+              const indicator = isActive ? (
+                <span
+                  aria-hidden
+                  style={{
+                    position:        "absolute",
+                    bottom:          0,
+                    left:            "50%",
+                    transform:       "translateX(-50%)",
+                    width:           18,
+                    height:          2,
+                    borderRadius:    1,
+                    background:      "#1d1d1f",
+                  }}
+                />
+              ) : null;
 
               return item.mega ? (
                 <button
                   key={item.id}
                   className={linkCls}
                   onMouseEnter={() => { openMega(item.id); setHoveredId(item.id); }}
+                  onKeyDown={(e) => {
+                    // Enter / Space / ↓ → open mega and focus first link
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      openMegaFromKeyboard(item.id, e.currentTarget);
+                    }
+                    // ↑ → open mega and focus last link (reverse navigation)
+                    else if (e.key === "ArrowUp") {
+                      e.preventDefault();
+                      openMegaFromKeyboard(item.id, e.currentTarget, true);
+                    }
+                  }}
+                  aria-haspopup="true"
+                  aria-expanded={activeId === item.id}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {item.label}
+                  {indicator}
                 </button>
               ) : (
                 <Link
@@ -355,8 +500,10 @@ export default function Navbar() {
                   href={item.href}
                   className={linkCls}
                   onMouseEnter={() => { closeMega(); setHoveredId(item.id); }}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {item.label}
+                  {indicator}
                 </Link>
               );
             })}
@@ -444,6 +591,15 @@ export default function Navbar() {
         <div
           ref={megaPanelRef}
           className="absolute left-0 right-0 overflow-hidden"
+          onKeyDown={handleMegaKeyDown}
+          onBlur={(e) => {
+            // Close the mega when keyboard focus leaves the panel entirely
+            // (relatedTarget is the element receiving focus; null means focus
+            // moved outside the document — also a reason to close).
+            if (!megaPanelRef.current?.contains(e.relatedTarget as Node | null)) {
+              closeMega();
+            }
+          }}
           style={{
             top: "100%",
             zIndex: 50,
@@ -475,6 +631,7 @@ export default function Navbar() {
                               key={lnk.href}
                               href={lnk.href}
                               onClick={closeMega}
+                              aria-current={pathname === lnk.href ? "page" : undefined}
                               className="text-[#1d1d1f] font-semibold leading-snug py-[3px]
                                          hover:text-[#1d1d1f]/50 transition-colors"
                               style={{ fontSize: 24 }}
@@ -491,6 +648,7 @@ export default function Navbar() {
                             key={lnk.href}
                             href={lnk.href}
                             onClick={closeMega}
+                            aria-current={pathname === lnk.href ? "page" : undefined}
                             className="text-[#1d1d1f] font-semibold hover:text-[#1d1d1f]/50 transition-colors"
                             style={{ fontSize: 15 }}
                           >
@@ -530,13 +688,14 @@ export default function Navbar() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search elegant-galaxy.com"
-                className="flex-1 bg-transparent outline-none text-[#1d1d1f] placeholder:text-[#6e6e73]"
+                className="flex-1 bg-transparent text-[#1d1d1f] placeholder:text-[#6e6e73]"
                 style={{ fontSize: 26 }}
                 autoComplete="off"
               />
               {query && (
                 <button
                   onClick={() => { setQuery(""); searchRef.current?.focus(); }}
+                  aria-label="Clear search"
                   className="text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
                 >
                   <X size={16} strokeWidth={1.75} />
@@ -553,6 +712,7 @@ export default function Navbar() {
                   key={lnk.href}
                   href={lnk.href}
                   onClick={() => setSearch(false)}
+                  aria-current={pathname === lnk.href ? "page" : undefined}
                   className="flex items-center gap-2 py-2 text-[#1d1d1f] font-semibold
                              hover:text-[#1d1d1f]/50 transition-colors group"
                   style={{ fontSize: 16 }}
@@ -598,17 +758,22 @@ export default function Navbar() {
           }}
         >
           <div className="px-4 py-4 flex flex-col">
-            {NAV.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="flex items-center justify-between px-2 py-3.5
-                           text-[17px] text-[#1d1d1f] border-b border-black/[0.06]
-                           hover:text-[#1d1d1f]/60 transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const isActive =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className="flex items-center justify-between px-2 py-3.5
+                             text-[17px] text-[#1d1d1f] border-b border-black/[0.06]
+                             hover:text-[#1d1d1f]/60 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
 
             {/* Mobile distributor buttons */}
             <div className="flex flex-col gap-3 pt-6 pb-2">

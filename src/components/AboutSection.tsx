@@ -46,10 +46,11 @@ export default function AboutSection() {
         className="mx-auto max-w-[1440px] px-8"
         style={{ paddingTop: 80, paddingBottom: 88 }}
       >
-        <div style={{ display: "flex", gap: 80, alignItems: "flex-start" }}>
+        {/* Stack on mobile, side-by-side on lg+ */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
 
           {/* ── Left: copy ─────────────────────────────────────────────── */}
-          <div style={{ flex: "1 1 0", minWidth: 0 }}>
+          <div className="flex-1 min-w-0">
 
             {/* Eyebrow */}
             <p style={{
@@ -64,14 +65,16 @@ export default function AboutSection() {
             </p>
 
             {/* Headline */}
-            <h2 style={{
-              fontSize:      48,
-              fontWeight:    700,
-              letterSpacing: "-0.03em",
-              lineHeight:    1.08,
-              marginBottom:  24,
-              color:         "#f5f5f7",
-            }}>
+            <h2
+              className="text-[34px] sm:text-[42px] lg:text-[48px]"
+              style={{
+                fontWeight:    700,
+                letterSpacing: "-0.03em",
+                lineHeight:    1.08,
+                marginBottom:  24,
+                color:         "#f5f5f7",
+              }}
+            >
               Powering Indian homes.{" "}
               <span style={{ color: "rgba(245,245,247,0.38)" }}>
                 Since 2012.
@@ -127,14 +130,8 @@ export default function AboutSection() {
           </div>
 
           {/* ── Right: stats 2×2 ──────────────────────────────────────── */}
-          <div style={{
-            flexShrink: 0,
-            width:      420,
-            display:    "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap:        12,
-            paddingTop: 8,
-          }}>
+          {/* Full width on mobile, fixed 420px on lg+ */}
+          <div className="w-full lg:w-[420px] lg:shrink-0 grid grid-cols-2 gap-3" style={{ paddingTop: 8 }}>
             <Stat value="12+"  label="Years of engineering excellence" />
             <Stat value="2M+"  label="Appliances in Indian homes"      />
             <Stat value="500+" label="Cities served pan-India"         />

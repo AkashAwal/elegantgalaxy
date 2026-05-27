@@ -6,6 +6,7 @@ import {
   BLOG_POSTS, BLOG_CATEGORIES, getBlogPost,
   type BlogSection, type BlogPost,
 } from "@/data/blog-posts";
+import ShareButtons from "@/components/ShareButtons";
 
 // ── Static generation ─────────────────────────────────────────────────────────
 
@@ -217,7 +218,8 @@ function RelatedPosts({ post }: { post: BlogPost }) {
       }}>
         More from the journal
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+      {/* 1-col on mobile, 2-col on sm+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {related.map(r => {
           const meta = BLOG_CATEGORIES[r.category];
           return (
@@ -272,7 +274,7 @@ export default async function BlogPostPage(
   const meta = BLOG_CATEGORIES[post.category];
 
   return (
-    <main className="bg-[#f5f5f7] min-h-screen">
+    <main id="main-content" className="bg-[#f5f5f7] min-h-screen">
 
       {/* ── Gradient header ──────────────────────────────────────────────────── */}
       <div style={{ background: meta.gradient, paddingTop: 56, paddingBottom: 56 }}>
@@ -315,16 +317,18 @@ export default async function BlogPostPage(
             {meta.label}
           </span>
 
-          <h1 style={{
-            fontSize:      40,
-            fontWeight:    700,
-            letterSpacing: "-0.028em",
-            lineHeight:    1.12,
-            color:         "#fff",
-            marginBottom:  16,
-            maxWidth:      740,
-            margin:        "0 auto 16px",
-          }}>
+          {/* Responsive heading */}
+          <h1
+            className="text-[24px] sm:text-[32px] lg:text-[40px]"
+            style={{
+              fontWeight:    700,
+              letterSpacing: "-0.028em",
+              lineHeight:    1.12,
+              color:         "#fff",
+              maxWidth:      740,
+              margin:        "0 auto 16px",
+            }}
+          >
             {post.title}
           </h1>
 
@@ -369,15 +373,22 @@ export default async function BlogPostPage(
       {/* ── Article body ─────────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 88 }}>
         <div style={{ maxWidth: 740, margin: "0 auto" }}>
-          <div style={{
-            background:   "#fff",
-            borderRadius: 20,
-            padding:      "44px 52px",
-            boxShadow:    "0 2px 20px rgba(0,0,0,0.06)",
-          }}>
+          {/* Responsive padding on the article card */}
+          <div
+            className="px-5 py-8 sm:px-10 sm:py-10 lg:px-[52px] lg:py-[44px]"
+            style={{
+              background:   "#fff",
+              borderRadius: 20,
+              boxShadow:    "0 2px 20px rgba(0,0,0,0.06)",
+            }}
+          >
             {post.content.map((section, i) => (
               <RenderSection key={i} section={section} />
             ))}
+            <ShareButtons
+              url={`https://elegantgalaxy.in/blog/${post.slug}`}
+              title={post.title}
+            />
           </div>
 
           {/* Tags */}

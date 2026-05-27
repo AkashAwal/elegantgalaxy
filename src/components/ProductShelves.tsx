@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Check, X } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -249,6 +250,12 @@ type Product = {
   href:         string;
   bg:           string;
   illustration: ReactNode;
+  /**
+   * Path to a real product image under /public, e.g. "/images/products/tv-65.webp".
+   * When provided, next/image is rendered instead of the SVG illustration.
+   * Convention: /public/images/products/{id}.webp (400 × 400 px, transparent bg).
+   */
+  imageSrc?:    string;
 };
 
 type Shelf = {
@@ -299,6 +306,28 @@ const SHELVES: Shelf[] = [
     ],
   },
 ];
+
+// ─── Illustration switcher ────────────────────────────────────────────────────
+// Renders a real product image (next/image) when `imageSrc` is set on the
+// product, and falls back to the SVG placeholder otherwise.
+// Drop images into /public/images/products/{id}.webp (400 × 400 px,
+// transparent background) and add `imageSrc: "/images/products/{id}.webp"`
+// to the product entry in SHELVES to activate them one at a time.
+
+function ProductIllustration({ product }: { product: Product }) {
+  if (product.imageSrc) {
+    return (
+      <Image
+        src={product.imageSrc}
+        alt={product.name}
+        fill
+        sizes="(max-width: 1024px) 50vw, 25vw"
+        style={{ objectFit: "contain", padding: 24 }}
+      />
+    );
+  }
+  return <>{product.illustration}</>;
+}
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 
@@ -364,7 +393,7 @@ function ProductCard({
             {product.badge}
           </span>
         )}
-        {product.illustration}
+        <ProductIllustration product={product} />
       </div>
 
       {/* Info */}
@@ -372,7 +401,7 @@ function ProductCard({
         <p style={{
           fontSize:      9.5,
           fontWeight:    600,
-          color:         "#aeaeb2",
+          color:         "#6e6e73",
           letterSpacing: "0.07em",
           marginBottom:  4,
         }}>
@@ -439,6 +468,10 @@ function ProductCard({
         <button
           onClick={onToggleCompare}
           disabled={maxReached && !isCompared}
+          aria-label={isCompared
+            ? `Remove ${product.name} from comparison`
+            : `Add ${product.name} to comparison`}
+          aria-pressed={isCompared}
           style={{
             marginTop:      8,
             width:          "100%",
@@ -461,7 +494,7 @@ function ProductCard({
             width:          14,
             height:         14,
             borderRadius:   3,
-            border:         `1.5px solid ${isCompared ? "#0071e3" : "#aeaeb2"}`,
+            border:         `1.5px solid ${isCompared ? "#0071e3" : "#8e8e93"}`,
             background:     isCompared ? "#0071e3" : "transparent",
             display:        "inline-flex",
             alignItems:     "center",
@@ -524,6 +557,7 @@ function CompareBar({
             </span>
             <button
               onClick={() => onRemove(p.id)}
+              aria-label={`Remove ${p.name} from comparison`}
               style={{
                 border:     "none",
                 background: "none",
@@ -540,7 +574,7 @@ function CompareBar({
           </div>
         ))}
         {products.length < 3 && (
-          <span style={{ fontSize: 12, color: "#aeaeb2", fontStyle: "italic" }}>
+          <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
             Add 1 more to compare
           </span>
         )}
@@ -594,6 +628,42 @@ function CompareModal({
   category: string;
   onClose:  () => void;
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef  = useRef<HTMLButtonElement>(null);
+  const returnRef = useRef<HTMLElement | null>(null);
+  const TITLE_ID  = "compare-modal-title";
+
+  // On mount: remember where focus came from, move it to the close button.
+  // On unmount: give focus back to the opener.
+  useEffect(() => {
+    returnRef.current = document.activeElement as HTMLElement;
+    closeRef.current?.focus();
+    return () => { returnRef.current?.focus(); };
+  }, []);
+
+  // Escape key → close (document-level so it fires even if nothing inside is focused)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Tab focus trap — keep keyboard focus cycling within the dialog
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Tab") return;
+    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable?.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  };
+
   return (
     <div
       onClick={onClose}
@@ -609,7 +679,12 @@ function CompareModal({
       }}
     >
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={TITLE_ID}
         onClick={e => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
         style={{
           background:   "#fff",
           borderRadius: 20,
@@ -623,7 +698,10 @@ function CompareModal({
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
           <div>
-            <h2 style={{ fontSize: 21, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em" }}>
+            <h2
+              id={TITLE_ID}
+              style={{ fontSize: 21, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em" }}
+            >
               Compare {category}
             </h2>
             <p style={{ fontSize: 12, color: "#6e6e73", marginTop: 2 }}>
@@ -631,7 +709,9 @@ function CompareModal({
             </p>
           </div>
           <button
+            ref={closeRef}
             onClick={onClose}
+            aria-label="Close comparison"
             style={{
               width:       36,
               height:      36,
@@ -659,13 +739,14 @@ function CompareModal({
             <div key={p.id} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
               {/* Illustration */}
               <div style={{
-                background:     p.bg,
-                height:         160,
-                display:        "flex",
-                alignItems:     "center",
+                background: p.bg,
+                height:     160,
+                position:   "relative",
+                display:    "flex",
+                alignItems: "center",
                 justifyContent: "center",
               }}>
-                {p.illustration}
+                <ProductIllustration product={p} />
               </div>
 
               {/* Details */}
@@ -685,7 +766,7 @@ function CompareModal({
                     {p.badge}
                   </span>
                 )}
-                <p style={{ fontSize: 9.5, fontWeight: 600, color: "#aeaeb2", letterSpacing: "0.07em", marginBottom: 4 }}>
+                <p style={{ fontSize: 9.5, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.07em", marginBottom: 4 }}>
                   {p.subtitle}
                 </p>
                 <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 10, lineHeight: 1.3 }}>
@@ -751,7 +832,7 @@ function ShelfRow({ shelf }: { shelf: Shelf }) {
       </div>
 
       {/* Cards row — 4 equal-width cards filling the full row */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
         {shelf.products.map(p => (
           <ProductCard
             key={p.id}

@@ -105,7 +105,7 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
           alignItems: "center",
           gap:        4,
           fontSize:   12,
-          color:      "#aeaeb2",
+          color:      "#6e6e73",
           fontWeight: 500,
         }}>
           <Clock size={12} />
@@ -158,7 +158,7 @@ export default function SupportClient() {
           padding:      "0 16px",
           boxShadow:    "0 2px 12px rgba(0,0,0,0.06)",
         }}>
-          <Search size={18} color="#aeaeb2" strokeWidth={1.75} style={{ flexShrink: 0 }} />
+          <Search size={18} color="#6e6e73" strokeWidth={1.75} style={{ flexShrink: 0 }} />
           <input
             type="search"
             placeholder="Search guides… e.g. connect to WiFi, error code, wash cycle"
@@ -171,13 +171,13 @@ export default function SupportClient() {
               color:       "#1d1d1f",
               background:  "transparent",
               border:      "none",
-              outline:     "none",
             }}
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              style={{ border: "none", background: "none", cursor: "pointer", display: "flex", alignItems: "center", color: "#aeaeb2" }}
+              aria-label="Clear search"
+              style={{ border: "none", background: "none", cursor: "pointer", display: "flex", alignItems: "center", color: "#6e6e73" }}
             >
               <X size={16} />
             </button>
@@ -221,7 +221,8 @@ export default function SupportClient() {
             {query ? ` for "${query}"` : ""}
           </p>
           {results.length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            /* 1-col on mobile, 2 on sm, 3 on lg */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {results.map(a => <ArticleCard key={a.slug} article={a} />)}
             </div>
           ) : (
@@ -272,7 +273,8 @@ export default function SupportClient() {
                   Shop {meta.label} →
                 </Link>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+              {/* 1-col on mobile, 2 on sm, 3 on lg */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 {articles.map(a => <ArticleCard key={a.slug} article={a} />)}
               </div>
             </div>
@@ -281,20 +283,18 @@ export default function SupportClient() {
       )}
 
       {/* ── Bottom CTA ───────────────────────────────────────────────────── */}
-      <div style={{
-        marginTop:    72,
-        padding:      "40px 48px",
-        background:   "#fff",
-        borderRadius: 18,
-        border:       "1.5px solid #e8e8ed",
-        display:      "flex",
-        alignItems:   "center",
-        justifyContent: "space-between",
-        gap:          32,
-      }}>
+      <div
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-10"
+        style={{
+          marginTop:    72,
+          background:   "#fff",
+          borderRadius: 18,
+          border:       "1.5px solid #e8e8ed",
+        }}
+      >
         <div>
           <p style={{ fontSize: 18, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em", marginBottom: 6 }}>
-            Can't find what you're looking for?
+            Can&apos;t find what you&apos;re looking for?
           </p>
           <p style={{ fontSize: 14, color: "#6e6e73" }}>
             Our support team is available Mon–Sat, 9 AM – 6 PM IST.

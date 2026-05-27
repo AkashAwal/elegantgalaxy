@@ -14,7 +14,7 @@ function ContactSkeleton() {
 
 export default function ContactPage() {
   return (
-    <main className="bg-[#f5f5f7] min-h-screen">
+    <main id="main-content" className="bg-[#f5f5f7] min-h-screen">
       <Suspense fallback={<ContactSkeleton />}>
         <ContactClient />
       </Suspense>

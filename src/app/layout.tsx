@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SiteFooter from "@/components/SiteFooter";
+import BackToTop from "@/components/BackToTop";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -93,9 +95,20 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full ${inter.variable}`}>
       <body className="min-h-full flex flex-col antialiased">
+        {/* ── Skip to content (A11Y) ───────────────────────────────────────────
+            Visually hidden above the viewport; slides into view on keyboard
+            focus so screen-reader and keyboard users can bypass the navbar.  */}
+        <a
+          href="#main-content"
+          className="fixed -top-20 left-4 z-[9999] rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#0071e3] shadow-lg ring-2 ring-[#0071e3] outline-none transition-[top] duration-150 focus:top-4"
+        >
+          Skip to content
+        </a>
         <Navbar />
         {children}
         <SiteFooter />
+        <BackToTop />
+        <CookieConsentBanner />
       </body>
     </html>
   );
