@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    // Explicitly anchor the workspace root to this project directory.
+    // Without this, Next.js 16 / Turbopack auto-detects the root by
+    // walking up for lockfiles and may land on a stray package-lock.json
+    // in a parent directory, which breaks route discovery.
+    root: path.resolve(__dirname),
+  },
 };
 
 export default nextConfig;
