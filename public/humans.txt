@@ -1,0 +1,16 @@
+/* TEAM */
+
+  Brand: Elegant Galaxy
+  Contact: hello [at] elegantgalaxy.in
+  Location: India
+
+/* THANKS */
+
+  Customers across 500+ Indian cities who've trusted us since 2012.
+
+/* SITE */
+
+  Last update: 2026
+  Standards: HTML5, CSS3
+  Components: Next.js, React 19, TypeScript, Tailwind CSS v4
+  Hosted in: India

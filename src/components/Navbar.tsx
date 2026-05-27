@@ -246,8 +246,14 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => { setMobile(false); }, [pathname]);
+  // Reset all interactive state on every route change
+  useEffect(() => {
+    setMobile(false);
+    setActiveId(null);
+    setSearch(false);
+    setHoveredId(null);
+    setQuery("");
+  }, [pathname]);
 
   const activeMega = NAV.find((n) => n.id === activeId)?.mega ?? null;
   const panelOpen  = !!activeMega || searchOpen;

@@ -1,0 +1,4 @@
+Contact: mailto:hello@elegantgalaxy.in
+Preferred-Languages: en, hi
+Canonical: https://elegantgalaxy.in/.well-known/security.txt
+Policy: https://elegantgalaxy.in/privacy

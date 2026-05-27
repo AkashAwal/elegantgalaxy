@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import SiteFooter from "@/components/SiteFooter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,9 +11,78 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Elegant Galaxy Pvt Ltd",
+  metadataBase: new URL("https://elegantgalaxy.in"),
+
+  title: {
+    default:  "Elegant Galaxy — Home Appliances Since 2012",
+    template: "%s — Elegant Galaxy",
+  },
   description:
-    "Elegant Galaxy Private Limited — premium home appliances: Smart TVs, Washing Machines, Air Coolers, and Infrared Cooktops.",
+    "Elegant Galaxy makes LED TVs, washing machines, air coolers, and infrared cooktops for Indian households. Sold in 500+ cities, serviced in 200+ centres across India.",
+
+  keywords: [
+    "home appliances India",
+    "LED TV India",
+    "washing machine India",
+    "air cooler India",
+    "infrared cooktop India",
+    "Elegant Galaxy",
+    "buy home appliances online India",
+  ],
+
+  authors:  [{ name: "Elegant Galaxy", url: "https://elegantgalaxy.in" }],
+  creator:  "Elegant Galaxy",
+  publisher:"Elegant Galaxy",
+
+  alternates: {
+    canonical: "https://elegantgalaxy.in",
+    languages: {
+      "en-IN": "https://elegantgalaxy.in",
+    },
+  },
+
+  openGraph: {
+    type:        "website",
+    locale:      "en_IN",
+    url:         "https://elegantgalaxy.in",
+    siteName:    "Elegant Galaxy",
+    title:       "Elegant Galaxy — Home Appliances Since 2012",
+    description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
+    images: [
+      {
+        url:    "/og-image.png",
+        width:  1200,
+        height: 630,
+        alt:    "Elegant Galaxy — Home Appliances",
+      },
+    ],
+  },
+
+  twitter: {
+    card:        "summary_large_image",
+    title:       "Elegant Galaxy — Home Appliances Since 2012",
+    description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
+    images:      ["/og-image.png"],
+  },
+
+  robots: {
+    index:               true,
+    follow:              true,
+    googleBot: {
+      index:             true,
+      follow:            true,
+      "max-image-preview":  "large",
+      "max-snippet":        -1,
+      "max-video-preview":  -1,
+    },
+  },
+
+  verification: {
+    // Add Search Console verification token here once confirmed:
+    // google: "YOUR_VERIFICATION_TOKEN",
+  },
+
+  category: "shopping",
 };
 
 export default function RootLayout({
@@ -25,6 +95,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         <Navbar />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

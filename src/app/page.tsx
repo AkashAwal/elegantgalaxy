@@ -2,6 +2,10 @@ import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
 import ProductSection from "@/components/ProductSection";
+import ProductShelves from "@/components/ProductShelves";
+import AboutSection from "@/components/AboutSection";
+import DistributorSection from "@/components/DistributorSection";
+import FAQSection from "@/components/FAQSection";
 import TVShowcase from "@/components/TVShowcase";
 
 // ── Placeholder product silhouettes (swap with real <Image /> later) ──────────
@@ -195,6 +199,18 @@ export default function Home() {
       <ProductSection />
 
       <DifferenceSection />
+
+      {/* ── Product shelves ────────────────────────────────────────────── */}
+      <ProductShelves />
+
+      {/* ── About ─────────────────────────────────────────────────────── */}
+      <AboutSection />
+
+      {/* ── Distributor ───────────────────────────────────────────────── */}
+      <DistributorSection />
+
+      {/* ── FAQ ───────────────────────────────────────────────────────── */}
+      <FAQSection />
 
     </main>
   );
