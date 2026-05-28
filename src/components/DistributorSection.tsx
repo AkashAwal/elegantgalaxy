@@ -48,23 +48,6 @@ export default function DistributorSection() {
           {/* The same two buttons from the header */}
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <Link
-              href="/distributors"
-              style={{
-                display:        "inline-flex",
-                alignItems:     "center",
-                height:         44,
-                padding:        "0 26px",
-                borderRadius:   980,
-                fontSize:       15,
-                fontWeight:     500,
-                color:          "#0071e3",
-                border:         "1.5px solid #0071e3",
-                textDecoration: "none",
-              }}
-            >
-              Find a Distributor
-            </Link>
-            <Link
               href="/contact?type=distributor"
               style={{
                 display:        "inline-flex",

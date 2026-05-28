@@ -35,7 +35,6 @@ const COLS = [
   {
     heading: "Business",
     links: [
-      { label: "Find a Distributor",   href: "/distributors"         },
       { label: "Become a Distributor", href: "/distributors/apply"   },
       { label: "Financing",            href: "/distributors/financing"},
     ],

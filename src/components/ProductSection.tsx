@@ -421,7 +421,7 @@ function ProductTile({ product }: { product: Product }) {
 
 export default function ProductSection() {
   return (
-    <section className="mx-auto max-w-[1440px] px-8 py-14">
+    <section id="accessories" className="mx-auto max-w-[1440px] px-8 py-14">
 
       <div className="mb-8">
         <h2 style={{ fontSize: 28, fontWeight: 600, letterSpacing: "-0.02em" }}>

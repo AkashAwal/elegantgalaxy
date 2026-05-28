@@ -34,10 +34,10 @@ const NAV: NavItem[] = [
         heading: "Explore LED TVs",
         primary: [
           { label: "Explore All LED TVs",  href: "/products/led-tvs" },
-          { label: "32-Inch LED TVs",      href: "/products/led-tvs/32-inch" },
-          { label: "43-Inch LED TVs",      href: "/products/led-tvs/43-inch" },
-          { label: "55-Inch LED TVs",      href: "/products/led-tvs/55-inch" },
-          { label: "65-Inch LED TVs",      href: "/products/led-tvs/65-inch" },
+          { label: "32-Inch LED TVs",      href: "/products/led-tvs?size=32" },
+          { label: "43-Inch LED TVs",      href: "/products/led-tvs?size=43" },
+          { label: "55-Inch LED TVs",      href: "/products/led-tvs?size=55" },
+          { label: "65-Inch LED TVs",      href: "/products/led-tvs?size=65" },
         ],
         links: [
           { label: "Compare LED TVs",      href: "/products/led-tvs/compare" },
@@ -47,8 +47,7 @@ const NAV: NavItem[] = [
         heading: "Shop LED TVs",
         links: [
           { label: "Shop LED TVs",         href: "/products/led-tvs" },
-          { label: "TV Accessories",       href: "/products/led-tvs/accessories" },
-          { label: "Find a Distributor",   href: "/distributors" },
+          { label: "TV Accessories",       href: "/#accessories" },
           { label: "Financing",            href: "/distributors/financing" },
         ],
       },
@@ -86,7 +85,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Washing Machines",        href: "/products/washing-machines" },
           { label: "Accessories",                  href: "/products/washing-machines/accessories" },
-          { label: "Find a Distributor",           href: "/distributors" },
           { label: "Financing",                    href: "/distributors/financing" },
         ],
       },
@@ -125,7 +123,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Air Coolers",        href: "/products/air-coolers" },
           { label: "Accessories",             href: "/products/air-coolers/accessories" },
-          { label: "Find a Distributor",      href: "/distributors" },
           { label: "Financing",               href: "/distributors/financing" },
         ],
       },
@@ -163,7 +160,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Cooktops",           href: "/products/infrared-cooktops" },
           { label: "Accessories",             href: "/products/infrared-cooktops/accessories" },
-          { label: "Find a Distributor",      href: "/distributors" },
           { label: "Financing",               href: "/distributors/financing" },
         ],
       },
@@ -186,7 +182,6 @@ const NAV: NavItem[] = [
 ];
 
 const QUICK_LINKS: MegaLink[] = [
-  { label: "Find a Distributor",    href: "/distributors" },
   { label: "Become a Distributor",  href: "/distributors/apply" },
   { label: "LED TVs",               href: "/products/led-tvs" },
   { label: "Washing Machines",      href: "/products/washing-machines" },
@@ -532,22 +527,6 @@ export default function Navbar() {
             {/* Desktop buttons */}
             <div className="hidden lg:flex items-center gap-2.5" onMouseEnter={closeMega}>
 
-              {/* Ghost blue pill */}
-              <Link
-                href="/distributors"
-                className="flex items-center h-[30px] px-4 rounded-full
-                           whitespace-nowrap select-none transition-all duration-200
-                           "
-                style={{
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: "#0071e3",
-                  border: "1.5px solid #0071e3",
-                }}
-              >
-                Find a Distributor
-              </Link>
-
               {/* Solid blue pill */}
               <Link
                 href="/distributors/apply"
@@ -777,18 +756,6 @@ export default function Navbar() {
 
             {/* Mobile distributor buttons */}
             <div className="flex flex-col gap-3 pt-6 pb-2">
-              <Link
-                href="/distributors"
-                className="flex items-center justify-center h-11 rounded-full"
-                style={{
-                  fontSize: 15,
-                  fontWeight: 500,
-                  color: "#0071e3",
-                  border: "1.5px solid #0071e3",
-                }}
-              >
-                Find a Distributor
-              </Link>
               <Link
                 href="/distributors/apply"
                 className="flex items-center justify-center h-11 rounded-full"

@@ -417,21 +417,6 @@ export default function AboutPage() {
               }}>
                 Customer Care: +91 95406 99333
               </a>
-              <Link href="/distributors" style={{
-                display:        "inline-flex",
-                alignItems:     "center",
-                justifyContent: "center",
-                padding:        "11px 24px",
-                borderRadius:   980,
-                background:     "#0071e3",
-                color:          "#fff",
-                fontSize:       14,
-                fontWeight:     500,
-                textDecoration: "none",
-                whiteSpace:     "nowrap",
-              }}>
-                Find a distributor near you
-              </Link>
             </div>
           </div>
         </div>

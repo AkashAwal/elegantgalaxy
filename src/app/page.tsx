@@ -145,17 +145,10 @@ export default function Home() {
             </p>
             <Link
               href="/contact"
-              className="block text-[#0071e3] hover:underline mb-1"
-              style={{ fontSize: 14 }}
-            >
-              Customer Care ↗
-            </Link>
-            <Link
-              href="/distributors"
               className="block text-[#0071e3] hover:underline"
               style={{ fontSize: 14 }}
             >
-              Find a Distributor ↗
+              Customer Care ↗
             </Link>
           </div>
 
