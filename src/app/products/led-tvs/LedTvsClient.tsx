@@ -6,7 +6,7 @@ import { Phone, MessageCircle, FileText, X, Check } from "lucide-react";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
-const SIZES = [24, 32, 40, 43, 50, 55, 65, 75, 85, 100];
+const SIZES = [24, 32, 40, 42, 43, 50, 55, 58, 65, 75, 85, 100];
 
 interface TvModel {
   id:         string;
@@ -35,8 +35,22 @@ const MODELS: TvModel[] = [
     id:         "webos-4k",
     type:       "WebOS 4K",
     platform:   "webOS 4K",
-    sizes:      [43, 50, 55, 65, 75, 85, 100],
-    resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+    sizes:      [43, 50, 55, 58, 65, 75, 85, 100],
+    resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+  },
+  {
+    id:         "frameless-smart",
+    type:       "Frameless Smart",
+    platform:   "Frameless Smart",
+    sizes:      [24, 32, 40, 42, 43],
+    resolution: { 24: "Full HD", 32: "Full HD", 40: "Full HD", 42: "Full HD", 43: "Full HD" },
+  },
+  {
+    id:         "frameless-normal",
+    type:       "Frameless Normal",
+    platform:   "Frameless Normal",
+    sizes:      [24],
+    resolution: { 24: "Full HD" },
   },
   {
     id:         "google",
@@ -51,7 +65,7 @@ const PHONE         = "+919540699333";
 const PHONE_DISPLAY = "+91 95406 99333";
 const WA_BASE       = `https://wa.me/${PHONE}`;
 
-const tvName    = (model: TvModel, size: number) => `EG ${model.type} ${size} Smart LED`;
+const tvName    = (model: TvModel, size: number) => `EG ${model.type} ${size}" Smart LED`;
 const entryKey  = (modelId: string, size: number) => `${modelId}::${size}`;
 const parseKey  = (key: string) => {
   const [modelId, sizeStr] = key.split("::");
