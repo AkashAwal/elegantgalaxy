@@ -388,8 +388,7 @@ function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnq
         boxShadow:    hovered
           ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
           : "0 2px 16px rgba(0,0,0,0.07)",
-        transform:    hovered ? "translateY(-4px)" : "translateY(0)",
-        transition:   "box-shadow 0.25s ease, transform 0.25s ease, outline-color 0.15s ease",
+        transition:   "box-shadow 0.25s ease, outline-color 0.15s ease",
       }}
     >
       {/* Image */}
@@ -531,7 +530,7 @@ export default function LedTvsClient({
             <div className="flex flex-col lg:flex-row lg:gap-10">
 
               {/* Sizes */}
-              <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ flex: "1 1 0%", minWidth: 0 }}>
                 <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Select a Size</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
                   <button onClick={() => setSelectedSize(null)} aria-pressed={selectedSize === null} style={{ height: 50, minWidth: 72, padding: "0 18px", borderRadius: 12, border: selectedSize === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedSize === null ? "#0071e3" : "#fff", color: selectedSize === null ? "#fff" : "#1d1d1f", fontSize: 15, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
@@ -556,7 +555,7 @@ export default function LedTvsClient({
               <div className="hidden lg:block" style={{ width: 1, background: "rgba(0,0,0,0.08)", alignSelf: "stretch", flexShrink: 0 }} />
 
               {/* Model filter */}
-              <div style={{ flexShrink: 0 }} className="mt-6 lg:mt-0">
+              <div style={{ flex: "1 1 0%", minWidth: 0 }} className="mt-6 lg:mt-0">
                 <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Filter by Model</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   <button onClick={() => setSelectedModelId(null)} aria-pressed={selectedModelId === null} style={{ height: 40, padding: "0 16px", borderRadius: 980, border: selectedModelId === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedModelId === null ? "#0071e3" : "#fff", color: selectedModelId === null ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>

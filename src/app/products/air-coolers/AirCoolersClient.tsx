@@ -533,8 +533,7 @@ function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () =>
         boxShadow:    hovered
           ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
           : "0 2px 16px rgba(0,0,0,0.07)",
-        transform:   hovered ? "translateY(-4px)" : "translateY(0)",
-        transition:  "box-shadow 0.25s ease, transform 0.25s ease",
+        transition:  "box-shadow 0.25s ease",
       }}
     >
       {/* Illustration — clips top corners independently */}

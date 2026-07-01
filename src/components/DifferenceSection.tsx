@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { ReactNode, CSSProperties } from "react";
@@ -111,20 +110,19 @@ type DiffCard = {
   icon:  ReactNode;
   title: string;
   desc:  string;
-  href:  string;
 };
 
 const CARDS: DiffCard[] = [
-  { icon: <IconWarranty />,  title: "5-Year Warranty",       desc: "Every product backed by our industry-leading 5-year warranty.",          href: "/support/warranty"        },
-  { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power.", href: "/products"                },
-  { icon: <IconEMI />,       title: "No-Cost EMI",            desc: "Split your purchase into easy monthly instalments at zero extra cost.",    href: "/distributors/financing"  },
-  { icon: <IconInstall />,   title: "Free Installation",      desc: "Expert technicians set everything up — free of charge, at your doorstep.",href: "/support"                 },
-  { icon: <IconService />,   title: "200+ Service Centres",   desc: "Nationwide network so expert help is always close to home.",              href: "/support/service-centres" },
-  { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards.",         href: "/products"                },
-  { icon: <IconSupport />,   title: "24 / 7 Support",         desc: "Our customer care team is available around the clock, every day.",        href: "/contact"                 },
-  { icon: <IconReturns />,   title: "30-Day Returns",         desc: "Not happy? Return any product within 30 days, no questions asked.",       href: "/support"                 },
-  { icon: <IconDelivery />,  title: "Pan-India Delivery",     desc: "Fast, tracked delivery to every pin code across the country.",            href: "/distributors"            },
-  { icon: <IconAward />,     title: "Award-Winning Design",   desc: "Recognised for design excellence at national and international forums.",   href: "/about"                   },
+  { icon: <IconWarranty />,  title: "5-Year Warranty",       desc: "Every product backed by our industry-leading 5-year warranty."          },
+  { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power." },
+  { icon: <IconEMI />,       title: "No-Cost EMI",            desc: "Split your purchase into easy monthly instalments at zero extra cost."    },
+  { icon: <IconInstall />,   title: "Free Installation",      desc: "Expert technicians set everything up — free of charge, at your doorstep." },
+  { icon: <IconService />,   title: "200+ Service Centres",   desc: "Nationwide network so expert help is always close to home."              },
+  { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards."         },
+  { icon: <IconSupport />,   title: "24 / 7 Support",         desc: "Our customer care team is available around the clock, every day."        },
+  { icon: <IconReturns />,   title: "30-Day Returns",         desc: "Not happy? Return any product within 30 days, no questions asked."       },
+  { icon: <IconDelivery />,  title: "Pan-India Delivery",     desc: "Fast, tracked delivery to every pin code across the country."            },
+  { icon: <IconAward />,     title: "Award-Winning Design",   desc: "Recognised for design excellence at national and international forums."   },
 ];
 
 const LOOPED = [...CARDS, ...CARDS];
@@ -132,15 +130,13 @@ const LOOPED = [...CARDS, ...CARDS];
 // ── Card with flat lift on hover ───────────────────────────────────────────────
 
 function LiftCard({
-  href,
   children,
   style,
 }: {
-  href: string;
   children: ReactNode;
   style?: CSSProperties;
 }) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const onMouseEnter = () => {
     const el = cardRef.current;
@@ -161,16 +157,15 @@ function LiftCard({
   };
 
   return (
-    <Link
+    <div
       ref={cardRef}
-      href={href}
       className="relative flex-shrink-0 overflow-hidden rounded-[18px]"
       style={{ willChange: "transform", boxShadow: "0 2px 10px rgba(0,0,0,0.07)", ...style }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {children}
-    </Link>
+    </div>
   );
 }
 
@@ -223,7 +218,6 @@ export default function DifferenceSection() {
           {LOOPED.map((card, i) => (
             <LiftCard
               key={i}
-              href={card.href}
               style={{ width: 274, flexShrink: 0, height: 244, background: "#fff" }}
             >
               <div className="flex flex-col h-full px-7 pt-7 pb-6" style={{ minWidth: 0 }}>
