@@ -373,22 +373,17 @@ interface ModelCardProps {
 function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnquire }: ModelCardProps) {
   const resolution  = model.resolution[size] ?? "Full HD";
   const displayName = tvName(model, size);
-  const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         background:   "#fff",
         borderRadius: 18,
         overflow:     "hidden",
         outline:      isCompared ? "2px solid #0071e3" : "2px solid transparent",
         outlineOffset: "-1px",
-        boxShadow:    hovered
-          ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
-          : "0 2px 16px rgba(0,0,0,0.07)",
-        transition:   "box-shadow 0.25s ease, outline-color 0.15s ease",
+        boxShadow:    "0 2px 16px rgba(0,0,0,0.07)",
+        transition:   "outline-color 0.15s ease",
       }}
     >
       {/* Image */}

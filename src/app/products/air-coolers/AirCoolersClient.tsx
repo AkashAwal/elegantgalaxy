@@ -518,22 +518,16 @@ function formatSpecValue(model: CoolerModel, key: keyof CoolerModel): string {
 
 function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () => void }) {
   const [expanded, setExpanded] = useState(false);
-  const [hovered,  setHovered]  = useState(false);
   const isDark = model.type === "commercial";
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         background:   "#fff",
         borderRadius: 18,
         position:     "relative",
         zIndex:       expanded ? 20 : 1,
-        boxShadow:    hovered
-          ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
-          : "0 2px 16px rgba(0,0,0,0.07)",
-        transition:  "box-shadow 0.25s ease",
+        boxShadow:    "0 2px 16px rgba(0,0,0,0.07)",
       }}
     >
       {/* Illustration — clips top corners independently */}

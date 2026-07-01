@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
-import ProductSection from "@/components/ProductSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import ProductShelves from "@/components/ProductShelves";
 import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
@@ -132,7 +132,7 @@ export default function Home() {
             className="font-semibold text-[#1d1d1f] leading-none text-[40px] sm:text-[52px] lg:text-[64px]"
             style={{ letterSpacing: "-0.003em" }}
           >
-            Store
+            Elegant Galaxy
           </h1>
 
           {/* Right — tagline + links */}
@@ -197,8 +197,8 @@ export default function Home() {
       {/* ── Latest products section ────────────────────────────────────── */}
       <LatestSection />
 
-      {/* ── Product tiles ─────────────────────────────────────────────────── */}
-      <ProductSection />
+      {/* ── Testimonials ──────────────────────────────────────────────────── */}
+      <TestimonialsSection />
 
       <DifferenceSection />
 
@@ -208,11 +208,12 @@ export default function Home() {
       {/* ── About ─────────────────────────────────────────────────────── */}
       <AboutSection />
 
-      {/* ── Distributor ───────────────────────────────────────────────── */}
-      <DistributorSection />
-
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
       <FAQSection />
+
+      {/* ── Distributor — B2B pitch placed after the B2C flow so it doesn't
+             interrupt shoppers browsing products ────────────────────────── */}
+      <DistributorSection />
 
     </main>
   );

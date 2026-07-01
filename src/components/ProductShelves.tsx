@@ -342,24 +342,18 @@ function ProductCard({
   onToggleCompare: () => void;
   maxReached:      boolean;
 }) {
-  const [hovered, setHovered] = useState(false);
-
   const isDark = product.bg.startsWith("#0") || product.bg.startsWith("#1");
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         background:   "#fff",
         borderRadius: 16,
         overflow:     "hidden",
-        boxShadow:    hovered
-          ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
-          : "0 2px 10px rgba(0,0,0,0.07)",
+        boxShadow:    "0 2px 10px rgba(0,0,0,0.07)",
         outline:      isCompared ? "2px solid #0071e3" : "2px solid transparent",
         outlineOffset: "-1px",
-        transition:   "box-shadow 0.25s ease, outline-color 0.15s ease",
+        transition:   "outline-color 0.15s ease",
         display:      "flex",
         flexDirection:"column",
         flex:         1,
