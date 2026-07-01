@@ -412,7 +412,7 @@ export default function ContactClient() {
                       </svg>
                       Sending…
                     </>
-                  ) : "Send Message →"}
+                  ) : "Send Message"}
                 </button>
 
                 <p style={{ fontSize: 11.5, color: "#6e6e73", textAlign: "center", marginTop: -4 }}>
@@ -451,7 +451,7 @@ export default function ContactClient() {
             <p style={{ fontSize: 14, color: "#6e6e73", lineHeight: 1.65 }}>
               Still have questions?{" "}
               <a href="tel:+919540699333" style={{ color: "#0071e3", textDecoration: "none", fontWeight: 500 }}>
-                Call us →
+                Call us
               </a>
             </p>
           </div>

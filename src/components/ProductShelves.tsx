@@ -611,7 +611,7 @@ function CompareBar({
           letterSpacing: "-0.01em",
         }}
       >
-        Compare {products.length} →
+        Compare {products.length}
       </button>
     </div>
   );

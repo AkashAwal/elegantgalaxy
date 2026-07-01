@@ -270,7 +270,7 @@ export default function SupportClient() {
                   href={meta.href}
                   style={{ fontSize: 13, color: "#0071e3", fontWeight: 500, textDecoration: "none" }}
                 >
-                  Shop {meta.label} →
+                  Shop {meta.label}
                 </Link>
               </div>
               {/* 1-col on mobile, 2 on sm, 3 on lg */}

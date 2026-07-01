@@ -123,21 +123,13 @@ export default function SiteFooter() {
           {/* Brand column — spans 2 on mobile, 1 on desktop */}
           <div className="col-span-2 lg:col-span-1">
             {/* Logo mark */}
-            <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14 }}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2l2.6 6.4L21 12l-6.4 2.6L12 22l-2.6-6.4L3 12l6.4-2.6L12 2z"
-                  fill="#C8A951"
-                />
-              </svg>
-              <span style={{
-                fontSize:      15,
-                fontWeight:    600,
-                letterSpacing: "-0.01em",
-                color:         "#f5f5f7",
-              }}>
-                Elegant Galaxy
-              </span>
+            <div style={{ marginBottom: 14 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/eg-logo.png"
+                alt="Elegant Galaxy"
+                style={{ display: "block", height: 80, width: "auto", filter: "brightness(0) invert(1)" }}
+              />
             </div>
             <p style={{
               fontSize:   13,
@@ -152,9 +144,9 @@ export default function SiteFooter() {
             {/* Social icons (placeholder links) */}
             <div style={{ display: "flex", gap: 12 }}>
               {[
-                { label: "Instagram", href: "https://instagram.com", path: "M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" },
-                { label: "YouTube",   href: "https://youtube.com",   path: "M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.7.4A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9C6 19 12 19 12 19s6 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8zM10 15V9l5.2 3-5.2 3z" },
-                { label: "LinkedIn",  href: "https://linkedin.com",  path: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" },
+                { label: "Instagram", cls: "si-instagram", href: "https://instagram.com", path: "M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" },
+                { label: "YouTube",   cls: "si-youtube",   href: "https://youtube.com",   path: "M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.7.4A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9C6 19 12 19 12 19s6 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8zM10 15V9l5.2 3-5.2 3z" },
+                { label: "LinkedIn",  cls: "si-linkedin",  href: "https://linkedin.com",  path: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" },
               ].map(s => (
                 <a
                   key={s.label}
@@ -162,6 +154,7 @@ export default function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
+                  className={`social-icon ${s.cls}`}
                   style={{
                     width:          34,
                     height:         34,
@@ -170,8 +163,8 @@ export default function SiteFooter() {
                     display:        "flex",
                     alignItems:     "center",
                     justifyContent: "center",
-                    color:          "rgba(245,245,247,0.5)",
-                    transition:     "background 0.2s ease, color 0.2s ease",
+                    color:          "rgba(245,245,247,0.45)",
+                    transition:     "background 0.22s ease, color 0.22s ease",
                   }}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -179,6 +172,11 @@ export default function SiteFooter() {
                   </svg>
                 </a>
               ))}
+              <style>{`
+                .si-instagram:hover { background: rgba(225,48,108,0.15) !important; color: #E1306C !important; }
+                .si-youtube:hover   { background: rgba(255,0,0,0.12)    !important; color: #FF0000 !important; }
+                .si-linkedin:hover  { background: rgba(10,102,194,0.15) !important; color: #0A66C2 !important; }
+              `}</style>
             </div>
           </div>
 

@@ -528,7 +528,8 @@ function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () =>
       style={{
         background:   "#fff",
         borderRadius: 18,
-        overflow:     "hidden",
+        position:     "relative",
+        zIndex:       expanded ? 20 : 1,
         boxShadow:    hovered
           ? "0 12px 32px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.07)"
           : "0 2px 16px rgba(0,0,0,0.07)",
@@ -536,9 +537,11 @@ function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () =>
         transition:  "box-shadow 0.25s ease, transform 0.25s ease",
       }}
     >
-      {/* Illustration */}
+      {/* Illustration — clips top corners independently */}
       <div style={{
         background:     isDark ? "#1d1d1f" : "#e0f2fe",
+        borderRadius:   "18px 18px 0 0",
+        overflow:       "hidden",
         padding:        "28px 24px 20px",
         display:        "flex",
         justifyContent: "center",
@@ -612,43 +615,57 @@ function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () =>
           ))}
         </div>
 
-        {/* Expand specs */}
-        <button
-          onClick={() => setExpanded((p) => !p)}
-          style={{
-            width:          "100%",
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "space-between",
-            padding:        "8px 12px",
-            borderRadius:   10,
-            border:         "1.5px solid rgba(0,0,0,0.1)",
-            background:     "#f5f5f7",
-            cursor:         "pointer",
-            fontSize:       13,
-            fontWeight:     500,
-            color:          "#1d1d1f",
-            marginBottom:   12,
-          }}
-        >
-          <span>{expanded ? "Hide Specifications" : "View Full Specifications"}</span>
-          {expanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
-        </button>
+        {/* Expand specs — overlay anchor */}
+        <div style={{ position: "relative", marginBottom: 12 }}>
+          <button
+            onClick={() => setExpanded((p) => !p)}
+            style={{
+              width:          "100%",
+              display:        "flex",
+              alignItems:     "center",
+              justifyContent: "space-between",
+              padding:        "8px 12px",
+              borderRadius:   10,
+              border:         "1.5px solid rgba(0,0,0,0.1)",
+              background:     "#f5f5f7",
+              cursor:         "pointer",
+              fontSize:       13,
+              fontWeight:     500,
+              color:          "#1d1d1f",
+            }}
+          >
+            <span>{expanded ? "Hide Specifications" : "View Full Specifications"}</span>
+            {expanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+          </button>
 
-        {/* Full spec table */}
-        {expanded && (
-          <div style={{ marginBottom: 14, borderRadius: 10, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+          {/* Full spec table — always in DOM, animated with opacity + transform */}
+          <div style={{
+            position:      "absolute",
+            top:           "calc(100% + 4px)",
+            left:          0,
+            right:         0,
+            zIndex:        30,
+            background:    "#fff",
+            borderRadius:  10,
+            border:        "1px solid rgba(0,0,0,0.1)",
+            boxShadow:     "0 8px 28px rgba(0,0,0,0.14)",
+            opacity:       expanded ? 1 : 0,
+            transform:     expanded ? "translateY(0)" : "translateY(-6px)",
+            visibility:    expanded ? "visible" : "hidden",
+            transition:    "opacity 0.22s ease, transform 0.22s ease, visibility 0.22s",
+            pointerEvents: expanded ? "auto" : "none",
+          }}>
             {SPEC_ROWS.map(({ label, key }, i) => (
               <div
                 key={key}
                 style={{
-                  display:         "flex",
-                  justifyContent:  "space-between",
-                  alignItems:      "center",
-                  padding:         "7px 12px",
-                  background:      i % 2 === 0 ? "#fafafa" : "#fff",
-                  borderBottom:    i < SPEC_ROWS.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
-                  gap:             8,
+                  display:        "flex",
+                  justifyContent: "space-between",
+                  alignItems:     "center",
+                  padding:        "7px 12px",
+                  background:     i % 2 === 0 ? "#fafafa" : "#fff",
+                  borderBottom:   i < SPEC_ROWS.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
+                  gap:            8,
                 }}
               >
                 <span style={{ fontSize: 12, color: "#6e6e73", flexShrink: 0 }}>{label}</span>
@@ -658,7 +675,7 @@ function CoolerCard({ model, onEnquire }: { model: CoolerModel; onEnquire: () =>
               </div>
             ))}
           </div>
-        )}
+        </div>
 
         <button
           onClick={onEnquire}

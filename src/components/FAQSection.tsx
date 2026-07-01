@@ -104,20 +104,22 @@ function FAQItem({
         role="region"
         aria-labelledby={triggerId}
         style={{
-          maxHeight:  isOpen ? 300 : 0,
-          overflow:   "hidden",
-          transition: "max-height 0.32s ease",
+          display:          "grid",
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          transition:       "grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <p style={{
-          fontSize:     14.5,
-          lineHeight:   1.75,
-          color:        "#6e6e73",
-          paddingBottom: 22,
-          maxWidth:     640,
-        }}>
-          {a}
-        </p>
+        <div style={{ overflow: "hidden", minHeight: 0 }}>
+          <p style={{
+            fontSize:      14.5,
+            lineHeight:    1.75,
+            color:         "#6e6e73",
+            paddingBottom: 22,
+            maxWidth:      640,
+          }}>
+            {a}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -165,7 +167,7 @@ export default function FAQSection() {
                 href="/contact"
                 style={{ color: "#0071e3", textDecoration: "none", fontWeight: 500 }}
               >
-                Talk to us →
+                Talk to us
               </a>
             </p>
           </div>

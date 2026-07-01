@@ -34,10 +34,10 @@ const NAV: NavItem[] = [
         heading: "Explore LED TVs",
         primary: [
           { label: "Explore All LED TVs",  href: "/products/led-tvs" },
-          { label: "32-Inch LED TVs",      href: "/products/led-tvs?size=32" },
-          { label: "43-Inch LED TVs",      href: "/products/led-tvs?size=43" },
-          { label: "55-Inch LED TVs",      href: "/products/led-tvs?size=55" },
-          { label: "65-Inch LED TVs",      href: "/products/led-tvs?size=65" },
+          { label: "Android TV",           href: "/products/led-tvs?model=android" },
+          { label: "WebOS 4K",             href: "/products/led-tvs?model=webos-4k" },
+          { label: "WebOS 2K",             href: "/products/led-tvs?model=webos-2k" },
+          { label: "Google TV",            href: "/products/led-tvs?model=google" },
         ],
         links: [
           { label: "Compare LED TVs",      href: "/products/led-tvs/compare" },
@@ -406,16 +406,9 @@ export default function Navbar() {
             className="shrink-0 flex items-center gap-[7px]"
             aria-label="Elegant Galaxy home"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 2l2.6 6.4L21 12l-6.4 2.6L12 22l-2.6-6.4L3 12l6.4-2.6L12 2z"
-                fill="#C8A951"
-              />
-            </svg>
-            <span
-              className="text-[#1d1d1f] font-semibold hidden sm:inline"
-              style={{ fontSize: 15, letterSpacing: "-0.01em" }}
-            >
+            <span className="flex items-center gap-[7px]" style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em", color: "#1d1d1f" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/eg-logo.png" alt="" aria-hidden style={{ display: "block", height: 28, width: 28, objectFit: "contain" }} />
               Elegant Galaxy
             </span>
           </Link>

@@ -18,18 +18,11 @@ interface TvModel {
 
 const MODELS: TvModel[] = [
   {
-    id:         "distro",
-    type:       "Distro",
-    platform:   "Distro OS",
-    sizes:      [32, 40, 43],
-    resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
-  },
-  {
-    id:         "webos-2k",
-    type:       "WebOS 2K",
-    platform:   "webOS 2K",
-    sizes:      [43],
-    resolution: { 43: "Full HD" },
+    id:         "android",
+    type:       "Android TV",
+    platform:   "Android TV",
+    sizes:      [32, 43, 50, 55, 65, 75],
+    resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD" },
   },
   {
     id:         "webos-4k",
@@ -37,6 +30,27 @@ const MODELS: TvModel[] = [
     platform:   "webOS 4K",
     sizes:      [43, 50, 55, 58, 65, 75, 85, 100],
     resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+  },
+  {
+    id:         "webos-2k",
+    type:       "WebOS 2K",
+    platform:   "webOS 2K",
+    sizes:      [32, 40, 43],
+    resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
+  },
+  {
+    id:         "google",
+    type:       "Google TV",
+    platform:   "Google TV",
+    sizes:      [32, 43, 50, 55, 65, 75, 85, 100],
+    resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+  },
+  {
+    id:         "distro",
+    type:       "Distro",
+    platform:   "Distro OS",
+    sizes:      [32, 40, 43],
+    resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
   },
   {
     id:         "frameless-smart",
@@ -51,13 +65,6 @@ const MODELS: TvModel[] = [
     platform:   "Frameless Normal",
     sizes:      [24],
     resolution: { 24: "Full HD" },
-  },
-  {
-    id:         "google",
-    type:       "Google TV",
-    platform:   "Google TV",
-    sizes:      [32, 43, 50, 55, 65, 75, 85, 100],
-    resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
   },
 ];
 
@@ -226,7 +233,7 @@ function CompareBar({
         onClick={onCompare}
         style={{ padding: "9px 18px", borderRadius: 8, background: "#0071e3", color: "#fff", border: "none", cursor: "pointer", fontSize: 13, fontWeight: 500, flexShrink: 0, letterSpacing: "-0.01em" }}
       >
-        Compare {entries.length} →
+        Compare {entries.length}
       </button>
     </div>
   );
@@ -447,9 +454,15 @@ function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnq
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function LedTvsClient({ initialSize = null }: { initialSize?: number | null }) {
+export default function LedTvsClient({
+  initialSize    = null,
+  initialModelId = null,
+}: {
+  initialSize?:    number | null;
+  initialModelId?: string | null;
+}) {
   const [selectedSize,    setSelectedSize]    = useState<number | null>(initialSize);
-  const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(initialModelId);
   const [compared,        setCompared]        = useState<Set<string>>(new Set());
   const [showCompareModal, setShowCompareModal] = useState(false);
   const [enquireTarget,   setEnquireTarget]   = useState<{ model: TvModel; size: number } | null>(null);
@@ -500,67 +513,73 @@ export default function LedTvsClient({ initialSize = null }: { initialSize?: num
       <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 56, paddingBottom: 48 }}>
           <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6e6e73", marginBottom: 12 }}>LED Televisions</p>
-          <h1 style={{ fontSize: 46, fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", lineHeight: 1.08, marginBottom: 14 }}>Find Your Perfect TV.</h1>
+          <h1 style={{ fontSize: 46, fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", lineHeight: 1.08, marginBottom: 14 }}>
+            {initialModelId ? (MODELS.find((m) => m.id === initialModelId)?.platform ?? "LED TVs") : "Find Your Perfect TV."}
+          </h1>
           <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.65, maxWidth: 520 }}>
-            Filter by size or model below to find the right TV for your home. Not sure what to pick? Our team is happy to guide you.
+            {initialModelId
+              ? `Browse our full range of ${MODELS.find((m) => m.id === initialModelId)?.platform ?? ""} smart televisions. Not sure what size to pick? Our team is happy to guide you.`
+              : "Filter by size or model below to find the right TV for your home. Not sure what to pick? Our team is happy to guide you."}
           </p>
         </div>
       </section>
 
-      {/* ── Size + Model selector ─────────────────────────────────────────────── */}
-      <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 36 }}>
-          <div className="flex flex-col lg:flex-row lg:gap-10">
+      {/* ── Size + Model selector — hidden when coming from a nav category link ── */}
+      {!initialModelId && (
+        <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+          <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 36 }}>
+            <div className="flex flex-col lg:flex-row lg:gap-10">
 
-            {/* Sizes */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Select a Size</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-                <button onClick={() => setSelectedSize(null)} aria-pressed={selectedSize === null} style={{ height: 50, minWidth: 72, padding: "0 18px", borderRadius: 12, border: selectedSize === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedSize === null ? "#0071e3" : "#fff", color: selectedSize === null ? "#fff" : "#1d1d1f", fontSize: 15, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
-                  All
-                </button>
-                {SIZES.map((size) => {
-                  const globallyAvailable  = MODELS.some((m) => m.sizes.includes(size));
-                  const availableForFilter = allowedSizes ? allowedSizes.has(size) : globallyAvailable;
-                  const isSelected         = selectedSize === size;
-                  const dimmed             = !availableForFilter && !isSelected;
-                  return (
-                    <button key={size} onClick={() => setSelectedSize(isSelected ? null : size)} disabled={!availableForFilter} aria-pressed={isSelected}
-                      style={{ height: 50, minWidth: 72, padding: "0 18px", borderRadius: 12, border: isSelected ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isSelected ? "#0071e3" : "#fff", color: isSelected ? "#fff" : dimmed ? "#aaaaaa" : "#1d1d1f", fontSize: 15, fontWeight: 600, cursor: availableForFilter ? "pointer" : "not-allowed", opacity: dimmed ? 0.38 : 1, transition: "all 0.15s ease" }}
-                    >
-                      {size}&quot;
-                    </button>
-                  );
-                })}
+              {/* Sizes */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Select a Size</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                  <button onClick={() => setSelectedSize(null)} aria-pressed={selectedSize === null} style={{ height: 50, minWidth: 72, padding: "0 18px", borderRadius: 12, border: selectedSize === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedSize === null ? "#0071e3" : "#fff", color: selectedSize === null ? "#fff" : "#1d1d1f", fontSize: 15, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
+                    All
+                  </button>
+                  {SIZES.map((size) => {
+                    const globallyAvailable  = MODELS.some((m) => m.sizes.includes(size));
+                    const availableForFilter = allowedSizes ? allowedSizes.has(size) : globallyAvailable;
+                    const isSelected         = selectedSize === size;
+                    const dimmed             = !availableForFilter && !isSelected;
+                    return (
+                      <button key={size} onClick={() => setSelectedSize(isSelected ? null : size)} disabled={!availableForFilter} aria-pressed={isSelected}
+                        style={{ height: 50, minWidth: 72, padding: "0 18px", borderRadius: 12, border: isSelected ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isSelected ? "#0071e3" : "#fff", color: isSelected ? "#fff" : dimmed ? "#aaaaaa" : "#1d1d1f", fontSize: 15, fontWeight: 600, cursor: availableForFilter ? "pointer" : "not-allowed", opacity: dimmed ? 0.38 : 1, transition: "all 0.15s ease" }}
+                      >
+                        {size}&quot;
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="hidden lg:block" style={{ width: 1, background: "rgba(0,0,0,0.08)", alignSelf: "stretch", flexShrink: 0 }} />
+
+              {/* Model filter */}
+              <div style={{ flexShrink: 0 }} className="mt-6 lg:mt-0">
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Filter by Model</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  <button onClick={() => setSelectedModelId(null)} aria-pressed={selectedModelId === null} style={{ height: 40, padding: "0 16px", borderRadius: 980, border: selectedModelId === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedModelId === null ? "#0071e3" : "#fff", color: selectedModelId === null ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
+                    All Models
+                  </button>
+                  {MODELS.map((m) => {
+                    const isActive = selectedModelId === m.id;
+                    return (
+                      <button key={m.id} onClick={() => setSelectedModelId(isActive ? null : m.id)} aria-pressed={isActive}
+                        style={{ height: 40, padding: "0 16px", borderRadius: 980, border: isActive ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isActive ? "#0071e3" : "#fff", color: isActive ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease", whiteSpace: "nowrap" }}
+                      >
+                        {m.platform}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            <div className="hidden lg:block" style={{ width: 1, background: "rgba(0,0,0,0.08)", alignSelf: "stretch", flexShrink: 0 }} />
-
-            {/* Model filter */}
-            <div style={{ flexShrink: 0 }} className="mt-6 lg:mt-0">
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Filter by Model</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                <button onClick={() => setSelectedModelId(null)} aria-pressed={selectedModelId === null} style={{ height: 40, padding: "0 16px", borderRadius: 980, border: selectedModelId === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: selectedModelId === null ? "#0071e3" : "#fff", color: selectedModelId === null ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
-                  All Models
-                </button>
-                {MODELS.map((m) => {
-                  const isActive = selectedModelId === m.id;
-                  return (
-                    <button key={m.id} onClick={() => setSelectedModelId(isActive ? null : m.id)} aria-pressed={isActive}
-                      style={{ height: 40, padding: "0 16px", borderRadius: 980, border: isActive ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isActive ? "#0071e3" : "#fff", color: isActive ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease", whiteSpace: "nowrap" }}
-                    >
-                      {m.platform}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {statusText && <p style={{ fontSize: 13, color: "#6e6e73", marginTop: 16 }}>{statusText}</p>}
           </div>
-
-          {statusText && <p style={{ fontSize: 13, color: "#6e6e73", marginTop: 16 }}>{statusText}</p>}
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Card grid ────────────────────────────────────────────────────────── */}
       <section>

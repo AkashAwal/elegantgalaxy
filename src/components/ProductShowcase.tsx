@@ -463,7 +463,7 @@ function ParallaxSection({
           textDecoration: "none",
           letterSpacing:  "-0.01em",
         }}>
-          Shop Now →
+          Shop Now
         </Link>
       </div>
     </div>
