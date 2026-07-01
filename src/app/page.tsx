@@ -3,6 +3,7 @@ import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ProductShelves from "@/components/ProductShelves";
+import RemotesSection from "@/components/RemotesSection";
 import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
 import FAQSection from "@/components/FAQSection";
@@ -197,13 +198,16 @@ export default function Home() {
       {/* ── Latest products section ────────────────────────────────────── */}
       <LatestSection />
 
-      {/* ── Testimonials ──────────────────────────────────────────────────── */}
-      <TestimonialsSection />
-
       <DifferenceSection />
 
       {/* ── Product shelves ────────────────────────────────────────────── */}
       <ProductShelves />
+
+      {/* ── TV remotes CTA ────────────────────────────────────────────── */}
+      <RemotesSection />
+
+      {/* ── Testimonials — social proof right after browsing products ──── */}
+      <TestimonialsSection />
 
       {/* ── About ─────────────────────────────────────────────────────── */}
       <AboutSection />
