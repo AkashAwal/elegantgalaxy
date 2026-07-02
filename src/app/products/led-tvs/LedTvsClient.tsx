@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MessageCircle, FileText, X, Check } from "lucide-react";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -14,6 +15,8 @@ interface TvModel {
   platform:   string;
   sizes:      number[];
   resolution: Record<number, string>;
+  /** Path to a real product photo under /public. When set, this is shown instead of the generic TV silhouette. */
+  imageSrc?: string;
 }
 
 const MODELS: TvModel[] = [
@@ -23,6 +26,7 @@ const MODELS: TvModel[] = [
     platform:   "Android TV",
     sizes:      [32, 43, 50, 55, 65, 75],
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD" },
+    imageSrc:   "/images/tvs/android-front.webp",
   },
   {
     id:         "webos-4k",
@@ -30,6 +34,7 @@ const MODELS: TvModel[] = [
     platform:   "webOS 4K",
     sizes:      [43, 50, 55, 58, 65, 75, 85, 100],
     resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+    imageSrc:   "/images/tvs/webos-4k-front.webp",
   },
   {
     id:         "webos-2k",
@@ -37,6 +42,7 @@ const MODELS: TvModel[] = [
     platform:   "webOS 2K",
     sizes:      [32, 40, 43],
     resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
+    imageSrc:   "/images/tvs/webos-2k-front.webp",
   },
   {
     id:         "google",
@@ -44,6 +50,7 @@ const MODELS: TvModel[] = [
     platform:   "Google TV",
     sizes:      [32, 43, 50, 55, 65, 75, 85, 100],
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
+    imageSrc:   "/images/tvs/google-front.webp",
   },
   {
     id:         "distro",
@@ -96,6 +103,21 @@ function TvIcon() {
       <rect x="70" y="124" width="60" height="7"   rx="3.5" fill="#2c2c2e" />
     </svg>
   );
+}
+
+function TvIllustration({ model }: { model: TvModel }) {
+  if (model.imageSrc) {
+    return (
+      <Image
+        src={model.imageSrc}
+        alt={`${model.platform} TV`}
+        width={400}
+        height={283}
+        style={{ width: "100%", maxWidth: 280, height: "auto" }}
+      />
+    );
+  }
+  return <TvIcon />;
 }
 
 // ── Enquire modal ─────────────────────────────────────────────────────────────
@@ -322,11 +344,16 @@ function CompareModal({
             return (
               <div key={key} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
                 {/* Illustration */}
-                <div style={{ background: "#1d1d1f", height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  <span style={{ position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", background: "rgba(255,255,255,0.11)", color: "rgba(255,255,255,0.8)", padding: "2px 7px", borderRadius: 20 }}>
+                <div style={{ background: model.imageSrc ? "#fff" : "#1d1d1f", height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                  <span style={{
+                    position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
+                    background: model.imageSrc ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
+                    color:      model.imageSrc ? "#1d1d1f" : "rgba(255,255,255,0.8)",
+                    padding: "2px 7px", borderRadius: 20,
+                  }}>
                     {model.platform}
                   </span>
-                  <TvIcon />
+                  <TvIllustration model={model} />
                 </div>
 
                 {/* Details */}
@@ -387,11 +414,16 @@ function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnq
       }}
     >
       {/* Image */}
-      <div style={{ background: "#1d1d1f", padding: "28px 24px 20px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 168, position: "relative" }}>
-        <span style={{ position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", background: "rgba(255,255,255,0.11)", color: "rgba(255,255,255,0.8)", padding: "3px 8px", borderRadius: 20 }}>
+      <div style={{ background: model.imageSrc ? "#fff" : "#1d1d1f", padding: "28px 24px 20px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 168, position: "relative" }}>
+        <span style={{
+          position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
+          background: model.imageSrc ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
+          color:      model.imageSrc ? "#1d1d1f" : "rgba(255,255,255,0.8)",
+          padding: "3px 8px", borderRadius: 20,
+        }}>
           {model.platform}
         </span>
-        <TvIcon />
+        <TvIllustration model={model} />
       </div>
 
       {/* Content */}
