@@ -34,10 +34,10 @@ const NAV: NavItem[] = [
         heading: "Explore LED TVs",
         primary: [
           { label: "Explore All LED TVs",  href: "/products/led-tvs" },
-          { label: "Android TV",           href: "/products/led-tvs?model=android" },
-          { label: "WebOS 4K",             href: "/products/led-tvs?model=webos-4k" },
-          { label: "WebOS 2K",             href: "/products/led-tvs?model=webos-2k" },
-          { label: "Google TV",            href: "/products/led-tvs?model=google" },
+          { label: "Android TV",           href: "/products/led-tvs/android" },
+          { label: "WebOS 4K",             href: "/products/led-tvs/webos-4k" },
+          { label: "WebOS 2K",             href: "/products/led-tvs/webos-2k" },
+          { label: "Google TV",            href: "/products/led-tvs/google" },
         ],
         links: [
           { label: "Compare LED TVs",      href: "/products/led-tvs/compare" },
