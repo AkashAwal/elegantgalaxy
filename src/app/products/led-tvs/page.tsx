@@ -35,7 +35,7 @@ export default function LedTvsPage() {
       {/* Category grid */}
       <section>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 80 }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ rowGap: 40, columnGap: 20 }}>
             {MODELS.map((model) => (
               <Link
                 key={model.id}
@@ -67,7 +67,7 @@ export default function LedTvsPage() {
                     <TvIcon />
                   )}
                 </div>
-                <div style={{ padding: "18px 20px 20px" }}>
+                <div style={{ padding: "18px 20px 20px", textAlign: "center" }}>
                   <p style={{ fontSize: 18, fontWeight: 700, color: "#1d1d1f", marginBottom: 4, letterSpacing: "-0.01em" }}>
                     {model.platform}
                   </p>

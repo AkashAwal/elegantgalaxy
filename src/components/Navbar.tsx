@@ -204,7 +204,7 @@ export default function Navbar() {
   //               Escape can return focus to it.
   // activeIdRef — stable snapshot of activeId for the document-level Escape
   //               handler (avoids stale closure without adding a dependency).
-  const triggerRef              = useRef<HTMLButtonElement | null>(null);
+  const triggerRef              = useRef<HTMLElement | null>(null);
   const activeIdRef             = useRef<string | null>(null);
 
   // Declared before callbacks so TypeScript can see them in scope.
@@ -252,7 +252,7 @@ export default function Navbar() {
    */
   const openMegaFromKeyboard = useCallback((
     id:       string,
-    el:       HTMLButtonElement,
+    el:       HTMLElement,
     focusLast = false,
   ) => {
     cancelClose();
@@ -457,13 +457,15 @@ export default function Navbar() {
               ) : null;
 
               return item.mega ? (
-                <button
+                <Link
                   key={item.id}
+                  href={item.href}
                   className={linkCls}
                   onMouseEnter={() => { openMega(item.id); setHoveredId(item.id); }}
+                  onClick={closeMega}
                   onKeyDown={(e) => {
-                    // Enter / Space / ↓ → open mega and focus first link
-                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                    // ↓ → open mega and focus first link (Enter/Space navigate normally)
+                    if (e.key === "ArrowDown") {
                       e.preventDefault();
                       openMegaFromKeyboard(item.id, e.currentTarget);
                     }
@@ -479,7 +481,7 @@ export default function Navbar() {
                 >
                   {item.label}
                   {indicator}
-                </button>
+                </Link>
               ) : (
                 <Link
                   key={item.id}

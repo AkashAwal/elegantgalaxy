@@ -60,6 +60,13 @@ export const MODELS: TvModel[] = [
     },
   },
   {
+    id:         "smart-board",
+    type:       "Interactive Smart Board",
+    platform:   "Interactive Smart Board",
+    sizes:      [65, 75, 86, 98],
+    resolution: { 65: "4K Ultra HD", 75: "4K Ultra HD", 86: "4K Ultra HD", 98: "4K Ultra HD" },
+  },
+  {
     id:         "distro",
     type:       "Distro",
     platform:   "Distro OS",
@@ -86,7 +93,10 @@ export const PHONE         = "+919540699333";
 export const PHONE_DISPLAY = "+91 95406 99333";
 export const WA_BASE       = `https://wa.me/${PHONE}`;
 
-export const tvName   = (model: TvModel, size: number) => `EG ${model.type} ${size}" Smart LED`;
+export const tvName   = (model: TvModel, size: number) =>
+  model.id === "smart-board"
+    ? `EG ${size}" Interactive Smart Teaching Board`
+    : `EG ${model.type} ${size}" Smart LED`;
 export const entryKey = (modelId: string, size: number) => `${modelId}::${size}`;
 export const parseKey = (key: string) => {
   const [modelId, sizeStr] = key.split("::");

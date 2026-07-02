@@ -6,238 +6,37 @@ import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Check, X } from "lucide-react";
 import type { ReactNode } from "react";
 
-// ─── SVG Illustrations ────────────────────────────────────────────────────────
+// ─── Real product data & illustrations (shared with the category pages) ──────
 
-function TV65() {
-  return (
-    <svg viewBox="0 0 260 175" width="200" height="135" fill="none">
-      <rect x="10" y="6" width="240" height="132" rx="8" fill="#1d1d1f" />
-      <rect x="18" y="14" width="224" height="116" rx="4" fill="#2c2c2e" />
-      <rect x="23" y="19" width="214" height="106" rx="3" fill="#3a3a3c" opacity=".65" />
-      <rect x="118" y="138" width="24" height="14" rx="2" fill="#6e6e73" />
-      <rect x="96" y="152" width="68" height="6" rx="3" fill="#6e6e73" />
-    </svg>
-  );
-}
-function TV55() {
-  return (
-    <svg viewBox="0 0 220 160" width="178" height="128" fill="none">
-      <rect x="10" y="6" width="200" height="120" rx="8" fill="#1d1d1f" />
-      <rect x="18" y="14" width="184" height="104" rx="4" fill="#2c2c2e" />
-      <rect x="23" y="19" width="174" height="94" rx="3" fill="#3a3a3c" opacity=".65" />
-      <rect x="98" y="126" width="24" height="14" rx="2" fill="#6e6e73" />
-      <rect x="76" y="140" width="68" height="6" rx="3" fill="#6e6e73" />
-    </svg>
-  );
-}
-function TV43() {
-  return (
-    <svg viewBox="0 0 180 136" width="158" height="119" fill="none">
-      <rect x="8" y="5" width="164" height="100" rx="7" fill="#1d1d1f" />
-      <rect x="15" y="12" width="150" height="86" rx="4" fill="#2c2c2e" />
-      <rect x="19" y="16" width="142" height="78" rx="3" fill="#3a3a3c" opacity=".6" />
-      <rect x="80" y="105" width="20" height="12" rx="2" fill="#6e6e73" />
-      <rect x="62" y="117" width="56" height="5" rx="2.5" fill="#6e6e73" />
-    </svg>
-  );
-}
-function TV32() {
-  return (
-    <svg viewBox="0 0 150 115" width="136" height="104" fill="none">
-      <rect x="6" y="4" width="138" height="84" rx="6" fill="#1d1d1f" />
-      <rect x="12" y="10" width="126" height="72" rx="3" fill="#2c2c2e" />
-      <rect x="16" y="14" width="118" height="64" rx="2" fill="#3a3a3c" opacity=".6" />
-      <rect x="67" y="88" width="16" height="10" rx="2" fill="#6e6e73" />
-      <rect x="51" y="98" width="48" height="4" rx="2" fill="#6e6e73" />
-    </svg>
-  );
-}
-function FrontLoader7() {
-  return (
-    <svg viewBox="0 0 140 180" width="110" height="141" fill="none">
-      <rect x="8" y="8" width="124" height="164" rx="10" fill="#e5e5ea" />
-      <rect x="14" y="14" width="112" height="152" rx="8" fill="#d1d1d6" />
-      <rect x="22" y="22" width="48" height="8" rx="4" fill="#aeaeb2" />
-      <circle cx="104" cy="26" r="6" fill="#aeaeb2" />
-      <circle cx="118" cy="26" r="6" fill="#aeaeb2" />
-      <circle cx="70" cy="104" r="44" fill="#8e8e93" />
-      <circle cx="70" cy="104" r="36" fill="#636366" />
-      <circle cx="70" cy="104" r="26" fill="#48484a" />
-      <circle cx="70" cy="104" r="18" fill="#2c2c2e" />
-      <circle cx="63" cy="97" r="5" fill="#3a3a3c" opacity=".8" />
-    </svg>
-  );
-}
-function FrontLoader6() {
-  return (
-    <svg viewBox="0 0 140 180" width="110" height="141" fill="none">
-      <rect x="8" y="8" width="124" height="164" rx="10" fill="#eae8f5" />
-      <rect x="14" y="14" width="112" height="152" rx="8" fill="#d8d5f0" />
-      <rect x="22" y="22" width="48" height="8" rx="4" fill="#b8b4d8" />
-      <circle cx="104" cy="26" r="6" fill="#b8b4d8" />
-      <circle cx="118" cy="26" r="6" fill="#b8b4d8" />
-      <circle cx="70" cy="104" r="44" fill="#9e99c8" />
-      <circle cx="70" cy="104" r="36" fill="#7b75b0" />
-      <circle cx="70" cy="104" r="26" fill="#5a5490" />
-      <circle cx="70" cy="104" r="18" fill="#3d3870" />
-      <circle cx="63" cy="97" r="5" fill="#2d2960" opacity=".8" />
-    </svg>
-  );
-}
-function TopLoader8() {
-  return (
-    <svg viewBox="0 0 140 180" width="110" height="141" fill="none">
-      <rect x="8" y="8" width="124" height="164" rx="10" fill="#e5e5ea" />
-      <rect x="14" y="14" width="112" height="152" rx="8" fill="#d1d1d6" />
-      <rect x="22" y="22" width="96" height="28" rx="6" fill="#c7c7cc" />
-      <rect x="30" y="30" width="40" height="12" rx="4" fill="#aeaeb2" />
-      <circle cx="104" cy="36" r="8" fill="#aeaeb2" />
-      <rect x="22" y="62" width="96" height="90" rx="6" fill="#aeaeb2" />
-      <circle cx="70" cy="107" r="36" fill="#8e8e93" />
-      <circle cx="70" cy="107" r="24" fill="#636366" />
-    </svg>
-  );
-}
-function TopLoader10() {
-  return (
-    <svg viewBox="0 0 140 180" width="110" height="141" fill="none">
-      <rect x="8" y="8" width="124" height="164" rx="10" fill="#e8f4ff" />
-      <rect x="14" y="14" width="112" height="152" rx="8" fill="#d0e8ff" />
-      <rect x="22" y="22" width="96" height="28" rx="6" fill="#b8d8f8" />
-      <rect x="30" y="30" width="40" height="12" rx="4" fill="#90bce8" />
-      <circle cx="104" cy="36" r="8" fill="#90bce8" />
-      <rect x="22" y="62" width="96" height="90" rx="6" fill="#90bce8" />
-      <circle cx="70" cy="107" r="36" fill="#5a9fd4" />
-      <circle cx="70" cy="107" r="24" fill="#2d7ab8" />
-    </svg>
-  );
-}
-function TowerCooler() {
-  return (
-    <svg viewBox="0 0 100 200" width="78" height="156" fill="none">
-      <rect x="18" y="8" width="64" height="168" rx="16" fill="#dbeafe" />
-      <rect x="26" y="16" width="48" height="116" rx="10" fill="#bfdbfe" />
-      {[0,1,2,3,4,5].map(i => (
-        <rect key={i} x="32" y={26 + i*18} width="36" height="7" rx="3.5" fill="#93c5fd" />
-      ))}
-      <circle cx="50" cy="155" r="16" fill="#93c5fd" />
-      <circle cx="50" cy="155" r="9" fill="#60a5fa" />
-      <circle cx="50" cy="155" r="3.5" fill="#3b82f6" />
-      <rect x="20" y="173" width="60" height="8" rx="4" fill="#93c5fd" />
-    </svg>
-  );
-}
-function PersonalCooler() {
-  return (
-    <svg viewBox="0 0 120 150" width="96" height="120" fill="none">
-      <rect x="12" y="10" width="96" height="120" rx="12" fill="#e0f2fe" />
-      <rect x="20" y="18" width="80" height="80" rx="8" fill="#bae6fd" />
-      {[0,1,2,3].map(i => (
-        <rect key={i} x="26" y={26 + i*18} width="68" height="7" rx="3.5" fill="#7dd3fc" />
-      ))}
-      <circle cx="60" cy="118" r="14" fill="#7dd3fc" />
-      <circle cx="60" cy="118" r="8" fill="#38bdf8" />
-      <circle cx="60" cy="118" r="3" fill="#0284c7" />
-    </svg>
-  );
-}
-function DesertCooler() {
-  return (
-    <svg viewBox="0 0 160 160" width="138" height="138" fill="none">
-      <rect x="10" y="30" width="140" height="110" rx="10" fill="#dbeafe" />
-      <rect x="18" y="38" width="70" height="94" rx="6" fill="#bfdbfe" />
-      {[0,1,2,3,4].map(i => (
-        <rect key={i} x="24" y={46 + i*17} width="58" height="8" rx="4" fill="#93c5fd" />
-      ))}
-      <circle cx="118" cy="85" r="34" fill="#93c5fd" />
-      <circle cx="118" cy="85" r="22" fill="#60a5fa" />
-      <circle cx="118" cy="85" r="10" fill="#3b82f6" />
-      <rect x="10" y="140" width="140" height="10" rx="5" fill="#bfdbfe" />
-      <rect x="30" y="8" width="20" height="22" rx="3" fill="#93c5fd" />
-      <rect x="110" y="8" width="20" height="22" rx="3" fill="#93c5fd" />
-    </svg>
-  );
-}
-function WindowCooler() {
-  return (
-    <svg viewBox="0 0 160 130" width="138" height="112" fill="none">
-      <rect x="8" y="8" width="144" height="114" rx="10" fill="#ccfbf1" />
-      <rect x="16" y="16" width="64" height="98" rx="6" fill="#99f6e4" />
-      {[0,1,2,3,4].map(i => (
-        <rect key={i} x="22" y={24 + i*17} width="52" height="7" rx="3.5" fill="#5eead4" />
-      ))}
-      <rect x="88" y="16" width="56" height="98" rx="6" fill="#99f6e4" />
-      <circle cx="116" cy="65" r="30" fill="#5eead4" />
-      <circle cx="116" cy="65" r="18" fill="#2dd4bf" />
-      <circle cx="116" cy="65" r="8" fill="#0d9488" />
-    </svg>
-  );
-}
-function Cooktop1() {
-  return (
-    <svg viewBox="0 0 140 100" width="126" height="90" fill="none">
-      <rect x="8" y="10" width="124" height="80" rx="10" fill="#1c1c1e" />
-      <rect x="16" y="18" width="108" height="64" rx="6" fill="#2c2c2e" />
-      <circle cx="70" cy="50" r="24" fill="none" stroke="#ff6b35" strokeWidth="3" />
-      <circle cx="70" cy="50" r="14" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="70" cy="50" r="5" fill="#ff6b35" />
-    </svg>
-  );
-}
-function Cooktop2() {
-  return (
-    <svg viewBox="0 0 200 120" width="178" height="107" fill="none">
-      <rect x="10" y="14" width="180" height="92" rx="10" fill="#1c1c1e" />
-      <rect x="18" y="22" width="164" height="76" rx="6" fill="#2c2c2e" />
-      <circle cx="74" cy="60" r="24" fill="none" stroke="#ff6b35" strokeWidth="3" />
-      <circle cx="74" cy="60" r="14" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="74" cy="60" r="5" fill="#ff6b35" />
-      <circle cx="134" cy="60" r="24" fill="none" stroke="#ff6b35" strokeWidth="3" />
-      <circle cx="134" cy="60" r="14" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="134" cy="60" r="5" fill="#ff6b35" />
-    </svg>
-  );
-}
-function Cooktop3() {
-  return (
-    <svg viewBox="0 0 240 130" width="200" height="108" fill="none">
-      <rect x="8" y="10" width="224" height="110" rx="10" fill="#1c1c1e" />
-      <rect x="16" y="18" width="208" height="94" rx="6" fill="#2c2c2e" />
-      <circle cx="60" cy="65" r="22" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="60" cy="65" r="13" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="60" cy="65" r="4.5" fill="#ff6b35" />
-      <circle cx="124" cy="65" r="22" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="124" cy="65" r="13" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="124" cy="65" r="4.5" fill="#ff6b35" />
-      <circle cx="188" cy="65" r="22" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="188" cy="65" r="13" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="188" cy="65" r="4.5" fill="#ff6b35" />
-    </svg>
-  );
-}
-function Cooktop4() {
-  return (
-    <svg viewBox="0 0 260 140" width="218" height="117" fill="none">
-      <rect x="8" y="12" width="244" height="116" rx="10" fill="#1c1c1e" />
-      <rect x="16" y="20" width="228" height="100" rx="6" fill="#2c2c2e" />
-      <circle cx="66" cy="56" r="20" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="66" cy="56" r="11" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="66" cy="56" r="4" fill="#ff6b35" />
-      <circle cx="130" cy="56" r="20" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="130" cy="56" r="11" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="130" cy="56" r="4" fill="#ff6b35" />
-      <circle cx="66" cy="100" r="20" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="66" cy="100" r="11" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="66" cy="100" r="4" fill="#ff6b35" />
-      <circle cx="130" cy="100" r="20" fill="none" stroke="#ff6b35" strokeWidth="2.5" />
-      <circle cx="130" cy="100" r="11" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="130" cy="100" r="4" fill="#ff6b35" />
-      <circle cx="200" cy="78" r="28" fill="none" stroke="#ff6b35" strokeWidth="3" />
-      <circle cx="200" cy="78" r="16" fill="none" stroke="#ff9a5c" strokeWidth="2" />
-      <circle cx="200" cy="78" r="6" fill="#ff6b35" />
-    </svg>
-  );
-}
+import { MODELS as TV_MODELS, tvName } from "@/data/led-tvs";
+import { MODELS as WASHER_MODELS, TYPE_LABEL as WASHER_TYPE_LABEL } from "@/data/washing-machines";
+import { WasherIllustration } from "@/app/products/washing-machines/WashingMachinesClient";
+import { MODELS as COOLER_MODELS } from "@/data/air-coolers";
+import { CoolerIllustration } from "@/app/products/air-coolers/AirCoolersClient";
+import { MODELS as COOKTOP_MODELS, burnerLabel } from "@/data/infrared-cooktops";
+import { CooktopSvg } from "@/app/products/infrared-cooktops/InfraredCooktopsClient";
+
+// ─── Featured picks — real models pulled from each category page ─────────────
+
+const androidTv = TV_MODELS.find((m) => m.id === "android")!;
+const webos4kTv  = TV_MODELS.find((m) => m.id === "webos-4k")!;
+const webos2kTv  = TV_MODELS.find((m) => m.id === "webos-2k")!;
+const googleTv   = TV_MODELS.find((m) => m.id === "google")!;
+
+const flWasher7  = WASHER_MODELS.find((m) => m.id === "fl-7")!;
+const flWasher8  = WASHER_MODELS.find((m) => m.id === "fl-8")!;
+const tlWasher10 = WASHER_MODELS.find((m) => m.id === "tl-10")!;
+const saWasher8  = WASHER_MODELS.find((m) => m.id === "sa-8")!;
+
+const iceCool100    = COOLER_MODELS.find((m) => m.id === "c-ice-cool-100-1")!;
+const iceStorm160   = COOLER_MODELS.find((m) => m.id === "c-ice-storm-160-1")!;
+const iceWind90     = COOLER_MODELS.find((m) => m.id === "d-ice-wind-90")!;
+const windStormPlus = COOLER_MODELS.find((m) => m.id === "d-wind-storm-plus")!;
+
+const cooktop1 = COOKTOP_MODELS.find((m) => m.id === "ct-1a")!;
+const cooktop2 = COOKTOP_MODELS.find((m) => m.id === "ct-2a")!;
+const cooktop3 = COOKTOP_MODELS.find((m) => m.id === "ct-3a")!;
+const cooktop4 = COOKTOP_MODELS.find((m) => m.id === "ct-4a")!;
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -245,16 +44,10 @@ type Product = {
   id:           string;
   name:         string;
   subtitle:     string;
-  price:        string;
-  badge?:       string;
   href:         string;
   bg:           string;
-  illustration: ReactNode;
-  /**
-   * Path to a real product image under /public, e.g. "/images/products/tv-65.webp".
-   * When provided, next/image is rendered instead of the SVG illustration.
-   * Convention: /public/images/products/{id}.webp (400 × 400 px, transparent bg).
-   */
+  illustration?: ReactNode;
+  /** Real product photo — when set, next/image is rendered instead of `illustration`. */
   imageSrc?:    string;
 };
 
@@ -269,40 +62,40 @@ const SHELVES: Shelf[] = [
     category:     "LED TVs",
     categoryHref: "/products/led-tvs",
     products: [
-      { id: "tv-65", name: 'Elegant 65" 4K QLED TV',        subtitle: '65" · 4K QLED',   price: "₹74,999", badge: "PREMIUM", href: "/products/led-tvs", bg: "#0f0f10", illustration: <TV65 /> },
-      { id: "tv-55", name: 'Elegant 55" 4K QLED TV',        subtitle: '55" · 4K QLED',   price: "₹49,999", badge: "NEW",     href: "/products/led-tvs", bg: "#1a1a1a", illustration: <TV55 /> },
-      { id: "tv-43", name: 'Elegant 43" Full HD Smart TV',   subtitle: '43" · FULL HD',   price: "₹27,999",                   href: "/products/led-tvs", bg: "#1d1d1f", illustration: <TV43 /> },
-      { id: "tv-32", name: 'Elegant 32" HD Ready Smart TV',  subtitle: '32" · HD READY',  price: "₹18,999",                   href: "/products/led-tvs", bg: "#0a1628", illustration: <TV32 /> },
+      { id: androidTv.id,  name: tvName(androidTv, 65),  subtitle: `65" · ${androidTv.resolution[65]}`,  href: `/products/led-tvs/${androidTv.id}?size=65`,  bg: "#fff", imageSrc: androidTv.images!.front },
+      { id: webos4kTv.id,  name: tvName(webos4kTv, 55),  subtitle: `55" · ${webos4kTv.resolution[55]}`,  href: `/products/led-tvs/${webos4kTv.id}?size=55`,  bg: "#fff", imageSrc: webos4kTv.images!.front },
+      { id: webos2kTv.id,  name: tvName(webos2kTv, 43),  subtitle: `43" · ${webos2kTv.resolution[43]}`,  href: `/products/led-tvs/${webos2kTv.id}?size=43`,  bg: "#fff", imageSrc: webos2kTv.images!.front },
+      { id: googleTv.id,   name: tvName(googleTv, 75),   subtitle: `75" · ${googleTv.resolution[75]}`,   href: `/products/led-tvs/${googleTv.id}?size=75`,   bg: "#fff", imageSrc: googleTv.images!.front },
     ],
   },
   {
     category:     "Washing Machines",
     categoryHref: "/products/washing-machines",
     products: [
-      { id: "wm-fl7",  name: "Elegant 7kg Front Load Washer",  subtitle: "FRONT LOAD · 7KG",  price: "₹32,999", badge: "BESTSELLER", href: "/products/washing-machines", bg: "#f0f0f5", illustration: <FrontLoader7 /> },
-      { id: "wm-fl6",  name: "Elegant 6kg Front Load Washer",  subtitle: "FRONT LOAD · 6KG",  price: "₹28,999",                      href: "/products/washing-machines", bg: "#f0eff8", illustration: <FrontLoader6 /> },
-      { id: "wm-tl8",  name: "Elegant 8kg Top Load Washer",    subtitle: "TOP LOAD · 8KG",    price: "₹24,499",                      href: "/products/washing-machines", bg: "#f5f5f7", illustration: <TopLoader8 /> },
-      { id: "wm-tl10", name: "Elegant 10kg Top Load Washer",   subtitle: "TOP LOAD · 10KG",   price: "₹29,999", badge: "NEW",        href: "/products/washing-machines", bg: "#e8f4ff", illustration: <TopLoader10 /> },
+      { id: flWasher7.id,  name: flWasher7.name,  subtitle: `${WASHER_TYPE_LABEL[flWasher7.type]} · ${flWasher7.capacity}kg`,   href: `/products/washing-machines/${flWasher7.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={flWasher7} /> },
+      { id: flWasher8.id,  name: flWasher8.name,  subtitle: `${WASHER_TYPE_LABEL[flWasher8.type]} · ${flWasher8.capacity}kg`,   href: `/products/washing-machines/${flWasher8.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={flWasher8} /> },
+      { id: tlWasher10.id, name: tlWasher10.name, subtitle: `${WASHER_TYPE_LABEL[tlWasher10.type]} · ${tlWasher10.capacity}kg`, href: `/products/washing-machines/${tlWasher10.id}`, bg: "#f0f0f5", illustration: <WasherIllustration model={tlWasher10} /> },
+      { id: saWasher8.id,  name: saWasher8.name,  subtitle: `${WASHER_TYPE_LABEL[saWasher8.type]} · ${saWasher8.capacity}kg`,   href: `/products/washing-machines/${saWasher8.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={saWasher8} /> },
     ],
   },
   {
     category:     "Air Coolers",
     categoryHref: "/products/air-coolers",
     products: [
-      { id: "ac-tower",    name: "Elegant 50L Tower Air Cooler",   subtitle: "TOWER · 50 LITRES",    price: "₹12,999", badge: "NEW", href: "/products/air-coolers", bg: "#eff6ff", illustration: <TowerCooler /> },
-      { id: "ac-desert",   name: "Elegant 80L Desert Cooler",      subtitle: "DESERT · 80 LITRES",   price: "₹9,499",              href: "/products/air-coolers", bg: "#e0f2fe", illustration: <DesertCooler /> },
-      { id: "ac-personal", name: "Elegant 20L Personal Cooler",    subtitle: "PERSONAL · 20 LITRES", price: "₹6,499",              href: "/products/air-coolers", bg: "#e0f2fe", illustration: <PersonalCooler /> },
-      { id: "ac-window",   name: "Elegant 60L Window Cooler",      subtitle: "WINDOW · 60 LITRES",   price: "₹10,999",             href: "/products/air-coolers", bg: "#ccfbf1", illustration: <WindowCooler /> },
+      { id: iceCool100.id,    name: iceCool100.name,    subtitle: `Commercial · ${iceCool100.capacity}L`,    href: `/products/air-coolers/${iceCool100.id}`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
+      { id: iceStorm160.id,   name: iceStorm160.name,   subtitle: `Commercial · ${iceStorm160.capacity}L`,   href: `/products/air-coolers/${iceStorm160.id}`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
+      { id: iceWind90.id,     name: iceWind90.name,     subtitle: `Desert · ${iceWind90.capacity}L`,         href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
+      { id: windStormPlus.id, name: windStormPlus.name, subtitle: `Desert · ${windStormPlus.capacity}L`,     href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
     ],
   },
   {
     category:     "Infrared Cooktops",
     categoryHref: "/products/infrared-cooktops",
     products: [
-      { id: "ct-1", name: "Elegant Single Burner Cooktop",      subtitle: "INFRARED · 1 BURNER", price: "₹3,999",              href: "/products/infrared-cooktops", bg: "#18181b", illustration: <Cooktop1 /> },
-      { id: "ct-2", name: "Elegant 2-Burner Infrared Cooktop",  subtitle: "INFRARED · 2 BURNER", price: "₹6,999",              href: "/products/infrared-cooktops", bg: "#1c1c1e", illustration: <Cooktop2 /> },
-      { id: "ct-3", name: "Elegant 3-Burner Infrared Cooktop",  subtitle: "INFRARED · 3 BURNER", price: "₹8,999", badge: "NEW", href: "/products/infrared-cooktops", bg: "#111827", illustration: <Cooktop3 /> },
-      { id: "ct-4", name: "Elegant 4-Burner Infrared Cooktop",  subtitle: "INFRARED · 4 BURNER", price: "₹11,999", badge: "BESTSELLER", href: "/products/infrared-cooktops", bg: "#18181b", illustration: <Cooktop4 /> },
+      { id: cooktop1.id, name: cooktop1.name, subtitle: `${burnerLabel(cooktop1.burners)} · ${cooktop1.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop1.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop1.burners} /> },
+      { id: cooktop2.id, name: cooktop2.name, subtitle: `${burnerLabel(cooktop2.burners)} · ${cooktop2.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop2.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop2.burners} /> },
+      { id: cooktop3.id, name: cooktop3.name, subtitle: `${burnerLabel(cooktop3.burners)} · ${cooktop3.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop3.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop3.burners} /> },
+      { id: cooktop4.id, name: cooktop4.name, subtitle: `${burnerLabel(cooktop4.burners)} · ${cooktop4.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop4.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop4.burners} /> },
     ],
   },
 ];
@@ -342,8 +135,6 @@ function ProductCard({
   onToggleCompare: () => void;
   maxReached:      boolean;
 }) {
-  const isDark = product.bg.startsWith("#0") || product.bg.startsWith("#1");
-
   return (
     <div
       style={{
@@ -370,22 +161,6 @@ function ProductCard({
         position:       "relative",
         flexShrink:     0,
       }}>
-        {product.badge && (
-          <span style={{
-            position:      "absolute",
-            top:           12,
-            left:          12,
-            fontSize:      9.5,
-            fontWeight:    700,
-            letterSpacing: "0.08em",
-            color:         isDark ? "#f5f5f7" : "#1d1d1f",
-            background:    isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.07)",
-            padding:       "3px 8px",
-            borderRadius:  20,
-          }}>
-            {product.badge}
-          </span>
-        )}
         <ProductIllustration product={product} />
       </div>
 
@@ -411,16 +186,7 @@ function ProductCard({
         }}>
           {product.name}
         </p>
-        <p style={{
-          fontSize:      15,
-          fontWeight:    700,
-          color:         "#1d1d1f",
-          letterSpacing: "-0.01em",
-          marginBottom:  12,
-        }}>
-          {product.price}
-        </p>
-        <div style={{ display: "flex", gap: 7 }}>
+        <div style={{ display: "flex", gap: 7, marginTop: 4 }}>
           <Link
             href={product.href}
             style={{
@@ -744,29 +510,11 @@ function CompareModal({
 
               {/* Details */}
               <div style={{ padding: "16px" }}>
-                {p.badge && (
-                  <span style={{
-                    fontSize:      9.5,
-                    fontWeight:    700,
-                    letterSpacing: "0.07em",
-                    color:         "#6e6e73",
-                    background:    "#f2f2f7",
-                    padding:       "2px 7px",
-                    borderRadius:  20,
-                    display:       "inline-block",
-                    marginBottom:  6,
-                  }}>
-                    {p.badge}
-                  </span>
-                )}
                 <p style={{ fontSize: 9.5, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.07em", marginBottom: 4 }}>
                   {p.subtitle}
                 </p>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 10, lineHeight: 1.3 }}>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16, lineHeight: 1.3 }}>
                   {p.name}
-                </p>
-                <p style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>
-                  {p.price}
                 </p>
                 <Link
                   href={p.href}

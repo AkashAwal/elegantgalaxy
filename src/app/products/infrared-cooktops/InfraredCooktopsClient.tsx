@@ -531,26 +531,6 @@ export default function InfraredCooktopsClient({
     return true;
   });
 
-  const pillBase: React.CSSProperties = {
-    height:    40,
-    padding:   "0 18px",
-    borderRadius: 980,
-    border:    "2px solid rgba(0,0,0,0.12)",
-    background: "#fff",
-    color:     "#1d1d1f",
-    fontSize:  13,
-    fontWeight: 600,
-    cursor:    "pointer",
-    transition: "all 0.15s ease",
-    whiteSpace: "nowrap",
-  };
-  const pillActive: React.CSSProperties = {
-    ...pillBase,
-    border:     "2px solid #0071e3",
-    background: "#0071e3",
-    color:      "#fff",
-  };
-
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
 
@@ -568,37 +548,6 @@ export default function InfraredCooktopsClient({
         </div>
       </section>
 
-      {/* Filters */}
-      <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 36 }}>
-          <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Burners</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            <button onClick={() => setBurnerFilter(null)} aria-pressed={burnerFilter === null} style={burnerFilter === null ? pillActive : pillBase}>
-              All
-            </button>
-            {BURNER_COUNTS.map((n) => {
-              const isSelected = burnerFilter === n;
-              return (
-                <button
-                  key={n}
-                  onClick={() => setBurnerFilter(isSelected ? null : n)}
-                  aria-pressed={isSelected}
-                  style={isSelected ? pillActive : pillBase}
-                >
-                  {burnerLabel(n)}
-                </button>
-              );
-            })}
-          </div>
-
-          {visible.length > 0 && (
-            <p style={{ fontSize: 13, color: "#6e6e73", marginTop: 16 }}>
-              {visible.length} model{visible.length !== 1 ? "s" : ""} shown
-            </p>
-          )}
-        </div>
-      </section>
-
       {/* Grid */}
       <section>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: comparedModels.length >= 2 ? 140 : 80 }}>
@@ -607,7 +556,7 @@ export default function InfraredCooktopsClient({
               <p style={{ fontSize: 22, fontWeight: 700, color: "#1d1d1f", marginBottom: 10, letterSpacing: "-0.02em" }}>
                 No models match this selection
               </p>
-              <p style={{ fontSize: 16, color: "#6e6e73" }}>Try adjusting your filters above.</p>
+              <p style={{ fontSize: 16, color: "#6e6e73" }}>Try a different burner count.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>

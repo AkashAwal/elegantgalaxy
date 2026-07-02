@@ -2,8 +2,8 @@ import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import InteractiveBoardSection from "@/components/InteractiveBoardSection";
 import ProductShelves from "@/components/ProductShelves";
-import RemotesSection from "@/components/RemotesSection";
 import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
 import FAQSection from "@/components/FAQSection";
@@ -203,8 +203,8 @@ export default function Home() {
       {/* ── Product shelves ────────────────────────────────────────────── */}
       <ProductShelves />
 
-      {/* ── TV remotes CTA ────────────────────────────────────────────── */}
-      <RemotesSection />
+      {/* ── Interactive Smart Board showcase ─────────────────────────────── */}
+      <InteractiveBoardSection />
 
       {/* ── Testimonials — social proof right after browsing products ──── */}
       <TestimonialsSection />

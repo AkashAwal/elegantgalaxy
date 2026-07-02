@@ -570,26 +570,6 @@ export default function WashingMachinesClient({
     return true;
   });
 
-  const pillBase: React.CSSProperties = {
-    height:    40,
-    padding:   "0 18px",
-    borderRadius: 980,
-    border:    "2px solid rgba(0,0,0,0.12)",
-    background: "#fff",
-    color:     "#1d1d1f",
-    fontSize:  13,
-    fontWeight: 600,
-    cursor:    "pointer",
-    transition: "all 0.15s ease",
-    whiteSpace: "nowrap",
-  };
-  const pillActive: React.CSSProperties = {
-    ...pillBase,
-    border:     "2px solid #0071e3",
-    background: "#0071e3",
-    color:      "#fff",
-  };
-
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
 
@@ -607,69 +587,6 @@ export default function WashingMachinesClient({
         </div>
       </section>
 
-      {/* Filters */}
-      <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 36 }}>
-          <div className="flex flex-col lg:flex-row lg:gap-10">
-
-            <div style={{ flex: "1 1 0%", minWidth: 0 }}>
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Washer Type</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {([null, "front-load", "top-load", "semi-automatic"] as const).map((t) => (
-                  <button
-                    key={String(t)}
-                    onClick={() => setTypeFilter(t)}
-                    aria-pressed={typeFilter === t}
-                    style={typeFilter === t ? pillActive : pillBase}
-                  >
-                    {t === null ? "All Types" : TYPE_LABEL[t]}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="hidden lg:block" style={{ width: 1, background: "rgba(0,0,0,0.08)", alignSelf: "stretch", flexShrink: 0 }} />
-
-            <div style={{ flex: "1 1 0%", minWidth: 0 }} className="mt-6 lg:mt-0">
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Capacity</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                <button onClick={() => setCapFilter(null)} aria-pressed={capFilter === null} style={capFilter === null ? pillActive : pillBase}>
-                  All
-                </button>
-                {CAPACITIES.map((cap) => {
-                  const available = MODELS.some(
-                    (m) => m.capacity === cap && (!typeFilter || m.type === typeFilter)
-                  );
-                  const isSelected = capFilter === cap;
-                  return (
-                    <button
-                      key={cap}
-                      onClick={() => setCapFilter(isSelected ? null : cap)}
-                      disabled={!available}
-                      aria-pressed={isSelected}
-                      style={{
-                        ...(isSelected ? pillActive : pillBase),
-                        opacity:       !available && !isSelected ? 0.38 : 1,
-                        cursor:        available ? "pointer" : "not-allowed",
-                        color:         !available && !isSelected ? "#aaa" : isSelected ? "#fff" : "#1d1d1f",
-                      }}
-                    >
-                      {cap}kg
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {visible.length > 0 && (
-            <p style={{ fontSize: 13, color: "#6e6e73", marginTop: 16 }}>
-              {visible.length} model{visible.length !== 1 ? "s" : ""} shown
-            </p>
-          )}
-        </div>
-      </section>
-
       {/* Grid */}
       <section>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: comparedModels.length >= 2 ? 140 : 80 }}>
@@ -678,7 +595,7 @@ export default function WashingMachinesClient({
               <p style={{ fontSize: 22, fontWeight: 700, color: "#1d1d1f", marginBottom: 10, letterSpacing: "-0.02em" }}>
                 No models match this selection
               </p>
-              <p style={{ fontSize: 16, color: "#6e6e73" }}>Try adjusting your filters above.</p>
+              <p style={{ fontSize: 16, color: "#6e6e73" }}>Try a different washer type or capacity.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>
