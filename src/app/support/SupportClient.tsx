@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { Search, Clock, ChevronRight, X } from "lucide-react";
 import { ARTICLES, CATEGORIES, searchArticles, getArticlesByCategory } from "@/data/support-articles";
 import type { Category } from "@/data/support-articles";
@@ -121,9 +122,18 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
 
 // ── Main client component ─────────────────────────────────────────────────────
 
+function isCategory(value: string | null): value is Category {
+  return value !== null && value in CATEGORIES;
+}
+
 export default function SupportClient() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
   const [query,    setQuery]    = useState("");
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const [activeCategory, setActiveCategory] = useState<Category | null>(
+    isCategory(categoryParam) ? categoryParam : null
+  );
 
   const results = useMemo(() => {
     let list = query ? searchArticles(query) : ARTICLES;

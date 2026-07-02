@@ -47,14 +47,14 @@ const NAV: NavItem[] = [
         heading: "Shop LED TVs",
         links: [
           { label: "Shop LED TVs",         href: "/products/led-tvs" },
-          { label: "TV Accessories",       href: "/#accessories" },
+          { label: "TV Accessories",       href: "/products/led-tvs/accessories" },
           { label: "Financing",            href: "/distributors/financing" },
         ],
       },
       {
         heading: "More from LED TVs",
         links: [
-          { label: "TV Support",           href: "/support/tv" },
+          { label: "TV Support",           href: "/support?category=led-tvs" },
           { label: "Warranty",             href: "/support/warranty" },
           { label: "Service Centres",      href: "/support/service-centres" },
           { label: "Energy Ratings",       href: "/products/led-tvs/energy" },
@@ -72,9 +72,9 @@ const NAV: NavItem[] = [
         heading: "Explore Washing Machines",
         primary: [
           { label: "Explore All Washing Machines", href: "/products/washing-machines" },
-          { label: "Front Load",                   href: "/products/washing-machines/front-load" },
-          { label: "Top Load",                     href: "/products/washing-machines/top-load" },
-          { label: "Semi-Automatic",               href: "/products/washing-machines/semi-automatic" },
+          { label: "Front Load",                   href: "/products/washing-machines?type=front-load" },
+          { label: "Top Load",                     href: "/products/washing-machines?type=top-load" },
+          { label: "Semi-Automatic",               href: "/products/washing-machines?type=semi-automatic" },
         ],
         links: [
           { label: "Compare Washing Machines",     href: "/products/washing-machines/compare" },
@@ -91,7 +91,7 @@ const NAV: NavItem[] = [
       {
         heading: "More from Washing Machines",
         links: [
-          { label: "Washing Machine Support",      href: "/support/washing-machines" },
+          { label: "Washing Machine Support",      href: "/support?category=washing-machines" },
           { label: "Warranty",                     href: "/support/warranty" },
           { label: "Service Centres",              href: "/support/service-centres" },
           { label: "Energy Ratings",               href: "/products/washing-machines/energy" },
@@ -109,10 +109,8 @@ const NAV: NavItem[] = [
         heading: "Explore Air Coolers",
         primary: [
           { label: "Explore All Air Coolers", href: "/products/air-coolers" },
-          { label: "Personal Coolers",        href: "/products/air-coolers/personal" },
-          { label: "Desert Coolers",          href: "/products/air-coolers/desert" },
-          { label: "Tower Coolers",           href: "/products/air-coolers/tower" },
-          { label: "Window Coolers",          href: "/products/air-coolers/window" },
+          { label: "Commercial Coolers",      href: "/products/air-coolers?type=commercial" },
+          { label: "Desert Coolers",          href: "/products/air-coolers?type=desert" },
         ],
         links: [
           { label: "Compare Air Coolers",     href: "/products/air-coolers/compare" },
@@ -129,7 +127,7 @@ const NAV: NavItem[] = [
       {
         heading: "More from Air Coolers",
         links: [
-          { label: "Air Cooler Support",      href: "/support/air-coolers" },
+          { label: "Air Cooler Support",      href: "/support?category=air-coolers" },
           { label: "Warranty",                href: "/support/warranty" },
           { label: "Service Centres",         href: "/support/service-centres" },
           { label: "Energy Ratings",          href: "/products/air-coolers/energy" },
@@ -147,8 +145,8 @@ const NAV: NavItem[] = [
         heading: "Explore Infrared Cooktops",
         primary: [
           { label: "Explore All Cooktops",    href: "/products/infrared-cooktops" },
-          { label: "Single Burner",           href: "/products/infrared-cooktops/single-burner" },
-          { label: "Double Burner",           href: "/products/infrared-cooktops/double-burner" },
+          { label: "Single Burner",           href: "/products/infrared-cooktops?burners=single-burner" },
+          { label: "Double Burner",           href: "/products/infrared-cooktops?burners=double-burner" },
         ],
         links: [
           { label: "Compare Cooktops",        href: "/products/infrared-cooktops/compare" },
@@ -166,7 +164,7 @@ const NAV: NavItem[] = [
       {
         heading: "More from Infrared Cooktops",
         links: [
-          { label: "Cooktop Support",         href: "/support/cooktops" },
+          { label: "Cooktop Support",         href: "/support?category=infrared-cooktops" },
           { label: "Warranty",                href: "/support/warranty" },
           { label: "Service Centres",         href: "/support/service-centres" },
           { label: "Safety Certifications",   href: "/products/infrared-cooktops/safety" },
