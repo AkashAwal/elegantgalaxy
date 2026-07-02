@@ -15,8 +15,8 @@ interface TvModel {
   platform:   string;
   sizes:      number[];
   resolution: Record<number, string>;
-  /** Path to a real product photo under /public. When set, this is shown instead of the generic TV silhouette. */
-  imageSrc?: string;
+  /** Real product photos under /public, front/left/right angles. When set, these are shown instead of the generic TV silhouette. */
+  images?: { front: string; left: string; right: string };
 }
 
 const MODELS: TvModel[] = [
@@ -26,7 +26,11 @@ const MODELS: TvModel[] = [
     platform:   "Android TV",
     sizes:      [32, 43, 50, 55, 65, 75],
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD" },
-    imageSrc:   "/images/tvs/android-front.webp",
+    images: {
+      front: "/images/tvs/android-front.webp",
+      left:  "/images/tvs/android-left.webp",
+      right: "/images/tvs/android-right.webp",
+    },
   },
   {
     id:         "webos-4k",
@@ -34,7 +38,11 @@ const MODELS: TvModel[] = [
     platform:   "webOS 4K",
     sizes:      [43, 50, 55, 58, 65, 75, 85, 100],
     resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
-    imageSrc:   "/images/tvs/webos-4k-front.webp",
+    images: {
+      front: "/images/tvs/webos-4k-front.webp",
+      left:  "/images/tvs/webos-4k-left.webp",
+      right: "/images/tvs/webos-4k-right.webp",
+    },
   },
   {
     id:         "webos-2k",
@@ -42,7 +50,11 @@ const MODELS: TvModel[] = [
     platform:   "webOS 2K",
     sizes:      [32, 40, 43],
     resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
-    imageSrc:   "/images/tvs/webos-2k-front.webp",
+    images: {
+      front: "/images/tvs/webos-2k-front.webp",
+      left:  "/images/tvs/webos-2k-left.webp",
+      right: "/images/tvs/webos-2k-right.webp",
+    },
   },
   {
     id:         "google",
@@ -50,7 +62,11 @@ const MODELS: TvModel[] = [
     platform:   "Google TV",
     sizes:      [32, 43, 50, 55, 65, 75, 85, 100],
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
-    imageSrc:   "/images/tvs/google-front.webp",
+    images: {
+      front: "/images/tvs/google-front.webp",
+      left:  "/images/tvs/google-left.webp",
+      right: "/images/tvs/google-right.webp",
+    },
   },
   {
     id:         "distro",
@@ -106,10 +122,10 @@ function TvIcon() {
 }
 
 function TvIllustration({ model }: { model: TvModel }) {
-  if (model.imageSrc) {
+  if (model.images) {
     return (
       <Image
-        src={model.imageSrc}
+        src={model.images.front}
         alt={`${model.platform} TV`}
         width={400}
         height={283}
@@ -118,6 +134,39 @@ function TvIllustration({ model }: { model: TvModel }) {
     );
   }
   return <TvIcon />;
+}
+
+// Card version: cycles front → left → right → front while hovered, matching
+// the site's other hover-slideshow product tiles.
+function TvCardIllustration({ model }: { model: TvModel }) {
+  const [idx, setIdx] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  if (!model.images) return <TvIcon />;
+  const angles = [model.images.front, model.images.left, model.images.right];
+
+  const onEnter = () => {
+    timerRef.current = setInterval(() => {
+      setIdx((prev) => (prev + 1) % angles.length);
+    }, 700);
+  };
+
+  const onLeave = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    setIdx(0);
+  };
+
+  return (
+    <div onMouseEnter={onEnter} onMouseLeave={onLeave} style={{ width: "100%", maxWidth: 280 }}>
+      <Image
+        src={angles[idx]}
+        alt={`${model.platform} TV`}
+        width={400}
+        height={283}
+        style={{ width: "100%", height: "auto" }}
+      />
+    </div>
+  );
 }
 
 // ── Enquire modal ─────────────────────────────────────────────────────────────
@@ -344,11 +393,11 @@ function CompareModal({
             return (
               <div key={key} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
                 {/* Illustration */}
-                <div style={{ background: model.imageSrc ? "#fff" : "#1d1d1f", height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                <div style={{ background: model.images ? "#fff" : "#1d1d1f", height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
                   <span style={{
                     position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
-                    background: model.imageSrc ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
-                    color:      model.imageSrc ? "#1d1d1f" : "rgba(255,255,255,0.8)",
+                    background: model.images ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
+                    color:      model.images ? "#1d1d1f" : "rgba(255,255,255,0.8)",
                     padding: "2px 7px", borderRadius: 20,
                   }}>
                     {model.platform}
@@ -414,16 +463,16 @@ function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnq
       }}
     >
       {/* Image */}
-      <div style={{ background: model.imageSrc ? "#fff" : "#1d1d1f", padding: "28px 24px 20px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 168, position: "relative" }}>
+      <div style={{ background: model.images ? "#fff" : "#1d1d1f", padding: "28px 24px 20px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 168, position: "relative" }}>
         <span style={{
           position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
-          background: model.imageSrc ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
-          color:      model.imageSrc ? "#1d1d1f" : "rgba(255,255,255,0.8)",
+          background: model.images ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
+          color:      model.images ? "#1d1d1f" : "rgba(255,255,255,0.8)",
           padding: "3px 8px", borderRadius: 20,
         }}>
           {model.platform}
         </span>
-        <TvIllustration model={model} />
+        <TvCardIllustration model={model} />
       </div>
 
       {/* Content */}
