@@ -129,7 +129,7 @@ function TvIllustration({ model }: { model: TvModel }) {
         alt={`${model.platform} TV`}
         width={400}
         height={283}
-        style={{ width: "100%", maxWidth: 280, height: "auto" }}
+        style={{ width: "100%", maxWidth: 360, height: "auto" }}
       />
     );
   }
@@ -157,7 +157,7 @@ function TvCardIllustration({ model }: { model: TvModel }) {
   };
 
   return (
-    <div onMouseEnter={onEnter} onMouseLeave={onLeave} style={{ width: "100%", maxWidth: 280 }}>
+    <div onMouseEnter={onEnter} onMouseLeave={onLeave} style={{ width: "100%", maxWidth: 360 }}>
       <Image
         src={angles[idx]}
         alt={`${model.platform} TV`}
@@ -393,7 +393,7 @@ function CompareModal({
             return (
               <div key={key} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
                 {/* Illustration */}
-                <div style={{ background: model.images ? "#fff" : "#1d1d1f", height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                <div style={{ background: model.images ? "#fff" : "#1d1d1f", height: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", padding: "0 10px" }}>
                   <span style={{
                     position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
                     background: model.images ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
@@ -463,7 +463,7 @@ function ModelCard({ model, size, isCompared, maxReached, onToggleCompare, onEnq
       }}
     >
       {/* Image */}
-      <div style={{ background: model.images ? "#fff" : "#1d1d1f", padding: "28px 24px 20px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 168, position: "relative" }}>
+      <div style={{ background: model.images ? "#fff" : "#1d1d1f", padding: "18px 14px 12px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 220, position: "relative" }}>
         <span style={{
           position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
           background: model.images ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
