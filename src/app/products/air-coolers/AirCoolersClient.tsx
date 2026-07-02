@@ -703,9 +703,9 @@ function CompareModal({
                 borderBottom:        i < SPEC_ROWS.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
               }}
             >
-              <span style={{ fontSize: 12, color: "#6e6e73", flexShrink: 0 }}>{label}</span>
+              <span style={{ fontSize: 12, color: "#6e6e73", flexShrink: 0, textAlign: "center" }}>{label}</span>
               {models.map((m) => (
-                <span key={m.id} style={{ fontSize: 12, fontWeight: 600, color: "#1d1d1f", textAlign: "right" }}>
+                <span key={m.id} style={{ fontSize: 12, fontWeight: 600, color: "#1d1d1f", textAlign: "center" }}>
                   {formatSpecValue(m, key)}
                 </span>
               ))}
