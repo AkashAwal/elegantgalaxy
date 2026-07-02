@@ -6,7 +6,7 @@ import { Phone, MessageCircle, FileText, X, ChevronDown, ChevronUp, Check } from
 
 // ── SVG Illustration ──────────────────────────────────────────────────────────
 
-function CooktopSvg({ burners }: { burners: number }) {
+export function CooktopSvg({ burners }: { burners: number }) {
   const width  = 90 + burners * 60;
   const positions: Array<[number, number]> = [];
   if (burners === 1) positions.push([width / 2, 55]);
@@ -31,40 +31,16 @@ function CooktopSvg({ burners }: { burners: number }) {
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
-interface CooktopModel {
-  id:            string;
-  modelNumber:   string;
-  name:          string;
-  burners:       number;
-  wattagePerBurner: number;
-  totalWattage:  number;
-  surface:       string;
-  controls:      string;
-  timerMinutes:  number;
-  bodyMaterial:  string;
-  warranty:      string;
-  dimensions:    string;
-}
-
-const MODELS: CooktopModel[] = [
-  { id: "ct-1a", modelNumber: "EGIR-1000S", name: "Elegant Single Burner Cooktop",     burners: 1, wattagePerBurner: 2000, totalWattage: 2000, surface: "Ceramic Glass", controls: "Touch Panel", timerMinutes: 180, bodyMaterial: "Tempered Glass + ABS", warranty: "2 Years", dimensions: "355 × 295 × 60 mm" },
-  { id: "ct-1b", modelNumber: "EGIR-1200S", name: "Elegant Single Burner Cooktop Pro", burners: 1, wattagePerBurner: 2200, totalWattage: 2200, surface: "Ceramic Glass", controls: "Touch Panel", timerMinutes: 180, bodyMaterial: "Tempered Glass + ABS", warranty: "2 Years", dimensions: "355 × 295 × 60 mm" },
-  { id: "ct-2a", modelNumber: "EGIR-2000D", name: "Elegant 2-Burner Infrared Cooktop",     burners: 2, wattagePerBurner: 2000, totalWattage: 4000, surface: "Ceramic Glass", controls: "Touch Panel", timerMinutes: 180, bodyMaterial: "Tempered Glass + ABS", warranty: "2 Years", dimensions: "590 × 320 × 60 mm" },
-  { id: "ct-2b", modelNumber: "EGIR-2200D", name: "Elegant 2-Burner Infrared Cooktop Pro", burners: 2, wattagePerBurner: 2200, totalWattage: 4400, surface: "Ceramic Glass", controls: "Touch Panel", timerMinutes: 180, bodyMaterial: "Tempered Glass + ABS", warranty: "2 Years", dimensions: "590 × 320 × 60 mm" },
-  { id: "ct-3a", modelNumber: "EGIR-2000T", name: "Elegant 3-Burner Infrared Cooktop",     burners: 3, wattagePerBurner: 2000, totalWattage: 6000, surface: "Ceramic Glass", controls: "Knob + Touch", timerMinutes: 180, bodyMaterial: "Tempered Glass + Steel", warranty: "2 Years", dimensions: "760 × 400 × 65 mm" },
-  { id: "ct-4a", modelNumber: "EGIR-2000Q", name: "Elegant 4-Burner Infrared Cooktop",     burners: 4, wattagePerBurner: 2000, totalWattage: 8000, surface: "Ceramic Glass", controls: "Knob + Touch", timerMinutes: 180, bodyMaterial: "Tempered Glass + Steel", warranty: "2 Years", dimensions: "760 × 400 × 65 mm" },
-];
-
-const BURNER_COUNTS = [1, 2, 3, 4];
-const PHONE         = "+919540699333";
-const PHONE_DISPLAY = "+91 95406 99333";
-const WA_BASE       = `https://wa.me/${PHONE}`;
-
-const burnerLabel = (n: number) => n === 1 ? "Single Burner" : n === 2 ? "Double Burner" : `${n}-Burner`;
+import {
+  MODELS, BURNER_COUNTS, PHONE, PHONE_DISPLAY, WA_BASE, burnerLabel,
+  type CooktopModel,
+} from "@/data/infrared-cooktops";
+export { MODELS, BURNER_COUNTS, PHONE, PHONE_DISPLAY, WA_BASE, burnerLabel };
+export type { CooktopModel };
 
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
 
-function EnquireModal({ model, onClose }: { model: CooktopModel; onClose: () => void }) {
+export function EnquireModal({ model, onClose }: { model: CooktopModel; onClose: () => void }) {
   const text    = `Hi, I'm interested in the ${model.name} — model ${model.modelNumber}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
   const formUrl = `/contact?product=infrared-cooktop&model=${encodeURIComponent(model.id)}`;
@@ -117,7 +93,7 @@ function EnquireModal({ model, onClose }: { model: CooktopModel; onClose: () => 
 
 // ── Spec Table ────────────────────────────────────────────────────────────────
 
-const SPEC_ROWS: Array<{ label: string; key: keyof CooktopModel }> = [
+export const SPEC_ROWS: Array<{ label: string; key: keyof CooktopModel }> = [
   { label: "Model Number",      key: "modelNumber" },
   { label: "Burners",           key: "burners" },
   { label: "Wattage per Burner",key: "wattagePerBurner" },
@@ -130,7 +106,7 @@ const SPEC_ROWS: Array<{ label: string; key: keyof CooktopModel }> = [
   { label: "Dimensions",        key: "dimensions" },
 ];
 
-function formatSpecValue(model: CooktopModel, key: keyof CooktopModel): string {
+export function formatSpecValue(model: CooktopModel, key: keyof CooktopModel): string {
   const v = model[key];
   if (key === "burners") return burnerLabel(model.burners);
   if (key === "wattagePerBurner" || key === "totalWattage") return `${v} W`;
@@ -465,25 +441,33 @@ function CooktopCard({
           </div>
         </div>
 
-        <button
-          onClick={onEnquire}
-          style={{
-            width:          "100%",
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "center",
-            height:         42,
-            borderRadius:   980,
-            background:     "#0071e3",
-            color:          "#fff",
-            border:         "none",
-            cursor:         "pointer",
-            fontSize:       14,
-            fontWeight:     600,
-          }}
-        >
-          Enquire Now
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <Link
+            href={`/products/infrared-cooktops/${model.id}`}
+            style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", height: 42, borderRadius: 980, background: "#0071e3", color: "#fff", textDecoration: "none", fontSize: 14, fontWeight: 600 }}
+          >
+            View Now
+          </Link>
+          <button
+            onClick={onEnquire}
+            style={{
+              flex:           1,
+              display:        "flex",
+              alignItems:     "center",
+              justifyContent: "center",
+              height:         42,
+              borderRadius:   980,
+              background:     "transparent",
+              color:          "#0071e3",
+              border:         "1.5px solid #0071e3",
+              cursor:         "pointer",
+              fontSize:       14,
+              fontWeight:     600,
+            }}
+          >
+            Enquire Now
+          </button>
+        </div>
 
         <button
           onClick={onToggleCompare}

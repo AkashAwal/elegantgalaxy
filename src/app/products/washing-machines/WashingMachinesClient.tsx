@@ -55,7 +55,7 @@ function SemiAutoSvg() {
   );
 }
 
-function WasherIllustration({ model }: { model: WasherModel }) {
+export function WasherIllustration({ model }: { model: WasherModel }) {
   if (model.type === "front-load") return <FrontLoadSvg />;
   if (model.type === "top-load")    return <TopLoadSvg />;
   return <SemiAutoSvg />;
@@ -63,49 +63,16 @@ function WasherIllustration({ model }: { model: WasherModel }) {
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
-type WasherType = "front-load" | "top-load" | "semi-automatic";
-
-interface WasherModel {
-  id:            string;
-  modelNumber:   string;
-  name:          string;
-  type:          WasherType;
-  capacity:      number;
-  spinSpeed:     number;
-  energyRating:  string;
-  washPrograms:  number;
-  motor:         string;
-  bodyMaterial:  string;
-  warranty:      string;
-  dimensions:    string;
-}
-
-const MODELS: WasherModel[] = [
-  { id: "fl-6",  modelNumber: "EGFL-06D", name: "Elegant 6kg Front Load Washer",  type: "front-load", capacity: 6,  spinSpeed: 1000, energyRating: "5 Star", washPrograms: 12, motor: "BLDC Inverter", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "595 × 545 × 850 mm" },
-  { id: "fl-7",  modelNumber: "EGFL-07D", name: "Elegant 7kg Front Load Washer",  type: "front-load", capacity: 7,  spinSpeed: 1200, energyRating: "5 Star", washPrograms: 14, motor: "BLDC Inverter", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "595 × 545 × 850 mm" },
-  { id: "fl-8",  modelNumber: "EGFL-08D", name: "Elegant 8kg Front Load Washer",  type: "front-load", capacity: 8,  spinSpeed: 1400, energyRating: "5 Star", washPrograms: 16, motor: "BLDC Inverter", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "600 × 580 × 850 mm" },
-  { id: "tl-7",  modelNumber: "EGTL-07D", name: "Elegant 7kg Top Load Washer",    type: "top-load",    capacity: 7,  spinSpeed: 700,  energyRating: "4 Star", washPrograms: 8,  motor: "Standard Induction", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "580 × 550 × 900 mm" },
-  { id: "tl-8",  modelNumber: "EGTL-08D", name: "Elegant 8kg Top Load Washer",    type: "top-load",    capacity: 8,  spinSpeed: 750,  energyRating: "4 Star", washPrograms: 10, motor: "Standard Induction", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "580 × 550 × 900 mm" },
-  { id: "tl-10", modelNumber: "EGTL-10D", name: "Elegant 10kg Top Load Washer",   type: "top-load",    capacity: 10, spinSpeed: 800,  energyRating: "5 Star", washPrograms: 10, motor: "BLDC Inverter", bodyMaterial: "Stainless Steel Drum", warranty: "5 Years Motor, 2 Years Comprehensive", dimensions: "600 × 560 × 950 mm" },
-  { id: "sa-7",  modelNumber: "EGSA-07D", name: "Elegant 7kg Semi-Automatic Washer",  type: "semi-automatic", capacity: 7,  spinSpeed: 1300, energyRating: "N/A", washPrograms: 3, motor: "Standard Induction", bodyMaterial: "Plastic Body", warranty: "2 Years Motor, 1 Year Comprehensive", dimensions: "770 × 430 × 900 mm" },
-  { id: "sa-8",  modelNumber: "EGSA-08D", name: "Elegant 8kg Semi-Automatic Washer",  type: "semi-automatic", capacity: 8,  spinSpeed: 1350, energyRating: "N/A", washPrograms: 3, motor: "Standard Induction", bodyMaterial: "Plastic Body", warranty: "2 Years Motor, 1 Year Comprehensive", dimensions: "800 × 440 × 900 mm" },
-  { id: "sa-10", modelNumber: "EGSA-10D", name: "Elegant 10kg Semi-Automatic Washer", type: "semi-automatic", capacity: 10, spinSpeed: 1400, energyRating: "N/A", washPrograms: 4, motor: "Standard Induction", bodyMaterial: "Plastic Body", warranty: "2 Years Motor, 1 Year Comprehensive", dimensions: "830 × 460 × 900 mm" },
-];
-
-const CAPACITIES = [6, 7, 8, 10];
-const PHONE         = "+919540699333";
-const PHONE_DISPLAY = "+91 95406 99333";
-const WA_BASE       = `https://wa.me/${PHONE}`;
-
-const TYPE_LABEL: Record<WasherType, string> = {
-  "front-load":     "Front Load",
-  "top-load":       "Top Load",
-  "semi-automatic": "Semi-Automatic",
-};
+import {
+  MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_LABEL,
+  type WasherType, type WasherModel,
+} from "@/data/washing-machines";
+export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_LABEL };
+export type { WasherType, WasherModel };
 
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
 
-function EnquireModal({ model, onClose }: { model: WasherModel; onClose: () => void }) {
+export function EnquireModal({ model, onClose }: { model: WasherModel; onClose: () => void }) {
   const text    = `Hi, I'm interested in the ${model.name} — model ${model.modelNumber}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
   const formUrl = `/contact?product=washing-machine&model=${encodeURIComponent(model.id)}`;
@@ -158,7 +125,7 @@ function EnquireModal({ model, onClose }: { model: WasherModel; onClose: () => v
 
 // ── Spec Table ────────────────────────────────────────────────────────────────
 
-const SPEC_ROWS: Array<{ label: string; key: keyof WasherModel }> = [
+export const SPEC_ROWS: Array<{ label: string; key: keyof WasherModel }> = [
   { label: "Model Number",  key: "modelNumber" },
   { label: "Type",          key: "type" },
   { label: "Capacity",      key: "capacity" },
@@ -171,7 +138,7 @@ const SPEC_ROWS: Array<{ label: string; key: keyof WasherModel }> = [
   { label: "Dimensions",    key: "dimensions" },
 ];
 
-function formatSpecValue(model: WasherModel, key: keyof WasherModel): string {
+export function formatSpecValue(model: WasherModel, key: keyof WasherModel): string {
   const v = model[key];
   if (key === "type") return TYPE_LABEL[model.type];
   if (key === "capacity") return `${v} kg`;
@@ -507,25 +474,33 @@ function WasherCard({
           </div>
         </div>
 
-        <button
-          onClick={onEnquire}
-          style={{
-            width:          "100%",
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "center",
-            height:         42,
-            borderRadius:   980,
-            background:     "#0071e3",
-            color:          "#fff",
-            border:         "none",
-            cursor:         "pointer",
-            fontSize:       14,
-            fontWeight:     600,
-          }}
-        >
-          Enquire Now
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          <Link
+            href={`/products/washing-machines/${model.id}`}
+            style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", height: 42, borderRadius: 980, background: "#0071e3", color: "#fff", textDecoration: "none", fontSize: 14, fontWeight: 600 }}
+          >
+            View Now
+          </Link>
+          <button
+            onClick={onEnquire}
+            style={{
+              flex:           1,
+              display:        "flex",
+              alignItems:     "center",
+              justifyContent: "center",
+              height:         42,
+              borderRadius:   980,
+              background:     "transparent",
+              color:          "#0071e3",
+              border:         "1.5px solid #0071e3",
+              cursor:         "pointer",
+              fontSize:       14,
+              fontWeight:     600,
+            }}
+          >
+            Enquire Now
+          </button>
+        </div>
 
         <button
           onClick={onToggleCompare}

@@ -4,107 +4,14 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, MessageCircle, FileText, X, Check } from "lucide-react";
+import { SIZES, MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName, entryKey, parseKey, type TvModel } from "@/data/led-tvs";
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-
-const SIZES = [24, 32, 40, 42, 43, 50, 55, 58, 65, 75, 85, 100];
-
-interface TvModel {
-  id:         string;
-  type:       string;
-  platform:   string;
-  sizes:      number[];
-  resolution: Record<number, string>;
-  /** Real product photos under /public, front/left/right angles. When set, these are shown instead of the generic TV silhouette. */
-  images?: { front: string; left: string; right: string };
-}
-
-const MODELS: TvModel[] = [
-  {
-    id:         "android",
-    type:       "Android TV",
-    platform:   "Android TV",
-    sizes:      [32, 43, 50, 55, 65, 75],
-    resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD" },
-    images: {
-      front: "/images/tvs/android-front.webp",
-      left:  "/images/tvs/android-left.webp",
-      right: "/images/tvs/android-right.webp",
-    },
-  },
-  {
-    id:         "webos-4k",
-    type:       "WebOS 4K",
-    platform:   "webOS 4K",
-    sizes:      [43, 50, 55, 58, 65, 75, 85, 100],
-    resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
-    images: {
-      front: "/images/tvs/webos-4k-front.webp",
-      left:  "/images/tvs/webos-4k-left.webp",
-      right: "/images/tvs/webos-4k-right.webp",
-    },
-  },
-  {
-    id:         "webos-2k",
-    type:       "WebOS 2K",
-    platform:   "webOS 2K",
-    sizes:      [32, 40, 43],
-    resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
-    images: {
-      front: "/images/tvs/webos-2k-front.webp",
-      left:  "/images/tvs/webos-2k-left.webp",
-      right: "/images/tvs/webos-2k-right.webp",
-    },
-  },
-  {
-    id:         "google",
-    type:       "Google TV",
-    platform:   "Google TV",
-    sizes:      [32, 43, 50, 55, 65, 75, 85, 100],
-    resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
-    images: {
-      front: "/images/tvs/google-front.webp",
-      left:  "/images/tvs/google-left.webp",
-      right: "/images/tvs/google-right.webp",
-    },
-  },
-  {
-    id:         "distro",
-    type:       "Distro",
-    platform:   "Distro OS",
-    sizes:      [32, 40, 43],
-    resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
-  },
-  {
-    id:         "frameless-smart",
-    type:       "Frameless Smart",
-    platform:   "Frameless Smart",
-    sizes:      [24, 32, 40, 42, 43],
-    resolution: { 24: "Full HD", 32: "Full HD", 40: "Full HD", 42: "Full HD", 43: "Full HD" },
-  },
-  {
-    id:         "frameless-normal",
-    type:       "Frameless Normal",
-    platform:   "Frameless Normal",
-    sizes:      [24],
-    resolution: { 24: "Full HD" },
-  },
-];
-
-const PHONE         = "+919540699333";
-const PHONE_DISPLAY = "+91 95406 99333";
-const WA_BASE       = `https://wa.me/${PHONE}`;
-
-const tvName    = (model: TvModel, size: number) => `EG ${model.type} ${size}" Smart LED`;
-const entryKey  = (modelId: string, size: number) => `${modelId}::${size}`;
-const parseKey  = (key: string) => {
-  const [modelId, sizeStr] = key.split("::");
-  return { modelId, size: Number(sizeStr) };
-};
+export type { TvModel };
+export { SIZES, MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName };
 
 // ── TV silhouette ─────────────────────────────────────────────────────────────
 
-function TvIcon() {
+export function TvIcon() {
   return (
     <svg
       viewBox="0 0 200 134"
@@ -121,7 +28,7 @@ function TvIcon() {
   );
 }
 
-function TvIllustration({ model }: { model: TvModel }) {
+export function TvIllustration({ model }: { model: TvModel }) {
   if (model.images) {
     return (
       <Image
@@ -171,13 +78,13 @@ function TvCardIllustration({ model }: { model: TvModel }) {
 
 // ── Enquire modal ─────────────────────────────────────────────────────────────
 
-interface EnquireModalProps {
+export interface EnquireModalProps {
   model:   TvModel;
   size:    number;
   onClose: () => void;
 }
 
-function EnquireModal({ model, size, onClose }: EnquireModalProps) {
+export function EnquireModal({ model, size, onClose }: EnquireModalProps) {
   const name    = tvName(model, size);
   const res     = model.resolution[size] ?? "Full HD";
   const text    = `Hi, I'm interested in the ${name}. Could you share more details?`;
