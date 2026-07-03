@@ -127,7 +127,7 @@ const CARDS: DiffCard[] = [
 
 const LOOPED = [...CARDS, ...CARDS];
 
-// ── Card with flat lift on hover ───────────────────────────────────────────────
+// ── Flat static card ────────────────────────────────────────────────────────────
 
 function LiftCard({
   children,
@@ -136,33 +136,10 @@ function LiftCard({
   children: ReactNode;
   style?: CSSProperties;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const onMouseEnter = () => {
-    const el = cardRef.current;
-    if (el) {
-      el.style.transition = "transform 0.22s ease-out, box-shadow 0.22s ease-out";
-      el.style.transform  = "translateY(-6px) scale(1.02)";
-      el.style.boxShadow  = "0 16px 40px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.07)";
-    }
-  };
-
-  const onMouseLeave = () => {
-    const el = cardRef.current;
-    if (el) {
-      el.style.transition = "transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease";
-      el.style.transform  = "translateY(0) scale(1)";
-      el.style.boxShadow  = "0 2px 10px rgba(0,0,0,0.07)";
-    }
-  };
-
   return (
     <div
-      ref={cardRef}
       className="relative flex-shrink-0 overflow-hidden rounded-[18px]"
-      style={{ willChange: "transform", boxShadow: "0 2px 10px rgba(0,0,0,0.07)", ...style }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.07)", ...style }}
     >
       {children}
     </div>
@@ -171,8 +148,18 @@ function LiftCard({
 
 // ── Section ────────────────────────────────────────────────────────────────────
 
+const CARD_GAP    = 16;
+const AUTOPLAY_MS = 3500;
+
+// One step = one card's width. Since 3 cards + 2 gaps fill the container,
+// a single card's width is (clientWidth + gap) / 3.
+function getStep(el: HTMLDivElement) {
+  return (el.clientWidth + CARD_GAP) / 3;
+}
+
 export default function DifferenceSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef  = useRef<HTMLDivElement>(null);
+  const pausedRef  = useRef(false);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -185,8 +172,23 @@ export default function DifferenceSection() {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollRight = () => scrollRef.current?.scrollBy({ left:  300, behavior: "smooth" });
-  const scrollLeft  = () => scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (pausedRef.current) return;
+      const el = scrollRef.current;
+      if (el) el.scrollBy({ left: getStep(el), behavior: "smooth" });
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const scrollRight = () => {
+    const el = scrollRef.current;
+    if (el) el.scrollBy({ left: getStep(el), behavior: "smooth" });
+  };
+  const scrollLeft = () => {
+    const el = scrollRef.current;
+    if (el) el.scrollBy({ left: -getStep(el), behavior: "smooth" });
+  };
 
   return (
     <section className="w-full pb-16">
@@ -199,16 +201,19 @@ export default function DifferenceSection() {
         </h2>
       </div>
 
-      {/* Full-width carousel */}
-      <div className="relative w-full">
+      {/* 3-card autoplaying carousel */}
+      <div
+        className="relative mx-auto max-w-[1440px] px-8"
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
         <div
           ref={scrollRef}
-          className="flex gap-3 overflow-x-auto"
+          className="flex overflow-x-auto"
           style={{
+            gap:             CARD_GAP,
             scrollbarWidth:  "none",
             msOverflowStyle: "none",
-            paddingLeft:     "calc(max((100vw - 1440px) / 2, 0px) + 2rem)",
-            paddingRight:    "2rem",
             paddingTop:      "16px",
             paddingBottom:   "36px",
             marginTop:       "-16px",
@@ -218,19 +223,23 @@ export default function DifferenceSection() {
           {LOOPED.map((card, i) => (
             <LiftCard
               key={i}
-              style={{ width: 274, flexShrink: 0, height: 244, background: "#fff" }}
+              style={{
+                flex:      `0 0 calc((100% - ${2 * CARD_GAP}px) / 3)`,
+                height:    280,
+                background: "#fff",
+              }}
             >
-              <div className="flex flex-col h-full px-7 pt-7 pb-6" style={{ minWidth: 0 }}>
-                <div className="mb-4">{card.icon}</div>
+              <div className="flex flex-col h-full px-8 pt-8 pb-7" style={{ minWidth: 0 }}>
+                <div className="mb-5">{card.icon}</div>
                 <p
                   className="text-[#1d1d1f] font-semibold mb-2 leading-snug"
-                  style={{ fontSize: 17, letterSpacing: "-0.01em" }}
+                  style={{ fontSize: 20, letterSpacing: "-0.01em" }}
                 >
                   {card.title}
                 </p>
                 <p
                   className="text-[#6e6e73] leading-snug"
-                  style={{ fontSize: 13 }}
+                  style={{ fontSize: 15 }}
                 >
                   {card.desc}
                 </p>
