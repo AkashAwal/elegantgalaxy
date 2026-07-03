@@ -180,11 +180,11 @@ const NAV: NavItem[] = [
 ];
 
 const QUICK_LINKS: MegaLink[] = [
-  { label: "Become a Distributor",  href: "/distributors/apply" },
   { label: "LED TVs",               href: "/products/led-tvs" },
   { label: "Washing Machines",      href: "/products/washing-machines" },
   { label: "Air Coolers",           href: "/products/air-coolers" },
   { label: "Infrared Cooktops",     href: "/products/infrared-cooktops" },
+  { label: "Become a Distributor",  href: "/distributors/apply" },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -220,7 +220,10 @@ export default function Navbar() {
 
   const scheduleMegaClose = useCallback(() => {
     cancelClose();
-    closeTimer.current = setTimeout(() => setActiveId(null), 180);
+    closeTimer.current = setTimeout(() => {
+      setActiveId(null);
+      setSearch(false);
+    }, 180);
   }, [cancelClose]);
 
   const openMega = useCallback((id: string) => {
@@ -242,6 +245,15 @@ export default function Navbar() {
     });
     setQuery("");
   }, [closeMega]);
+
+  const openSearch = useCallback(() => {
+    cancelClose();
+    closeMega();
+    setSearch((prev) => {
+      if (!prev) setTimeout(() => searchRef.current?.focus(), 40);
+      return true;
+    });
+  }, [cancelClose, closeMega]);
 
   // ── Keyboard navigation helpers ───────────────────────────────────────────
 
@@ -499,7 +511,7 @@ export default function Navbar() {
             {/* Search icon — also participates in the fade-others effect */}
             <button
               onClick={toggleSearch}
-              onMouseEnter={() => { closeMega(); setHoveredId("__search__"); }}
+              onMouseEnter={() => { openSearch(); setHoveredId("__search__"); }}
               className={`flex items-center justify-center w-9 h-9 rounded-full
                          text-[#1d1d1f] transition-opacity duration-150 ml-1
                          ${hoveredId !== null && hoveredId !== "__search__"
@@ -641,6 +653,8 @@ export default function Navbar() {
         {/* ── Search panel — always mounted, fades in/out via CSS transition ─── */}
         <div
           className="absolute left-0 right-0"
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleMegaClose}
           style={{
             top: "100%",
             zIndex: 50,
@@ -659,7 +673,7 @@ export default function Navbar() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search elegant-galaxy.com"
+                placeholder="Search Elegant Galaxy"
                 className="flex-1 bg-transparent text-[#1d1d1f] placeholder:text-[#6e6e73]"
                 style={{ fontSize: 26 }}
                 autoComplete="off"

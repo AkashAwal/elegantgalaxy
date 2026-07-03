@@ -51,7 +51,7 @@ async function hasMX(domain: string): Promise<boolean> {
 // ── Route handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, countryCode, phone, location, message } =
+    const { name, email, countryCode, phone, location, message, businessName, businessType } =
       (await req.json()) as Record<string, string>;
 
     // ── Name ──────────────────────────────────────────────────────────────────
@@ -104,10 +104,16 @@ export async function POST(req: NextRequest) {
 
     // ── Send to Telegram ──────────────────────────────────────────────────────
     const cc = (countryCode ?? "+91").trim();
+    const cleanBusinessName = (businessName ?? "").trim();
+    const cleanBusinessType = (businessType ?? "").trim();
+    const isDistributor     = !!cleanBusinessName || !!cleanBusinessType;
+
     const text = [
-      `🛎️ *New Enquiry — Elegant Galaxy*`,
+      isDistributor ? `🏢 *New Distributor Application — Elegant Galaxy*` : `🛎️ *New Enquiry — Elegant Galaxy*`,
       ``,
       `👤 *Name:* ${cleanName}`,
+      ...(cleanBusinessName ? [`🏬 *Business:* ${cleanBusinessName}`] : []),
+      ...(cleanBusinessType ? [`🗂️ *Business Type:* ${cleanBusinessType}`] : []),
       `📧 *Email:* ${cleanEmail}`,
       `📱 *Phone:* ${cc} ${digits}`,
       `📍 *Location:* ${cleanLocation}`,

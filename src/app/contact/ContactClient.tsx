@@ -107,18 +107,9 @@ function isGibberish(str: string): boolean {
 export default function ContactClient() {
   const params         = useSearchParams();
   const enquireProduct = params.get("enquire");
-  const contactType    = params.get("type");
 
-  const defaultMessage =
-    enquireProduct
-      ? `I want to enquire about the ${enquireProduct}.`
-      : contactType === "distributor"
-      ? "I'm interested in becoming an Elegant Galaxy distributor. Please share details about your partnership programme."
-      : "";
-
-  const contextLabel =
-    enquireProduct            ? `Enquiring about: ${enquireProduct}` :
-    contactType === "distributor" ? "Distributor application"        : null;
+  const defaultMessage = enquireProduct ? `I want to enquire about the ${enquireProduct}.` : "";
+  const contextLabel   = enquireProduct ? `Enquiring about: ${enquireProduct}` : null;
 
   const [form, setForm]           = useState({ name: "", email: "", phone: "", location: "", message: defaultMessage });
   const [errors, setErrors]       = useState<Record<string, string>>({});
@@ -225,9 +216,9 @@ export default function ContactClient() {
           <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#6e6e73", marginBottom: 16, textTransform: "uppercase" }}>
             Get in touch
           </p>
-          <h1 style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1, color: "#1d1d1f", marginBottom: 12 }}>
-            Contact us.
-          </h1>
+          <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1, color: "#1d1d1f", marginBottom: 12 }}>
+            Send us a message.
+          </h2>
           <p style={{ fontSize: 14.5, color: "#6e6e73", lineHeight: 1.65, marginBottom: 32 }}>
             Our team is here to help. Fill in the form or call us directly.
           </p>

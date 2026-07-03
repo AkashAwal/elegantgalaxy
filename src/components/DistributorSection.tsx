@@ -48,7 +48,7 @@ export default function DistributorSection() {
           {/* The same two buttons from the header */}
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <Link
-              href="/contact?type=distributor"
+              href="/distributors/apply"
               style={{
                 display:        "inline-flex",
                 alignItems:     "center",

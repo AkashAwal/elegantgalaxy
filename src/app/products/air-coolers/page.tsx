@@ -73,7 +73,7 @@ export default async function AirCoolersPage({
                     background: bg,
                     padding: "28px 24px 20px",
                     display: "flex", justifyContent: "center", alignItems: "center",
-                    minHeight: 220,
+                    aspectRatio: "16 / 9",
                   }}>
                     <CoolerIllustration model={models[0]} />
                   </div>
