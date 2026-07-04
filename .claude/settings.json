@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npm ls *)",
+      "Bash(where.exe chrome.exe)",
+      "Bash(where.exe msedge.exe)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application//**)",
+      "Read(//c/Program Files/Microsoft/Edge/**)",
+      "Bash(npm install *)",
+      "Bash(cp \"C:\\\\Users\\\\akash\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-akash-OneDrive-Documents-GitHub-elegantgalaxy\\\\8fdff14b-05ce-4c74-858d-3982b5ade4d4\\\\scratchpad\\\\verify-form.js\" \"c:\\\\Users\\\\akash\\\\OneDrive\\\\Documents\\\\GitHub\\\\elegantgalaxy\\\\.verify-form.tmp.js\")",
+      "Bash(node .verify-form.tmp.js)"
+    ]
+  }
+}
