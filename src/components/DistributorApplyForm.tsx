@@ -1,13 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 const BUSINESS_TYPES = [
   "Retail Showroom",
   "Wholesale / Distribution",
   "Online Reseller",
   "Other",
+];
+
+const INDIA_STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
+  "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
+  "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
+  "West Bengal", "Andaman and Nicobar Islands", "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir",
+  "Ladakh", "Lakshadweep", "Puducherry",
+];
+
+const TERMS_CLAUSES = [
+  "All disputes shall be referred to a sole Arbitrator appointed by Elegant Galaxy Pvt. Ltd., under the Arbitration and Conciliation Act 1996 (as amended). Place of arbitration: Noida. The decision is final and binding on both parties.",
+  "Any change in the constitution of the firm/company must be communicated in writing within 7 days.",
+  "Credit limits are granted solely at the discretion of the company; otherwise business is on a cash-and-carry basis.",
+  "Products must not be sold above the printed MRP, and MRP labels must not be tampered with.",
+  "If the firm/company defaults in payment, all proprietors/partners are personally liable to pay the same.",
+  "Products are delivered to the Dealer/Distributor's registered warehouse per the Purchase Order. The Dealer/Distributor should insure their warehouse — damage from fire, accident, or natural calamity is on their account.",
+  "Transportation of product to a Sub Dealer destination is the Distributor's responsibility, in case of sub-distributorship.",
+  "All information provided in this application is true and correct.",
 ];
 
 function inputStyle(hasError: boolean, focused: boolean): React.CSSProperties {
@@ -34,7 +56,8 @@ function isGibberish(str: string): boolean {
 
 const INITIAL_FORM = {
   name: "", businessName: "", businessType: "", email: "", phone: "",
-  location: "", message: "",
+  location: "", state: "", companyAddress: "",
+  ownerDesignation: "", gstNo: "", panNo: "", brandsText: "",
 };
 
 export default function DistributorApplyForm() {
@@ -43,6 +66,10 @@ export default function DistributorApplyForm() {
   const [focused, setFocused]         = useState<Record<string, boolean>>({});
   const [status, setStatus]           = useState<"idle" | "loading" | "success" | "error">("idle");
   const [serverError, setServerError] = useState("");
+  const [termsOpen, setTermsOpen]     = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [termsError, setTermsError]   = useState("");
+  const phoneRef = useRef<HTMLInputElement>(null);
 
   const set = useCallback((field: string, value: string) => {
     setForm(f => ({ ...f, [field]: value }));
@@ -51,6 +78,14 @@ export default function DistributorApplyForm() {
 
   const focus = (f: string) => setFocused(p => ({ ...p, [f]: true  }));
   const blur  = (f: string) => setFocused(p => ({ ...p, [f]: false }));
+
+  function handlePhoneBlur() {
+    blur("phone");
+    const digits = form.phone.replace(/\D/g, "");
+    if (digits.length === 10 && !/^(\d)\1{9}$/.test(digits)) return;
+    setErrors(e => ({ ...e, phone: "Enter A Valid Mobile No." }));
+    window.setTimeout(() => phoneRef.current?.focus(), 0);
+  }
 
   function validate(): boolean {
     const errs: Record<string, string> = {};
@@ -70,20 +105,49 @@ export default function DistributorApplyForm() {
     const email = form.email.trim();
     if (!email) errs.email = "Email is required.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errs.email = "Please enter a valid email address.";
+    else {
+      const domainLabel  = email.slice(email.lastIndexOf("@") + 1).split(".")[0];
+      const domainLetters = domainLabel.replace(/[^a-z]/gi, "");
+      if (domainLetters.length >= 2 && isGibberish(domainLabel))
+        errs.email = "Please enter a valid email domain.";
+    }
 
     const digits = form.phone.replace(/\D/g, "");
-    if (!form.phone) errs.phone = "Phone number is required.";
-    else if (digits.length !== 10) errs.phone = "Must be exactly 10 digits.";
-    else if (/^(\d)\1{9}$/.test(digits)) errs.phone = "Please enter a valid phone number.";
+    if (!form.phone) errs.phone = "Enter A Valid Mobile No.";
+    else if (digits.length !== 10) errs.phone = "Enter A Valid Mobile No.";
+    else if (/^(\d)\1{9}$/.test(digits)) errs.phone = "Enter A Valid Mobile No.";
 
     if (!form.location.trim() || form.location.trim().length < 2)
       errs.location = "Please enter your city or region.";
 
-    if (!form.message.trim() || form.message.trim().length < 5)
-      errs.message = "Tell us a bit about your business.";
+    if (!form.state)
+      errs.state = "Please select your state.";
+
+    if (!form.companyAddress.trim() || form.companyAddress.trim().length < 5)
+      errs.companyAddress = "Please enter your company's registered address.";
+
+    if (!form.ownerDesignation.trim())
+      errs.ownerDesignation = "Please enter your designation (e.g. Proprietor, Partner, Director).";
+
+    const gst = form.gstNo.trim();
+    if (!gst) errs.gstNo = "GST number is required.";
+    else if (!/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}Z[A-Z\d]{1}$/i.test(gst))
+      errs.gstNo = "Please enter a valid 15-character GST number.";
+
+    const pan = form.panNo.trim();
+    if (!pan) errs.panNo = "PAN number is required.";
+    else if (!/^[A-Z]{5}\d{4}[A-Z]{1}$/i.test(pan))
+      errs.panNo = "Please enter a valid 10-character PAN number.";
+
+    if (!form.brandsText.trim())
+      errs.brandsText = "Please list the brands/products you deal in.";
 
     setErrors(errs);
-    return Object.keys(errs).length === 0;
+
+    const hasTerms = agreedToTerms;
+    setTermsError(hasTerms ? "" : "You must agree to the Distributor Terms & Conditions.");
+
+    return Object.keys(errs).length === 0 && hasTerms;
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -94,7 +158,7 @@ export default function DistributorApplyForm() {
     try {
       const res  = await fetch("/api/contact", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, countryCode: "+91" }),
+        body: JSON.stringify({ ...form, countryCode: "+91", agreedToTerms }),
       });
       const data = await res.json();
       if (!res.ok) { setServerError(data.error || "Something went wrong."); setStatus("error"); }
@@ -206,10 +270,11 @@ export default function DistributorApplyForm() {
                   +91
                 </span>
                 <input
+                  ref={phoneRef}
                   type="tel" placeholder="9876543210"
                   value={form.phone}
                   onChange={e => set("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
-                  onFocus={() => focus("phone")} onBlur={() => blur("phone")}
+                  onFocus={() => focus("phone")} onBlur={handlePhoneBlur}
                   style={{ ...inputStyle(!!errors.phone, !!focused.phone), borderRadius: "0 9px 9px 0" }}
                   inputMode="numeric" autoComplete="tel-national" maxLength={10}
                 />
@@ -251,19 +316,137 @@ export default function DistributorApplyForm() {
             </div>
           </div>
 
-          {/* Message */}
+          {/* Row 4: State + Owner Designation */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
+                State <span style={{ color: "#ef4444" }}>*</span>
+              </label>
+              <select
+                value={form.state}
+                onChange={e => set("state", e.target.value)}
+                onFocus={() => focus("state")} onBlur={() => blur("state")}
+                style={{ ...inputStyle(!!errors.state, !!focused.state), color: form.state ? "#1d1d1f" : "#6e6e73" }}
+              >
+                <option value="" disabled>Select one</option>
+                {INDIA_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <FieldError msg={errors.state} />
+            </div>
+            <div>
+              <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
+                Owner Designation <span style={{ color: "#ef4444" }}>*</span>
+              </label>
+              <input
+                type="text" placeholder="Proprietor / Partner / Director"
+                value={form.ownerDesignation}
+                onChange={e => set("ownerDesignation", e.target.value)}
+                onFocus={() => focus("ownerDesignation")} onBlur={() => blur("ownerDesignation")}
+                style={inputStyle(!!errors.ownerDesignation, !!focused.ownerDesignation)}
+              />
+              <FieldError msg={errors.ownerDesignation} />
+            </div>
+          </div>
+
+          {/* Row 5: Company Address */}
           <div>
             <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
-              Tell us about your business <span style={{ color: "#ef4444" }}>*</span>
+              Company Address <span style={{ color: "#ef4444" }}>*</span>
             </label>
             <textarea
-              placeholder="Current retail experience, showroom size, products you'd like to stock..."
-              value={form.message} rows={4}
-              onChange={e => set("message", e.target.value)}
-              onFocus={() => focus("message")} onBlur={() => blur("message")}
-              style={{ ...inputStyle(!!errors.message, !!focused.message), resize: "vertical", lineHeight: 1.6, minHeight: 110 }}
+              placeholder="Registered business address"
+              value={form.companyAddress} rows={2}
+              onChange={e => set("companyAddress", e.target.value)}
+              onFocus={() => focus("companyAddress")} onBlur={() => blur("companyAddress")}
+              style={{ ...inputStyle(!!errors.companyAddress, !!focused.companyAddress), resize: "vertical", lineHeight: 1.6 }}
             />
-            <FieldError msg={errors.message} />
+            <FieldError msg={errors.companyAddress} />
+          </div>
+
+          {/* Row 6: GST No + PAN No */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
+                GST No. <span style={{ color: "#ef4444" }}>*</span>
+              </label>
+              <input
+                type="text" placeholder="22AAAAA0000A1Z5"
+                value={form.gstNo}
+                onChange={e => set("gstNo", e.target.value.toUpperCase())}
+                onFocus={() => focus("gstNo")} onBlur={() => blur("gstNo")}
+                style={inputStyle(!!errors.gstNo, !!focused.gstNo)}
+                maxLength={15}
+              />
+              <FieldError msg={errors.gstNo} />
+            </div>
+            <div>
+              <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
+                PAN No. <span style={{ color: "#ef4444" }}>*</span>
+              </label>
+              <input
+                type="text" placeholder="AAAAA0000A"
+                value={form.panNo}
+                onChange={e => set("panNo", e.target.value.toUpperCase())}
+                onFocus={() => focus("panNo")} onBlur={() => blur("panNo")}
+                style={inputStyle(!!errors.panNo, !!focused.panNo)}
+                maxLength={10}
+              />
+              <FieldError msg={errors.panNo} />
+            </div>
+          </div>
+
+          {/* Brands dealt in */}
+          <div>
+            <label style={{ display: "block", fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", marginBottom: 6 }}>
+              Brands You Currently Deal In <span style={{ color: "#ef4444" }}>*</span>
+            </label>
+            <textarea
+              placeholder="e.g. Samsung LED TVs, LG Washing Machines, Voltas Air Coolers..."
+              value={form.brandsText} rows={4}
+              onChange={e => set("brandsText", e.target.value)}
+              onFocus={() => focus("brandsText")} onBlur={() => blur("brandsText")}
+              style={{ ...inputStyle(!!errors.brandsText, !!focused.brandsText), resize: "vertical", lineHeight: 1.6, minHeight: 110 }}
+            />
+            <FieldError msg={errors.brandsText} />
+          </div>
+
+          {/* Terms & Conditions */}
+          <div>
+            <div style={{
+              background: "#f9f9fb", border: "1px solid #e8e8ed", borderRadius: 12,
+              padding: "14px 16px",
+            }}>
+              <p style={{ fontSize: 12.5, color: "#6e6e73", lineHeight: 1.6, margin: 0 }}>
+                By applying, you agree to standard distributor terms covering arbitration (Noida),
+                MRP compliance, credit at the company&apos;s discretion, warehouse delivery, and
+                liability for firm defaults.{" "}
+                <button
+                  type="button" onClick={() => setTermsOpen(o => !o)}
+                  style={{
+                    background: "none", border: "none", padding: 0, color: "#0071e3",
+                    fontSize: 12.5, fontWeight: 600, cursor: "pointer", textDecoration: "underline",
+                  }}
+                >
+                  {termsOpen ? "Hide full terms" : "View full terms"}
+                </button>
+              </p>
+              {termsOpen && (
+                <ol style={{ fontSize: 12, color: "#6e6e73", lineHeight: 1.7, marginTop: 10, paddingLeft: 18 }}>
+                  {TERMS_CLAUSES.map((c, i) => <li key={i} style={{ marginBottom: 4 }}>{c}</li>)}
+                </ol>
+              )}
+              <label style={{ display: "flex", alignItems: "flex-start", gap: 8, marginTop: 12, cursor: "pointer" }}>
+                <input
+                  type="checkbox" checked={agreedToTerms}
+                  onChange={e => { setAgreedToTerms(e.target.checked); if (e.target.checked) setTermsError(""); }}
+                  style={{ marginTop: 2 }}
+                />
+                <span style={{ fontSize: 12.5, color: "#1d1d1f", fontWeight: 500 }}>
+                  I have read and agree to the Distributor Terms &amp; Conditions.
+                </span>
+              </label>
+            </div>
+            <FieldError msg={termsError} />
           </div>
 
           {/* Server error */}

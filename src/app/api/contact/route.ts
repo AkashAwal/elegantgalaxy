@@ -51,8 +51,10 @@ async function hasMX(domain: string): Promise<boolean> {
 // ── Route handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, countryCode, phone, location, message, businessName, businessType } =
-      (await req.json()) as Record<string, string>;
+    const {
+      name, email, countryCode, phone, location, message, businessName, businessType,
+      state, companyAddress, ownerDesignation, gstNo, panNo, brandsText, agreedToTerms,
+    } = (await req.json()) as Record<string, string> & { agreedToTerms?: boolean };
 
     // ── Name ──────────────────────────────────────────────────────────────────
     const cleanName = (name ?? "").trim();
@@ -97,16 +99,43 @@ export async function POST(req: NextRequest) {
     if (cleanLocation.length < 2)
       return NextResponse.json({ error: "Please enter your location." }, { status: 400 });
 
-    // ── Message ───────────────────────────────────────────────────────────────
-    const cleanMessage = (message ?? "").trim();
-    if (cleanMessage.length < 5)
-      return NextResponse.json({ error: "Please enter a message." }, { status: 400 });
-
-    // ── Send to Telegram ──────────────────────────────────────────────────────
-    const cc = (countryCode ?? "+91").trim();
     const cleanBusinessName = (businessName ?? "").trim();
     const cleanBusinessType = (businessType ?? "").trim();
     const isDistributor     = !!cleanBusinessName || !!cleanBusinessType;
+
+    // ── Message ───────────────────────────────────────────────────────────────
+    // Only the general enquiry form (not the distributor form) collects a message.
+    const cleanMessage = (message ?? "").trim();
+    if (!isDistributor && cleanMessage.length < 5)
+      return NextResponse.json({ error: "Please enter a message." }, { status: 400 });
+
+    // ── Distributor-only fields ──────────────────────────────────────────────
+    const cleanState            = (state ?? "").trim();
+    const cleanCompanyAddress   = (companyAddress ?? "").trim();
+    const cleanOwnerDesignation = (ownerDesignation ?? "").trim();
+    const cleanGstNo            = (gstNo ?? "").trim().toUpperCase();
+    const cleanPanNo            = (panNo ?? "").trim().toUpperCase();
+    const cleanBrandsText       = (brandsText ?? "").trim();
+
+    if (isDistributor) {
+      if (!cleanState)
+        return NextResponse.json({ error: "Please select your state." }, { status: 400 });
+      if (cleanCompanyAddress.length < 5)
+        return NextResponse.json({ error: "Please enter your company's registered address." }, { status: 400 });
+      if (!cleanOwnerDesignation)
+        return NextResponse.json({ error: "Please enter your designation." }, { status: 400 });
+      if (!cleanGstNo || !/^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}Z[A-Z\d]{1}$/.test(cleanGstNo))
+        return NextResponse.json({ error: "Please enter a valid GST number." }, { status: 400 });
+      if (!cleanPanNo || !/^[A-Z]{5}\d{4}[A-Z]{1}$/.test(cleanPanNo))
+        return NextResponse.json({ error: "Please enter a valid PAN number." }, { status: 400 });
+      if (!cleanBrandsText)
+        return NextResponse.json({ error: "Please list the brands/products you deal in." }, { status: 400 });
+      if (!agreedToTerms)
+        return NextResponse.json({ error: "You must agree to the Distributor Terms & Conditions." }, { status: 400 });
+    }
+
+    // ── Send to Telegram ──────────────────────────────────────────────────────
+    const cc = (countryCode ?? "+91").trim();
 
     const text = [
       isDistributor ? `🏢 *New Distributor Application — Elegant Galaxy*` : `🛎️ *New Enquiry — Elegant Galaxy*`,
@@ -114,12 +143,17 @@ export async function POST(req: NextRequest) {
       `👤 *Name:* ${cleanName}`,
       ...(cleanBusinessName ? [`🏬 *Business:* ${cleanBusinessName}`] : []),
       ...(cleanBusinessType ? [`🗂️ *Business Type:* ${cleanBusinessType}`] : []),
+      ...(cleanOwnerDesignation ? [`🪪 *Designation:* ${cleanOwnerDesignation}`] : []),
       `📧 *Email:* ${cleanEmail}`,
       `📱 *Phone:* ${cc} ${digits}`,
       `📍 *Location:* ${cleanLocation}`,
-      ``,
-      `💬 *Message:*`,
-      cleanMessage,
+      ...(cleanState ? [`🗺️ *State:* ${cleanState}`] : []),
+      ...(cleanCompanyAddress ? [`🏠 *Company Address:* ${cleanCompanyAddress}`] : []),
+      ...(cleanGstNo ? [`🧾 *GST No:* ${cleanGstNo}`] : []),
+      ...(cleanPanNo ? [`🪙 *PAN No:* ${cleanPanNo}`] : []),
+      ...(isDistributor ? [`✅ *Agreed to Terms:* ${agreedToTerms ? "Yes" : "No"}`] : []),
+      ...(cleanBrandsText ? [``, `📦 *Brands Dealt In:*`, cleanBrandsText] : []),
+      ...(cleanMessage ? [``, `💬 *Message:*`, cleanMessage] : []),
     ].join("\n");
 
     const tgRes = await fetch(

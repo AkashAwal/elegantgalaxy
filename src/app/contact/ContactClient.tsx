@@ -140,9 +140,9 @@ export default function ContactClient() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errs.email = "Please enter a valid email address.";
 
     const digits = form.phone.replace(/\D/g, "");
-    if (!form.phone) errs.phone = "Phone number is required.";
-    else if (digits.length !== 10) errs.phone = "Must be exactly 10 digits.";
-    else if (/^(\d)\1{9}$/.test(digits)) errs.phone = "Please enter a valid phone number.";
+    if (!form.phone) errs.phone = "ENTER A VALID NUMBER";
+    else if (digits.length !== 10) errs.phone = "ENTER A VALID NUMBER";
+    else if (/^(\d)\1{9}$/.test(digits)) errs.phone = "ENTER A VALID NUMBER";
 
     if (!form.location.trim() || form.location.trim().length < 2)
       errs.location = "Please enter your city or area.";
