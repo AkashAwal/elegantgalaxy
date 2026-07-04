@@ -6,8 +6,8 @@ export interface TvModel {
   platform:   string;
   sizes:      number[];
   resolution: Record<number, string>;
-  /** Real product photos under /public, front/left/right angles. When set, these are shown instead of the generic TV silhouette. */
-  images?: { front: string; left: string; right: string };
+  /** Real product photo under /public. When set, shown instead of the generic TV silhouette. */
+  images?: { front: string };
 }
 
 export const MODELS: TvModel[] = [
@@ -19,8 +19,6 @@ export const MODELS: TvModel[] = [
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD" },
     images: {
       front: "/images/tvs/android-front.webp",
-      left:  "/images/tvs/android-left.webp",
-      right: "/images/tvs/android-right.webp",
     },
   },
   {
@@ -31,8 +29,6 @@ export const MODELS: TvModel[] = [
     resolution: { 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 58: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
     images: {
       front: "/images/tvs/webos-4k-front.webp",
-      left:  "/images/tvs/webos-4k-left.webp",
-      right: "/images/tvs/webos-4k-right.webp",
     },
   },
   {
@@ -43,8 +39,6 @@ export const MODELS: TvModel[] = [
     resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
     images: {
       front: "/images/tvs/webos-2k-front.webp",
-      left:  "/images/tvs/webos-2k-left.webp",
-      right: "/images/tvs/webos-2k-right.webp",
     },
   },
   {
@@ -55,8 +49,6 @@ export const MODELS: TvModel[] = [
     resolution: { 32: "Full HD", 43: "4K Ultra HD", 50: "4K Ultra HD", 55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD", 100: "4K Ultra HD" },
     images: {
       front: "/images/tvs/google-front.webp",
-      left:  "/images/tvs/google-left.webp",
-      right: "/images/tvs/google-right.webp",
     },
   },
   {
@@ -65,6 +57,9 @@ export const MODELS: TvModel[] = [
     platform:   "Interactive Smart Board",
     sizes:      [65, 75, 86, 98],
     resolution: { 65: "4K Ultra HD", 75: "4K Ultra HD", 86: "4K Ultra HD", 98: "4K Ultra HD" },
+    images: {
+      front: "/images/tvs/smart-board-front.webp",
+    },
   },
   {
     id:         "distro",
@@ -72,6 +67,9 @@ export const MODELS: TvModel[] = [
     platform:   "Distro OS",
     sizes:      [32, 40, 43],
     resolution: { 32: "Full HD", 40: "Full HD", 43: "Full HD" },
+    images: {
+      front: "/images/tvs/distro-front.webp",
+    },
   },
   {
     id:         "frameless-smart",
@@ -79,6 +77,9 @@ export const MODELS: TvModel[] = [
     platform:   "Frameless Smart",
     sizes:      [24, 32, 40, 42, 43],
     resolution: { 24: "Full HD", 32: "Full HD", 40: "Full HD", 42: "Full HD", 43: "Full HD" },
+    images: {
+      front: "/images/tvs/frameless-smart-front.webp",
+    },
   },
   {
     id:         "frameless-normal",
@@ -86,6 +87,9 @@ export const MODELS: TvModel[] = [
     platform:   "Frameless Normal",
     sizes:      [24],
     resolution: { 24: "Full HD" },
+    images: {
+      front: "/images/tvs/frameless-normal-front.webp",
+    },
   },
 ];
 

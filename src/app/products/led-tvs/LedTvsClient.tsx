@@ -43,30 +43,13 @@ export function TvIllustration({ model }: { model: TvModel }) {
   return <TvIcon />;
 }
 
-// Card version: cycles front → left → right → front while hovered, matching
-// the site's other hover-slideshow product tiles.
 function TvCardIllustration({ model }: { model: TvModel }) {
-  const [idx, setIdx] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   if (!model.images) return <TvIcon />;
-  const angles = [model.images.front, model.images.left, model.images.right];
-
-  const onEnter = () => {
-    timerRef.current = setInterval(() => {
-      setIdx((prev) => (prev + 1) % angles.length);
-    }, 700);
-  };
-
-  const onLeave = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    setIdx(0);
-  };
 
   return (
-    <div onMouseEnter={onEnter} onMouseLeave={onLeave} style={{ width: "100%", maxWidth: 360 }}>
+    <div style={{ width: "100%", maxWidth: 360 }}>
       <Image
-        src={angles[idx]}
+        src={model.images.front}
         alt={`${model.platform} TV`}
         width={400}
         height={283}

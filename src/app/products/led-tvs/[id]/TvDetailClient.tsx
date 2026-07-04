@@ -11,7 +11,6 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
   const [size, setSize] = useState<number>(
     initialSize && model.sizes.includes(initialSize) ? initialSize : model.sizes[0]
   );
-  const [angle, setAngle] = useState<"front" | "left" | "right">("front");
   const [showEnquire, setShowEnquire] = useState(false);
 
   const displayName = tvName(model, size);
@@ -52,8 +51,8 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
             }}>
               {model.images ? (
                 <Image
-                  src={model.images[angle]}
-                  alt={`${model.platform} TV — ${angle} view`}
+                  src={model.images.front}
+                  alt={`${model.platform} TV`}
                   width={500}
                   height={354}
                   style={{ width: "100%", maxWidth: 440, height: "auto" }}
@@ -63,32 +62,6 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
                 <TvIcon />
               )}
             </div>
-
-            {model.images && (
-              <div style={{ display: "flex", gap: 10 }}>
-                {(["front", "left", "right"] as const).map((a) => (
-                  <button
-                    key={a}
-                    onClick={() => setAngle(a)}
-                    aria-pressed={angle === a}
-                    style={{
-                      flex: 1,
-                      padding: "10px 0",
-                      borderRadius: 10,
-                      border: angle === a ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.1)",
-                      background: "#fff",
-                      cursor: "pointer",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: angle === a ? "#0071e3" : "#6e6e73",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {a}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Details */}
