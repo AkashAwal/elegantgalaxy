@@ -8,15 +8,15 @@ import { Plus, Minus } from "lucide-react";
 const FAQS = [
   {
     q: "What warranty do Elegant Galaxy products come with?",
-    a: "All Elegant Galaxy products carry a comprehensive 5-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available for additional peace of mind.",
+    a: "All Elegant Galaxy products carry a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available for additional peace of mind.",
   },
   {
     q: "Do you offer no-cost EMI?",
     a: "Yes. We offer no-cost EMI across all major banks and credit cards — split your purchase into 3, 6, 9, or 12 monthly instalments with zero extra cost.",
   },
   {
-    q: "How do I find a service centre near me?",
-    a: "We have 200+ authorised service centres across India. Visit our Service Centres page, enter your city or pin code, and find the one closest to you.",
+    q: "How do I get my product repaired?",
+    a: "All repairs are handled in-house by our own factory technicians. Contact the retailer you bought from, or reach our customer care team directly, and we'll walk you through the process.",
   },
   {
     q: "What is your return policy?",

@@ -128,13 +128,6 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
             >
               <Phone size={14} /> Or call us at {PHONE_DISPLAY}
             </a>
-
-            <Link
-              href={`/products/led-tvs/compare`}
-              style={{ fontSize: 14, color: "#0071e3", fontWeight: 500 }}
-            >
-              Compare with other LED TVs →
-            </Link>
           </div>
         </div>
       </section>

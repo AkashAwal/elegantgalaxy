@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title:       "About Elegant Galaxy — Home Appliances Since 2012",
   description:
-    "Elegant Galaxy has been making home appliances for Indian households since 2012. LED TVs, washing machines, air coolers, and infrared cooktops — sold in 500+ cities and serviced through 200+ centres across India.",
+    "Elegant Galaxy has been making home appliances for Indian households since 2012. LED TVs, washing machines, air coolers, and infrared cooktops — sold in 500+ cities, with every repair handled in-house at our own factory.",
   openGraph: {
     title:       "About Elegant Galaxy",
     description: "Built for Indian homes since 2012. LED TVs, washing machines, air coolers, and infrared cooktops.",
@@ -65,7 +65,7 @@ const STATS = [
   { value: "2012", label: "Year founded",          sub: "Over 12 years in the market" },
   { value: "2M+",  label: "Appliances in homes",   sub: "Across the country" },
   { value: "500+", label: "Cities served",          sub: "Pan-India distribution" },
-  { value: "200+", label: "Service centres",        sub: "24-hour response commitment" },
+  { value: "In-House", label: "Factory Repairs",    sub: "Every repair, done by our own technicians" },
 ];
 
 const PRODUCTS = [
@@ -113,7 +113,7 @@ const PRINCIPLES = [
   {
     number: "03",
     title:  "Service you can count on",
-    body:   "200+ service centres. 24-hour response commitment. Customer care available Mon–Sat, 9 AM – 6 PM IST. We believe the relationship with a customer doesn't end at the point of sale — it starts there.",
+    body:   "Every repair is handled in-house by our own factory technicians — no third-party centres. Reach us through the retailer you bought from, or call our customer care team directly, Mon–Sat, 9 AM – 6 PM IST. We believe the relationship with a customer doesn't end at the point of sale — it starts there.",
   },
 ];
 
@@ -196,7 +196,7 @@ export default function AboutPage() {
                 Each new product category was entered only after we identified a consistent gap between what Indian consumers needed and what the market was delivering. Our product decisions are driven by service records, customer feedback, and field research conducted across Indian households — not global trend reports. When we added infrared cooktops, it was because customers kept asking us how to cook safely when gas wasn't available. When we expanded our washing machine range, it was because our service data showed which features actually got used and which didn't.
               </p>
               <p style={{ fontSize: 17, lineHeight: 1.8, color: "#3a3a3c" }}>
-                Today, Elegant Galaxy appliances are used in over two million homes across more than 500 cities in India. Our distribution network reaches Tier 1, Tier 2, and Tier 3 cities alike, and our 200+ service centres operate with a 24-hour response commitment. The founding team remains involved in product review. That commitment to staying close to the product hasn't changed since the first television shipped in 2012.
+                Today, Elegant Galaxy appliances are used in over two million homes across more than 500 cities in India. Our distribution network reaches Tier 1, Tier 2, and Tier 3 cities alike, and every repair is still handled in-house by our own factory technicians rather than outsourced to third parties. The founding team remains involved in product review. That commitment to staying close to the product hasn't changed since the first television shipped in 2012.
               </p>
             </div>
 
@@ -395,10 +395,10 @@ export default function AboutPage() {
                 marginBottom:  12,
                 lineHeight:    1.2,
               }}>
-                Pan-India reach. Neighbourhood-level service.
+                Pan-India reach. Factory-direct service.
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.75, color: "#6e6e73" }}>
-                Elegant Galaxy products are available through authorised distributors and dealer networks in over 500 cities — from metros to Tier 3 towns. Our service centres are staffed by trained technicians and carry parts inventory for every product currently in production, plus products up to 8 years old. If you need a repair or a replacement part, we have it.
+                Elegant Galaxy products are available through authorised distributors and dealer networks in over 500 cities — from metros to Tier 3 towns. Every repair, however, is handled in-house at our own factory by our trained technicians, with parts inventory kept for every product currently in production, plus products up to 8 years old. Contact the retailer you bought from, or reach our customer care team directly, and we'll take it from there.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>

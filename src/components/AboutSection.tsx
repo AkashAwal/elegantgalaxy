@@ -81,7 +81,7 @@ export default function AboutSection() {
             { value: "12+",  label: "Years of engineering excellence" },
             { value: "2M+",  label: "Appliances in Indian homes"      },
             { value: "500+", label: "Cities served pan-India"         },
-            { value: "200+", label: "Authorised service centres"      },
+            { value: "In-House", label: "Factory-repaired products"    },
           ].map(({ value, label }, i) => (
             <div
               key={i}

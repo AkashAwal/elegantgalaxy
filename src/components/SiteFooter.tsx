@@ -64,8 +64,6 @@ const SERVICE_COL = {
   heading: "Service",
   links: [
     { label: "Warranty",         href: "/support/warranty"          },
-    { label: "Service Centres",  href: "/support/service-centres"   },
-    { label: "Financing",        href: "/distributors/financing"    },
   ],
 };
 

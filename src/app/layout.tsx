@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s — Elegant Galaxy",
   },
   description:
-    "Elegant Galaxy makes LED TVs, washing machines, air coolers, and infrared cooktops for Indian households. Sold in 500+ cities, serviced in 200+ centres across India.",
+    "Elegant Galaxy makes LED TVs, washing machines, air coolers, and infrared cooktops for Indian households. Sold in 500+ cities, with every repair handled in-house at our own factory.",
 
   keywords: [
     "home appliances India",

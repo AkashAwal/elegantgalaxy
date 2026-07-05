@@ -29,7 +29,7 @@ const CATEGORIES = [
     faqs: [
       {
         q: "Do you offer no-cost EMI?",
-        a: "Yes. Split your purchase into 3, 6, 9, or 12 monthly instalments across all major banks and credit cards at zero extra cost. See our Financing page for details.",
+        a: "Yes. Split your purchase into 3, 6, 9, or 12 monthly instalments across all major banks and credit cards at zero extra cost.",
       },
       {
         q: "How long does delivery take?",
@@ -50,11 +50,11 @@ const CATEGORIES = [
     faqs: [
       {
         q: "What warranty do Elegant Galaxy products come with?",
-        a: "All Elegant Galaxy products carry a comprehensive 5-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available.",
+        a: "All Elegant Galaxy products carry a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available.",
       },
       {
-        q: "How do I find a service centre near me?",
-        a: "We have 200+ authorised service centres across India with a 24-hour response commitment. Visit our Service Centres page and enter your city or pin code.",
+        q: "How do I get my product repaired?",
+        a: "All repairs are handled in-house by our own factory technicians. Contact the retailer you bought from, or reach our customer care team directly, and we'll walk you through the process.",
       },
       {
         q: "How do I register my warranty?",

@@ -4,14 +4,14 @@ import { Shield } from "lucide-react";
 
 export const metadata: Metadata = {
   title:       "Warranty",
-  description: "Details on Elegant Galaxy's 5-year warranty coverage for LED TVs, washing machines, air coolers, and infrared cooktops.",
+  description: "Details on Elegant Galaxy's 1-year warranty coverage for LED TVs, washing machines, air coolers, and infrared cooktops.",
 };
 
 const COVERAGE = [
-  { category: "LED TVs",             term: "5 years", note: "Covers panel, mainboard, and power supply defects" },
-  { category: "Washing Machines",    term: "5 years", note: "Covers motor and drum defects; 2 years on electronics" },
-  { category: "Air Coolers",         term: "2 years", note: "Covers motor, pump, and body defects" },
-  { category: "Infrared Cooktops",   term: "2 years", note: "Covers heating element and control panel defects" },
+  { category: "LED TVs",             term: "1 year", note: "Covers panel, mainboard, and power supply defects" },
+  { category: "Washing Machines",    term: "1 year", note: "Covers motor, drum, and electronics defects" },
+  { category: "Air Coolers",         term: "1 year", note: "Covers motor, pump, and body defects" },
+  { category: "Infrared Cooktops",   term: "1 year", note: "Covers heating element and control panel defects" },
 ];
 
 const EXCLUSIONS = [
@@ -39,7 +39,7 @@ export default function WarrantyPage() {
           </h1>
           <p style={{ fontSize: 16, color: "rgba(245,245,247,0.55)", lineHeight: 1.65, maxWidth: 560 }}>
             All Elegant Galaxy appliances come with a manufacturer warranty covering manufacturing
-            defects in materials and workmanship, honoured through our 200+ nationwide service centres.
+            defects in materials and workmanship, honoured in-house by our own factory technicians.
           </p>
         </div>
       </section>
@@ -93,15 +93,9 @@ export default function WarrantyPage() {
       {/* CTA */}
       <section className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 72, textAlign: "center" }}>
         <p style={{ fontSize: 15, color: "#6e6e73", marginBottom: 20 }}>
-          Need to file a warranty claim or find your nearest service centre?
+          Need to file a warranty claim or get a repair started?
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link
-            href="/support/service-centres"
-            style={{ display: "inline-flex", alignItems: "center", height: 46, padding: "0 28px", borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#1d1d1f", border: "1.5px solid rgba(0,0,0,0.15)", textDecoration: "none" }}
-          >
-            Find a Service Centre
-          </Link>
           <Link
             href="/contact"
             style={{ display: "inline-flex", alignItems: "center", height: 46, padding: "0 28px", borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#fff", background: "#0071e3", textDecoration: "none" }}

@@ -113,11 +113,11 @@ type DiffCard = {
 };
 
 const CARDS: DiffCard[] = [
-  { icon: <IconWarranty />,  title: "5-Year Warranty",       desc: "Every product backed by our industry-leading 5-year warranty."          },
+  { icon: <IconWarranty />,  title: "1-Year Warranty",       desc: "Every product backed by our industry-leading 1-year warranty."          },
   { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power." },
   { icon: <IconEMI />,       title: "No-Cost EMI",            desc: "Split your purchase into easy monthly instalments at zero extra cost."    },
   { icon: <IconInstall />,   title: "Free Installation",      desc: "Expert technicians set everything up — free of charge, at your doorstep." },
-  { icon: <IconService />,   title: "200+ Service Centres",   desc: "Nationwide network so expert help is always close to home."              },
+  { icon: <IconService />,   title: "Factory Repairs",        desc: "Every repair handled in-house by our own technicians — never outsourced." },
   { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards."         },
   { icon: <IconSupport />,   title: "24 / 7 Support",         desc: "Our customer care team is available around the clock, every day."        },
   { icon: <IconReturns />,   title: "30-Day Returns",         desc: "Not happy? Return any product within 30 days, no questions asked."       },

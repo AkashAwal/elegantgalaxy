@@ -21,7 +21,7 @@ const VIEWS: [ShowcaseView, ShowcaseView, ShowcaseView] = [
   {
     src:   "/tv1-right.webp",
     title: "Every Detail Counts.",
-    desc:  "Aerospace-grade aluminium finish, backed by a 3-year manufacturer warranty.",
+    desc:  "Aerospace-grade aluminium finish, backed by a 1-year manufacturer warranty.",
     tag:   "DETAIL VIEW",
     bg:    "#090d10",
     glow:  "rgba(52, 211, 153, 0.10)",

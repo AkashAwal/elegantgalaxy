@@ -39,16 +39,13 @@ const NAV: NavItem[] = [
           { label: "WebOS 2K",             href: "/products/led-tvs/webos-2k" },
           { label: "Google TV",            href: "/products/led-tvs/google" },
         ],
-        links: [
-          { label: "Compare LED TVs",      href: "/products/led-tvs/compare" },
-        ],
+        links: [],
       },
       {
         heading: "Shop LED TVs",
         links: [
           { label: "Shop LED TVs",         href: "/products/led-tvs" },
           { label: "TV Accessories",       href: "/products/led-tvs/accessories" },
-          { label: "Financing",            href: "/distributors/financing" },
         ],
       },
       {
@@ -56,7 +53,7 @@ const NAV: NavItem[] = [
         links: [
           { label: "TV Support",           href: "/support?category=led-tvs" },
           { label: "Warranty",             href: "/support/warranty" },
-          { label: "Service Centres",      href: "/support/service-centres" },
+          { label: "Contact Us",      href: "/contact" },
           { label: "Energy Ratings",       href: "/products/led-tvs/energy" },
         ],
       },
@@ -85,7 +82,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Washing Machines",        href: "/products/washing-machines" },
           { label: "Accessories",                  href: "/products/washing-machines/accessories" },
-          { label: "Financing",                    href: "/distributors/financing" },
         ],
       },
       {
@@ -93,7 +89,7 @@ const NAV: NavItem[] = [
         links: [
           { label: "Washing Machine Support",      href: "/support?category=washing-machines" },
           { label: "Warranty",                     href: "/support/warranty" },
-          { label: "Service Centres",              href: "/support/service-centres" },
+          { label: "Contact Us",              href: "/contact" },
           { label: "Energy Ratings",               href: "/products/washing-machines/energy" },
         ],
       },
@@ -121,7 +117,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Air Coolers",        href: "/products/air-coolers" },
           { label: "Accessories",             href: "/products/air-coolers/accessories" },
-          { label: "Financing",               href: "/distributors/financing" },
         ],
       },
       {
@@ -129,7 +124,7 @@ const NAV: NavItem[] = [
         links: [
           { label: "Air Cooler Support",      href: "/support?category=air-coolers" },
           { label: "Warranty",                href: "/support/warranty" },
-          { label: "Service Centres",         href: "/support/service-centres" },
+          { label: "Contact Us",         href: "/contact" },
           { label: "Energy Ratings",          href: "/products/air-coolers/energy" },
         ],
       },
@@ -158,7 +153,6 @@ const NAV: NavItem[] = [
         links: [
           { label: "Shop Cooktops",           href: "/products/infrared-cooktops" },
           { label: "Accessories",             href: "/products/infrared-cooktops/accessories" },
-          { label: "Financing",               href: "/distributors/financing" },
         ],
       },
       {
@@ -166,7 +160,7 @@ const NAV: NavItem[] = [
         links: [
           { label: "Cooktop Support",         href: "/support?category=infrared-cooktops" },
           { label: "Warranty",                href: "/support/warranty" },
-          { label: "Service Centres",         href: "/support/service-centres" },
+          { label: "Contact Us",         href: "/contact" },
           { label: "Safety Certifications",   href: "/products/infrared-cooktops/safety" },
         ],
       },
