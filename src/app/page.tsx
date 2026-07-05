@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import ProductShelves from "@/components/ProductShelves";
 import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
@@ -198,7 +198,7 @@ export default function Home() {
       <ProductShelves />
 
       {/* ── Testimonials — social proof right after browsing products ──── */}
-      <TestimonialsSection />
+      <GoogleReviewsSection />
 
       {/* ── About ─────────────────────────────────────────────────────── */}
       <AboutSection />

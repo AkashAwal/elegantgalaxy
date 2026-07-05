@@ -99,7 +99,7 @@ export default function AboutSection() {
                 i === 2      ? "lg:pl-8" : "",
                 i >= 2               ? "border-t border-t-white/[0.08] pt-8" : "",
                 i >= 1 && i <= 3     ? "lg:border-l lg:border-l-white/[0.08]" : "",
-                i >= 2               ? "lg:border-t-0"                     : "",
+                i >= 2               ? "lg:border-t-0 lg:pt-0"              : "",
               ].filter(Boolean).join(" ")}
             >
               <p

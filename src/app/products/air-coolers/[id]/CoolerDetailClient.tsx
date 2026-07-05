@@ -100,7 +100,7 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
               <Phone size={14} /> Or call us at {PHONE_DISPLAY}
             </a>
 
-            <Link href="/products/air-coolers/compare" style={{ fontSize: 14, color: "#0071e3", fontWeight: 500 }}>
+            <Link href="/products/air-coolers" style={{ fontSize: 14, color: "#0071e3", fontWeight: 500 }}>
               Compare with other air coolers →
             </Link>
           </div>

@@ -77,9 +77,7 @@ const NAV: NavItem[] = [
           { label: "Top Load",                     href: "/products/washing-machines?type=top-load" },
           { label: "Semi-Automatic",               href: "/products/washing-machines?type=semi-automatic" },
         ],
-        links: [
-          { label: "Compare Washing Machines",     href: "/products/washing-machines/compare" },
-        ],
+        links: [],
       },
       {
         heading: "Shop Washing Machines",
@@ -112,9 +110,7 @@ const NAV: NavItem[] = [
           { label: "Commercial Coolers",      href: "/products/air-coolers?type=commercial" },
           { label: "Desert Coolers",          href: "/products/air-coolers?type=desert" },
         ],
-        links: [
-          { label: "Compare Air Coolers",     href: "/products/air-coolers/compare" },
-        ],
+        links: [],
       },
       {
         heading: "Shop Air Coolers",
@@ -148,7 +144,6 @@ const NAV: NavItem[] = [
           { label: "Double Burner",           href: "/products/infrared-cooktops?burners=double-burner" },
         ],
         links: [
-          { label: "Compare Cooktops",        href: "/products/infrared-cooktops/compare" },
           { label: "Why Infrared?",           href: "/products/infrared-cooktops/why-infrared" },
         ],
       },

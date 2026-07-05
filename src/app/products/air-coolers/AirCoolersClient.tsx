@@ -250,52 +250,56 @@ function CompareBar({
   onCompare: () => void;
 }) {
   return (
-    <div style={{
-      padding:      "12px 18px",
-      background:   "#fff",
-      border:       "1.5px solid #0071e3",
-      borderRadius: 14,
-      display:      "flex",
-      alignItems:   "center",
-      gap:          14,
-      boxShadow:    "0 4px 16px rgba(0,113,227,0.1)",
-      flexWrap:     "wrap",
-    }}>
-      <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em" }}>
-        COMPARING
-      </span>
+    <div
+      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-3.5"
+      style={{
+        padding:      "14px 16px",
+        background:   "#fff",
+        border:       "1.5px solid #0071e3",
+        borderRadius: 14,
+        boxShadow:    "0 4px 16px rgba(0,113,227,0.1)",
+      }}
+    >
+      <div className="flex items-start sm:items-center gap-3 sm:flex-1 min-w-0">
+        <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em", paddingTop: 6 }}>
+          COMPARING
+        </span>
 
-      <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
-        {models.map((m) => (
-          <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 8px 5px 10px", background: "#eff6ff", borderRadius: 7, border: "1px solid #bfdbfe" }}>
-            <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
-              {m.name} · {m.capacity}L
+        <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
+          {models.map((m) => (
+            <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 8px 5px 10px", background: "#eff6ff", borderRadius: 7, border: "1px solid #bfdbfe" }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
+                {m.name} · {m.capacity}L
+              </span>
+              <button
+                onClick={() => onRemove(m.id)}
+                aria-label={`Remove ${m.name} from comparison`}
+                style={{ border: "none", background: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", color: "#6e6e73", lineHeight: 1 }}
+              >
+                <X size={12} strokeWidth={2.5} />
+              </button>
+            </div>
+          ))}
+          {models.length < 3 && (
+            <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
+              Add {3 - models.length} more to compare
             </span>
-            <button
-              onClick={() => onRemove(m.id)}
-              aria-label={`Remove ${m.name} from comparison`}
-              style={{ border: "none", background: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", color: "#6e6e73", lineHeight: 1 }}
-            >
-              <X size={12} strokeWidth={2.5} />
-            </button>
-          </div>
-        ))}
-        {models.length < 3 && (
-          <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
-            Add {3 - models.length} more to compare
-          </span>
-        )}
+          )}
+        </div>
       </div>
 
-      <button onClick={onClear} style={{ border: "none", background: "none", cursor: "pointer", fontSize: 12, color: "#6e6e73", fontWeight: 500, flexShrink: 0, padding: "0 4px" }}>
-        Clear
-      </button>
-      <button
-        onClick={onCompare}
-        style={{ padding: "9px 18px", borderRadius: 8, background: "#0071e3", color: "#fff", border: "none", cursor: "pointer", fontSize: 13, fontWeight: 500, flexShrink: 0, letterSpacing: "-0.01em" }}
-      >
-        Compare {models.length}
-      </button>
+      <div className="flex items-center justify-between sm:justify-end gap-3 sm:flex-shrink-0">
+        <button onClick={onClear} style={{ border: "none", background: "none", cursor: "pointer", fontSize: 12, color: "#6e6e73", fontWeight: 500, flexShrink: 0, padding: "0 4px" }}>
+          Clear
+        </button>
+        <button
+          onClick={onCompare}
+          className="flex-1 sm:flex-none"
+          style={{ padding: "9px 18px", borderRadius: 8, background: "#0071e3", color: "#fff", border: "none", cursor: "pointer", fontSize: 13, fontWeight: 500, letterSpacing: "-0.01em" }}
+        >
+          Compare {models.length}
+        </button>
+      </div>
     </div>
   );
 }

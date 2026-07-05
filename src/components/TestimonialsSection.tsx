@@ -2,42 +2,11 @@
 
 import { useRef, useEffect } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-
-// ── Testimonial data ────────────────────────────────────────────────────────────
-
-type Testimonial = {
-  quote:    string;
-  name:     string;
-  location: string;
-  product:  string;
-};
-
-const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:    "The 55\" QLED completely changed our living room. Picture quality is stunning and the smart features actually work smoothly, unlike our old TV.",
-    name:     "Priya Sharma",
-    location: "Pune, Maharashtra",
-    product:  "Elegant 55\" 4K QLED TV",
-  },
-  {
-    quote:    "Free installation was a lifesaver — the technician arrived on time and even walked us through the app setup. Great after-sales support.",
-    name:     "Rohan Mehta",
-    location: "Ahmedabad, Gujarat",
-    product:  "Elegant 8kg Top Load Washer",
-  },
-  {
-    quote:    "Bought the desert cooler for our shop and it handles the summer heat effortlessly. Runs quiet enough that customers don't even notice it.",
-    name:     "Anitha Reddy",
-    location: "Hyderabad, Telangana",
-    product:  "Elegant 80L Desert Cooler",
-  },
-];
-
-const LOOPED = [...TESTIMONIALS, ...TESTIMONIALS];
+import type { ReviewItem } from "@/lib/googleReviews";
 
 // ── Card ─────────────────────────────────────────────────────────────────────────
 
-function TestimonialCard({ t }: { t: Testimonial }) {
+function TestimonialCard({ t }: { t: ReviewItem }) {
   return (
     <div
       className="relative shrink-0 grow-0 basis-full sm:basis-[46%] lg:basis-[calc((100%-32px)/3)]"
@@ -52,11 +21,21 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         scrollSnapAlign: "start",
       }}
     >
-      {/* Stars */}
-      <div style={{ display: "flex", gap: 2, marginBottom: 16 }}>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} size={15} fill="#F5A623" color="#F5A623" />
-        ))}
+      {/* Name + stars */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 16 }}>
+        <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f" }}>
+          {t.name}
+        </p>
+        <div style={{ display: "flex", gap: 2, flexShrink: 0 }}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              size={13}
+              fill={i < Math.round(t.rating) ? "#F5A623" : "none"}
+              color="#F5A623"
+            />
+          ))}
+        </div>
       </div>
 
       {/* Quote */}
@@ -64,24 +43,10 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         fontSize:     15,
         lineHeight:   1.6,
         color:        "#1d1d1f",
-        marginBottom: 22,
         flex:         1,
       }}>
         &ldquo;{t.quote}&rdquo;
       </p>
-
-      {/* Attribution */}
-      <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: 16 }}>
-        <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 2 }}>
-          {t.name}
-        </p>
-        <p style={{ fontSize: 12.5, color: "#6e6e73", marginBottom: 6 }}>
-          {t.location}
-        </p>
-        <p style={{ fontSize: 12, color: "#0071e3", fontWeight: 500 }}>
-          {t.product}
-        </p>
-      </div>
     </div>
   );
 }
@@ -98,9 +63,24 @@ function getStep(el: HTMLDivElement) {
   return first ? first.offsetWidth + CARD_GAP : el.clientWidth;
 }
 
-export default function TestimonialsSection() {
+export interface TestimonialsSectionProps {
+  reviews:       ReviewItem[];
+  overallRating?: number | null;
+  totalReviews?:  number | null;
+  isLive?:        boolean;
+  placeId?:       string | null;
+}
+
+export default function TestimonialsSection({
+  reviews,
+  overallRating = null,
+  totalReviews  = null,
+  isLive        = false,
+  placeId       = null,
+}: TestimonialsSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
+  const looped    = reviews.length > 1 ? [...reviews, ...reviews] : reviews;
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -136,10 +116,69 @@ export default function TestimonialsSection() {
 
       {/* Heading */}
       <div className="mx-auto max-w-[1440px] px-8 mb-8">
-        <h2 style={{ fontSize: 28, fontWeight: 600, letterSpacing: "-0.02em" }}>
-          <span className="text-[#1d1d1f]">What our customers say.&nbsp;</span>
-          <span className="text-[#6e6e73]">Real homes, real reviews.</span>
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <h2 style={{ fontSize: 28, fontWeight: 600, letterSpacing: "-0.02em" }}>
+            <span className="text-[#1d1d1f]">What our customers say.&nbsp;</span>
+            <span className="text-[#6e6e73]">Real homes, real reviews.</span>
+          </h2>
+
+          {isLive && (
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+              {/* Google rating badge */}
+              <a
+                href={placeId ? `https://www.google.com/maps/place/?q=place_id:${encodeURIComponent(placeId)}` : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display:        "inline-flex",
+                  alignItems:     "center",
+                  gap:            8,
+                  padding:        "8px 14px",
+                  borderRadius:   980,
+                  background:     "#fff",
+                  border:         "1px solid rgba(0,0,0,0.08)",
+                  boxShadow:      "0 2px 8px rgba(0,0,0,0.05)",
+                  textDecoration: "none",
+                  flexShrink:     0,
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden>
+                  <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+                  <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+                  <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z" />
+                  <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+                </svg>
+                <span style={{ fontSize: 13.5, fontWeight: 600, color: "#1d1d1f" }}>
+                  {overallRating != null ? overallRating.toFixed(1) : "—"}
+                </span>
+                <div style={{ display: "flex", gap: 1 }}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={12}
+                      fill={overallRating != null && i < Math.round(overallRating) ? "#F5A623" : "none"}
+                      color="#F5A623"
+                    />
+                  ))}
+                </div>
+                <span style={{ fontSize: 13, color: "#6e6e73" }}>
+                  {totalReviews != null ? `${totalReviews.toLocaleString()} reviews` : "on Google"}
+                </span>
+              </a>
+
+              {placeId && (
+                <a
+                  href={`https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: 13.5, color: "#0071e3", fontWeight: 500, textDecoration: "none", flexShrink: 0 }}
+                >
+                  Write a review ↗
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Autoplaying carousel */}
@@ -160,7 +199,7 @@ export default function TestimonialsSection() {
             scrollSnapType:  "x mandatory",
           }}
         >
-          {LOOPED.map((t, i) => (
+          {looped.map((t, i) => (
             <TestimonialCard key={i} t={t} />
           ))}
         </div>

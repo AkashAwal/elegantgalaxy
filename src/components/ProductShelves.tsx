@@ -284,94 +284,98 @@ function CompareBar({
   onCompare: () => void;
 }) {
   return (
-    <div style={{
-      marginTop:  16,
-      padding:    "12px 18px",
-      background: "#fff",
-      border:     "1.5px solid #0071e3",
-      borderRadius: 14,
-      display:    "flex",
-      alignItems: "center",
-      gap:        14,
-      boxShadow:  "0 4px 16px rgba(0,113,227,0.1)",
-    }}>
-      <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em" }}>
-        COMPARING
-      </span>
+    <div
+      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-3.5"
+      style={{
+        marginTop:    16,
+        padding:      "14px 16px",
+        background:   "#fff",
+        border:       "1.5px solid #0071e3",
+        borderRadius: 14,
+        boxShadow:    "0 4px 16px rgba(0,113,227,0.1)",
+      }}
+    >
+      <div className="flex items-start sm:items-center gap-3 sm:flex-1 min-w-0">
+        <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em", paddingTop: 6 }}>
+          COMPARING
+        </span>
 
-      {/* Product chips */}
-      <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
-        {products.map(p => (
-          <div key={p.id} style={{
-            display:    "flex",
-            alignItems: "center",
-            gap:        6,
-            padding:    "5px 8px 5px 10px",
-            background: "#eff6ff",
-            borderRadius: 7,
-            border:     "1px solid #bfdbfe",
-          }}>
-            <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
-              {p.name}
+        {/* Product chips */}
+        <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
+          {products.map(p => (
+            <div key={p.id} style={{
+              display:    "flex",
+              alignItems: "center",
+              gap:        6,
+              padding:    "5px 8px 5px 10px",
+              background: "#eff6ff",
+              borderRadius: 7,
+              border:     "1px solid #bfdbfe",
+            }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
+                {p.name}
+              </span>
+              <button
+                onClick={() => onRemove(p.id)}
+                aria-label={`Remove ${p.name} from comparison`}
+                style={{
+                  border:     "none",
+                  background: "none",
+                  cursor:     "pointer",
+                  padding:    0,
+                  display:    "flex",
+                  alignItems: "center",
+                  color:      "#6e6e73",
+                  lineHeight: 1,
+                }}
+              >
+                <X size={12} strokeWidth={2.5} />
+              </button>
+            </div>
+          ))}
+          {products.length < 3 && (
+            <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
+              Add 1 more to compare
             </span>
-            <button
-              onClick={() => onRemove(p.id)}
-              aria-label={`Remove ${p.name} from comparison`}
-              style={{
-                border:     "none",
-                background: "none",
-                cursor:     "pointer",
-                padding:    0,
-                display:    "flex",
-                alignItems: "center",
-                color:      "#6e6e73",
-                lineHeight: 1,
-              }}
-            >
-              <X size={12} strokeWidth={2.5} />
-            </button>
-          </div>
-        ))}
-        {products.length < 3 && (
-          <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
-            Add 1 more to compare
-          </span>
-        )}
+          )}
+        </div>
       </div>
 
-      <button
-        onClick={onClear}
-        style={{
-          border:     "none",
-          background: "none",
-          cursor:     "pointer",
-          fontSize:   12,
-          color:      "#6e6e73",
-          fontWeight: 500,
-          flexShrink: 0,
-          padding:    "0 4px",
-        }}
-      >
-        Clear
-      </button>
+      <div className="flex items-center justify-between sm:justify-end gap-3 sm:flex-shrink-0">
+        <button
+          onClick={onClear}
+          style={{
+            border:     "none",
+            background: "none",
+            cursor:     "pointer",
+            fontSize:   12,
+            color:      "#6e6e73",
+            fontWeight: 500,
+            flexShrink: 0,
+            padding:    "0 4px",
+          }}
+        >
+          Clear
+        </button>
 
-      <button
-        onClick={onCompare}
-        style={{
-          padding:      "9px 18px",
-          borderRadius: 8,
-          background:   "#0071e3",
-          color:        "#fff",
-          border:       "none",
-          cursor:       "pointer",
-          fontSize:     13,
-          fontWeight:   500,
-          flexShrink:   0,
-          letterSpacing: "-0.01em",
-        }}
-      >
-        Compare {products.length}
-      </button>
+        <button
+          onClick={onCompare}
+          className="flex-1 sm:flex-none"
+          style={{
+            padding:      "9px 18px",
+            borderRadius: 8,
+            background:   "#0071e3",
+            color:        "#fff",
+            border:       "none",
+            cursor:       "pointer",
+            fontSize:     13,
+            fontWeight:   500,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Compare {products.length}
+        </button>
+      </div>
     </div>
   );
 }
@@ -571,8 +575,9 @@ function ShelfRow({ shelf }: { shelf: Shelf }) {
         </h3>
       </div>
 
-      {/* Cards row — 4 equal-width cards filling the full row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+      {/* Cards row — single column on mobile (2-up was too thin to show the
+          photo at a usable size), 2-up from sm, 4 equal-width cards from lg */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
         {shelf.products.map(p => (
           <ProductCard
             key={p.id}

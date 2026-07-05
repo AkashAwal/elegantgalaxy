@@ -72,6 +72,28 @@ export default function LatestSection() {
             >
               {p.tagline}
             </p>
+
+            {/* Desktop CTA — sits under the text; the mobile copy of this
+                button lives under the photo instead (see right column). */}
+            <Link
+              href={p.href}
+              className="tv-fadein-d2 hidden lg:inline-flex"
+              style={{
+                alignItems:     "center",
+                marginTop:      28,
+                padding:        "12px 28px",
+                borderRadius:   "50px",
+                background:     "#0071e3",
+                color:          "#fff",
+                fontSize:       15,
+                fontWeight:     600,
+                textDecoration: "none",
+                letterSpacing:  "-0.01em",
+                whiteSpace:     "nowrap",
+              }}
+            >
+              View Now
+            </Link>
           </div>
 
           {/* ── Right: image ───────────────────────────────────────────── */}
@@ -102,8 +124,8 @@ export default function LatestSection() {
             </div>
 
             <div
-              className="tv-fadein-d2"
-              style={{ display: "flex", justifyContent: "center", marginTop: 24 }}
+              className="tv-fadein-d2 flex lg:hidden"
+              style={{ justifyContent: "center", marginTop: 24 }}
             >
               <Link
                 href={p.href}
