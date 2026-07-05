@@ -33,14 +33,15 @@ export default function Error({
       <ErrorTV />
 
       <div style={{ textAlign: "center" }}>
-        <p style={{
-          fontSize:      96,
-          fontWeight:    700,
-          letterSpacing: "-0.048em",
-          color:         "#f5f5f7",
-          lineHeight:    0.88,
-          marginBottom:  18,
-        }}>
+        <p
+          className="text-[64px] sm:text-[80px] lg:text-[96px]"
+          style={{
+            fontWeight:    700,
+            letterSpacing: "-0.048em",
+            color:         "#f5f5f7",
+            lineHeight:    0.88,
+            marginBottom:  18,
+          }}>
           500
         </p>
         <p style={{

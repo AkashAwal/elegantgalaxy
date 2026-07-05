@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useCallback, useEffect, useLayoutEffect } from "react";
-import { Search, X, ArrowRight, Menu } from "lucide-react";
+import { Search, X, ArrowRight, Menu, ChevronDown } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -38,6 +38,10 @@ const NAV: NavItem[] = [
           { label: "WebOS 4K",             href: "/products/led-tvs/webos-4k" },
           { label: "WebOS 2K",             href: "/products/led-tvs/webos-2k" },
           { label: "Google TV",            href: "/products/led-tvs/google" },
+          { label: "Interactive Smart Board", href: "/products/led-tvs/smart-board" },
+          { label: "Distro",               href: "/products/led-tvs/distro" },
+          { label: "Frameless Smart",      href: "/products/led-tvs/frameless-smart" },
+          { label: "Frameless Normal",     href: "/products/led-tvs/frameless-normal" },
         ],
         links: [],
       },
@@ -189,6 +193,7 @@ export default function Navbar() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [searchOpen, setSearch] = useState(false);
   const [mobileOpen, setMobile] = useState(false);
+  const [mobileExpandedId, setMobileExpandedId] = useState<string | null>(null);
   const [query, setQuery]       = useState("");
   const closeTimer              = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchRef               = useRef<HTMLInputElement>(null);
@@ -330,6 +335,7 @@ export default function Navbar() {
       if (e.key !== "Escape") return;
       setSearch(false);
       setMobile(false);
+      setMobileExpandedId(null);
       setActiveId(null);
       if (activeIdRef.current) {
         triggerRef.current?.focus();
@@ -343,6 +349,7 @@ export default function Navbar() {
   // Reset all interactive state on every route change
   useEffect(() => {
     setMobile(false);
+    setMobileExpandedId(null);
     setActiveId(null);
     setSearch(false);
     setHoveredId(null);
@@ -552,7 +559,7 @@ export default function Navbar() {
               <Search size={18} strokeWidth={1.75} />
             </button>
             <button
-              onClick={() => setMobile((o) => !o)}
+              onClick={() => { setMobile((o) => !o); setMobileExpandedId(null); }}
               className="lg:hidden flex items-center justify-center w-10 h-11 text-[#1d1d1f] opacity-80"
               aria-label="Menu"
             >
@@ -737,39 +744,88 @@ export default function Navbar() {
             WebkitBackdropFilter: "blur(20px)",
           }}
         >
-          <div className="px-4 py-4 flex flex-col">
+          <div
+            className="px-6 pt-6 flex flex-col"
+            style={{ paddingBottom: "max(28px, env(safe-area-inset-bottom))" }}
+          >
             {NAV.map((item) => {
               const isActive =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              const isExpanded = mobileExpandedId === item.id;
+
+              // Only the first column's "primary" links (the actual model-type
+              // navigation) — the support/warranty/contact "links" columns are
+              // secondary utility links already reachable elsewhere and just
+              // clutter the mobile accordion.
+              const subLinks = item.mega?.flatMap((col) => col.primary ?? []);
+
+              if (!item.mega) {
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`py-2.5 text-[20px] font-bold tracking-tight transition-colors
+                               ${isActive ? "text-[#0071e3]" : "text-[#1d1d1f] active:text-[#1d1d1f]/60"}`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
               return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className="flex items-center justify-between px-2 py-3.5
-                             text-[17px] text-[#1d1d1f] border-b border-black/[0.06]
-                             hover:text-[#1d1d1f]/60 transition-colors"
-                >
-                  {item.label}
-                </Link>
+                <div key={item.id}>
+                  <button
+                    onClick={() => setMobileExpandedId(isExpanded ? null : item.id)}
+                    aria-expanded={isExpanded}
+                    className={`w-full flex items-center justify-between py-2.5 text-[20px] font-bold tracking-tight
+                               ${isActive ? "text-[#0071e3]" : "text-[#1d1d1f]"}`}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={18}
+                      strokeWidth={2.25}
+                      className="shrink-0 transition-transform duration-200"
+                      style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
+                    />
+                  </button>
+
+                  {/* Accordion panel */}
+                  <div
+                    className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
+                    style={{ maxHeight: isExpanded ? subLinks!.length * 40 + 24 : 0 }}
+                  >
+                    <div className="flex flex-col pb-3 pl-1">
+                      {subLinks!.map((lnk, i) => (
+                        <Link
+                          key={lnk.href}
+                          href={lnk.href}
+                          className={i === 0
+                            ? "py-1.5 text-[14px] font-semibold text-[#0071e3]"
+                            : "py-1.5 text-[14px] text-[#6e6e73]"}
+                        >
+                          {lnk.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               );
             })}
 
-            {/* Mobile distributor buttons */}
-            <div className="flex flex-col gap-3 pt-6 pb-2">
-              <Link
-                href="/distributors/apply"
-                className="flex items-center justify-center h-11 rounded-full"
-                style={{
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  background: "#0071e3",
-                }}
-              >
-                Become a Distributor
-              </Link>
-            </div>
+            {/* Mobile distributor CTA */}
+            <Link
+              href="/distributors/apply"
+              className="w-full flex items-center justify-center h-12 rounded-full mt-6"
+              style={{
+                fontSize: 15,
+                fontWeight: 600,
+                color: "#ffffff",
+                background: "#0071e3",
+              }}
+            >
+              Become a Distributor
+            </Link>
           </div>
         </div>
       )}

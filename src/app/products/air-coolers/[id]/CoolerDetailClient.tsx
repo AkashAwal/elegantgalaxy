@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Phone, MessageCircle } from "lucide-react";
+import { ChevronRight, Phone } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, type CoolerModel } from "@/data/air-coolers";
 import { CoolerIllustration, EnquireModal, SPEC_ROWS, formatSpecValue } from "../AirCoolersClient";
 
@@ -89,7 +90,7 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
                 rel="noopener noreferrer"
                 style={{ flex: "1 1 160px", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, height: 48, borderRadius: 980, background: "#25D366", color: "#fff", textDecoration: "none", fontSize: 15, fontWeight: 600 }}
               >
-                <MessageCircle size={17} /> WhatsApp
+                <WhatsAppIcon size={17} /> WhatsApp
               </a>
             </div>
             <a

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SiteFooter from "@/components/SiteFooter";
 import BackToTop from "@/components/BackToTop";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 
 const inter = Inter({
@@ -108,6 +109,7 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <BackToTop />
+        <WhatsAppFloat />
         <CookieConsentBanner />
       </body>
     </html>

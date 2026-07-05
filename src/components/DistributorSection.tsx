@@ -22,14 +22,15 @@ export default function DistributorSection() {
           </p>
 
           {/* Heading */}
-          <h2 style={{
-            fontSize:      46,
-            fontWeight:    700,
-            letterSpacing: "-0.03em",
-            lineHeight:    1.08,
-            color:         "#1d1d1f",
-            marginBottom:  18,
-          }}>
+          <h2
+            className="text-[32px] sm:text-[40px] lg:text-[46px]"
+            style={{
+              fontWeight:    700,
+              letterSpacing: "-0.03em",
+              lineHeight:    1.08,
+              color:         "#1d1d1f",
+              marginBottom:  18,
+            }}>
             Grow with<br />Elegant Galaxy.
           </h2>
 

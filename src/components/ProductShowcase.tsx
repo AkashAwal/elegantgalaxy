@@ -484,6 +484,7 @@ function FeaturesSection({
   return (
     <div
       ref={ref}
+      className="px-6 sm:px-10"
       style={{
         background:     "#08090e",
         minHeight:      "100vh",
@@ -491,7 +492,7 @@ function FeaturesSection({
         flexDirection:  "column",
         alignItems:     "center",
         justifyContent: "center",
-        padding:        "92px 40px",
+        padding:        "92px 0",
         position:       "relative",
         overflow:       "hidden",
       }}
@@ -537,30 +538,29 @@ function FeaturesSection({
         {featuresHeading ?? "Every feature, thoughtfully placed."}
       </h2>
 
-      <div style={{
-        display:             "grid",
-        gridTemplateColumns: "1fr auto 1fr",
-        gap:                 "0 clamp(24px, 4vw, 64px)",
-        alignItems:          "center",
-        width:               "100%",
-        maxWidth:            1140,
-        position:            "relative",
-        zIndex:              2,
-      }}>
+      <div
+        className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr]"
+        style={{
+          gap:                 "40px clamp(24px, 4vw, 64px)",
+          alignItems:          "center",
+          width:               "100%",
+          maxWidth:            1140,
+          position:            "relative",
+          zIndex:              2,
+        }}>
 
         {/* Left features */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 52, alignItems: "flex-end" }}>
+        <div className="order-2 lg:order-1 items-center text-center lg:items-end lg:text-right" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
           {featuresLeft.map((f, i) => (
             <div
               key={f.label}
               style={{
-                textAlign:  "right",
                 opacity:    inView ? 1 : 0,
                 transform:  inView ? "translateX(0)" : "translateX(-52px)",
                 transition: `opacity 0.65s ease ${0.18 + i * 0.2}s, transform 0.65s ease ${0.18 + i * 0.2}s`,
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 10, marginBottom: 5 }}>
+              <div className="justify-center lg:justify-end" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
                 <p style={{ fontSize: 15, fontWeight: 600, color: "#f5f5f7", margin: 0 }}>{f.label}</p>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#60a5fa", flexShrink: 0 }} />
               </div>
@@ -570,26 +570,26 @@ function FeaturesSection({
         </div>
 
         {/* Centre TV */}
-        <div style={{
-          position:   "relative",
-          width:      "min(480px, 36vw)",
-          height:     "min(300px, 22.5vw)",
-          opacity:    inView ? 1 : 0,
-          transform:  inView ? "scale(1)" : "scale(0.92)",
-          transition: "opacity 0.85s ease 0.12s, transform 0.85s ease 0.12s",
-          filter:     "drop-shadow(0 0 64px rgba(96,165,250,0.15))",
-        }}>
+        <div
+          className="order-1 lg:order-2 w-[70vw] h-[44vw] max-w-[420px] max-h-[260px] lg:w-[min(480px,36vw)] lg:h-[min(300px,22.5vw)] mx-auto"
+          style={{
+            position:   "relative",
+            opacity:    inView ? 1 : 0,
+            transform:  inView ? "scale(1)" : "scale(0.92)",
+            transition: "opacity 0.85s ease 0.12s, transform 0.85s ease 0.12s",
+            filter:     "drop-shadow(0 0 64px rgba(96,165,250,0.15))",
+          }}>
           <Image
             src={views[0].src}
             alt="Feature callout view"
             fill
             style={{ objectFit: "contain" }}
-            sizes="36vw"
+            sizes="(max-width: 1024px) 70vw, 36vw"
           />
         </div>
 
         {/* Right features */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 52, alignItems: "flex-start" }}>
+        <div className="order-3 items-center text-center lg:items-start lg:text-left" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
           {featuresRight.map((f, i) => (
             <div
               key={f.label}
@@ -599,11 +599,11 @@ function FeaturesSection({
                 transition: `opacity 0.65s ease ${0.22 + i * 0.2}s, transform 0.65s ease ${0.22 + i * 0.2}s`,
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
+              <div className="justify-center lg:justify-start" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8", flexShrink: 0 }} />
                 <p style={{ fontSize: 15, fontWeight: 600, color: "#f5f5f7", margin: 0 }}>{f.label}</p>
               </div>
-              <p style={{ fontSize: 12, color: "rgba(245,245,247,0.42)", margin: 0, paddingLeft: 16 }}>{f.sub}</p>
+              <p className="pl-0 lg:pl-4" style={{ fontSize: 12, color: "rgba(245,245,247,0.42)", margin: 0 }}>{f.sub}</p>
             </div>
           ))}
         </div>
@@ -630,24 +630,25 @@ function SpecsSection({
   return (
     <div
       ref={ref}
+      className="px-6 sm:px-10"
       style={{
         background:     "#ffffff",
         minHeight:      "100vh",
         display:        "flex",
         alignItems:     "center",
         justifyContent: "center",
-        padding:        "80px 40px",
+        padding:        "80px 0",
         overflow:       "hidden",
       }}
     >
-      <div style={{
-        display:             "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap:                 "clamp(48px, 7vw, 96px)",
-        alignItems:          "center",
-        maxWidth:            1120,
-        width:               "100%",
-      }}>
+      <div
+        className="grid grid-cols-1 lg:grid-cols-2"
+        style={{
+          gap:                 "clamp(48px, 7vw, 96px)",
+          alignItems:          "center",
+          maxWidth:            1120,
+          width:               "100%",
+        }}>
 
         {/* Left: image + CTA */}
         <div>

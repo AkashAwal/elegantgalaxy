@@ -2,7 +2,6 @@ import Link from "next/link";
 import LatestSection from "@/components/LatestSection";
 import DifferenceSection from "@/components/DifferenceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import InteractiveBoardSection from "@/components/InteractiveBoardSection";
 import ProductShelves from "@/components/ProductShelves";
 import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
@@ -161,31 +160,26 @@ export default function Home() {
         <div className="h-px" style={{ background: "rgba(0,0,0,0.08)" }} />
       </div>
 
-      {/* ── Category carousel ─────────────────────────────────────────── */}
+      {/* ── Category grid ─────────────────────────────────────────────── */}
       {/*
-        On mobile the icons are too wide to fit in a single row —
-        overflow-x-auto gives a horizontal scroll, same pattern as the
-        LatestSection/DifferenceSection carousels.
+        2x2 grid on mobile so all four categories are visible without
+        scrolling; single row from md+ once there's room to spread them out.
       */}
-      <section className="mx-auto max-w-[1440px] px-8 py-12 overflow-hidden">
-        <div
-          className="flex gap-8 md:gap-16 md:justify-center overflow-x-auto pb-2 md:pb-0"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
-        >
+      <section className="mx-auto max-w-[1440px] px-8 py-12">
+        <div className="grid grid-cols-2 gap-y-8 gap-x-4 md:flex md:gap-16 md:justify-center">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.href}
               href={cat.href}
-              className="flex flex-col items-center group shrink-0"
+              className="flex flex-col items-center group"
             >
               <div
-                className="flex items-end justify-center mb-6"
-                style={{ height: 200 }}
+                className="flex items-end justify-center mb-4 md:mb-6 h-[120px] md:h-[200px] [&_svg]:h-auto [&_svg]:w-auto [&_svg]:max-h-full [&_svg]:max-w-full"
               >
                 {cat.icon}
               </div>
               <span
-                className="text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors duration-150"
+                className="text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors duration-150 text-center"
                 style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}
               >
                 {cat.label}
@@ -202,9 +196,6 @@ export default function Home() {
 
       {/* ── Product shelves ────────────────────────────────────────────── */}
       <ProductShelves />
-
-      {/* ── Interactive Smart Board showcase ─────────────────────────────── */}
-      <InteractiveBoardSection />
 
       {/* ── Testimonials — social proof right after browsing products ──── */}
       <TestimonialsSection />

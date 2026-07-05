@@ -2,7 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Phone, MessageCircle, FileText, X, ChevronDown, ChevronUp, Check } from "lucide-react";
+import { Phone, FileText, X, ChevronDown, ChevronUp, Check } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // ── SVG Illustration ──────────────────────────────────────────────────────────
 
@@ -72,7 +73,7 @@ export function EnquireModal({ model, onClose }: { model: CooktopModel; onClose:
         </a>
 
         <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#25D366", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
-          <MessageCircle size={20} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <WhatsAppIcon size={20} />
           <div>
             <div style={{ fontSize: 15, fontWeight: 700 }}>WhatsApp Us</div>
             <div style={{ fontSize: 12, opacity: 0.88, marginTop: 1 }}>Quick reply during business hours</div>
@@ -248,6 +249,8 @@ function CompareModal({
           </button>
         </div>
 
+        <div className="overflow-x-auto -mx-1 px-1">
+        <div style={{ minWidth: models.length > 1 ? models.length * 200 : undefined }}>
         <div style={{ display: "grid", gridTemplateColumns: `repeat(${models.length}, 1fr)`, gap: 16, marginBottom: 24 }}>
           {models.map((m) => (
             <div key={m.id} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
@@ -293,6 +296,8 @@ function CompareModal({
               ))}
             </div>
           ))}
+        </div>
+        </div>
         </div>
       </div>
     </div>

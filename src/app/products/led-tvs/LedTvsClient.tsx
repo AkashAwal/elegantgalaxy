@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, MessageCircle, FileText, X } from "lucide-react";
+import { Phone, FileText, X } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { SIZES, MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName, entryKey, type TvModel } from "@/data/led-tvs";
 
 export type { TvModel };
@@ -100,7 +101,7 @@ export function EnquireModal({ model, size, onClose }: EnquireModalProps) {
         </a>
 
         <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#25D366", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
-          <MessageCircle size={20} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <WhatsAppIcon size={20} />
           <div>
             <div style={{ fontSize: 15, fontWeight: 700 }}>WhatsApp Us</div>
             <div style={{ fontSize: 12, opacity: 0.88, marginTop: 1 }}>Quick reply during business hours</div>
@@ -141,7 +142,7 @@ function ModelCard({ model, size, onEnquire }: ModelCardProps) {
       }}
     >
       {/* Image */}
-      <div style={{ background: model.images ? "#fff" : "#1d1d1f", padding: "18px 14px 12px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: 220, position: "relative" }}>
+      <div style={{ background: model.images ? "#fff" : "#1d1d1f", padding: "12px 12px 8px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative" }}>
         <span style={{
           position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
           background: model.images ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.11)",
@@ -162,11 +163,11 @@ function ModelCard({ model, size, onEnquire }: ModelCardProps) {
           {displayName}
         </p>
 
-        <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-          <Link href={`/products/led-tvs/${model.id}?size=${size}`} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", height: 40, borderRadius: 980, background: "#0071e3", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 8 }}>
+          <Link href={`/products/led-tvs/${model.id}?size=${size}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: 40, borderRadius: 980, background: "#0071e3", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
             View Now
           </Link>
-          <button onClick={onEnquire} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", height: 40, borderRadius: 980, border: "1.5px solid #0071e3", background: "transparent", color: "#0071e3", fontSize: 14, fontWeight: 500, cursor: "pointer" }}>
+          <button onClick={onEnquire} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: 40, borderRadius: 980, border: "1.5px solid #0071e3", background: "transparent", color: "#0071e3", fontSize: 14, fontWeight: 500, cursor: "pointer" }}>
             Enquire
           </button>
         </div>

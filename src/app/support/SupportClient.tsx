@@ -294,7 +294,7 @@ export default function SupportClient() {
 
       {/* ── Bottom CTA ───────────────────────────────────────────────────── */}
       <div
-        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-10"
+        className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left justify-between gap-6 p-6 sm:p-10"
         style={{
           marginTop:    72,
           background:   "#fff",
@@ -310,7 +310,7 @@ export default function SupportClient() {
             Our support team is available Mon–Sat, 9 AM – 6 PM IST.
           </p>
         </div>
-        <div style={{ display: "flex", gap: 10, flexShrink: 0, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 10, flexShrink: 0, flexWrap: "wrap", justifyContent: "center" }}>
           <a href="tel:+919540699333" style={{
             display: "inline-flex", alignItems: "center", gap: 6,
             padding: "10px 20px", borderRadius: 980,

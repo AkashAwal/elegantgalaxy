@@ -35,9 +35,9 @@ export default function HeroSlider({
 
   return (
     <div
+      className="flex flex-col justify-start pt-8 pb-12 lg:block lg:relative lg:pt-14 lg:pb-[72px] lg:min-h-screen"
       style={{
         position:   "relative",
-        height:     "100vh",
         overflow:   "hidden",
         background: bg,
         transition: "background 0.75s ease",
@@ -54,23 +54,17 @@ export default function HeroSlider({
         }}
       />
 
-      {/* Crossfading images */}
+      {/* Crossfading images — stacked above text on mobile, centered overlay from lg+ */}
       <div
-        style={{
-          position:       "absolute",
-          inset:          0,
-          display:        "flex",
-          alignItems:     "center",
-          justifyContent: "center",
-        }}
+        className="relative lg:absolute lg:inset-0 flex items-center justify-center mb-10 lg:mb-0"
+        style={{ zIndex: 1 }}
       >
         {views.map((v, i) => (
           <div
             key={v.src}
+            className="w-[78vw] h-[49vw] max-w-[320px] max-h-[200px] lg:w-[min(720px,65vw)] lg:h-[min(450px,40vw)] lg:max-w-none lg:max-h-none"
             style={{
-              position:   "absolute",
-              width:      "min(720px, 65vw)",
-              height:     "min(450px, 40vw)",
+              position:   i === active ? "relative" : "absolute",
               opacity:    i === active ? 1 : 0,
               transition: "opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
@@ -81,19 +75,16 @@ export default function HeroSlider({
               fill
               style={{ objectFit: "contain" }}
               priority={i === 0}
-              sizes="65vw"
+              sizes="(max-width: 1024px) 78vw, 65vw"
             />
           </div>
         ))}
       </div>
 
-      {/* Left overlay text — keyed so CSS animation re-runs on each slide */}
+      {/* Overlay text — centered below the image on mobile, left-aligned overlay from lg+ */}
       <div
+        className="relative text-center px-6 mx-auto lg:absolute lg:text-left lg:px-0 lg:mx-0 lg:top-1/2 lg:-translate-y-1/2 lg:left-[clamp(24px,5vw,80px)]"
         style={{
-          position:  "absolute",
-          left:      "clamp(24px, 5vw, 80px)",
-          top:       "50%",
-          transform: "translateY(-50%)",
           maxWidth:  300,
           zIndex:    2,
         }}
@@ -141,11 +132,8 @@ export default function HeroSlider({
 
       {/* Bottom dot nav */}
       <div
+        className="relative mt-10 justify-center lg:absolute lg:mt-0 lg:bottom-10 lg:left-1/2 lg:-translate-x-1/2"
         style={{
-          position:       "absolute",
-          bottom:         40,
-          left:           "50%",
-          transform:      "translateX(-50%)",
           display:        "flex",
           gap:            8,
           alignItems:     "center",

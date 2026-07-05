@@ -115,7 +115,7 @@ function ProductIllustration({ product }: { product: Product }) {
         alt={product.name}
         fill
         sizes="(max-width: 1024px) 50vw, 25vw"
-        style={{ objectFit: "contain", padding: 24 }}
+        style={{ objectFit: "contain", padding: 10 }}
       />
     );
   }
@@ -151,10 +151,12 @@ function ProductCard({
         minWidth:     0,
       }}
     >
-      {/* Illustration area */}
+      {/* Illustration area — real photos hug their own aspect ratio so there's
+          no dead space above/below; SVG icon illustrations keep the fixed
+          height they were drawn for. */}
       <div style={{
         background:     product.bg,
-        height:         192,
+        ...(product.imageSrc ? { aspectRatio: "4 / 3" } : { height: 192 }),
         display:        "flex",
         alignItems:     "center",
         justifyContent: "center",
@@ -186,11 +188,10 @@ function ProductCard({
         }}>
           {product.name}
         </p>
-        <div style={{ display: "flex", gap: 7, marginTop: 4 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 4 }}>
           <Link
             href={product.href}
             style={{
-              flex:           1,
               textAlign:      "center",
               padding:        "8px 0",
               borderRadius:   7,
@@ -207,7 +208,6 @@ function ProductCard({
           <Link
             href={`/contact?enquire=${encodeURIComponent(product.name)}`}
             style={{
-              flex:           1,
               textAlign:      "center",
               padding:        "7px 0",
               borderRadius:   7,
@@ -488,12 +488,11 @@ function CompareModal({
           </button>
         </div>
 
-        {/* Comparison columns */}
-        <div style={{
-          display:             "grid",
-          gridTemplateColumns: `repeat(${products.length}, 1fr)`,
-          gap:                 16,
-        }}>
+        {/* Comparison columns — horizontal scroll on mobile, even grid from sm+ */}
+        <div
+          className="grid grid-flow-col auto-cols-[75%] overflow-x-auto pb-2 sm:grid-flow-row sm:auto-cols-auto sm:overflow-visible sm:pb-0 sm:[grid-template-columns:repeat(var(--cols),1fr)]"
+          style={{ gap: 16, ["--cols" as string]: products.length }}
+        >
           {products.map(p => (
             <div key={p.id} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
               {/* Illustration */}

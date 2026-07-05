@@ -88,9 +88,11 @@ export default function NotFound() {
 
         {/* TV body */}
         <div style={{
+          width:        "min(420px, 82vw)",
           background:   "linear-gradient(160deg, #404040 0%, #1c1c1c 100%)",
           borderRadius: 26,
           padding:      "26px 30px 30px",
+          boxSizing:    "border-box",
           boxShadow: [
             "0 28px 70px rgba(0,0,0,0.75)",
             "0 8px 28px rgba(0,0,0,0.5)",
@@ -104,6 +106,7 @@ export default function NotFound() {
             background:   "#0b0b0b",
             borderRadius: 14,
             padding:      11,
+            boxSizing:    "border-box",
             boxShadow:    "inset 0 4px 12px rgba(0,0,0,0.95), inset 0 0 0 1px rgba(0,0,0,0.6)",
           }}>
             {/* Screen canvas */}
@@ -112,7 +115,7 @@ export default function NotFound() {
                 ref={canvasRef}
                 width={420}
                 height={315}
-                style={{ display: "block" }}
+                style={{ display: "block", width: "100%", height: "auto" }}
               />
 
               {/* Scanlines overlay */}
@@ -203,14 +206,15 @@ export default function NotFound() {
 
       {/* ── Copy & CTA ─────────────────────────────────────────────────────── */}
       <div style={{ textAlign: "center" }}>
-        <p style={{
-          fontSize:      96,
-          fontWeight:    700,
-          letterSpacing: "-0.048em",
-          color:         "#f5f5f7",
-          lineHeight:    0.88,
-          marginBottom:  18,
-        }}>
+        <p
+          className="text-[64px] sm:text-[80px] lg:text-[96px]"
+          style={{
+            fontWeight:    700,
+            letterSpacing: "-0.048em",
+            color:         "#f5f5f7",
+            lineHeight:    0.88,
+            marginBottom:  18,
+          }}>
           404
         </p>
         <p style={{

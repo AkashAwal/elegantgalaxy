@@ -1,30 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
-
-// ── SVG illustration ───────────────────────────────────────────────────────────
-
-function SmartBoard() {
-  return (
-    <svg viewBox="0 0 360 240" width="340" height="227" fill="none">
-      <rect x="20" y="10" width="320" height="196" rx="10" fill="#111" />
-      <rect x="30" y="20" width="300" height="176" rx="6" fill="#1a1a1a" />
-      <rect x="36" y="26" width="288" height="164" rx="4" fill="#222" />
-      <defs>
-        <radialGradient id="boardglow" cx="50%" cy="45%" r="55%">
-          <stop offset="0%" stopColor="#0071e3" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#111" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect x="36" y="26" width="288" height="164" rx="4" fill="url(#boardglow)" />
-      <path d="M100 150 L150 90 L190 120 L260 60" stroke="#0071e3" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <circle cx="260" cy="60" r="7" fill="#0071e3" />
-      <rect x="158" y="208" width="44" height="16" rx="3" fill="#1c1c1e" />
-      <rect x="130" y="224" width="100" height="7" rx="3.5" fill="#1c1c1e" />
-    </svg>
-  );
-}
+import Image from "next/image";
 
 // ── Data ───────────────────────────────────────────────────────────────────────
 
@@ -33,7 +10,7 @@ type Product = {
   label:    string;
   tagline:  string;
   href:     string;
-  image:    ReactNode;
+  imageSrc: string;
   imageBg:  string;
 };
 
@@ -41,9 +18,9 @@ const PRODUCT: Product = {
   category: "Interactive Smart Board",
   label:    'EG 65" Interactive Smart Teaching Board',
   tagline:  '65" screen · 4K Ultra HD',
-  href:     "/contact",
-  image:    <SmartBoard />,
-  imageBg:  "#111",
+  href:     "/products/led-tvs/smart-board",
+  imageSrc: "/images/tvs/smart-board-front.webp",
+  imageBg:  "#fff",
 };
 
 // ── Component ──────────────────────────────────────────────────────────────────
@@ -91,14 +68,42 @@ export default function LatestSection() {
                 fontSize:      17,
                 color:         "#6e6e73",
                 lineHeight:    1.6,
-                marginBottom:  28,
               }}
             >
               {p.tagline}
             </p>
+          </div>
+
+          {/* ── Right: image ───────────────────────────────────────────── */}
+          {/*
+            aspectRatio (not a fixed height) so the photo fills the box at any
+            width — a fixed 480px height left illustrations floating tiny
+            inside a mostly-empty box on narrow mobile screens.
+          */}
+          <div className="w-full" style={{ flex: 1.3, minWidth: 0 }}>
+            <div
+              className="w-full lg:max-w-none"
+              style={{
+                position:     "relative",
+                borderRadius: 24,
+                overflow:     "hidden",
+                aspectRatio:  "360 / 300",
+                maxHeight:    720,
+                background:   p.imageBg,
+              }}>
+              <Image
+                src={p.imageSrc}
+                alt={p.label}
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                style={{ objectFit: "contain" }}
+                priority
+              />
+            </div>
+
             <div
               className="tv-fadein-d2"
-              style={{ display: "flex", alignItems: "center", gap: 20 }}
+              style={{ display: "flex", justifyContent: "center", marginTop: 24 }}
             >
               <Link
                 href={p.href}
@@ -116,24 +121,8 @@ export default function LatestSection() {
                   whiteSpace:     "nowrap",
                 }}
               >
-                Enquire Now
+                View Now
               </Link>
-            </div>
-          </div>
-
-          {/* ── Right: image ───────────────────────────────────────────── */}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{
-              position:       "relative",
-              borderRadius:   24,
-              overflow:       "hidden",
-              height:         480,
-              background:     p.imageBg,
-              display:        "flex",
-              alignItems:     "center",
-              justifyContent: "center",
-            }}>
-              {p.image}
             </div>
           </div>
 

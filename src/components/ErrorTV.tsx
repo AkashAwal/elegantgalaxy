@@ -75,8 +75,10 @@ export default function ErrorTV() {
 
       {/* TV body */}
       <div style={{
+        width: "min(420px, 82vw)",
         background: "linear-gradient(160deg, #404040 0%, #1c1c1c 100%)",
         borderRadius: 26, padding: "26px 30px 30px",
+        boxSizing: "border-box",
         boxShadow: [
           "0 28px 70px rgba(0,0,0,0.75)",
           "0 8px 28px rgba(0,0,0,0.5)",
@@ -88,10 +90,11 @@ export default function ErrorTV() {
         {/* Screen bezel */}
         <div style={{
           background: "#0b0b0b", borderRadius: 14, padding: 11,
+          boxSizing: "border-box",
           boxShadow: "inset 0 4px 12px rgba(0,0,0,0.95), inset 0 0 0 1px rgba(0,0,0,0.6)",
         }}>
           <div style={{ position: "relative", borderRadius: 7, overflow: "hidden" }}>
-            <canvas ref={canvasRef} width={420} height={315} style={{ display: "block" }} />
+            <canvas ref={canvasRef} width={420} height={315} style={{ display: "block", width: "100%", height: "auto" }} />
 
             {/* Scanlines */}
             <div style={{

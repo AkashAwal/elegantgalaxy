@@ -33,7 +33,9 @@ export default function CategoryEnergyPage({
               {category} Energy Ratings
             </p>
           </div>
-          <h1 style={{ fontSize: 40, fontWeight: 700, letterSpacing: "-0.03em", color: "#f5f5f7", lineHeight: 1.1, marginBottom: 14, maxWidth: 620 }}>
+          <h1
+            className="text-[28px] sm:text-[34px] lg:text-[40px]"
+            style={{ fontWeight: 700, letterSpacing: "-0.03em", color: "#f5f5f7", lineHeight: 1.1, marginBottom: 14, maxWidth: 620 }}>
             Built to save you money on electricity.
           </h1>
           <p style={{ fontSize: 16, color: "rgba(245,245,247,0.55)", lineHeight: 1.65, maxWidth: 560 }}>

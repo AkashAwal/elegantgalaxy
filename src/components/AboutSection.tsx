@@ -76,6 +76,11 @@ export default function AboutSection() {
         <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 64 }} />
 
         {/* ── Stats row ──────────────────────────────────────────────────── */}
+        {/*
+          2x2 grid on mobile — the value font is smaller here than on lg
+          (where it's a single row of 4) so "In-House" fits on one line
+          instead of wrapping mid-word inside a narrow column.
+        */}
         <div className="grid grid-cols-2 lg:grid-cols-4">
           {[
             { value: "12+",  label: "Years of engineering excellence" },
@@ -85,23 +90,27 @@ export default function AboutSection() {
           ].map(({ value, label }, i) => (
             <div
               key={i}
-              style={{ padding: "0 32px" }}
               className={[
-                i % 2 === 1          ? "border-l border-l-white/[0.08]"    : "",
-                i >= 2               ? "border-t border-t-white/[0.08]"    : "",
+                "px-4 sm:px-8 pb-8 lg:pb-0",
+                // Left column of the 2-up grid (i=0 and i=2) is flush left; at
+                // lg (4-up single row) only i=0 is leftmost, so i=2 needs its
+                // padding restored.
+                i % 2 === 0 ? "pl-0" : "",
+                i === 2      ? "lg:pl-8" : "",
+                i >= 2               ? "border-t border-t-white/[0.08] pt-8" : "",
                 i >= 1 && i <= 3     ? "lg:border-l lg:border-l-white/[0.08]" : "",
                 i >= 2               ? "lg:border-t-0"                     : "",
-                i === 0              ? "pl-0"                               : "",
               ].filter(Boolean).join(" ")}
             >
-              <p style={{
-                fontSize:      "clamp(40px, 4.5vw, 60px)",
-                fontWeight:    700,
-                letterSpacing: "-0.04em",
-                lineHeight:    1,
-                color:         "#f5f5f7",
-                marginBottom:  10,
-              }}>
+              <p
+                className="text-[22px] sm:text-[36px] lg:text-[clamp(40px,4.5vw,60px)] whitespace-nowrap"
+                style={{
+                  fontWeight:    700,
+                  letterSpacing: "-0.04em",
+                  lineHeight:    1,
+                  color:         "#f5f5f7",
+                  marginBottom:  10,
+                }}>
                 {value}
               </p>
               <p style={{

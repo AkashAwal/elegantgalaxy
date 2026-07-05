@@ -132,13 +132,15 @@ const LOOPED = [...CARDS, ...CARDS];
 function LiftCard({
   children,
   style,
+  className,
 }: {
   children: ReactNode;
   style?: CSSProperties;
+  className?: string;
 }) {
   return (
     <div
-      className="relative flex-shrink-0 overflow-hidden rounded-[18px]"
+      className={`relative flex-shrink-0 overflow-hidden rounded-[18px] ${className ?? ""}`}
       style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.07)", ...style }}
     >
       {children}
@@ -151,10 +153,11 @@ function LiftCard({
 const CARD_GAP    = 16;
 const AUTOPLAY_MS = 3500;
 
-// One step = one card's width. Since 3 cards + 2 gaps fill the container,
-// a single card's width is (clientWidth + gap) / 3.
+// One step = one card's width (plus the gap), measured from the DOM so it
+// stays correct regardless of how many cards fit per screen at each breakpoint.
 function getStep(el: HTMLDivElement) {
-  return (el.clientWidth + CARD_GAP) / 3;
+  const first = el.firstElementChild as HTMLElement | null;
+  return first ? first.offsetWidth + CARD_GAP : el.clientWidth;
 }
 
 export default function DifferenceSection() {
@@ -218,15 +221,17 @@ export default function DifferenceSection() {
             paddingBottom:   "36px",
             marginTop:       "-16px",
             marginBottom:    "-36px",
+            scrollSnapType:  "x mandatory",
           }}
         >
           {LOOPED.map((card, i) => (
             <LiftCard
               key={i}
+              className="basis-full sm:basis-[46%] lg:basis-[calc((100%-32px)/3)] shrink-0 grow-0"
               style={{
-                flex:      `0 0 calc((100% - ${2 * CARD_GAP}px) / 3)`,
                 height:    280,
                 background: "#fff",
+                scrollSnapAlign: "start",
               }}
             >
               <div className="flex flex-col h-full px-8 pt-8 pb-7" style={{ minWidth: 0 }}>
@@ -248,11 +253,11 @@ export default function DifferenceSection() {
           ))}
         </div>
 
-        {/* Left arrow */}
+        {/* Left arrow — hidden on mobile where the card is full-width and would sit under it */}
         <button
           onClick={scrollLeft}
-          className="absolute left-3 top-1/2 -translate-y-1/2
-                     w-12 h-12 rounded-full flex items-center justify-center
+          className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2
+                     w-12 h-12 rounded-full items-center justify-center
                      bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
                      transition-colors duration-150 shadow-sm"
           aria-label="Scroll left"
@@ -263,14 +268,36 @@ export default function DifferenceSection() {
         {/* Right arrow */}
         <button
           onClick={scrollRight}
-          className="absolute right-3 top-1/2 -translate-y-1/2
-                     w-12 h-12 rounded-full flex items-center justify-center
+          className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2
+                     w-12 h-12 rounded-full items-center justify-center
                      bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
                      transition-colors duration-150 shadow-sm"
           aria-label="Scroll right"
         >
           <ChevronRight size={22} strokeWidth={2} />
         </button>
+
+        {/* Mobile arrows — below the card instead of overlaying it */}
+        <div className="flex sm:hidden justify-center gap-4 mt-4">
+          <button
+            onClick={scrollLeft}
+            className="w-12 h-12 rounded-full flex items-center justify-center
+                       bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
+                       transition-colors duration-150 shadow-sm"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={22} strokeWidth={2} />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="w-12 h-12 rounded-full flex items-center justify-center
+                       bg-[#e8e8ed] hover:bg-[#d1d1d6] text-[#1d1d1f]
+                       transition-colors duration-150 shadow-sm"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={22} strokeWidth={2} />
+          </button>
+        </div>
       </div>
 
     </section>

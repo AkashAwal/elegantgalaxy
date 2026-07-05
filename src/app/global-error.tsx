@@ -63,7 +63,7 @@ export default function GlobalError({
           {/* Copy */}
           <div style={{ textAlign: "center" }}>
             <p style={{
-              fontSize:      96,
+              fontSize:      "clamp(64px, 14vw, 96px)",
               fontWeight:    700,
               letterSpacing: "-0.048em",
               color:         "#f5f5f7",
