@@ -253,45 +253,29 @@ export default function ContactClient() {
             </a>
           ))}
 
-          {/* Address + map */}
-          <div style={{ marginTop: 10 }}>
+          {/* Address */}
+          <div style={{
+            padding: "13px 16px", background: "#fff", borderRadius: 12,
+            border: "1.5px solid #e8e8ed", display: "flex", alignItems: "flex-start", gap: 12,
+            marginTop: 10,
+          }}>
             <div style={{
-              padding: "13px 16px", background: "#fff", borderRadius: 12,
-              border: "1.5px solid #e8e8ed", display: "flex", alignItems: "flex-start", gap: 12,
-              marginBottom: 12,
+              width: 34, height: 34, borderRadius: 8, background: "#eff6ff",
+              display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
             }}>
-              <div style={{
-                width: 34, height: 34, borderRadius: 8, background: "#eff6ff",
-                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="10" r="3" stroke="#0071e3" strokeWidth="1.8" />
-                </svg>
-              </div>
-              <div>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>
-                  Our Location
-                </p>
-                <p style={{ fontSize: 13, color: "#1d1d1f", lineHeight: 1.55 }}>
-                  Guldhar, Pillar no 639, M-112, Meerut Rd, opposite Crown Honda Delhi, Garhi,
-                  Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003
-                </p>
-              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#0071e3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="12" cy="10" r="3" stroke="#0071e3" strokeWidth="1.8" />
+              </svg>
             </div>
-
-            <div style={{
-              borderRadius: 12, overflow: "hidden", border: "1.5px solid #e8e8ed",
-              aspectRatio: "4 / 3",
-            }}>
-              <iframe
-                title="Elegant Galaxy location on Google Maps"
-                src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s28.7041548,77.4498068!6i16"
-                width="100%" height="100%"
-                style={{ border: 0, display: "block" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>
+                Our Location
+              </p>
+              <p style={{ fontSize: 13, color: "#1d1d1f", lineHeight: 1.55 }}>
+                Guldhar, Pillar no 639, M-112, Meerut Rd, opposite Crown Honda Delhi, Garhi,
+                Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003
+              </p>
             </div>
           </div>
 
@@ -460,6 +444,21 @@ export default function ContactClient() {
           </div>
         </div>
 
+      </div>
+
+      {/* ── Map — full width ─────────────────────────────────────────── */}
+      <div style={{
+        marginTop: 40, borderRadius: 20, overflow: "hidden",
+        border: "1.5px solid #e8e8ed", height: 420,
+      }}>
+        <iframe
+          title="Elegant Galaxy location on Google Maps"
+          src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s28.7041548,77.4498068!6i16"
+          width="100%" height="100%"
+          style={{ border: 0, display: "block" }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
 
       {/* ── FAQ — full width, same layout as homepage ─────────────────── */}
