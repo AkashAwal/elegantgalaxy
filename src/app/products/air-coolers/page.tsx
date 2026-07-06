@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AirCoolersClient, { CoolerIllustration } from "./AirCoolersClient";
-import { MODELS, type CoolerType } from "@/data/air-coolers";
+import Image from "next/image";
+import AirCoolersClient from "./AirCoolersClient";
+import { MODELS, TYPE_IMAGES, type CoolerType } from "@/data/air-coolers";
 
 export const metadata: Metadata = {
   title: "Air Coolers",
@@ -14,9 +15,9 @@ export const metadata: Metadata = {
   },
 };
 
-const TYPES: Array<{ type: CoolerType; label: string; bg: string }> = [
-  { type: "commercial", label: "Commercial Coolers", bg: "#1d1d1f" },
-  { type: "desert",     label: "Desert Coolers",      bg: "#e0f2fe" },
+const TYPES: Array<{ type: CoolerType; label: string }> = [
+  { type: "commercial", label: "Commercial Coolers" },
+  { type: "desert",     label: "Desert Coolers" },
 ];
 
 export default async function AirCoolersPage({
@@ -53,7 +54,7 @@ export default async function AirCoolersPage({
       <section>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 80 }}>
           <div className="grid grid-cols-1 sm:grid-cols-2" style={{ rowGap: 40, columnGap: 20 }}>
-            {TYPES.map(({ type: t, label, bg }) => {
+            {TYPES.map(({ type: t, label }) => {
               const models = MODELS.filter((m) => m.type === t);
               const caps   = models.map((m) => m.capacity).sort((a, b) => a - b);
               return (
@@ -70,12 +71,20 @@ export default async function AirCoolersPage({
                   }}
                 >
                   <div style={{
-                    background: bg,
+                    background: "#f0f0f5",
                     padding: "28px 24px 20px",
                     display: "flex", justifyContent: "center", alignItems: "center",
                     aspectRatio: "16 / 9",
                   }}>
-                    <CoolerIllustration model={models[0]} />
+                    <div style={{ width: "100%", maxWidth: 90, height: "100%", position: "relative" }}>
+                      <Image
+                        src={TYPE_IMAGES[t]}
+                        alt={label}
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="200px"
+                      />
+                    </div>
                   </div>
                   <div style={{ padding: "18px 20px 20px", textAlign: "center" }}>
                     <p style={{ fontSize: 18, fontWeight: 700, color: "#1d1d1f", marginBottom: 4, letterSpacing: "-0.01em" }}>

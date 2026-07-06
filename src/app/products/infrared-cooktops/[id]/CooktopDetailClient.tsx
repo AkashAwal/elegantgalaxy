@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, burnerLabel, type CooktopModel } from "@/data/infrared-cooktops";
-import { CooktopSvg, EnquireModal, SPEC_ROWS, formatSpecValue } from "../InfraredCooktopsClient";
+import { CooktopIllustration, EnquireModal, SPEC_ROWS, formatSpecValue } from "../InfraredCooktopsClient";
 
 export default function CooktopDetailClient({ model }: { model: CooktopModel }) {
   const [showEnquire, setShowEnquire] = useState(false);
@@ -42,7 +42,7 @@ export default function CooktopDetailClient({ model }: { model: CooktopModel }) 
             padding: 32,
             border: "1px solid rgba(0,0,0,0.06)",
           }}>
-            <CooktopSvg burners={model.burners} />
+            <CooktopIllustration model={model} />
           </div>
 
           {/* Details */}
@@ -134,7 +134,7 @@ export default function CooktopDetailClient({ model }: { model: CooktopModel }) 
                   style={{ display: "block", borderRadius: 14, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", textDecoration: "none" }}
                 >
                   <div style={{ background: "#18181b", height: 140, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-                    <CooktopSvg burners={m.burners} />
+                    <CooktopIllustration model={m} />
                   </div>
                   <div style={{ padding: "12px 14px" }}>
                     <p style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f" }}>{m.name}</p>

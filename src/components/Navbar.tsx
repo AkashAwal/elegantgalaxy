@@ -72,10 +72,12 @@ const NAV: NavItem[] = [
       {
         heading: "Explore Washing Machines",
         primary: [
-          { label: "Explore All Washing Machines", href: "/products/washing-machines" },
-          { label: "Front Load",                   href: "/products/washing-machines?type=front-load" },
-          { label: "Top Load",                     href: "/products/washing-machines?type=top-load" },
-          { label: "Semi-Automatic",               href: "/products/washing-machines?type=semi-automatic" },
+          { label: "7kg",  href: "/products/washing-machines?cap=7" },
+          { label: "8kg",  href: "/products/washing-machines?cap=8" },
+          { label: "9kg",  href: "/products/washing-machines?cap=9" },
+          { label: "10kg", href: "/products/washing-machines?cap=10" },
+          { label: "11kg", href: "/products/washing-machines?cap=11" },
+          { label: "12kg", href: "/products/washing-machines?cap=12" },
         ],
         links: [],
       },

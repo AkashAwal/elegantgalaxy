@@ -8,6 +8,32 @@ export interface TvModel {
   resolution: Record<number, string>;
   /** Real product photo under /public. When set, shown instead of the generic TV silhouette. */
   images?: { front: string };
+  /** Per-size specs that vary by screen size — only set for the Interactive Smart Board. */
+  panelSpecs?: Record<number, {
+    modelNumber:      string;
+    aspectRatio:      string;
+    refreshRate:      string;
+    powerConsumption: number;
+    dimensions:       string;
+    packDimensions:   string;
+    netWeight:        number;
+    grossWeight:      number;
+  }>;
+  /** Specs shared across every size — only set for the Interactive Smart Board. */
+  commonSpecs?: {
+    panelType:         string;
+    brightness:        string;
+    contrastRatio:     string;
+    displayColor:      string;
+    touchPoints:       string;
+    touchResponseTime: string;
+    surfaceProtection: string;
+    os:                string;
+    ram:               string;
+    rom:               string;
+    internet:          string;
+    speaker:           string;
+  };
 }
 
 export const MODELS: TvModel[] = [
@@ -55,10 +81,37 @@ export const MODELS: TvModel[] = [
     id:         "smart-board",
     type:       "Interactive Smart Board",
     platform:   "Interactive Smart Board",
-    sizes:      [65, 75, 86, 98],
-    resolution: { 65: "4K Ultra HD", 75: "4K Ultra HD", 86: "4K Ultra HD", 98: "4K Ultra HD" },
+    sizes:      [55, 65, 75, 85, 86, 98, 105, 110],
+    resolution: {
+      55: "4K Ultra HD", 65: "4K Ultra HD", 75: "4K Ultra HD", 85: "4K Ultra HD",
+      86: "4K Ultra HD", 98: "4K Ultra HD", 105: "5120×2160 Ultra-Wide UHD", 110: "4K Ultra HD",
+    },
     images: {
       front: "/images/tvs/smart-board-front.webp",
+    },
+    panelSpecs: {
+      55:  { modelNumber: "EGIP-55",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 198, dimensions: "1257.6 × 743.7 × 83.9 mm",  packDimensions: "1358 × 855 × 175 mm",  netWeight: 24, grossWeight: 30 },
+      65:  { modelNumber: "EGIP-65",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 248, dimensions: "1485 × 887.6 × 91.6 mm",    packDimensions: "1600 × 1008 × 195 mm", netWeight: 36, grossWeight: 45 },
+      75:  { modelNumber: "EGIP-75",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 330, dimensions: "1707.1 × 1012.7 × 91.6 mm", packDimensions: "1837 × 1131 × 195 mm", netWeight: 54, grossWeight: 66 },
+      85:  { modelNumber: "EGIP-85",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 400, dimensions: "1953.3 × 1151.4 × 92.6 mm", packDimensions: "2070 × 1271 × 215 mm", netWeight: 66, grossWeight: 80 },
+      86:  { modelNumber: "EGIP-86",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 400, dimensions: "1953.3 × 1151.4 × 92.6 mm", packDimensions: "2070 × 1271 × 215 mm", netWeight: 66, grossWeight: 80 },
+      98:  { modelNumber: "EGIP-98",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 598, dimensions: "2216.8 × 1317.3 × 108.7 mm", packDimensions: "2385 × 1485 × 298 mm", netWeight: 82, grossWeight: 98 },
+      105: { modelNumber: "EGIP-105", aspectRatio: "21:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 515, dimensions: "2507.9 × 1135.5 × 106 mm",   packDimensions: "2668 × 1296 × 240 mm", netWeight: 87, grossWeight: 104 },
+      110: { modelNumber: "EGIP-110", aspectRatio: "16:9, Wide SXGA", refreshRate: "120Hz", powerConsumption: 785, dimensions: "2500.8 × 1477.5 × 108.7 mm", packDimensions: "2668 × 1615 × 298 mm", netWeight: 96, grossWeight: 120 },
+    },
+    commonSpecs: {
+      panelType:         "a-Si TFT-LCD",
+      brightness:        "450 cd/m² (typ)",
+      contrastRatio:     "5000:1",
+      displayColor:      "1.07B",
+      touchPoints:       "Infrared, 20-point multi-touch",
+      touchResponseTime: "5ms",
+      surfaceProtection: "Anti-glare tempered glass, 4mm",
+      os:                "Android 11.0",
+      ram:               "4GB (expandable to 8GB DDR4)",
+      rom:               "32GB (expandable to 128GB eMMC)",
+      internet:          "RJ45 + Wi-Fi 2.4G/5G + Bluetooth 5.0",
+      speaker:           "2 × 15W",
     },
   },
   {

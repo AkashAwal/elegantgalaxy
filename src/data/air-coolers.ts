@@ -25,7 +25,19 @@ export interface CoolerModel {
   motorMount: string;
   dimensions: string;
   packDimensions: string;
+  /** Real product photo under /public. When set, shown instead of the generic cooler illustration. */
+  images?: { front: string };
 }
+
+const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.jpg" };
+const LOUVER_IMAGE: { front: string } = { front: "/images/air-coolers/ice-storm-front.jpg" };
+const DESERT_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.jpg" };
+
+/** Representative photo for each cooler type's category tile. */
+export const TYPE_IMAGES: Record<CoolerType, string> = {
+  commercial: "/images/air-coolers/commercial-front.jpg",
+  desert:     "/images/air-coolers/desert-front.jpg",
+};
 
 const COMMERCIAL_BASE = {
   type: "commercial" as CoolerType,
@@ -53,6 +65,7 @@ const DESERT_BASE = {
   cordLength: "2.5M",
   bladeMaterial: "Plastic ABS",
   motorMount: "PP CP",
+  images: DESERT_IMAGE,
 };
 
 export const MODELS: CoolerModel[] = [
@@ -63,6 +76,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM32-H1-100L DG",
     name: "ICE COOL",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 1,
     capacity: 100,
     pumpWattage: 20,
@@ -78,6 +92,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM32-H3-100L-DG",
     name: "ICE COOL+",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 3,
     capacity: 100,
     pumpWattage: 20,
@@ -93,6 +108,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM32-H1-100L-DG",
     name: "ICE STORM",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 1,
     capacity: 100,
     pumpWattage: 20,
@@ -108,6 +124,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM32-H3-100L-DG",
     name: "ICE STORM+",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 3,
     capacity: 100,
     pumpWattage: 20,
@@ -124,6 +141,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM35-H1-130L DG",
     name: "ICE COOL",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 1,
     capacity: 130,
     pumpWattage: 20,
@@ -139,6 +157,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM35-H3-130L-DG",
     name: "ICE COOL+",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 3,
     capacity: 130,
     pumpWattage: 20,
@@ -154,6 +173,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM35-H1-130L-DG",
     name: "ICE STORM",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 1,
     capacity: 130,
     pumpWattage: 20,
@@ -169,6 +189,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM35-H3-130L-DG",
     name: "ICE STORM+",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 3,
     capacity: 130,
     pumpWattage: 20,
@@ -185,6 +206,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM35-H1-160L DG",
     name: "ICE COOL",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 1,
     capacity: 160,
     pumpWattage: 25,
@@ -200,6 +222,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "SFGM35-H3-160L-DG",
     name: "ICE COOL+",
     frontGrill: "spiral",
+    images: SPIRAL_IMAGE,
     honeycombSides: 3,
     capacity: 160,
     pumpWattage: 25,
@@ -215,6 +238,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM35-H1-160L-DG",
     name: "ICE STORM",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 1,
     capacity: 160,
     pumpWattage: 25,
@@ -230,6 +254,7 @@ export const MODELS: CoolerModel[] = [
     modelNumber: "LFGM35-H3-160L-DG",
     name: "ICE STORM+",
     frontGrill: "louver",
+    images: LOUVER_IMAGE,
     honeycombSides: 3,
     capacity: 160,
     pumpWattage: 25,

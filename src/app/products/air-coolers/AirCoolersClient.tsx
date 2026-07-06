@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, FileText, X, ChevronDown, ChevronUp, Check } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
@@ -137,10 +138,10 @@ function DesertCoolerSvg() {
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 import {
-  MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE,
+  MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES,
   type FrontGrill, type CoolerType, type CoolerModel,
 } from "@/data/air-coolers";
-export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE };
+export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES };
 export type { FrontGrill, CoolerType, CoolerModel };
 
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
@@ -232,6 +233,19 @@ export function formatSpecValue(model: CoolerModel, key: keyof CoolerModel): str
 }
 
 export function CoolerIllustration({ model }: { model: CoolerModel }) {
+  if (model.images) {
+    return (
+      <div style={{ width: "100%", maxWidth: 100 }}>
+        <Image
+          src={model.images.front}
+          alt={`${model.name} Air Cooler`}
+          width={476}
+          height={761}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </div>
+    );
+  }
   if (model.type !== "commercial") return <DesertCoolerSvg />;
   return model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />;
 }

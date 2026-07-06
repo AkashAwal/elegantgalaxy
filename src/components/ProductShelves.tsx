@@ -9,8 +9,7 @@ import type { ReactNode } from "react";
 // ─── Real product data & illustrations (shared with the category pages) ──────
 
 import { MODELS as TV_MODELS, tvName } from "@/data/led-tvs";
-import { MODELS as WASHER_MODELS, TYPE_LABEL as WASHER_TYPE_LABEL } from "@/data/washing-machines";
-import { WasherIllustration } from "@/app/products/washing-machines/WashingMachinesClient";
+import { CAPACITY_SPECS as WASHER_SPECS, washerName } from "@/data/washing-machines";
 import { MODELS as COOLER_MODELS } from "@/data/air-coolers";
 import { CoolerIllustration } from "@/app/products/air-coolers/AirCoolersClient";
 import { MODELS as COOKTOP_MODELS, burnerLabel } from "@/data/infrared-cooktops";
@@ -23,10 +22,6 @@ const webos4kTv  = TV_MODELS.find((m) => m.id === "webos-4k")!;
 const webos2kTv  = TV_MODELS.find((m) => m.id === "webos-2k")!;
 const googleTv   = TV_MODELS.find((m) => m.id === "google")!;
 
-const flWasher7  = WASHER_MODELS.find((m) => m.id === "fl-7")!;
-const flWasher8  = WASHER_MODELS.find((m) => m.id === "fl-8")!;
-const tlWasher10 = WASHER_MODELS.find((m) => m.id === "tl-10")!;
-const saWasher8  = WASHER_MODELS.find((m) => m.id === "sa-8")!;
 
 const iceCool100    = COOLER_MODELS.find((m) => m.id === "c-ice-cool-100-1")!;
 const iceStorm160   = COOLER_MODELS.find((m) => m.id === "c-ice-storm-160-1")!;
@@ -72,10 +67,10 @@ const SHELVES: Shelf[] = [
     category:     "Washing Machines",
     categoryHref: "/products/washing-machines",
     products: [
-      { id: flWasher7.id,  name: flWasher7.name,  subtitle: `${WASHER_TYPE_LABEL[flWasher7.type]} · ${flWasher7.capacity}kg`,   href: `/products/washing-machines/${flWasher7.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={flWasher7} /> },
-      { id: flWasher8.id,  name: flWasher8.name,  subtitle: `${WASHER_TYPE_LABEL[flWasher8.type]} · ${flWasher8.capacity}kg`,   href: `/products/washing-machines/${flWasher8.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={flWasher8} /> },
-      { id: tlWasher10.id, name: tlWasher10.name, subtitle: `${WASHER_TYPE_LABEL[tlWasher10.type]} · ${tlWasher10.capacity}kg`, href: `/products/washing-machines/${tlWasher10.id}`, bg: "#f0f0f5", illustration: <WasherIllustration model={tlWasher10} /> },
-      { id: saWasher8.id,  name: saWasher8.name,  subtitle: `${WASHER_TYPE_LABEL[saWasher8.type]} · ${saWasher8.capacity}kg`,   href: `/products/washing-machines/${saWasher8.id}`,  bg: "#f0f0f5", illustration: <WasherIllustration model={saWasher8} /> },
+      { id: "washer-7",  name: washerName(7),  subtitle: `Semi-Automatic · 7kg`,  href: `/products/washing-machines?cap=7`,  bg: "#f0f0f5", imageSrc: WASHER_SPECS[7].image },
+      { id: "washer-9",  name: washerName(9),  subtitle: `Semi-Automatic · 9kg`,  href: `/products/washing-machines?cap=9`,  bg: "#f0f0f5", imageSrc: WASHER_SPECS[9].image },
+      { id: "washer-10", name: washerName(10), subtitle: `Semi-Automatic · 10kg`, href: `/products/washing-machines?cap=10`, bg: "#f0f0f5", imageSrc: WASHER_SPECS[10].image },
+      { id: "washer-12", name: washerName(12), subtitle: `Semi-Automatic · 12kg`, href: `/products/washing-machines?cap=12`, bg: "#f0f0f5", imageSrc: WASHER_SPECS[12].image },
     ],
   },
   {

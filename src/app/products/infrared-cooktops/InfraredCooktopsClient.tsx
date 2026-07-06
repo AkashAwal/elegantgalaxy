@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, FileText, X, ChevronDown, ChevronUp, Check } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
@@ -38,6 +39,23 @@ import {
 } from "@/data/infrared-cooktops";
 export { MODELS, BURNER_COUNTS, PHONE, PHONE_DISPLAY, WA_BASE, burnerLabel };
 export type { CooktopModel };
+
+export function CooktopIllustration({ model }: { model: CooktopModel }) {
+  if (model.images) {
+    return (
+      <div style={{ width: "100%", maxWidth: 140 }}>
+        <Image
+          src={model.images.front}
+          alt={model.name}
+          width={940}
+          height={700}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </div>
+    );
+  }
+  return <CooktopSvg burners={model.burners} />;
+}
 
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
 
@@ -259,7 +277,7 @@ function CompareModal({
           {models.map((m) => (
             <div key={m.id} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
               <div style={{ background: "#18181b", height: 160, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <CooktopSvg burners={m.burners} />
+                <CooktopIllustration model={m} />
               </div>
               <div style={{ padding: 16 }}>
                 <p style={{ fontSize: 11, fontWeight: 600, color: "#6e6e73", marginBottom: 4 }}>
@@ -364,7 +382,7 @@ function CooktopCard({
         }}>
           {burnerLabel(model.burners)}
         </span>
-        <CooktopSvg burners={model.burners} />
+        <CooktopIllustration model={model} />
       </div>
 
       <div style={{ padding: "18px 20px 16px" }}>

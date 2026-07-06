@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const ITEMS = [
-  { name: "Inlet & Drain Hoses", desc: "Replacement hoses for front load and top load washers, matched to your model." },
+  { name: "Inlet & Drain Hoses", desc: "Replacement hoses for semi-automatic washers, matched to your model." },
   { name: "Machine Stands",      desc: "Raise your washer to a comfortable loading height with a compatible stand." },
   { name: "Anti-Vibration Pads", desc: "Reduce noise and movement during spin cycles, especially on upper floors." },
 ];
