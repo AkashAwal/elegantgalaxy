@@ -52,7 +52,7 @@ const JSON_LD = {
     name:    "Elegant Galaxy Appliances",
     itemListElement: [
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "LED Televisions",    description: "32 to 75 inch displays in HD, Full HD, and 4K" } },
-      { "@type": "Offer", itemOffered: { "@type": "Product", name: "Washing Machines",   description: "Top-load and front-load models from 6 kg to 12 kg" } },
+      { "@type": "Offer", itemOffered: { "@type": "Product", name: "Washing Machines",   description: "Semi-automatic models from 7 kg to 12 kg" } },
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "Air Coolers",        description: "Personal, tower, and desert coolers from 15 L to 60 L" } },
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "Infrared Cooktops",  description: "Single and double-burner cooktops with touch controls" } },
     ],
@@ -74,14 +74,14 @@ const PRODUCTS = [
     name:  "LED Televisions",
     range: "32\" – 75\"",
     body:  "HD, Full HD, and 4K panels with Dolby Audio support and thin-bezel design. Built for bedrooms, living rooms, and home theatres — with smart connectivity on select models.",
-    href:  "/products/led-tv",
+    href:  "/products/led-tvs",
   },
   {
     icon:  "🫧",
     name:  "Washing Machines",
-    range: "6 kg – 12 kg",
-    body:  "Top-load and front-load models with wash programmes tuned for Indian clothing types and hard-water conditions. Inverter motor on select models for quieter, more efficient operation.",
-    href:  "/products/washing-machine",
+    range: "7 kg – 12 kg",
+    body:  "Semi-automatic models with heavy wash pulsators and diamond steel drums, built for Indian clothing types and hard-water conditions.",
+    href:  "/products/washing-machines",
   },
   {
     icon:  "❄️",

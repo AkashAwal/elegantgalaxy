@@ -20,9 +20,9 @@ const PRODUCT_COLS = [
     heading: "Washing Machines",
     href:    "/products/washing-machines",
     links: [
-      { label: "Front Load",       href: "/products/washing-machines?type=front-load"     },
-      { label: "Top Load",         href: "/products/washing-machines?type=top-load"       },
-      { label: "Semi-Automatic",   href: "/products/washing-machines?type=semi-automatic" },
+      { label: "7kg",  href: "/products/washing-machines?cap=7"  },
+      { label: "9kg",  href: "/products/washing-machines?cap=9"  },
+      { label: "12kg", href: "/products/washing-machines?cap=12" },
     ],
   },
   {

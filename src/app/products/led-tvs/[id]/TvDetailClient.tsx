@@ -131,6 +131,52 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
             </a>
           </div>
         </div>
+
+        {/* Full spec table — Interactive Smart Board only, updates with selected size */}
+        {model.panelSpecs && model.commonSpecs && (() => {
+          const sizeSpec = model.panelSpecs[size];
+          const common   = model.commonSpecs;
+          if (!sizeSpec) return null;
+          const rows: Array<[string, string]> = [
+            ["Model Number",       sizeSpec.modelNumber],
+            ["Screen Size",        `${size}"`],
+            ["Panel Type",         common.panelType],
+            ["Resolution",         resolution],
+            ["Aspect Ratio",       sizeSpec.aspectRatio],
+            ["Refresh Rate",       sizeSpec.refreshRate],
+            ["Brightness",         common.brightness],
+            ["Contrast Ratio",     common.contrastRatio],
+            ["Display Color",      common.displayColor],
+            ["Power Consumption",  `${sizeSpec.powerConsumption}W (max)`],
+            ["Touch System",       common.touchPoints],
+            ["Touch Response",     common.touchResponseTime],
+            ["Surface Protection", common.surfaceProtection],
+            ["Operating System",   common.os],
+            ["RAM",                common.ram],
+            ["Storage",            common.rom],
+            ["Connectivity",       common.internet],
+            ["Speakers",           common.speaker],
+            ["Dimensions",         sizeSpec.dimensions],
+            ["Package Dimensions", sizeSpec.packDimensions],
+            ["Net Weight",         `${sizeSpec.netWeight} kg`],
+            ["Gross Weight",       `${sizeSpec.grossWeight} kg`],
+          ];
+          return (
+            <div style={{ marginTop: 56, maxWidth: 720 }}>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>
+                Full Specifications — {size}&quot;
+              </h2>
+              <div style={{ borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden", background: "#fff" }}>
+                {rows.map(([label, value], i) => (
+                  <div key={label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 16px", background: i % 2 === 0 ? "#fafafa" : "#fff", borderBottom: i < rows.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none" }}>
+                    <span style={{ fontSize: 13, color: "#6e6e73" }}>{label}</span>
+                    <span style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f", textAlign: "right" }}>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </section>
 
       {/* Other models */}
