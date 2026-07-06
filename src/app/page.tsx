@@ -22,9 +22,9 @@ const CATEGORIES = [
   {
     label:  "Washing Machines",
     href:   "/products/washing-machines",
-    image:  "/images/washing-machines/egwm-7kg-front.png",
-    width:  580,
-    height: 710,
+    image:  "/washing%20machines/6.svg",
+    width:  700,
+    height: 700,
   },
   {
     label:  "Air Coolers",

@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   // Dev-only on-screen route indicator (the "N" badge) defaults to
   // bottom-left, which collides with the WhatsApp float button there.
   devIndicators: false,
+  images: {
+    // The washing-machine product photos are raw .svg exports (masked
+    // raster layers) — next/image blocks SVG optimization by default.
+    dangerouslyAllowSVG: true,
+  },
   turbopack: {
     // Explicitly anchor the workspace root to this project directory.
     // Without this, Next.js 16 / Turbopack auto-detects the root by

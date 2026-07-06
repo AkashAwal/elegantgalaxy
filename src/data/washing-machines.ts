@@ -4,6 +4,8 @@ export interface WasherCapacitySpec {
   washPrograms: number;
   filterType:   string;
   image:        string;
+  /** Angled 3/4-view shot of the same physical design, shown as a second gallery photo. */
+  imageAngle:   string;
   /** Lid design/color group — capacities sharing a designId use the same physical lid pattern. */
   designId:     string;
 }
@@ -11,12 +13,12 @@ export interface WasherCapacitySpec {
 export const CAPACITIES = [7, 8, 9, 10, 11, 12];
 
 export const CAPACITY_SPECS: Record<number, WasherCapacitySpec> = {
-  7:  { modelNumber: "EGWM-7.0",  motor: "135W", washPrograms: 2, filterType: "Lint Filter",        image: "/images/washing-machines/egwm-7kg-front.png",  designId: "green-wave" },
-  8:  { modelNumber: "EGWM-8.0",  motor: "135W", washPrograms: 2, filterType: "Lint Filter",        image: "/images/washing-machines/egwm-8kg-front.png",  designId: "floral-rose" },
-  9:  { modelNumber: "EGWM-9.0",  motor: "180W", washPrograms: 2, filterType: "Double Magic Filter", image: "/images/washing-machines/egwm-9kg-front.png",  designId: "blue-bubble" },
-  10: { modelNumber: "EGWM-10.0", motor: "180W", washPrograms: 2, filterType: "Double Magic Filter", image: "/images/washing-machines/egwm-10kg-front.png", designId: "blue-bubble" },
-  11: { modelNumber: "EGWM-11.0", motor: "200W", washPrograms: 2, filterType: "Double Magic Filter", image: "/images/washing-machines/egwm-11kg-front.png", designId: "black" },
-  12: { modelNumber: "EGWM-12.0", motor: "200W", washPrograms: 2, filterType: "Double Magic Filter", image: "/images/washing-machines/egwm-12kg-front.png", designId: "black" },
+  7:  { modelNumber: "EGWM-7.0",  motor: "135W", washPrograms: 2, filterType: "Lint Filter",        image: "/washing%20machines/6.svg", imageAngle: "/washing%20machines/5.svg", designId: "green-wave" },
+  8:  { modelNumber: "EGWM-8.0",  motor: "135W", washPrograms: 2, filterType: "Lint Filter",        image: "/washing%20machines/4.svg", imageAngle: "/washing%20machines/3.svg", designId: "floral-rose" },
+  9:  { modelNumber: "EGWM-9.0",  motor: "180W", washPrograms: 2, filterType: "Double Magic Filter", image: "/washing%20machines/2.svg", imageAngle: "/washing%20machines/1.svg", designId: "blue-bubble" },
+  10: { modelNumber: "EGWM-10.0", motor: "180W", washPrograms: 2, filterType: "Double Magic Filter", image: "/washing%20machines/2.svg", imageAngle: "/washing%20machines/1.svg", designId: "blue-bubble" },
+  11: { modelNumber: "EGWM-11.0", motor: "200W", washPrograms: 2, filterType: "Double Magic Filter", image: "/washing%20machines/9.svg", imageAngle: "/washing%20machines/7.svg", designId: "black" },
+  12: { modelNumber: "EGWM-12.0", motor: "200W", washPrograms: 2, filterType: "Double Magic Filter", image: "/washing%20machines/9.svg", imageAngle: "/washing%20machines/7.svg", designId: "black" },
 };
 
 export const COMMON_SPECS = {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, FileText, X } from "lucide-react";
+import { Phone, FileText, X, ChevronLeft, ChevronRight } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -78,16 +78,35 @@ export default function WashingMachinesClient({
   const [capacity, setCapacity] = useState<number>(
     initialCap && CAPACITIES.includes(initialCap) ? initialCap : CAPACITIES[0]
   );
-  // The photo on display — independent of capacity. Clicking a gallery thumbnail
+  // The design on display — independent of capacity. Clicking a gallery thumbnail
   // only swaps this; it does not change the selected capacity/size.
-  const [previewImage, setPreviewImage] = useState<string>(CAPACITY_SPECS[capacity].image);
+  const [previewDesignCap, setPreviewDesignCap] = useState<number>(capacity);
+  const [previewAngle,     setPreviewAngle]     = useState<"front" | "angle">("front");
   const [showEnquire, setShowEnquire] = useState(false);
   const [hoveredThumb, setHoveredThumb] = useState<number | null>(null);
+
+  const previewImage = previewAngle === "front"
+    ? CAPACITY_SPECS[previewDesignCap].image
+    : CAPACITY_SPECS[previewDesignCap].imageAngle;
 
   // Some capacities share the same lid design/color — only show each design once.
   const uniqueDesigns = CAPACITIES.filter((cap, i, arr) =>
     arr.findIndex((c) => CAPACITY_SPECS[c].designId === CAPACITY_SPECS[cap].designId) === i
   );
+
+  // Single flat gallery — every design's front + angled photo, in one grid.
+  const galleryItems = uniqueDesigns.flatMap((cap) => [
+    { cap, angle: "front" as const, src: CAPACITY_SPECS[cap].image },
+    { cap, angle: "angle" as const, src: CAPACITY_SPECS[cap].imageAngle },
+  ]);
+  const galleryIndex = galleryItems.findIndex(
+    (g) => g.cap === previewDesignCap && g.angle === previewAngle
+  );
+  const stepGallery = (dir: 1 | -1) => {
+    const next = (galleryIndex + dir + galleryItems.length) % galleryItems.length;
+    setPreviewDesignCap(galleryItems[next].cap);
+    setPreviewAngle(galleryItems[next].angle);
+  };
 
   const spec = CAPACITY_SPECS[capacity];
   const name = washerName(capacity);
@@ -136,56 +155,85 @@ export default function WashingMachinesClient({
               minHeight: 380,
               display: "flex", alignItems: "center", justifyContent: "center",
               padding: 32,
-              marginBottom: 14,
+              marginBottom: 10,
               border: "1px solid rgba(0,0,0,0.06)",
+              position: "relative",
             }}>
+              <button
+                onClick={() => stepGallery(-1)}
+                aria-label="Previous photo"
+                style={{
+                  position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+                  width: 36, height: 36, borderRadius: "50%", border: "none",
+                  background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+
               <div style={{ width: "100%", maxWidth: 320 }}>
                 <Image
                   src={previewImage}
                   alt={name}
-                  width={580}
-                  height={710}
+                  width={700}
+                  height={700}
                   style={{ width: "100%", height: "auto" }}
                   priority
                 />
               </div>
+
+              <button
+                onClick={() => stepGallery(1)}
+                aria-label="Next photo"
+                style={{
+                  position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                  width: 36, height: 36, borderRadius: "50%", border: "none",
+                  background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                }}
+              >
+                <ChevronRight size={18} />
+              </button>
             </div>
 
-            {/* Thumbnail gallery — click a design to switch the main photo */}
-            <div className="grid grid-cols-4" style={{ gap: 10 }}>
-              {uniqueDesigns.map((cap) => {
-                const isSelected = CAPACITY_SPECS[cap].image === previewImage;
-                const isHovered  = hoveredThumb === cap;
+            {/* One gallery — every design's front + angled photo together, single row */}
+            <div className="grid grid-cols-8" style={{ gap: 6 }}>
+              {galleryItems.map((item, i) => {
+                const isSelected = i === galleryIndex;
+                const isHovered  = hoveredThumb === i;
                 return (
                   <button
-                    key={cap}
-                    onClick={() => setPreviewImage(CAPACITY_SPECS[cap].image)}
-                    onMouseEnter={() => setHoveredThumb(cap)}
+                    key={`${item.cap}-${item.angle}`}
+                    onClick={() => { setPreviewDesignCap(item.cap); setPreviewAngle(item.angle); }}
+                    onMouseEnter={() => setHoveredThumb(i)}
                     onMouseLeave={() => setHoveredThumb(null)}
                     aria-pressed={isSelected}
-                    aria-label={`Show ${cap}kg design`}
+                    aria-label={`Show ${washerName(item.cap)} — ${item.angle === "front" ? "front" : "angled"} view`}
                     style={{
                       background:   "#f0f0f5",
-                      borderRadius: 12,
-                      padding:      6,
+                      borderRadius: 8,
+                      padding:      3,
                       border:       isSelected ? "2px solid #0071e3" : "2px solid transparent",
                       boxShadow:    isSelected
-                        ? "0 4px 14px rgba(0,113,227,0.22)"
+                        ? "0 3px 10px rgba(0,113,227,0.22)"
                         : isHovered
-                          ? "0 4px 12px rgba(0,0,0,0.1)"
+                          ? "0 3px 8px rgba(0,0,0,0.1)"
                           : "none",
                       cursor:       "pointer",
                       transform:    isHovered && !isSelected ? "translateY(-2px)" : "translateY(0)",
                       transition:   "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
                     }}
                   >
-                    <div style={{ width: "100%", position: "relative", aspectRatio: "580 / 710" }}>
+                    <div style={{ width: "100%", position: "relative", aspectRatio: "1 / 1" }}>
                       <Image
-                        src={CAPACITY_SPECS[cap].image}
-                        alt={washerName(cap)}
+                        src={item.src}
+                        alt=""
                         fill
                         style={{ objectFit: "contain" }}
-                        sizes="120px"
+                        sizes="60px"
                       />
                     </div>
                   </button>
