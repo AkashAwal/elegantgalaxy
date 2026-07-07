@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/legal/cookies" },
-  title:       "Cookie Policy — Elegant Galaxy",
+  title:       "Cookie Policy",
   description: "How Elegant Galaxy uses cookies and similar technologies on its website.",
 };
 

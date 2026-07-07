@@ -20,7 +20,7 @@ export async function generateMetadata(
   const article  = getArticle(slug);
   if (!article) return {};
   return {
-    title:       `${article.title} — Elegant Galaxy Support`,
+    title:       article.title,
     description: article.description,
     alternates:  { canonical: `/support/${slug}` },
   };

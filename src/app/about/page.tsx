@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
-  title:       "About Elegant Galaxy — Home Appliances Since 2012",
+  title:       "About",
   description:
     "Elegant Galaxy has been making home appliances for Indian households since 2012. LED TVs, washing machines, air coolers, and infrared cooktops — sold in 500+ cities, with every repair handled in-house at our own factory.",
   openGraph: {

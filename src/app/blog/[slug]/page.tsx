@@ -21,7 +21,7 @@ export async function generateMetadata(
   const post = getBlogPost(slug);
   if (!post) return {};
   return {
-    title:       `${post.title} — Elegant Galaxy Journal`,
+    title:       post.title,
     description: post.excerpt,
     alternates:  { canonical: `/blog/${slug}` },
   };

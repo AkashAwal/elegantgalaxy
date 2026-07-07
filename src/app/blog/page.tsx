@@ -57,7 +57,7 @@ function BlogContentSkeleton() {
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
-  title:       "Blog — Elegant Galaxy",
+  title:       "Blog",
   description: "Guides, comparisons, and tips for getting the most from your Elegant Galaxy appliances.",
 };
 

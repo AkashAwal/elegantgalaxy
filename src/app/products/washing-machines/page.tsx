@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Explore Elegant Galaxy semi-automatic washing machines — 7kg to 12kg models with heavy wash pulsators and diamond steel drums.",
   openGraph: {
-    title:       "Washing Machines — Elegant Galaxy",
+    title:       "Washing Machines",
     description: "Semi-automatic washers built for Indian homes, from 7kg to 12kg.",
     type:        "website",
   },

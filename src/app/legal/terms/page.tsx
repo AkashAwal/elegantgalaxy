@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/legal/terms" },
-  title:       "Terms of Use — Elegant Galaxy",
+  title:       "Terms of Use",
   description: "The terms and conditions that govern your use of the Elegant Galaxy website.",
 };
 

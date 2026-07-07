@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Explore Elegant Galaxy LED TVs — Android TV, webOS 4K, webOS 2K, Google TV, Distro OS, Frameless Smart, and Frameless Normal.",
   openGraph: {
-    title:       "LED TVs — Elegant Galaxy",
+    title:       "LED TVs",
     description: "Premium LED TVs from 24\" to 100\". Android TV, webOS, Google TV, and more.",
     type:        "website",
   },

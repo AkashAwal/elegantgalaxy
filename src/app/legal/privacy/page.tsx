@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/legal/privacy" },
-  title:       "Privacy Policy — Elegant Galaxy",
+  title:       "Privacy Policy",
   description: "How Elegant Galaxy collects, uses, and protects your personal information.",
 };
 
