@@ -77,7 +77,7 @@ export default function AboutSection() {
 
         {/* ── Stats row ──────────────────────────────────────────────────── */}
         {/*
-          2x2 grid on mobile — the value font is smaller here than on lg
+          2x2 grid on mobile - the value font is smaller here than on lg
           (where it's a single row of 4) so "In-House" fits on one line
           instead of wrapping mid-word inside a narrow column.
         */}

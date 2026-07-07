@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
     const cc = (countryCode ?? "+91").trim();
 
     const text = [
-      isDistributor ? `🏢 *New Distributor Application — Elegant Galaxy*` : `🛎️ *New Enquiry — Elegant Galaxy*`,
+      isDistributor ? `🏢 *New Distributor Application - Elegant Galaxy*` : `🛎️ *New Enquiry - Elegant Galaxy*`,
       ``,
       `👤 *Name:* ${cleanName}`,
       ...(cleanBusinessName ? [`🏬 *Business:* ${cleanBusinessName}`] : []),

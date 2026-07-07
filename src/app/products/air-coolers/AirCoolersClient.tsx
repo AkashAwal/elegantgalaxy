@@ -147,7 +147,7 @@ export type { FrontGrill, CoolerType, CoolerModel };
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
 
 export function EnquireModal({ model, onClose }: { model: CoolerModel; onClose: () => void }) {
-  const text   = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${model.capacity}L) Air Cooler — model ${model.modelNumber}. Could you share more details?`;
+  const text   = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${model.capacity}L) Air Cooler - model ${model.modelNumber}. Could you share more details?`;
   const waUrl  = `${WA_BASE}?text=${encodeURIComponent(text)}`;
   const formUrl = `/contact?product=air-cooler&model=${encodeURIComponent(model.id)}`;
 
@@ -736,7 +736,7 @@ export default function AirCoolersClient({
             Stay Cool, Work Smart.
           </h1>
           <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.65, maxWidth: 540 }}>
-            Commercial and desert coolers built for Indian summers — high air delivery, honeycomb cooling pads, and durable PPCP bodies.
+            Commercial and desert coolers built for Indian summers - high air delivery, honeycomb cooling pads, and durable PPCP bodies.
           </p>
         </div>
       </section>

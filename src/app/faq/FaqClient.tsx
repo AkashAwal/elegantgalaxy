@@ -16,7 +16,7 @@ const CATEGORIES = [
       },
       {
         q: "Are your products ISI certified?",
-        a: "Yes — all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country.",
+        a: "Yes - all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country.",
       },
       {
         q: "Where can I buy Elegant Galaxy products?",
@@ -58,7 +58,7 @@ const CATEGORIES = [
       },
       {
         q: "How do I register my warranty?",
-        a: "Warranty registration details are on our Warranty page — you'll need your invoice and product serial number.",
+        a: "Warranty registration details are on our Warranty page - you'll need your invoice and product serial number.",
       },
     ],
   },

@@ -10,7 +10,7 @@ import { CooktopIllustration, EnquireModal, SPEC_ROWS, formatSpecValue } from ".
 export default function CooktopDetailClient({ model }: { model: CooktopModel }) {
   const [showEnquire, setShowEnquire] = useState(false);
 
-  const waText = `Hi, I'm interested in the ${model.name} — model ${model.modelNumber}. Could you share more details?`;
+  const waText = `Hi, I'm interested in the ${model.name} - model ${model.modelNumber}. Could you share more details?`;
   const waUrl  = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
 
   const otherModels = MODELS.filter((m) => m.id !== model.id).slice(0, 4);

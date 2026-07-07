@@ -55,7 +55,7 @@ export default function LedTvsRemotesPage() {
           </h1>
           <p style={{ fontSize: 16, color: "#6e6e73", lineHeight: 1.65, maxWidth: 560 }}>
             We stock and supply the exact remote for every Elegant Galaxy LED TV and Interactive
-            Smart Board platform we sell — factory-matched for full function, no universal-remote guesswork.
+            Smart Board platform we sell - factory-matched for full function, no universal-remote guesswork.
           </p>
         </div>
       </section>

@@ -17,10 +17,10 @@ export default function AirCoolersEnergyPage() {
     <CategoryEnergyPage
       category="Air Coolers"
       shopHref="/products/air-coolers"
-      intro="Air coolers aren't covered under India's BEE star labelling programme, since they use evaporative cooling rather than a compressor. Here's the motor wattage that determines your running cost — typically a fraction of what an air conditioner draws."
+      intro="Air coolers aren't covered under India's BEE star labelling programme, since they use evaporative cooling rather than a compressor. Here's the motor wattage that determines your running cost - typically a fraction of what an air conditioner draws."
       ratingLabel="Motor wattage by type"
       rows={ROWS}
-      note="A cooler running 8 hours a day on a 120W motor uses roughly 1 unit of electricity — far less than compressor-based cooling for a comparable room size."
+      note="A cooler running 8 hours a day on a 120W motor uses roughly 1 unit of electricity - far less than compressor-based cooling for a comparable room size."
     />
   );
 }

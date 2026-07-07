@@ -130,10 +130,10 @@ export default function PrivacyPage() {
       </p>
       <ul style={ul}>
         {[
-          "Service providers — companies that help us operate the website and process enquiries (e.g. hosting providers, email delivery services). These parties are contractually bound to protect your information and may only use it as directed by us.",
-          "Authorised distributors — if your enquiry relates to a product purchase or service in your region, we may refer your contact details to the relevant authorised distributor with your knowledge.",
-          "Legal requirements — if required by law, a court order, or to protect the rights and safety of Elegant Galaxy or the public.",
-          "Business transfers — in the event of a merger, acquisition, or sale of company assets, your information may be transferred. We will notify you via a prominent notice on our website.",
+          "Service providers - companies that help us operate the website and process enquiries (e.g. hosting providers, email delivery services). These parties are contractually bound to protect your information and may only use it as directed by us.",
+          "Authorised distributors - if your enquiry relates to a product purchase or service in your region, we may refer your contact details to the relevant authorised distributor with your knowledge.",
+          "Legal requirements - if required by law, a court order, or to protect the rights and safety of Elegant Galaxy or the public.",
+          "Business transfers - in the event of a merger, acquisition, or sale of company assets, your information may be transferred. We will notify you via a prominent notice on our website.",
         ].map(t => (
           <li key={t} style={li}><span style={dot} />{t}</li>
         ))}

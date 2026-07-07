@@ -80,8 +80,8 @@ export default function TermsPage() {
       {/* 3 */}
       <h2 style={h2}>3. Intellectual property</h2>
       <p style={p}>
-        All content on this Website — including text, graphics, logos, images, product
-        photographs, and software — is the property of Elegant Galaxy Pvt Ltd or its content
+        All content on this Website - including text, graphics, logos, images, product
+        photographs, and software - is the property of Elegant Galaxy Pvt Ltd or its content
         suppliers and is protected under Indian and international copyright and trademark law.
       </p>
       <p style={p}>
@@ -132,8 +132,8 @@ export default function TermsPage() {
       <p style={p}>
         To the fullest extent permitted by applicable law, Elegant Galaxy Pvt Ltd, its
         directors, employees, and agents shall not be liable for any indirect, incidental,
-        special, consequential, or punitive damages arising from your use of — or inability
-        to use — the Website or its content, even if we have been advised of the possibility
+        special, consequential, or punitive damages arising from your use of - or inability
+        to use - the Website or its content, even if we have been advised of the possibility
         of such damages.
       </p>
       <p style={p}>

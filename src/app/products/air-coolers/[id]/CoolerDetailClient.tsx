@@ -10,7 +10,7 @@ import { CoolerIllustration, EnquireModal, SPEC_ROWS, formatSpecValue } from "..
 export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
   const [showEnquire, setShowEnquire] = useState(false);
 
-  const waText = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${model.capacity}L) — model ${model.modelNumber}. Could you share more details?`;
+  const waText = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${model.capacity}L) - model ${model.modelNumber}. Could you share more details?`;
   const waUrl  = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
   const isDark = model.type === "commercial";
 

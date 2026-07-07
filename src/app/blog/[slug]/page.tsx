@@ -135,7 +135,7 @@ function RenderSection({ section }: { section: BlogSection }) {
           </p>
           {section.attribution && (
             <p style={{ fontSize: 13, color: "#6e6e73", fontWeight: 500 }}>
-              — {section.attribution}
+              - {section.attribution}
             </p>
           )}
         </div>

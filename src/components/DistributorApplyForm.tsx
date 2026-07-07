@@ -27,7 +27,7 @@ const TERMS_CLAUSES = [
   "Credit limits are granted solely at the discretion of the company; otherwise business is on a cash-and-carry basis.",
   "Products must not be sold above the printed MRP, and MRP labels must not be tampered with.",
   "If the firm/company defaults in payment, all proprietors/partners are personally liable to pay the same.",
-  "Products are delivered to the Dealer/Distributor's registered warehouse per the Purchase Order. The Dealer/Distributor should insure their warehouse — damage from fire, accident, or natural calamity is on their account.",
+  "Products are delivered to the Dealer/Distributor's registered warehouse per the Purchase Order. The Dealer/Distributor should insure their warehouse - damage from fire, accident, or natural calamity is on their account.",
   "Transportation of product to a Sub Dealer destination is the Distributor's responsibility, in case of sub-distributorship.",
   "All information provided in this application is true and correct.",
 ];

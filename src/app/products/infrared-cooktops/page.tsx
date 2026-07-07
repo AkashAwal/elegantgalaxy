@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products/infrared-cooktops" },
   title: "Infrared Cooktops",
   description:
-    "Explore Elegant Galaxy infrared cooktops — single to 4-burner ceramic glass cooktops that heat faster and safer than gas.",
+    "Explore Elegant Galaxy infrared cooktops - single to 4-burner ceramic glass cooktops that heat faster and safer than gas.",
   openGraph: {
     title:       "Infrared Cooktops",
     description: "Single to 4-burner infrared cooktops with ceramic glass surfaces.",

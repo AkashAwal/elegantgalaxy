@@ -83,7 +83,7 @@ export default function WarrantyPage() {
           <ul style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 640 }}>
             {EXCLUSIONS.map((e) => (
               <li key={e} style={{ fontSize: 14.5, color: "#3a3a3c", lineHeight: 1.6, paddingLeft: 18, position: "relative" }}>
-                <span style={{ position: "absolute", left: 0, color: "#8e8e93" }}>—</span>
+                <span style={{ position: "absolute", left: 0, color: "#8e8e93" }}>-</span>
                 {e}
               </li>
             ))}

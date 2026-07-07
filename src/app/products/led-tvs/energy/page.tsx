@@ -55,10 +55,10 @@ export default function LedTvsEnergyPage() {
     <CategoryEnergyPage
       category="LED TVs"
       shopHref="/products/led-tvs"
-      intro="TVs aren't covered under India's BEE star labelling programme, so instead of a star rating, here's what actually drives your electricity bill — typical power draw across every platform we sell, from Android TV to the Interactive Smart Board."
+      intro="TVs aren't covered under India's BEE star labelling programme, so instead of a star rating, here's what actually drives your electricity bill - typical power draw across every platform we sell, from Android TV to the Interactive Smart Board."
       ratingLabel="Typical power draw by model"
       rows={ROWS}
-      note="Figures are typical values at standard brightness with Eco Mode enabled, scaled across the sizes each model is available in; actual consumption varies with picture settings and usage. Standard LED TVs draw under 0.5W in standby. The Interactive Smart Board runs an embedded Android PC, touch overlay, and built-in speakers, so its idle/ready-mode draw is higher than a standard TV's standby — typically 2–4W depending on size."
+      note="Figures are typical values at standard brightness with Eco Mode enabled, scaled across the sizes each model is available in; actual consumption varies with picture settings and usage. Standard LED TVs draw under 0.5W in standby. The Interactive Smart Board runs an embedded Android PC, touch overlay, and built-in speakers, so its idle/ready-mode draw is higher than a standard TV's standby - typically 2–4W depending on size."
     />
   );
 }

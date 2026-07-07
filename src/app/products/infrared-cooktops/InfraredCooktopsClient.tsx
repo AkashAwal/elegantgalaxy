@@ -60,7 +60,7 @@ export function CooktopIllustration({ model }: { model: CooktopModel }) {
 // ── Enquire Modal ─────────────────────────────────────────────────────────────
 
 export function EnquireModal({ model, onClose }: { model: CooktopModel; onClose: () => void }) {
-  const text    = `Hi, I'm interested in the ${model.name} — model ${model.modelNumber}. Could you share more details?`;
+  const text    = `Hi, I'm interested in the ${model.name} - model ${model.modelNumber}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
   const formUrl = `/contact?product=infrared-cooktop&model=${encodeURIComponent(model.id)}`;
 

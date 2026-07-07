@@ -15,7 +15,7 @@ export async function generateMetadata(
   if (!model) return {};
   return {
     title:       model.name,
-    description: `${model.name} — ${model.modelNumber}, ${model.capacity}L, ${model.airDelivery} CMH air delivery.`,
+    description: `${model.name} - ${model.modelNumber}, ${model.capacity}L, ${model.airDelivery} CMH air delivery.`,
     alternates:  { canonical: `/products/air-coolers/${id}` },
   };
 }

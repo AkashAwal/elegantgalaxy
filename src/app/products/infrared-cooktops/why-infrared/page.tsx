@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 const POINTS = [
   { title: "Faster heat-up",       desc: "Infrared elements reach cooking temperature in seconds, closer to gas than a traditional coil hotplate." },
-  { title: "Works with any cookware", desc: "Unlike induction, infrared heats the surface directly — so steel, aluminium, glass, and ceramic cookware all work." },
+  { title: "Works with any cookware", desc: "Unlike induction, infrared heats the surface directly - so steel, aluminium, glass, and ceramic cookware all work." },
   { title: "No open flame",        desc: "No gas connection or cylinder needed, and no risk of a flame being blown out or left unlit." },
-  { title: "Easy to clean",        desc: "A flat ceramic glass surface wipes clean in seconds — no burner grates or drip trays to scrub." },
+  { title: "Easy to clean",        desc: "A flat ceramic glass surface wipes clean in seconds - no burner grates or drip trays to scrub." },
   { title: "Precise control",      desc: "Touch or knob controls give finer heat adjustment than most gas burners." },
   { title: "Lower kitchen heat",   desc: "Less ambient heat is thrown off compared to an open gas flame, which matters most in smaller kitchens." },
 ];
@@ -33,7 +33,7 @@ export default function WhyInfraredPage() {
             Gas-like speed, none of the flame.
           </h1>
           <p style={{ fontSize: 16, color: "rgba(245,245,247,0.55)", lineHeight: 1.65, maxWidth: 560 }}>
-            Infrared cooktops heat cookware directly using radiant heat — no gas connection,
+            Infrared cooktops heat cookware directly using radiant heat - no gas connection,
             no open flame, and no special induction-compatible pots required.
           </p>
         </div>

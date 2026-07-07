@@ -56,7 +56,7 @@ export const ARTICLES: SupportArticle[] = [
     sections: [
       {
         type: "text",
-        body: "Before you begin, make sure your WiFi router is switched on and working. Have your WiFi password ready — you can usually find it on a sticker on the back of your router.",
+        body: "Before you begin, make sure your WiFi router is switched on and working. Have your WiFi password ready - you can usually find it on a sticker on the back of your router.",
       },
       {
         type: "steps",
@@ -80,7 +80,7 @@ export const ARTICLES: SupportArticle[] = [
           },
           {
             title: "Enter your WiFi password",
-            body:  "An on-screen keyboard will appear. Use the arrow keys to select each letter of your password. Take your time — passwords are case-sensitive.",
+            body:  "An on-screen keyboard will appear. Use the arrow keys to select each letter of your password. Take your time - passwords are case-sensitive.",
             tip:   "Pressing the coloured buttons on your remote can switch between uppercase, lowercase, and numbers on the keyboard.",
           },
           {
@@ -185,7 +185,7 @@ export const ARTICLES: SupportArticle[] = [
         heading: "Picture modes explained",
         headers: ["Mode", "Best for", "What it does"],
         rows: [
-          ["Standard",  "Everyday viewing",           "A balanced setting — not too bright, not too dim. Good starting point for most rooms."],
+          ["Standard",  "Everyday viewing",           "A balanced setting - not too bright, not too dim. Good starting point for most rooms."],
           ["Cinema",    "Movies in a dark room",       "Warmer, more natural colours with lower brightness. Designed to match how films are meant to look."],
           ["Sports",    "Live sports",                 "High contrast and motion smoothing to keep fast-moving action sharp and clear."],
           ["Game",      "Gaming consoles",             "Reduces input lag so your controller feels more responsive. Turns off processing that would slow things down."],
@@ -299,7 +299,7 @@ export const ARTICLES: SupportArticle[] = [
         steps: [
           {
             title: "Remove all packaging",
-            body:  "Remove the machine from the box and peel off any protective plastic film from the body and control panel. Check inside the drum — there may be foam padding or polystyrene pieces.",
+            body:  "Remove the machine from the box and peel off any protective plastic film from the body and control panel. Check inside the drum - there may be foam padding or polystyrene pieces.",
           },
           {
             title: "Remove the transit bolts (front-load only)",
@@ -333,7 +333,7 @@ export const ARTICLES: SupportArticle[] = [
 
   {
     slug:          "washing-machine-modes",
-    title:         "Washing machine modes and cycles — complete guide",
+    title:         "Washing machine modes and cycles - complete guide",
     category:      "washing-machines",
     categoryLabel: "Washing Machines",
     description:   "Understand every wash cycle on your Elegant washing machine and which clothes to use each one for.",
@@ -357,7 +357,7 @@ export const ARTICLES: SupportArticle[] = [
           ["Wool",           "Woollen sweaters, hand-wash items",         "Cold–30°C", "400 rpm"],
           ["Baby Care",      "Baby clothes and bedding",                  "60°C",      "1000 rpm"],
           ["Rinse & Spin",   "Items that only need rinsing",              "Cold",      "1200 rpm"],
-          ["Spin Only",      "Removing extra water after hand washing",   "—",         "1200–1400 rpm"],
+          ["Spin Only",      "Removing extra water after hand washing",   "-",         "1200–1400 rpm"],
           ["Drum Clean",     "Cleaning the drum itself, no laundry",      "90°C",      "800 rpm"],
         ],
       },
@@ -369,7 +369,7 @@ export const ARTICLES: SupportArticle[] = [
         type: "list",
         heading: "Detergent tips",
         items: [
-          "Use liquid detergent for cold or low-temperature washes — powder may not dissolve fully.",
+          "Use liquid detergent for cold or low-temperature washes - powder may not dissolve fully.",
           "Never exceed the MAX line in the detergent drawer. Too much detergent leaves residue on clothes and inside the machine.",
           "Use a separate fabric softener in the softener compartment (usually marked with a flower symbol).",
           "For a drum clean cycle, use a washing machine cleaner tablet instead of normal detergent.",
@@ -399,7 +399,7 @@ export const ARTICLES: SupportArticle[] = [
         rows: [
           ["E1", "Water is not filling up", "Check the tap is fully open. Check the inlet hose is not kinked. Check the inlet filter for blockages."],
           ["E2", "Water is not draining",    "Check the drain hose is not kinked or blocked. Clean the pump filter (see your manual for location). Make sure the drain is not higher than 90 cm."],
-          ["E3", "Drum not spinning",        "The load may be unbalanced — open the door, rearrange clothes, and restart. Check nothing is blocking the drum."],
+          ["E3", "Drum not spinning",        "The load may be unbalanced - open the door, rearrange clothes, and restart. Check nothing is blocking the drum."],
           ["E4", "Water overflowing",        "Too much detergent was used. Run a rinse-only cycle. Reduce detergent in future washes."],
           ["E5", "Temperature sensor error", "Turn the machine off and on. If it persists, contact our service team."],
           ["E6", "Motor error",              "Turn the machine off at the wall, wait 2 minutes, and try again. If the error returns, contact service."],
@@ -432,7 +432,7 @@ export const ARTICLES: SupportArticle[] = [
         steps: [
           {
             title: "Choose the right position",
-            body:  "Place the cooler near a window or open door. Air coolers work by evaporating water — they need a flow of fresh, dry air to work well. Avoid placing them in the centre of a closed room.",
+            body:  "Place the cooler near a window or open door. Air coolers work by evaporating water - they need a flow of fresh, dry air to work well. Avoid placing them in the centre of a closed room.",
             tip:   "Cross-ventilation gives the best results. Place the cooler opposite an open window so fresh air is drawn in from one side and humid air exits the other.",
           },
           {
@@ -466,7 +466,7 @@ export const ARTICLES: SupportArticle[] = [
 
   {
     slug:          "air-cooler-cleaning",
-    title:         "How to clean your air cooler — pads, tank, and body",
+    title:         "How to clean your air cooler - pads, tank, and body",
     category:      "air-coolers",
     categoryLabel: "Air Coolers",
     description:   "Keep your Elegant air cooler performing at its best with this regular cleaning guide.",
@@ -501,7 +501,7 @@ export const ARTICLES: SupportArticle[] = [
             body:  "The pads are the thick honeycomb panels. Lift them out carefully.",
             tip:   "Note which way the pads were facing before removing them so you can put them back the right way.",
           },
-          { title: "Rinse the pads under running water", body: "Hold each pad under a tap or use a gentle shower spray. Do not scrub — the honeycomb structure is delicate. Let the water run through until it comes out clear." },
+          { title: "Rinse the pads under running water", body: "Hold each pad under a tap or use a gentle shower spray. Do not scrub - the honeycomb structure is delicate. Let the water run through until it comes out clear." },
           { title: "Let them dry completely", body: "Leave the pads in the sun or a well-ventilated area for at least 2 hours before refitting. Fitting wet pads is fine but fitting pads with mould or heavy deposits is not." },
           { title: "Refit the pads and panels", body: "Slide the pads back in the correct orientation and snap the panels back on." },
         ],
@@ -530,7 +530,7 @@ export const ARTICLES: SupportArticle[] = [
         rows: [
           ["Fan Only",       "Runs the fan without the water pump. No evaporative cooling.",         "When you just want air circulation, or in very humid weather."],
           ["Cool (Pump On)", "Runs the fan AND the water pump. Full evaporative cooling.",           "Normal use on hot, dry days."],
-          ["Sleep Mode",     "Gradually reduces fan speed over 30 minutes for quieter operation.",   "At night — it won't disturb sleep and uses less power."],
+          ["Sleep Mode",     "Gradually reduces fan speed over 30 minutes for quieter operation.",   "At night - it won't disturb sleep and uses less power."],
           ["Timer",          "Automatically turns the cooler off after the set time.",               "Set it for 2–4 hours before bed so it turns off while you sleep."],
           ["Speed: Low",     "Quieter, gentle airflow.",                                             "Sleeping, working, reading."],
           ["Speed: Medium",  "Balanced airflow and noise.",                                          "Daily use."],
@@ -565,11 +565,11 @@ export const ARTICLES: SupportArticle[] = [
         type: "list",
         heading: "Safety rules to always follow",
         items: [
-          "Never touch the glass surface during or immediately after cooking — it stays hot for up to 15 minutes after switching off.",
+          "Never touch the glass surface during or immediately after cooking - it stays hot for up to 15 minutes after switching off.",
           "Never leave the cooktop unattended while in use.",
           "Keep children away from the cooktop. The surface looks the same whether it is hot or cold.",
           "Never place plastic, paper, cloth, or aluminium foil directly on the glass surface.",
-          "Do not use cracked or broken cookware — it can crack the glass.",
+          "Do not use cracked or broken cookware - it can crack the glass.",
           "Always place the cooktop on a flat, stable, heat-resistant surface with at least 10 cm of space on all sides.",
           "Never block the air vents on the bottom and sides of the cooktop.",
           "Do not use the cooktop outdoors or in a wet environment.",
@@ -582,7 +582,7 @@ export const ARTICLES: SupportArticle[] = [
       },
       {
         type: "tip",
-        body: "The cooktop will automatically shut off if it overheats or if no cookware is detected on the surface for more than 60 seconds. This is a built-in safety feature — not a fault.",
+        body: "The cooktop will automatically shut off if it overheats or if no cookware is detected on the surface for more than 60 seconds. This is a built-in safety feature - not a fault.",
       },
     ],
   },
@@ -599,7 +599,7 @@ export const ARTICLES: SupportArticle[] = [
     sections: [
       {
         type: "text",
-        body: "Infrared cooktops heat the cookware directly using radiation — unlike induction which requires a magnetic base. This means a much wider range of cookware is compatible.",
+        body: "Infrared cooktops heat the cookware directly using radiation - unlike induction which requires a magnetic base. This means a much wider range of cookware is compatible.",
       },
       {
         type: "table",
@@ -609,7 +609,7 @@ export const ARTICLES: SupportArticle[] = [
           ["Stainless steel",    "✅ Yes",  "Works perfectly. The most common choice."],
           ["Aluminium",          "✅ Yes",  "Works well. Heats quickly."],
           ["Cast iron",          "✅ Yes",  "Works well. Retains heat excellently."],
-          ["Copper",             "✅ Yes",  "Works, but heats very quickly — watch carefully."],
+          ["Copper",             "✅ Yes",  "Works, but heats very quickly - watch carefully."],
           ["Non-stick pans",     "✅ Yes",  "Works well. Use medium heat to protect the coating."],
           ["Glass / Pyrex",      "✅ Yes",  "Works, but glass heats slowly."],
           ["Clay / terracotta",  "⚠️ Partial", "Only if the base is flat and smooth. Uneven bases may crack."],
@@ -625,7 +625,7 @@ export const ARTICLES: SupportArticle[] = [
         type: "list",
         heading: "Size guidelines",
         items: [
-          "Use cookware that matches the size of the heating zone — too small and heat is wasted, too large and the edges don't heat evenly.",
+          "Use cookware that matches the size of the heating zone - too small and heat is wasted, too large and the edges don't heat evenly.",
           "Minimum recommended base diameter: 12 cm.",
           "Maximum recommended base diameter: 26 cm for a standard burner.",
         ],
@@ -676,7 +676,7 @@ export const ARTICLES: SupportArticle[] = [
         type: "list",
         heading: "Things to never use on the glass surface",
         items: [
-          "Steel wool or abrasive scouring pads — they will permanently scratch the glass.",
+          "Steel wool or abrasive scouring pads - they will permanently scratch the glass.",
           "Harsh chemical cleaners or oven cleaners.",
           "Bleach or ammonia-based products.",
           "Rough cloths or paper towels with abrasive texture.",

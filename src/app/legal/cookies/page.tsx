@@ -110,7 +110,7 @@ export default function CookiesPage() {
       <h2 style={h2}>1. What are cookies?</h2>
       <p style={p}>
         Cookies are small text files placed on your device when you visit a website. They help
-        the website remember information about your visit — for example, your preferred language
+        the website remember information about your visit - for example, your preferred language
         or whether you have previously visited a particular page. Cookies cannot execute code,
         carry viruses, or access information on your device.
       </p>
@@ -151,7 +151,7 @@ export default function CookiesPage() {
       <CookieTable rows={[
         { name: "_ga",     provider: "Google Analytics", purpose: "Distinguishes unique users for traffic analysis",    duration: "2 years"  },
         { name: "_ga_*",   provider: "Google Analytics", purpose: "Stores and counts page views for a specific site",   duration: "2 years"  },
-        { name: "_gid",    provider: "Google Analytics", purpose: "Distinguishes users — shorter-lived companion to _ga", duration: "24 hours" },
+        { name: "_gid",    provider: "Google Analytics", purpose: "Distinguishes users - shorter-lived companion to _ga", duration: "24 hours" },
         { name: "_gat_gtag_*", provider: "Google Analytics", purpose: "Throttles request rate to the Analytics servers", duration: "1 minute" },
       ]} />
 
@@ -173,7 +173,7 @@ export default function CookiesPage() {
       </p>
       <ul style={ul}>
         {[
-          <span key="ga">Google Analytics — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: "#0071e3", textDecoration: "none" }}>Google Privacy Policy</a></span>,
+          <span key="ga">Google Analytics - <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: "#0071e3", textDecoration: "none" }}>Google Privacy Policy</a></span>,
         ].map((node, i) => (
           <li key={i} style={li}><span style={dot} />{node}</li>
         ))}

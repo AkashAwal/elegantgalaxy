@@ -18,7 +18,7 @@ export { CAPACITIES, CAPACITY_SPECS, COMMON_SPECS, PHONE, PHONE_DISPLAY, WA_BASE
 export function EnquireModal({ capacity, onClose }: { capacity: number; onClose: () => void }) {
   const spec    = CAPACITY_SPECS[capacity];
   const name    = washerName(capacity);
-  const text    = `Hi, I'm interested in the ${name} — model ${spec.modelNumber}. Could you share more details?`;
+  const text    = `Hi, I'm interested in the ${name} - model ${spec.modelNumber}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
   const formUrl = `/contact?product=washing-machine&capacity=${capacity}`;
 
@@ -123,7 +123,7 @@ export default function WashingMachinesClient({
     ["Buzzer",        COMMON_SPECS.buzzer ? "Yes" : "No"],
   ];
 
-  const waText = `Hi, I'm interested in the ${name} — model ${spec.modelNumber}. Could you share more details?`;
+  const waText = `Hi, I'm interested in the ${name} - model ${spec.modelNumber}. Could you share more details?`;
   const waUrl  = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
 
   return (
@@ -137,7 +137,7 @@ export default function WashingMachinesClient({
             Cleaner Clothes, Less Effort.
           </h1>
           <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.65, maxWidth: 540 }}>
-            Semi-automatic washers built for Indian homes, from 7kg to 12kg — heavy wash pulsators,
+            Semi-automatic washers built for Indian homes, from 7kg to 12kg - heavy wash pulsators,
             diamond steel drums, and durable ABS bodies.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function WashingMachinesClient({
                     onMouseEnter={() => setHoveredThumb(i)}
                     onMouseLeave={() => setHoveredThumb(null)}
                     aria-pressed={isSelected}
-                    aria-label={`Show ${washerName(item.cap)} — ${item.angle === "front" ? "front" : "angled"} view`}
+                    aria-label={`Show ${washerName(item.cap)} - ${item.angle === "front" ? "front" : "angled"} view`}
                     style={{
                       background:   "#f0f0f5",
                       borderRadius: 8,
@@ -312,7 +312,7 @@ export default function WashingMachinesClient({
         {/* Full spec table — swaps with selected capacity */}
         <div style={{ marginTop: 56, maxWidth: 720 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>
-            Full Specifications — {capacity}kg
+            Full Specifications - {capacity}kg
           </h2>
           <div style={{ borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden", background: "#fff" }}>
             {rows.map(([label, value], i) => (

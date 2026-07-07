@@ -22,7 +22,7 @@ const JSON_LD = {
     {
       "@type": "Question",
       name:    "Are your products ISI certified?",
-      acceptedAnswer: { "@type": "Answer", text: "Yes — all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country." },
+      acceptedAnswer: { "@type": "Answer", text: "Yes - all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country." },
     },
     {
       "@type": "Question",

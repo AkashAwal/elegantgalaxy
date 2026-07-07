@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title:       "About",
   description:
-    "Elegant Galaxy has been making home appliances for Indian households since 2012. LED TVs, washing machines, air coolers, and infrared cooktops — sold in 500+ cities, with every repair handled in-house at our own factory.",
+    "Home appliances built for Indian households since 2012 - LED TVs, washing machines, air coolers, and infrared cooktops, sold in 500+ cities.",
   openGraph: {
     title:       "About Elegant Galaxy",
     description: "Built for Indian homes since 2012. LED TVs, washing machines, air coolers, and infrared cooktops.",
@@ -74,7 +74,7 @@ const PRODUCTS = [
     icon:  "📺",
     name:  "LED Televisions",
     range: "32\" – 75\"",
-    body:  "HD, Full HD, and 4K panels with Dolby Audio support and thin-bezel design. Built for bedrooms, living rooms, and home theatres — with smart connectivity on select models.",
+    body:  "HD, Full HD, and 4K panels with Dolby Audio support and thin-bezel design. Built for bedrooms, living rooms, and home theatres - with smart connectivity on select models.",
     href:  "/products/led-tvs",
   },
   {
@@ -95,7 +95,7 @@ const PRODUCTS = [
     icon:  "🍳",
     name:  "Infrared Cooktops",
     range: "Single & double burner",
-    body:  "Touch-panel controls, child-lock, and 8 power levels. Compatible with Indian flat-base cookware — tawa, pressure cooker, and kadai. No open flame, no gas line, no combustion risk.",
+    body:  "Touch-panel controls, child-lock, and 8 power levels. Compatible with Indian flat-base cookware - tawa, pressure cooker, and kadai. No open flame, no gas line, no combustion risk.",
     href:  "/products/infrared-cooktop",
   },
 ];
@@ -104,17 +104,17 @@ const PRINCIPLES = [
   {
     number: "01",
     title:  "Honest engineering",
-    body:   "We don't add features to hit a spec count. Every feature in an Elegant Galaxy product exists because customers said they needed it — or because service data showed the absence was causing problems. We review service records before every product revision.",
+    body:   "We don't add features to hit a spec count. Every feature in an Elegant Galaxy product exists because customers said they needed it - or because service data showed the absence was causing problems. We review service records before every product revision.",
   },
   {
     number: "02",
     title:  "Built to last",
-    body:   "Our products are designed for a 10+ year lifespan. Spare parts are stocked for 8 years post-purchase, and our service manuals are written for repairability — not replacement. Durability is a design requirement, not a marketing claim.",
+    body:   "Our products are designed for a 10+ year lifespan. Spare parts are stocked for 8 years post-purchase, and our service manuals are written for repairability - not replacement. Durability is a design requirement, not a marketing claim.",
   },
   {
     number: "03",
     title:  "Service you can count on",
-    body:   "Every repair is handled in-house by our own factory technicians — no third-party centres. Reach us through the retailer you bought from, or call our customer care team directly, Mon–Sat, 9 AM – 6 PM IST. We believe the relationship with a customer doesn't end at the point of sale — it starts there.",
+    body:   "Every repair is handled in-house by our own factory technicians - no third-party centres. Reach us through the retailer you bought from, or call our customer care team directly, Mon–Sat, 9 AM – 6 PM IST. We believe the relationship with a customer doesn't end at the point of sale - it starts there.",
   },
 ];
 
@@ -191,10 +191,10 @@ export default function AboutPage() {
             {/* Right: story content */}
             <div className="flex-1 min-w-0" style={{ maxWidth: 680 }}>
               <p style={{ fontSize: 17, lineHeight: 1.8, color: "#3a3a3c", marginBottom: 28 }}>
-                Elegant Galaxy was founded in 2012 with a straightforward conviction: Indian households deserve home appliances that are honestly engineered, genuinely durable, and priced for real life — not the showroom floor. The company started with a focused range of LED televisions and expanded deliberately over the following decade into washing machines, air coolers, and infrared cooktops.
+                Elegant Galaxy was founded in 2012 with a straightforward conviction: Indian households deserve home appliances that are honestly engineered, genuinely durable, and priced for real life - not the showroom floor. The company started with a focused range of LED televisions and expanded deliberately over the following decade into washing machines, air coolers, and infrared cooktops.
               </p>
               <p style={{ fontSize: 17, lineHeight: 1.8, color: "#3a3a3c", marginBottom: 28 }}>
-                Each new product category was entered only after we identified a consistent gap between what Indian consumers needed and what the market was delivering. Our product decisions are driven by service records, customer feedback, and field research conducted across Indian households — not global trend reports. When we added infrared cooktops, it was because customers kept asking us how to cook safely when gas wasn't available. When we expanded our washing machine range, it was because our service data showed which features actually got used and which didn't.
+                Each new product category was entered only after we identified a consistent gap between what Indian consumers needed and what the market was delivering. Our product decisions are driven by service records, customer feedback, and field research conducted across Indian households - not global trend reports. When we added infrared cooktops, it was because customers kept asking us how to cook safely when gas wasn't available. When we expanded our washing machine range, it was because our service data showed which features actually got used and which didn't.
               </p>
               <p style={{ fontSize: 17, lineHeight: 1.8, color: "#3a3a3c" }}>
                 Today, Elegant Galaxy appliances are used in over two million homes across more than 500 cities in India. Our distribution network reaches Tier 1, Tier 2, and Tier 3 cities alike, and every repair is still handled in-house by our own factory technicians rather than outsourced to third parties. The founding team remains involved in product review. That commitment to staying close to the product hasn't changed since the first television shipped in 2012.
@@ -399,7 +399,7 @@ export default function AboutPage() {
                 Pan-India reach. Factory-direct service.
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.75, color: "#6e6e73" }}>
-                Elegant Galaxy products are available through authorised distributors and dealer networks in over 500 cities — from metros to Tier 3 towns. Every repair, however, is handled in-house at our own factory by our trained technicians, with parts inventory kept for every product currently in production, plus products up to 8 years old. Contact the retailer you bought from, or reach our customer care team directly, and we'll take it from there.
+                Elegant Galaxy products are available through authorised distributors and dealer networks in over 500 cities - from metros to Tier 3 towns. Every repair, however, is handled in-house at our own factory by our trained technicians, with parts inventory kept for every product currently in production, plus products up to 8 years old. Contact the retailer you bought from, or reach our customer care team directly, and we'll take it from there.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0 }}>

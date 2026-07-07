@@ -149,7 +149,7 @@ export default function TestimonialsSection({
                   <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
                 </svg>
                 <span style={{ fontSize: 13.5, fontWeight: 600, color: "#1d1d1f" }}>
-                  {overallRating != null ? overallRating.toFixed(1) : "—"}
+                  {overallRating != null ? overallRating.toFixed(1) : "-"}
                 </span>
                 <div style={{ display: "flex", gap: 1 }}>
                   {Array.from({ length: 5 }).map((_, i) => (

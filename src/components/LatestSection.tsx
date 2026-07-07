@@ -99,7 +99,7 @@ export default function LatestSection() {
           {/* ── Right: image ───────────────────────────────────────────── */}
           {/*
             aspectRatio (not a fixed height) so the photo fills the box at any
-            width — a fixed 480px height left illustrations floating tiny
+            width - a fixed 480px height left illustrations floating tiny
             inside a mostly-empty box on narrow mobile screens.
           */}
           <div className="w-full" style={{ flex: 1.3, minWidth: 0 }}>

@@ -30,7 +30,7 @@ const FALLBACK_REVIEWS: ReviewItem[] = [
     rating: 5,
   },
   {
-    quote:  "Free installation was a lifesaver — the technician arrived on time and even walked us through the app setup. Great after-sales support.",
+    quote:  "Free installation was a lifesaver - the technician arrived on time and even walked us through the app setup. Great after-sales support.",
     name:   "Rohan Mehta",
     rating: 5,
   },

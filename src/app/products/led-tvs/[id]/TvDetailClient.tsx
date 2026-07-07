@@ -78,7 +78,7 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
                   <div style={{ width: "100%", maxWidth: 440 }}>
                     <Image
                       src={gallery[galleryIndex]}
-                      alt={`${model.platform} — photo ${galleryIndex + 1}`}
+                      alt={`${model.platform} - photo ${galleryIndex + 1}`}
                       width={500}
                       height={354}
                       style={{ width: "100%", height: "auto" }}
@@ -251,7 +251,7 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
           return (
             <div style={{ marginTop: 56, maxWidth: 720 }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>
-                Full Specifications — {size}&quot;
+                Full Specifications - {size}&quot;
               </h2>
               <div style={{ borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden", background: "#fff" }}>
                 {rows.map(([label, value], i) => (

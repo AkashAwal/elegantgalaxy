@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "Do you offer no-cost EMI?",
-    a: "Yes. We offer no-cost EMI across all major banks and credit cards — split your purchase into 3, 6, 9, or 12 monthly instalments with zero extra cost.",
+    a: "Yes. We offer no-cost EMI across all major banks and credit cards - split your purchase into 3, 6, 9, or 12 monthly instalments with zero extra cost.",
   },
   {
     q: "How do I get my product repaired?",
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: "What is your return policy?",
-    a: "We offer a 30-day hassle-free return policy on all products. Contact our customer support team and we'll arrange a pickup and full refund — no questions asked.",
+    a: "We offer a 30-day hassle-free return policy on all products. Contact our customer support team and we'll arrange a pickup and full refund - no questions asked.",
   },
   {
     q: "How long does delivery take?",
@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     q: "Are your products ISI certified?",
-    a: "Yes — all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country.",
+    a: "Yes - all Elegant Galaxy products are ISI certified by the Bureau of Indian Standards, meeting the highest safety and quality benchmarks in the country.",
   },
   {
     q: "Do you offer free installation?",
@@ -49,7 +49,7 @@ function FAQItem({
   return (
     <div style={{ borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
       {/*
-        Native <button> already carries role="button" implicitly — no need to
+        Native <button> already carries role="button" implicitly - no need to
         add it explicitly. aria-expanded + aria-controls are what matters here.
       */}
       <button

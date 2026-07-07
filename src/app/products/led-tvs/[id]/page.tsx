@@ -15,7 +15,7 @@ export async function generateMetadata(
   if (!model) return {};
   return {
     title:       model.platform,
-    description: `Elegant Galaxy ${model.platform} — available in ${model.sizes.map((s) => `${s}"`).join(", ")}.`,
+    description: `Elegant Galaxy ${model.platform} - available in ${model.sizes.map((s) => `${s}"`).join(", ")}.`,
     alternates:  { canonical: `/products/led-tvs/${id}` },
   };
 }

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name:             "Elegant Galaxy",
     short_name:       "Elegant Galaxy",
-    description:      "Home appliances built for Indian households — LED TVs, washing machines, air coolers, and infrared cooktops. Since 2012.",
+    description:      "Home appliances built for Indian households - LED TVs, washing machines, air coolers, and infrared cooktops. Since 2012.",
     start_url:        "/",
     display:          "standalone",
     background_color: "#1d1d1f",

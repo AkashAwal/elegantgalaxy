@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "Do you offer no-cost EMI?",
-    a: "Yes — split your purchase into 3, 6, 9, or 12 monthly instalments across all major banks and credit cards at zero extra cost.",
+    a: "Yes - split your purchase into 3, 6, 9, or 12 monthly instalments across all major banks and credit cards at zero extra cost.",
   },
   {
     q: "Do you offer free installation?",

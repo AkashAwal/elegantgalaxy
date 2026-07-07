@@ -73,7 +73,7 @@
     /* No border-radius override: modern browsers already follow each
        element's own border-radius when drawing outlines. Forcing 4px here
        would square-off pill buttons and round-corner cards while they are
-       focused — the opposite of what we want. */
+       focused - the opposite of what we want. */
   }
 }
 
@@ -81,7 +81,7 @@
    In this mode the browser replaces all custom colours with system palette
    colours. We keep the outline present and use the system ButtonText colour
    so the ring is guaranteed to be visible against whatever system theme is
-   active — no further changes needed from our side.                           */
+   active - no further changes needed from our side.                           */
 @media (forced-colors: active) {
   :focus-visible {
     outline-color: ButtonText;
