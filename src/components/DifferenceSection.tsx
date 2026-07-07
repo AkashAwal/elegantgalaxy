@@ -23,26 +23,6 @@ function IconEnergy() {
     </svg>
   );
 }
-function IconEMI() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect x="4" y="9" width="28" height="18" rx="4" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.6" />
-      <rect x="4" y="14" width="28" height="5" fill="#3b82f6" fillOpacity="0.25" />
-      <rect x="8" y="21" width="8" height="2.5" rx="1.25" fill="#3b82f6" />
-      <rect x="20" y="21" width="4" height="2.5" rx="1.25" fill="#3b82f6" />
-      <rect x="26" y="21" width="4" height="2.5" rx="1.25" fill="#3b82f6" />
-    </svg>
-  );
-}
-function IconInstall() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#fef3c7" />
-      <path d="M23.5 12.5a5 5 0 0 0-7 7l-5 5 2 2 5-5a5 5 0 0 0 7-7l-3 3-2-2 3-3z"
-        fill="#d97706" />
-    </svg>
-  );
-}
 function IconService() {
   return (
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
@@ -71,17 +51,6 @@ function IconSupport() {
     </svg>
   );
 }
-function IconReturns() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#fff7ed" />
-      <path d="M11 18a7 7 0 0 1 12-4.9" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <path d="M25 18a7 7 0 0 1-12 4.9" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <path d="M9 13l2 5 5-2" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M27 23l-2-5-5 2" stroke="#ea580c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 function IconDelivery() {
   return (
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
@@ -93,13 +62,12 @@ function IconDelivery() {
     </svg>
   );
 }
-function IconAward() {
+function IconTrusted() {
   return (
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="16" r="10" fill="#fef9c3" stroke="#ca8a04" strokeWidth="1.6" />
-      <path d="M18 10l1.8 5.4h5.7l-4.6 3.4 1.8 5.4L18 21l-4.7 3.2 1.8-5.4-4.6-3.4h5.7L18 10z"
-        fill="#ca8a04" />
-      <path d="M13 25l-2 7h14l-2-7" stroke="#ca8a04" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+      <circle cx="18" cy="18" r="14" fill="#fef3c7" />
+      <path d="M18 9a9 9 0 1 0 9 9" stroke="#d97706" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      <path d="M18 9v9l6 3" stroke="#d97706" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -115,14 +83,11 @@ type DiffCard = {
 const CARDS: DiffCard[] = [
   { icon: <IconWarranty />,  title: "1-Year Warranty",       desc: "Every product backed by our industry-leading 1-year warranty."          },
   { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power." },
-  { icon: <IconEMI />,       title: "No-Cost EMI",            desc: "Split your purchase into easy monthly instalments at zero extra cost."    },
-  { icon: <IconInstall />,   title: "Free Installation",      desc: "Expert technicians set everything up - free of charge, at your doorstep." },
   { icon: <IconService />,   title: "Factory Repairs",        desc: "Every repair handled in-house by our own technicians - never outsourced." },
   { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards."         },
-  { icon: <IconSupport />,   title: "24 / 7 Support",         desc: "Our customer care team is available around the clock, every day."        },
-  { icon: <IconReturns />,   title: "30-Day Returns",         desc: "Not happy? Return any product within 30 days, no questions asked."       },
+  { icon: <IconSupport />,   title: "Real Customer Care",     desc: "Reach our support team Mon-Sat, 9 AM - 6 PM IST - always a real person." },
   { icon: <IconDelivery />,  title: "Pan-India Delivery",     desc: "Fast, tracked delivery to every pin code across the country."            },
-  { icon: <IconAward />,     title: "Award-Winning Design",   desc: "Recognised for design excellence at national and international forums."   },
+  { icon: <IconTrusted />,   title: "Trusted Since 2012",     desc: "Over 2 million homes across 500+ Indian cities trust Elegant Galaxy."     },
 ];
 
 const LOOPED = [...CARDS, ...CARDS];
