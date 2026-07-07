@@ -22,7 +22,7 @@ const CATEGORIES = [
   {
     label:  "Washing Machines",
     href:   "/products/washing-machines",
-    image:  "/washing%20machines/6.svg",
+    image:  "/washing-machines/6.svg",
     width:  700,
     height: 700,
   },
