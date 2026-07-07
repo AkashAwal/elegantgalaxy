@@ -156,8 +156,8 @@ export const MODELS: TvModel[] = [
   },
 ];
 
-export const PHONE         = "+919540699333";
-export const PHONE_DISPLAY = "+91 95406 99333";
+export const PHONE         = "+919540064444";
+export const PHONE_DISPLAY = "+91 95400 64444";
 export const WA_NUMBER     = "+919540064444";
 export const WA_BASE       = `https://wa.me/${WA_NUMBER}`;
 
