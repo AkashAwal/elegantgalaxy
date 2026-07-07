@@ -57,7 +57,7 @@ function isGibberish(str: string): boolean {
 const INITIAL_FORM = {
   name: "", businessName: "", businessType: "", email: "", phone: "",
   location: "", state: "", companyAddress: "",
-  ownerDesignation: "", gstNo: "", panNo: "", brandsText: "",
+  ownerDesignation: "", gstNo: "", panNo: "", brandsText: "", website: "",
 };
 
 export default function DistributorApplyForm() {
@@ -207,6 +207,17 @@ export default function DistributorApplyForm() {
       boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
     }}>
       <form onSubmit={handleSubmit} noValidate>
+        {/* Honeypot — hidden from sighted/keyboard/screen-reader users, but
+            visible to naive bots that auto-fill every input on the page. */}
+        <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+          <label htmlFor="website">Website</label>
+          <input
+            id="website" name="website" type="text" tabIndex={-1} autoComplete="off"
+            value={form.website}
+            onChange={e => set("website", e.target.value)}
+          />
+        </div>
+
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
           {/* Row 1: Name + Business name */}

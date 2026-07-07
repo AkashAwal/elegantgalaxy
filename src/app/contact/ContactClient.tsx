@@ -111,7 +111,7 @@ export default function ContactClient() {
   const defaultMessage = enquireProduct ? `I want to enquire about the ${enquireProduct}.` : "";
   const contextLabel   = enquireProduct ? `Enquiring about: ${enquireProduct}` : null;
 
-  const [form, setForm]           = useState({ name: "", email: "", phone: "", location: "", message: defaultMessage });
+  const [form, setForm]           = useState({ name: "", email: "", phone: "", location: "", message: defaultMessage, website: "" });
   const [errors, setErrors]       = useState<Record<string, string>>({});
   const [focused, setFocused]     = useState<Record<string, boolean>>({});
   const [status, setStatus]       = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -337,6 +337,17 @@ export default function ContactClient() {
             )}
 
             <form onSubmit={handleSubmit} noValidate>
+              {/* Honeypot — hidden from sighted/keyboard/screen-reader users, but
+                  visible to naive bots that auto-fill every input on the page. */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website" name="website" type="text" tabIndex={-1} autoComplete="off"
+                  value={form.website}
+                  onChange={e => set("website", e.target.value)}
+                />
+              </div>
+
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
                 {/* Row 1: Name + Email — stack on mobile */}

@@ -5,6 +5,30 @@ import type { MxRecord } from "dns";
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 const CHAT_ID   = process.env.TELEGRAM_CHAT_ID!;
 
+// ── Rate limiting ───────────────────────────────────────────────────────────
+// Best-effort, in-memory, per-IP. Resets on deploy/restart and doesn't share
+// state across serverless instances — good enough to blunt basic spam/abuse
+// without adding a database or a visible CAPTCHA.
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RATE_LIMIT_MAX       = 5;              // submissions per IP per window
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now   = Date.now();
+  const entry = hits.get(ip);
+  if (!entry || now > entry.resetAt) {
+    hits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT_MAX;
+}
+
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  return forwarded?.split(",")[0].trim() || "unknown";
+}
+
 // ── Disposable / throwaway email domains ──────────────────────────────────────
 const DISPOSABLE = new Set([
   "mailinator.com","tempmail.com","guerrillamail.com","10minutemail.com",
@@ -51,10 +75,21 @@ async function hasMX(domain: string): Promise<boolean> {
 // ── Route handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
+    if (isRateLimited(getClientIp(req)))
+      return NextResponse.json({ error: "Too many submissions. Please try again later." }, { status: 429 });
+
     const {
       name, email, countryCode, phone, location, message, businessName, businessType,
       state, companyAddress, ownerDesignation, gstNo, panNo, brandsText, agreedToTerms,
+      website, // honeypot — real users never see or fill this field
     } = (await req.json()) as Record<string, string> & { agreedToTerms?: boolean };
+
+    // ── Honeypot ──────────────────────────────────────────────────────────────
+    // Bots that auto-fill every input will populate this hidden field. Report
+    // success without actually sending anything, so the bot doesn't learn
+    // it was caught and keep retrying with different payloads.
+    if ((website ?? "").trim().length > 0)
+      return NextResponse.json({ success: true });
 
     // ── Name ──────────────────────────────────────────────────────────────────
     const cleanName = (name ?? "").trim();
