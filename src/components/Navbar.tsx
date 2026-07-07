@@ -58,7 +58,6 @@ const NAV: NavItem[] = [
           { label: "TV Support",           href: "/support?category=led-tvs" },
           { label: "Warranty",             href: "/support/warranty" },
           { label: "Contact Us",      href: "/contact" },
-          { label: "Energy Ratings",       href: "/products/led-tvs/energy" },
         ],
       },
     ],
@@ -72,6 +71,7 @@ const NAV: NavItem[] = [
       {
         heading: "Explore Washing Machines",
         primary: [
+          { label: "Explore All Washing Machines", href: "/products/washing-machines" },
           { label: "7kg",  href: "/products/washing-machines?cap=7" },
           { label: "8kg",  href: "/products/washing-machines?cap=8" },
           { label: "9kg",  href: "/products/washing-machines?cap=9" },
@@ -93,7 +93,6 @@ const NAV: NavItem[] = [
           { label: "Washing Machine Support",      href: "/support?category=washing-machines" },
           { label: "Warranty",                     href: "/support/warranty" },
           { label: "Contact Us",              href: "/contact" },
-          { label: "Energy Ratings",               href: "/products/washing-machines/energy" },
         ],
       },
     ],
@@ -125,7 +124,6 @@ const NAV: NavItem[] = [
           { label: "Air Cooler Support",      href: "/support?category=air-coolers" },
           { label: "Warranty",                href: "/support/warranty" },
           { label: "Contact Us",         href: "/contact" },
-          { label: "Energy Ratings",          href: "/products/air-coolers/energy" },
         ],
       },
     ],
@@ -139,18 +137,10 @@ const NAV: NavItem[] = [
       {
         heading: "Explore Infrared Cooktops",
         primary: [
-          { label: "Explore All Cooktops",    href: "/products/infrared-cooktops" },
-          { label: "Single Burner",           href: "/products/infrared-cooktops?burners=single-burner" },
-          { label: "Double Burner",           href: "/products/infrared-cooktops?burners=double-burner" },
+          { label: "Shop Infrared Cooktops", href: "/products/infrared-cooktops" },
         ],
         links: [
           { label: "Why Infrared?",           href: "/products/infrared-cooktops/why-infrared" },
-        ],
-      },
-      {
-        heading: "Shop Infrared Cooktops",
-        links: [
-          { label: "Shop Cooktops",           href: "/products/infrared-cooktops" },
         ],
       },
       {
@@ -159,7 +149,6 @@ const NAV: NavItem[] = [
           { label: "Cooktop Support",         href: "/support?category=infrared-cooktops" },
           { label: "Warranty",                href: "/support/warranty" },
           { label: "Contact Us",         href: "/contact" },
-          { label: "Safety Certifications",   href: "/products/infrared-cooktops/safety" },
         ],
       },
     ],

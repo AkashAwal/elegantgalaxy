@@ -37,8 +37,7 @@ const PRODUCT_COLS = [
     heading: "Infrared Cooktops",
     href:    "/products/infrared-cooktops",
     links: [
-      { label: "Single Burner", href: "/products/infrared-cooktops?burners=single-burner" },
-      { label: "Double Burner", href: "/products/infrared-cooktops?burners=double-burner" },
+      { label: "Single Burner Cooktop", href: "/products/infrared-cooktops" },
     ],
   },
 ];

@@ -12,8 +12,7 @@ import { MODELS as TV_MODELS, tvName } from "@/data/led-tvs";
 import { CAPACITY_SPECS as WASHER_SPECS, washerName } from "@/data/washing-machines";
 import { MODELS as COOLER_MODELS } from "@/data/air-coolers";
 import { CoolerIllustration } from "@/app/products/air-coolers/AirCoolersClient";
-import { MODELS as COOKTOP_MODELS, burnerLabel } from "@/data/infrared-cooktops";
-import { CooktopSvg } from "@/app/products/infrared-cooktops/InfraredCooktopsClient";
+import { NAME as COOKTOP_NAME, WATTS as COOKTOP_WATTS, IMAGES as COOKTOP_IMAGES } from "@/data/infrared-cooktops";
 
 // ─── Featured picks — real models pulled from each category page ─────────────
 
@@ -27,11 +26,6 @@ const iceCool100    = COOLER_MODELS.find((m) => m.id === "c-ice-cool-100-1")!;
 const iceStorm160   = COOLER_MODELS.find((m) => m.id === "c-ice-storm-160-1")!;
 const iceWind90     = COOLER_MODELS.find((m) => m.id === "d-ice-wind-90")!;
 const windStormPlus = COOLER_MODELS.find((m) => m.id === "d-wind-storm-plus")!;
-
-const cooktop1 = COOKTOP_MODELS.find((m) => m.id === "ct-1a")!;
-const cooktop2 = COOKTOP_MODELS.find((m) => m.id === "ct-2a")!;
-const cooktop3 = COOKTOP_MODELS.find((m) => m.id === "ct-3a")!;
-const cooktop4 = COOKTOP_MODELS.find((m) => m.id === "ct-4a")!;
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -87,10 +81,7 @@ const SHELVES: Shelf[] = [
     category:     "Infrared Cooktops",
     categoryHref: "/products/infrared-cooktops",
     products: [
-      { id: cooktop1.id, name: cooktop1.name, subtitle: `${burnerLabel(cooktop1.burners)} · ${cooktop1.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop1.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop1.burners} /> },
-      { id: cooktop2.id, name: cooktop2.name, subtitle: `${burnerLabel(cooktop2.burners)} · ${cooktop2.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop2.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop2.burners} /> },
-      { id: cooktop3.id, name: cooktop3.name, subtitle: `${burnerLabel(cooktop3.burners)} · ${cooktop3.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop3.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop3.burners} /> },
-      { id: cooktop4.id, name: cooktop4.name, subtitle: `${burnerLabel(cooktop4.burners)} · ${cooktop4.totalWattage}W`, href: `/products/infrared-cooktops/${cooktop4.id}`, bg: "#18181b", illustration: <CooktopSvg burners={cooktop4.burners} /> },
+      { id: "cooktop", name: COOKTOP_NAME, subtitle: `Single Burner · ${COOKTOP_WATTS}W`, href: `/products/infrared-cooktops`, bg: "#f0f0f5", imageSrc: COOKTOP_IMAGES.front },
     ],
   },
 ];

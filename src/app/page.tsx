@@ -18,34 +18,38 @@ export const metadata: Metadata = {
 
 // ── Category data — real product photos ────────────────────────────────────────
 
+// Each image below is pre-cropped to its content's bounding box (no baked-in
+// transparent padding) so the fixed flex gap between tiles reads as equal
+// spacing everywhere, instead of stacking with whatever padding the source
+// asset happened to have.
 const CATEGORIES = [
   {
     label:  "LED TVs",
     href:   "/products/led-tvs",
-    image:  "/images/tvs/android-front.webp",
-    width:  1000,
-    height: 706,
+    image:  "/images/tvs/android-front-homepage.png",
+    width:  810,
+    height: 487,
   },
   {
     label:  "Washing Machines",
     href:   "/products/washing-machines",
-    image:  "/washing-machines/6.svg",
-    width:  700,
-    height: 700,
+    image:  "/washing-machines/washer-homepage.png",
+    width:  882,
+    height: 1368,
   },
   {
     label:  "Air Coolers",
     href:   "/products/air-coolers",
-    image:  "/images/air-coolers/commercial-front.jpg",
+    image:  "/images/air-coolers/commercial-front-homepage.png",
     width:  476,
     height: 761,
   },
   {
     label:  "Infrared Cooktops",
     href:   "/products/infrared-cooktops",
-    image:  "/images/infrared-cooktops/cooktop-1burner-front.jpg",
-    width:  940,
-    height: 700,
+    image:  "/cooktops/cooktop-homepage.png",
+    width:  900,
+    height: 838,
   },
 ];
 
