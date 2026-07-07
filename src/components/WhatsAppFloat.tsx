@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PHONE } from "@/data/led-tvs";
+import { WA_NUMBER } from "@/data/led-tvs";
 
-const WA_HREF = `https://wa.me/${PHONE.replace("+", "")}?text=${encodeURIComponent(
+const WA_HREF = `https://wa.me/${WA_NUMBER.replace("+", "")}?text=${encodeURIComponent(
   "Hi Elegant Galaxy, I'd like to enquire about a product."
 )}`;
 

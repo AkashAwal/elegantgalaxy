@@ -30,6 +30,7 @@ export const MODELS: CooktopModel[] = [
 export const BURNER_COUNTS = [1, 2, 3, 4];
 export const PHONE         = "+919540699333";
 export const PHONE_DISPLAY = "+91 95406 99333";
-export const WA_BASE       = `https://wa.me/${PHONE}`;
+export const WA_NUMBER     = "+919540064444";
+export const WA_BASE       = `https://wa.me/${WA_NUMBER}`;
 
 export const burnerLabel = (n: number) => n === 1 ? "Single Burner" : n === 2 ? "Double Burner" : `${n}-Burner`;

@@ -169,19 +169,19 @@ export function EnquireModal({ model, onClose }: { model: CoolerModel; onClose: 
         </p>
         <p style={{ fontSize: 14, color: "#6e6e73", marginBottom: 28 }}>{model.modelNumber} &middot; {model.type === "commercial" ? "Commercial" : "Desert"} Cooler</p>
 
-        <a href={`tel:${PHONE}`} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#0071e3", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
-          <Phone size={20} strokeWidth={2} style={{ flexShrink: 0 }} />
-          <div>
-            <div style={{ fontSize: 15, fontWeight: 700 }}>Call Us</div>
-            <div style={{ fontSize: 12, opacity: 0.8, marginTop: 1 }}>{PHONE_DISPLAY} &middot; Mon–Sat, 9 AM–6 PM</div>
-          </div>
-        </a>
-
         <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#25D366", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
           <WhatsAppIcon size={20} />
           <div>
             <div style={{ fontSize: 15, fontWeight: 700 }}>WhatsApp Us</div>
             <div style={{ fontSize: 12, opacity: 0.88, marginTop: 1 }}>Quick reply during business hours</div>
+          </div>
+        </a>
+
+        <a href={`tel:${PHONE}`} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#0071e3", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
+          <Phone size={20} strokeWidth={2} style={{ flexShrink: 0 }} />
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 700 }}>Call Us</div>
+            <div style={{ fontSize: 12, opacity: 0.8, marginTop: 1 }}>{PHONE_DISPLAY} &middot; Mon–Sat, 9 AM–6 PM</div>
           </div>
         </a>
 
