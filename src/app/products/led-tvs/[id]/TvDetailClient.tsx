@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, Phone } from "lucide-react";
+import { ChevronRight, ChevronLeft, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName, type TvModel } from "@/data/led-tvs";
 import { TvIcon, EnquireModal } from "../LedTvsClient";
@@ -13,6 +13,14 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
     initialSize && model.sizes.includes(initialSize) ? initialSize : model.sizes[0]
   );
   const [showEnquire, setShowEnquire] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const [hoveredThumb, setHoveredThumb] = useState<number | null>(null);
+
+  const gallery = model.gallery;
+  const stepGallery = (dir: 1 | -1) => {
+    if (!gallery) return;
+    setGalleryIndex((i) => (i + dir + gallery.length) % gallery.length);
+  };
 
   const displayName = tvName(model, size);
   const resolution   = model.resolution[size] ?? "Full HD";
@@ -49,8 +57,50 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
               padding: 32,
               marginBottom: 14,
               border: "1px solid rgba(0,0,0,0.06)",
+              position: "relative",
             }}>
-              {model.images ? (
+              {gallery ? (
+                <>
+                  <button
+                    onClick={() => stepGallery(-1)}
+                    aria-label="Previous photo"
+                    style={{
+                      position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+                      width: 36, height: 36, borderRadius: "50%", border: "none",
+                      background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                    }}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  <div style={{ width: "100%", maxWidth: 440 }}>
+                    <Image
+                      src={gallery[galleryIndex]}
+                      alt={`${model.platform} — photo ${galleryIndex + 1}`}
+                      width={500}
+                      height={354}
+                      style={{ width: "100%", height: "auto" }}
+                      priority
+                    />
+                  </div>
+
+                  <button
+                    onClick={() => stepGallery(1)}
+                    aria-label="Next photo"
+                    style={{
+                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                      width: 36, height: 36, borderRadius: "50%", border: "none",
+                      background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                    }}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </>
+              ) : model.images ? (
                 <Image
                   src={model.images.front}
                   alt={`${model.platform} TV`}
@@ -63,6 +113,43 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
                 <TvIcon />
               )}
             </div>
+
+            {gallery && (
+              <div className="grid grid-cols-6" style={{ gap: 6 }}>
+                {gallery.map((src, i) => {
+                  const isSelected = i === galleryIndex;
+                  const isHovered  = hoveredThumb === i;
+                  return (
+                    <button
+                      key={src}
+                      onClick={() => setGalleryIndex(i)}
+                      onMouseEnter={() => setHoveredThumb(i)}
+                      onMouseLeave={() => setHoveredThumb(null)}
+                      aria-pressed={isSelected}
+                      aria-label={`Show photo ${i + 1}`}
+                      style={{
+                        background:   "#f0f0f5",
+                        borderRadius: 8,
+                        padding:      3,
+                        border:       isSelected ? "2px solid #0071e3" : "2px solid transparent",
+                        boxShadow:    isSelected
+                          ? "0 3px 10px rgba(0,113,227,0.22)"
+                          : isHovered
+                            ? "0 3px 8px rgba(0,0,0,0.1)"
+                            : "none",
+                        cursor:       "pointer",
+                        transform:    isHovered && !isSelected ? "translateY(-2px)" : "translateY(0)",
+                        transition:   "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+                      }}
+                    >
+                      <div style={{ width: "100%", position: "relative", aspectRatio: "1 / 1" }}>
+                        <Image src={src} alt="" fill style={{ objectFit: "contain" }} sizes="60px" />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Details */}
