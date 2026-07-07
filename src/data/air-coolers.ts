@@ -3,30 +3,35 @@
 export type FrontGrill = "spiral" | "louver";
 export type CoolerType = "commercial" | "desert";
 
+export interface CapacitySpec {
+  modelNumber: string;
+  pumpWattage: number;
+  airThrow: number;
+  dimensions: string;
+  packDimensions: string;
+}
+
 export interface CoolerModel {
   id: string;
-  modelNumber: string;
   name: string;
   type: CoolerType;
   frontGrill: FrontGrill;
   honeycombSides: 1 | 3;
-  capacity: number;
+  capacities: number[];
   bodyMaterial: string;
   motor: string;
   motorRotation: string;
-  pumpWattage: number;
   fanSize: string;
   rpm: number;
   airDelivery: number;
-  airThrow: number;
   honeycombSpec: string;
   cordLength: string;
   bladeMaterial: string;
   motorMount: string;
-  dimensions: string;
-  packDimensions: string;
   /** Real product photo under /public. When set, shown instead of the generic cooler illustration. */
   images?: { front: string };
+  /** Specs that vary by capacity. */
+  capacitySpecs: Record<number, CapacitySpec>;
 }
 
 const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.jpg" };
@@ -57,7 +62,6 @@ const DESERT_BASE = {
   bodyMaterial: "PPCP",
   motor: "93W Nirosha",
   motorRotation: "CW (Load 180W)",
-  pumpWattage: 18,
   fanSize: '16"',
   rpm: 1350,
   airDelivery: 5000,
@@ -69,250 +73,126 @@ const DESERT_BASE = {
 };
 
 export const MODELS: CoolerModel[] = [
-  // ── 100L Commercial ───────────────────────────────────────────────────────
+  // ── Commercial — Spiral grill ─────────────────────────────────────────────
   {
     ...COMMERCIAL_BASE,
-    id: "c-ice-cool-100-1",
-    modelNumber: "SFGM32-H1-100L DG",
+    id: "c-ice-cool",
     name: "ICE COOL",
     frontGrill: "spiral",
     images: SPIRAL_IMAGE,
     honeycombSides: 1,
-    capacity: 100,
-    pumpWattage: 20,
     fanSize: '19"',
     airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1355 mm",
-    packDimensions: "665 × 875 × 1295 mm",
+    capacities: [100, 130, 160],
+    capacitySpecs: {
+      100: { modelNumber: "SFGM32-H1-100L DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1355 mm", packDimensions: "665 × 875 × 1295 mm" },
+      130: { modelNumber: "SFGM35-H1-130L DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1395 mm", packDimensions: "665 × 875 × 1355 mm" },
+      160: { modelNumber: "SFGM35-H1-160L DG", pumpWattage: 25, airThrow: 80, dimensions: "610 × 800 × 1455 mm", packDimensions: "665 × 875 × 1420 mm" },
+    },
   },
   {
     ...COMMERCIAL_BASE,
-    id: "c-ice-cool-plus-100",
-    modelNumber: "SFGM32-H3-100L-DG",
+    id: "c-ice-cool-plus",
     name: "ICE COOL+",
     frontGrill: "spiral",
     images: SPIRAL_IMAGE,
     honeycombSides: 3,
-    capacity: 100,
-    pumpWattage: 20,
     fanSize: '19"',
     airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1355 mm",
-    packDimensions: "665 × 875 × 1295 mm",
+    capacities: [100, 130, 160],
+    capacitySpecs: {
+      100: { modelNumber: "SFGM32-H3-100L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1355 mm", packDimensions: "665 × 875 × 1295 mm" },
+      130: { modelNumber: "SFGM35-H3-130L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1395 mm", packDimensions: "665 × 875 × 1355 mm" },
+      160: { modelNumber: "SFGM35-H3-160L-DG", pumpWattage: 25, airThrow: 80, dimensions: "610 × 800 × 1455 mm", packDimensions: "665 × 875 × 1420 mm" },
+    },
   },
+  // ── Commercial — Louver grill ─────────────────────────────────────────────
   {
     ...COMMERCIAL_BASE,
-    id: "c-ice-storm-100-1",
-    modelNumber: "LFGM32-H1-100L-DG",
+    id: "c-ice-storm",
     name: "ICE STORM",
     frontGrill: "louver",
     images: LOUVER_IMAGE,
     honeycombSides: 1,
-    capacity: 100,
-    pumpWattage: 20,
     fanSize: '18.5"',
     airDelivery: 8000,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1355 mm",
-    packDimensions: "665 × 875 × 1295 mm",
+    capacities: [100, 130, 160],
+    capacitySpecs: {
+      100: { modelNumber: "LFGM32-H1-100L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1355 mm", packDimensions: "665 × 875 × 1295 mm" },
+      130: { modelNumber: "LFGM35-H1-130L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1395 mm", packDimensions: "665 × 875 × 1355 mm" },
+      160: { modelNumber: "LFGM35-H1-160L-DG", pumpWattage: 25, airThrow: 50, dimensions: "610 × 800 × 1455 mm", packDimensions: "665 × 875 × 1420 mm" },
+    },
   },
   {
     ...COMMERCIAL_BASE,
-    id: "c-ice-storm-plus-100",
-    modelNumber: "LFGM32-H3-100L-DG",
+    id: "c-ice-storm-plus",
     name: "ICE STORM+",
     frontGrill: "louver",
     images: LOUVER_IMAGE,
     honeycombSides: 3,
-    capacity: 100,
-    pumpWattage: 20,
     fanSize: '18.5"',
     airDelivery: 8000,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1355 mm",
-    packDimensions: "665 × 875 × 1295 mm",
+    capacities: [100, 130, 160],
+    capacitySpecs: {
+      100: { modelNumber: "LFGM32-H3-100L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1355 mm", packDimensions: "665 × 875 × 1295 mm" },
+      130: { modelNumber: "LFGM35-H3-130L-DG", pumpWattage: 20, airThrow: 80, dimensions: "610 × 800 × 1395 mm", packDimensions: "665 × 875 × 1355 mm" },
+      160: { modelNumber: "LFGM35-H3-160L-DG", pumpWattage: 25, airThrow: 80, dimensions: "610 × 800 × 1455 mm", packDimensions: "665 × 875 × 1420 mm" },
+    },
   },
-  // ── 130L Commercial ───────────────────────────────────────────────────────
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-cool-130-1",
-    modelNumber: "SFGM35-H1-130L DG",
-    name: "ICE COOL",
-    frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
-    honeycombSides: 1,
-    capacity: 130,
-    pumpWattage: 20,
-    fanSize: '19"',
-    airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1395 mm",
-    packDimensions: "665 × 875 × 1355 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-cool-plus-130",
-    modelNumber: "SFGM35-H3-130L-DG",
-    name: "ICE COOL+",
-    frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
-    honeycombSides: 3,
-    capacity: 130,
-    pumpWattage: 20,
-    fanSize: '19"',
-    airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1395 mm",
-    packDimensions: "665 × 875 × 1355 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-storm-130-1",
-    modelNumber: "LFGM35-H1-130L-DG",
-    name: "ICE STORM",
-    frontGrill: "louver",
-    images: LOUVER_IMAGE,
-    honeycombSides: 1,
-    capacity: 130,
-    pumpWattage: 20,
-    fanSize: '18.5"',
-    airDelivery: 8000,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1395 mm",
-    packDimensions: "665 × 875 × 1355 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-storm-plus-130",
-    modelNumber: "LFGM35-H3-130L-DG",
-    name: "ICE STORM+",
-    frontGrill: "louver",
-    images: LOUVER_IMAGE,
-    honeycombSides: 3,
-    capacity: 130,
-    pumpWattage: 20,
-    fanSize: '18.5"',
-    airDelivery: 8000,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1395 mm",
-    packDimensions: "665 × 875 × 1355 mm",
-  },
-  // ── 160L Commercial ───────────────────────────────────────────────────────
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-cool-160-1",
-    modelNumber: "SFGM35-H1-160L DG",
-    name: "ICE COOL",
-    frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
-    honeycombSides: 1,
-    capacity: 160,
-    pumpWattage: 25,
-    fanSize: '19"',
-    airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1455 mm",
-    packDimensions: "665 × 875 × 1420 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-cool-plus-160",
-    modelNumber: "SFGM35-H3-160L-DG",
-    name: "ICE COOL+",
-    frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
-    honeycombSides: 3,
-    capacity: 160,
-    pumpWattage: 25,
-    fanSize: '19"',
-    airDelivery: 8200,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1455 mm",
-    packDimensions: "665 × 875 × 1420 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-storm-160-1",
-    modelNumber: "LFGM35-H1-160L-DG",
-    name: "ICE STORM",
-    frontGrill: "louver",
-    images: LOUVER_IMAGE,
-    honeycombSides: 1,
-    capacity: 160,
-    pumpWattage: 25,
-    fanSize: '18.5"',
-    airDelivery: 8000,
-    airThrow: 50,
-    dimensions: "610 × 800 × 1455 mm",
-    packDimensions: "665 × 875 × 1420 mm",
-  },
-  {
-    ...COMMERCIAL_BASE,
-    id: "c-ice-storm-plus-160",
-    modelNumber: "LFGM35-H3-160L-DG",
-    name: "ICE STORM+",
-    frontGrill: "louver",
-    images: LOUVER_IMAGE,
-    honeycombSides: 3,
-    capacity: 160,
-    pumpWattage: 25,
-    fanSize: '18.5"',
-    airDelivery: 8000,
-    airThrow: 80,
-    dimensions: "610 × 800 × 1455 mm",
-    packDimensions: "665 × 875 × 1420 mm",
-  },
-  // ── Desert Coolers ────────────────────────────────────────────────────────
+  // ── Desert ────────────────────────────────────────────────────────────────
   {
     ...DESERT_BASE,
-    id: "d-ice-wind-90",
-    modelNumber: "PP90H",
+    id: "d-ice-wind",
     name: "ICE WIND",
     frontGrill: "louver",
-    capacity: 90,
-    airThrow: 50,
-    dimensions: "660 × 520 × 1200 mm",
-    packDimensions: "735 × 565 × 1225 mm",
+    capacities: [90],
+    capacitySpecs: {
+      90: { modelNumber: "PP90H", pumpWattage: 18, airThrow: 50, dimensions: "660 × 520 × 1200 mm", packDimensions: "735 × 565 × 1225 mm" },
+    },
   },
   {
     ...DESERT_BASE,
-    id: "d-ice-wind-plus-110",
-    modelNumber: "GL90H",
+    id: "d-ice-wind-plus",
     name: "ICE WIND+",
     frontGrill: "louver",
-    capacity: 110,
-    airThrow: 50,
-    dimensions: "660 × 520 × 1260 mm",
-    packDimensions: "735 × 565 × 1285 mm",
+    capacities: [110],
+    capacitySpecs: {
+      110: { modelNumber: "GL90H", pumpWattage: 18, airThrow: 50, dimensions: "660 × 520 × 1260 mm", packDimensions: "735 × 565 × 1285 mm" },
+    },
   },
   {
     ...DESERT_BASE,
-    id: "d-wind-storm-90",
-    modelNumber: "PP90F",
+    id: "d-wind-storm",
     name: "WIND STORM",
     frontGrill: "louver",
-    capacity: 90,
-    airThrow: 55,
-    dimensions: "660 × 520 × 1200 mm",
-    packDimensions: "735 × 565 × 1225 mm",
+    capacities: [90],
+    capacitySpecs: {
+      90: { modelNumber: "PP90F", pumpWattage: 18, airThrow: 55, dimensions: "660 × 520 × 1200 mm", packDimensions: "735 × 565 × 1225 mm" },
+    },
   },
   {
     ...DESERT_BASE,
     id: "d-wind-storm-plus",
-    modelNumber: "GL90F",
     name: "WIND STORM+",
     frontGrill: "louver",
-    capacity: 110,
-    airThrow: 55,
-    dimensions: "660 × 520 × 1260 mm",
-    packDimensions: "735 × 565 × 1285 mm",
+    capacities: [110],
+    capacitySpecs: {
+      110: { modelNumber: "GL90F", pumpWattage: 18, airThrow: 55, dimensions: "660 × 520 × 1260 mm", packDimensions: "735 × 565 × 1285 mm" },
+    },
   },
 ];
 
-export const CAPACITIES = [100, 130, 160, 90, 110];
+export const CAPACITIES = [90, 100, 110, 130, 160];
 export const PHONE         = "+919540064444";
 export const PHONE_DISPLAY = "+91 95400 64444";
 export const WA_NUMBER     = "+919540064444";
 export const WA_BASE       = `https://wa.me/${WA_NUMBER}`;
+
+export const coolerName = (model: CoolerModel, capacity: number) =>
+  `${model.name} ${capacity}L ${model.type === "commercial" ? "Commercial" : "Desert"} Cooler`;
+
+export const entryKey = (modelId: string, capacity: number) => `${modelId}::${capacity}`;
+export const parseKey = (key: string) => {
+  const [modelId, capStr] = key.split("::");
+  return { modelId, capacity: Number(capStr) };
+};

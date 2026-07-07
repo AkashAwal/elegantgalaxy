@@ -176,7 +176,7 @@ export default function SiteFooter() {
           {/* Right — buttons */}
           <div style={{ display: "flex", gap: 12, flexShrink: 0, flexWrap: "wrap" }}>
             <Link
-              href="/products/led-tvs"
+              href="/products"
               style={{
                 display:        "inline-flex",
                 alignItems:     "center",

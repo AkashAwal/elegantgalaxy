@@ -81,6 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // ── Product category roots ───────────────────────────────────────────────
   const productCategories: MetadataRoute.Sitemap = [
+    "/products",
     "/products/led-tvs",
     "/products/washing-machines",
     "/products/air-coolers",

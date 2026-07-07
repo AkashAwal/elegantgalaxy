@@ -5,14 +5,19 @@ import Link from "next/link";
 import { ChevronRight, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, type CoolerModel } from "@/data/air-coolers";
-import { CoolerIllustration, EnquireModal, SPEC_ROWS, formatSpecValue } from "../AirCoolersClient";
+import { CoolerIllustration, EnquireModal, getSpecRows } from "../AirCoolersClient";
 
-export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
+export default function CoolerDetailClient({ model, initialCap }: { model: CoolerModel; initialCap: number | null }) {
+  const [capacity, setCapacity] = useState<number>(
+    initialCap && model.capacities.includes(initialCap) ? initialCap : model.capacities[0]
+  );
   const [showEnquire, setShowEnquire] = useState(false);
 
-  const waText = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${model.capacity}L) - model ${model.modelNumber}. Could you share more details?`;
-  const waUrl  = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
-  const isDark = model.type === "commercial";
+  const cap     = model.capacitySpecs[capacity];
+  const waText  = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${capacity}L)${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
+  const waUrl   = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
+  const isDark  = model.type === "commercial";
+  const specRows = getSpecRows(model, capacity);
 
   const otherModels = MODELS.filter((m) => m.id !== model.id && m.type === model.type).slice(0, 4);
 
@@ -58,14 +63,44 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
               {model.name}
             </h1>
             <p style={{ fontSize: 15, color: "#6e6e73", marginBottom: 28 }}>
-              {model.modelNumber} &middot; <span style={{ color: "#0071e3", fontWeight: 600 }}>{model.capacity}L</span>
+              {cap?.modelNumber} &middot; <span style={{ color: "#0071e3", fontWeight: 600 }}>{capacity}L</span>
             </p>
+
+            {/* Capacity picker */}
+            {model.capacities.length > 1 && (
+              <>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f", marginBottom: 12 }}>Capacity</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 32 }}>
+                  {model.capacities.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => setCapacity(c)}
+                      aria-pressed={capacity === c}
+                      style={{
+                        height: 42,
+                        minWidth: 58,
+                        padding: "0 14px",
+                        borderRadius: 10,
+                        border: capacity === c ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)",
+                        background: capacity === c ? "#0071e3" : "#fff",
+                        color: capacity === c ? "#fff" : "#1d1d1f",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {c}L
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
 
             {/* Key stats */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px 16px", marginBottom: 32 }}>
               {[
                 { label: "Air Delivery", value: `${model.airDelivery} CMH` },
-                { label: "Air Throw",    value: `${model.airThrow} ft` },
+                { label: "Air Throw",    value: `${cap?.airThrow} ft` },
                 { label: "Fan Size",     value: model.fanSize },
                 { label: "Motor",        value: model.motor },
               ].map(({ label, value }) => (
@@ -108,12 +143,14 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
 
         {/* Full spec table */}
         <div style={{ marginTop: 56, maxWidth: 720 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>Full Specifications</h2>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 16 }}>
+            Full Specifications - {capacity}L
+          </h2>
           <div style={{ borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden", background: "#fff" }}>
-            {SPEC_ROWS.map(({ label, key }, i) => (
-              <div key={key} style={{ display: "flex", justifyContent: "space-between", padding: "10px 16px", background: i % 2 === 0 ? "#fafafa" : "#fff", borderBottom: i < SPEC_ROWS.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none" }}>
+            {specRows.map(({ label, value }, i) => (
+              <div key={label} style={{ display: "flex", justifyContent: "space-between", padding: "10px 16px", background: i % 2 === 0 ? "#fafafa" : "#fff", borderBottom: i < specRows.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none" }}>
                 <span style={{ fontSize: 13, color: "#6e6e73" }}>{label}</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f" }}>{formatSpecValue(model, key)}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f" }}>{value}</span>
               </div>
             ))}
           </div>
@@ -148,7 +185,7 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
       )}
 
       {showEnquire && (
-        <EnquireModal model={model} onClose={() => setShowEnquire(false)} />
+        <EnquireModal model={model} capacity={capacity} onClose={() => setShowEnquire(false)} />
       )}
     </main>
   );

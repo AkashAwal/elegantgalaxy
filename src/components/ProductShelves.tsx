@@ -22,9 +22,9 @@ const webos2kTv  = TV_MODELS.find((m) => m.id === "webos-2k")!;
 const googleTv   = TV_MODELS.find((m) => m.id === "google")!;
 
 
-const iceCool100    = COOLER_MODELS.find((m) => m.id === "c-ice-cool-100-1")!;
-const iceStorm160   = COOLER_MODELS.find((m) => m.id === "c-ice-storm-160-1")!;
-const iceWind90     = COOLER_MODELS.find((m) => m.id === "d-ice-wind-90")!;
+const iceCool100    = COOLER_MODELS.find((m) => m.id === "c-ice-cool")!;
+const iceStorm160   = COOLER_MODELS.find((m) => m.id === "c-ice-storm")!;
+const iceWind90     = COOLER_MODELS.find((m) => m.id === "d-ice-wind")!;
 const windStormPlus = COOLER_MODELS.find((m) => m.id === "d-wind-storm-plus")!;
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -71,10 +71,10 @@ const SHELVES: Shelf[] = [
     category:     "Air Coolers",
     categoryHref: "/products/air-coolers",
     products: [
-      { id: iceCool100.id,    name: iceCool100.name,    subtitle: `Commercial · ${iceCool100.capacity}L`,    href: `/products/air-coolers/${iceCool100.id}`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
-      { id: iceStorm160.id,   name: iceStorm160.name,   subtitle: `Commercial · ${iceStorm160.capacity}L`,   href: `/products/air-coolers/${iceStorm160.id}`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
-      { id: iceWind90.id,     name: iceWind90.name,     subtitle: `Desert · ${iceWind90.capacity}L`,         href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
-      { id: windStormPlus.id, name: windStormPlus.name, subtitle: `Desert · ${windStormPlus.capacity}L`,     href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
+      { id: iceCool100.id,    name: iceCool100.name,    subtitle: `Commercial · 100L`,    href: `/products/air-coolers/${iceCool100.id}?cap=100`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
+      { id: iceStorm160.id,   name: iceStorm160.name,   subtitle: `Commercial · 160L`,   href: `/products/air-coolers/${iceStorm160.id}?cap=160`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
+      { id: iceWind90.id,     name: iceWind90.name,     subtitle: `Desert · 90L`,         href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
+      { id: windStormPlus.id, name: windStormPlus.name, subtitle: `Desert · 110L`,     href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
     ],
   },
   {

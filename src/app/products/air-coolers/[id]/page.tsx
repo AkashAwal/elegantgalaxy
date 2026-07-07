@@ -14,20 +14,26 @@ export async function generateMetadata(
   const model  = MODELS.find((m) => m.id === id);
   if (!model) return {};
   return {
-    title:       model.name,
-    description: `${model.name} - ${model.modelNumber}, ${model.capacity}L, ${model.airDelivery} CMH air delivery.`,
+    title:       `${model.name} Air Cooler`,
+    description: `Elegant Galaxy ${model.name} - available in ${model.capacities.map((c) => `${c}L`).join(", ")}.`,
     alternates:  { canonical: `/products/air-coolers/${id}` },
   };
 }
 
 export default async function CoolerDetailPage({
   params,
+  searchParams,
 }: {
-  params: Promise<{ id: string }>;
+  params:       Promise<{ id: string }>;
+  searchParams: Promise<{ cap?: string }>;
 }) {
-  const { id } = await params;
-  const model  = MODELS.find((m) => m.id === id);
+  const { id }  = await params;
+  const { cap } = await searchParams;
+  const model   = MODELS.find((m) => m.id === id);
   if (!model) notFound();
 
-  return <CoolerDetailClient model={model} />;
+  const parsedCap  = cap ? parseInt(cap, 10) : null;
+  const initialCap = parsedCap && !Number.isNaN(parsedCap) ? parsedCap : null;
+
+  return <CoolerDetailClient model={model} initialCap={initialCap} />;
 }
