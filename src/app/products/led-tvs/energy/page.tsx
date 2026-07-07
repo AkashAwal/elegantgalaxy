@@ -3,6 +3,7 @@ import CategoryEnergyPage from "@/components/CategoryEnergyPage";
 import { MODELS } from "@/data/led-tvs";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/led-tvs/energy" },
   title:       "LED TV Energy Ratings",
   description: "Standby power, eco mode, and energy-conscious design across Elegant Galaxy LED TVs.",
 };

@@ -52,6 +52,7 @@ function SupportContentSkeleton() {
 }
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/support" },
   title:       "Support — Elegant Galaxy",
   description: "Step-by-step guides, manuals, and how-tos for all Elegant Galaxy products.",
 };

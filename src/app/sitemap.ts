@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS }  from "@/data/blog-posts";
 import { ARTICLES }    from "@/data/support-articles";
+import { MODELS as TV_MODELS }      from "@/data/led-tvs";
+import { MODELS as COOLER_MODELS }  from "@/data/air-coolers";
+import { MODELS as COOKTOP_MODELS } from "@/data/infrared-cooktops";
 
 const BASE = "https://elegantgalaxy.in";
 
@@ -45,13 +48,79 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority:        0.85,
     },
-    // Uncomment as pages go live:
-    // { url: `${BASE}/distributors`,        lastModified: now, changeFrequency: "monthly", priority: 0.75 },
-    // { url: `${BASE}/products/led-tv`,     lastModified: now, changeFrequency: "weekly",  priority: 0.8  },
-    // { url: `${BASE}/products/washing-machine`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    // { url: `${BASE}/products/air-cooler`, lastModified: now, changeFrequency: "weekly",  priority: 0.8  },
-    // { url: `${BASE}/products/infrared-cooktop`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    {
+      url:             `${BASE}/support/warranty`,
+      lastModified:    now,
+      changeFrequency: "monthly",
+      priority:        0.6,
+    },
+    {
+      url:             `${BASE}/distributors/apply`,
+      lastModified:    now,
+      changeFrequency: "monthly",
+      priority:        0.75,
+    },
+    {
+      url:             `${BASE}/legal/privacy`,
+      lastModified:    now,
+      changeFrequency: "yearly",
+      priority:        0.3,
+    },
+    {
+      url:             `${BASE}/legal/terms`,
+      lastModified:    now,
+      changeFrequency: "yearly",
+      priority:        0.3,
+    },
+    {
+      url:             `${BASE}/legal/cookies`,
+      lastModified:    now,
+      changeFrequency: "yearly",
+      priority:        0.3,
+    },
   ];
+
+  // ── Product category roots ───────────────────────────────────────────────
+  const productCategories: MetadataRoute.Sitemap = [
+    "/products/led-tvs",
+    "/products/washing-machines",
+    "/products/air-coolers",
+    "/products/infrared-cooktops",
+  ].map((path) => ({
+    url:             `${BASE}${path}`,
+    lastModified:    now,
+    changeFrequency: "weekly" as const,
+    priority:        0.8,
+  }));
+
+  // ── Product sub-pages (remotes, energy ratings, informational) ──────────
+  const productSubPages: MetadataRoute.Sitemap = [
+    "/products/led-tvs/remotes",
+    "/products/led-tvs/energy",
+    "/products/washing-machines/energy",
+    "/products/air-coolers/energy",
+    "/products/infrared-cooktops/why-infrared",
+    "/products/infrared-cooktops/safety",
+  ].map((path) => ({
+    url:             `${BASE}${path}`,
+    lastModified:    now,
+    changeFrequency: "monthly" as const,
+    priority:        0.5,
+  }));
+
+  // ── Individual product detail pages ──────────────────────────────────────
+  // Washing machines use a single query-param page (already covered by the
+  // category root above), so no per-model URLs are generated for them.
+  const productDetails: MetadataRoute.Sitemap = [
+    ...TV_MODELS.map((m) => `/products/led-tvs/${m.id}`),
+    ...COOLER_MODELS.map((m) => `/products/air-coolers/${m.id}`),
+    ...COOKTOP_MODELS.map((m) => `/products/infrared-cooktops/${m.id}`),
+  ].map((path) => ({
+    url:             `${BASE}${path}`,
+    lastModified:    now,
+    changeFrequency: "monthly" as const,
+    priority:        0.6,
+  }));
 
   // ── Blog posts ────────────────────────────────────────────────────────────
   const blog: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
@@ -69,5 +138,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.65,
   }));
 
-  return [...core, ...blog, ...support];
+  return [...core, ...productCategories, ...productSubPages, ...productDetails, ...blog, ...support];
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/legal/privacy" },
   title:       "Privacy Policy — Elegant Galaxy",
   description: "How Elegant Galaxy collects, uses, and protects your personal information.",
 };
@@ -187,8 +188,8 @@ export default function PrivacyPage() {
       </ul>
       <p style={p}>
         To exercise any of these rights, write to us at{" "}
-        <a href="mailto:privacy@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
-          privacy@elegantgalaxy.in
+        <a href="mailto:support@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
+          support@elegantgalaxy.in
         </a>. We will respond within 30 days.
       </p>
 
@@ -221,7 +222,7 @@ export default function PrivacyPage() {
       <p style={p}>
         This Privacy Policy is governed by the laws of the Republic of India. Any disputes
         arising from it shall be subject to the exclusive jurisdiction of the courts in
-        New Delhi, India.
+        Ghaziabad, Uttar Pradesh, India.
       </p>
 
       {/* 12 */}
@@ -238,10 +239,10 @@ export default function PrivacyPage() {
         color:        "#3a3a3c",
       }}>
         <strong style={{ color: "#1d1d1f" }}>Elegant Galaxy Pvt Ltd</strong><br />
-        Attn: Privacy Officer<br />
-        New Delhi, India<br />
-        <a href="mailto:privacy@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
-          privacy@elegantgalaxy.in
+        Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi,<br />
+        Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003<br />
+        <a href="mailto:support@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
+          support@elegantgalaxy.in
         </a>
       </div>
 

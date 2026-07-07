@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/legal/terms" },
   title:       "Terms of Use — Elegant Galaxy",
   description: "The terms and conditions that govern your use of the Elegant Galaxy website.",
 };
@@ -164,7 +165,7 @@ export default function TermsPage() {
         Republic of India, without regard to conflict-of-law principles. Any dispute arising
         from or relating to these Terms shall first be attempted to be resolved through good-faith
         negotiation. If unresolved within 30 days, disputes shall be subject to the exclusive
-        jurisdiction of the courts in New Delhi, India.
+        jurisdiction of the courts in Ghaziabad, Uttar Pradesh, India.
       </p>
 
       {/* 11 */}
@@ -177,10 +178,10 @@ export default function TermsPage() {
         fontSize: 14, lineHeight: 1.8, color: "#3a3a3c",
       }}>
         <strong style={{ color: "#1d1d1f" }}>Elegant Galaxy Pvt Ltd</strong><br />
-        Attn: Legal<br />
-        New Delhi, India<br />
-        <a href="mailto:legal@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
-          legal@elegantgalaxy.in
+        Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi,<br />
+        Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003<br />
+        <a href="mailto:support@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
+          support@elegantgalaxy.in
         </a>
       </div>
 

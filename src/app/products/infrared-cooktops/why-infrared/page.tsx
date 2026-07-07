@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Flame } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/infrared-cooktops/why-infrared" },
   title:       "Why Infrared?",
   description: "Why infrared cooktops heat faster and safer than gas or standard electric coils.",
 };

@@ -49,7 +49,7 @@ const NAV: NavItem[] = [
         heading: "Shop LED TVs",
         links: [
           { label: "Shop LED TVs",         href: "/products/led-tvs" },
-          { label: "TV Accessories",       href: "/products/led-tvs/accessories" },
+          { label: "Remotes",              href: "/products/led-tvs/remotes" },
         ],
       },
       {
@@ -85,7 +85,6 @@ const NAV: NavItem[] = [
         heading: "Shop Washing Machines",
         links: [
           { label: "Shop Washing Machines",        href: "/products/washing-machines" },
-          { label: "Accessories",                  href: "/products/washing-machines/accessories" },
         ],
       },
       {
@@ -118,7 +117,6 @@ const NAV: NavItem[] = [
         heading: "Shop Air Coolers",
         links: [
           { label: "Shop Air Coolers",        href: "/products/air-coolers" },
-          { label: "Accessories",             href: "/products/air-coolers/accessories" },
         ],
       },
       {
@@ -153,7 +151,6 @@ const NAV: NavItem[] = [
         heading: "Shop Infrared Cooktops",
         links: [
           { label: "Shop Cooktops",           href: "/products/infrared-cooktops" },
-          { label: "Accessories",             href: "/products/infrared-cooktops/accessories" },
         ],
       },
       {

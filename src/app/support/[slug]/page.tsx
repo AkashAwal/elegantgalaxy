@@ -22,6 +22,7 @@ export async function generateMetadata(
   return {
     title:       `${article.title} — Elegant Galaxy Support`,
     description: article.description,
+    alternates:  { canonical: `/support/${slug}` },
   };
 }
 

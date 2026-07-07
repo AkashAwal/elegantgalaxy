@@ -89,15 +89,15 @@ export const MODELS: TvModel[] = [
       86: "4K Ultra HD", 98: "4K Ultra HD", 105: "5120×2160 Ultra-Wide UHD", 110: "4K Ultra HD",
     },
     images: {
-      front: "/images/tvs/smart-board-1.svg",
+      front: "/images/tvs/smart-board-2.svg",
     },
     gallery: [
-      "/images/tvs/smart-board-1.svg",
       "/images/tvs/smart-board-2.svg",
       "/images/tvs/smart-board-3.svg",
       "/images/tvs/smart-board-4.svg",
       "/images/tvs/smart-board-5.svg",
       "/images/tvs/smart-board-6.svg",
+      "/images/tvs/smart-board-1.svg",
     ],
     panelSpecs: {
       55:  { modelNumber: "EGIP-55",  aspectRatio: "16:9, Wide SXGA", refreshRate: "60Hz",  powerConsumption: 198, dimensions: "1257.6 × 743.7 × 83.9 mm",  packDimensions: "1358 × 855 × 175 mm",  netWeight: 24, grossWeight: 30 },

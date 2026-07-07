@@ -23,6 +23,7 @@ export async function generateMetadata(
   return {
     title:       `${post.title} — Elegant Galaxy Journal`,
     description: post.excerpt,
+    alternates:  { canonical: `/blog/${slug}` },
   };
 }
 

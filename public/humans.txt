@@ -1,7 +1,7 @@
 /* TEAM */
 
   Brand: Elegant Galaxy
-  Contact: hello [at] elegantgalaxy.in
+  Contact: support [at] elegantgalaxy.in
   Location: India
 
 /* THANKS */

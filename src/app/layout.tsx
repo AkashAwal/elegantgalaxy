@@ -37,13 +37,6 @@ export const metadata: Metadata = {
   creator:  "Elegant Galaxy",
   publisher:"Elegant Galaxy",
 
-  alternates: {
-    canonical: "https://elegantgalaxy.in",
-    languages: {
-      "en-IN": "https://elegantgalaxy.in",
-    },
-  },
-
   openGraph: {
     type:        "website",
     locale:      "en_IN",

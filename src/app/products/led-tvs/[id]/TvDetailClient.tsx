@@ -121,7 +121,7 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
                   const isHovered  = hoveredThumb === i;
                   return (
                     <button
-                      key={src}
+                      key={i}
                       onClick={() => setGalleryIndex(i)}
                       onMouseEnter={() => setHoveredThumb(i)}
                       onMouseLeave={() => setHoveredThumb(null)}

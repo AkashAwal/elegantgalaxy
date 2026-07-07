@@ -5,6 +5,7 @@ import AirCoolersClient from "./AirCoolersClient";
 import { MODELS, TYPE_IMAGES, type CoolerType } from "@/data/air-coolers";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/air-coolers" },
   title: "Air Coolers",
   description:
     "Explore Elegant Galaxy commercial and desert air coolers — 100L to 160L commercial models and 90L–110L desert coolers with honeycomb cooling pads and high air delivery.",

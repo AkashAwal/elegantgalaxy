@@ -5,6 +5,7 @@ import { MODELS } from "@/data/led-tvs";
 import { TvIcon } from "./LedTvsClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/led-tvs" },
   title: "LED TVs",
   description:
     "Explore Elegant Galaxy LED TVs — Android TV, webOS 4K, webOS 2K, Google TV, Distro OS, Frameless Smart, and Frameless Normal.",

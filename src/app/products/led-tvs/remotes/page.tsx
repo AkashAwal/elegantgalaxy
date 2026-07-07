@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { MODELS, PHONE, PHONE_DISPLAY } from "@/data/led-tvs";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/led-tvs/remotes" },
   title:       "LED TV Remotes",
   description: "Genuine replacement remotes for every Elegant Galaxy LED TV and Interactive Smart Board model.",
 };
@@ -22,7 +23,7 @@ function RemoteIcon() {
   );
 }
 
-export default function LedTvsAccessoriesPage() {
+export default function LedTvsRemotesPage() {
   const remotes = MODELS.map((m) => ({
     id:       m.id,
     subtitle: `Genuine · Factory-Matched`,
@@ -47,7 +48,7 @@ export default function LedTvsAccessoriesPage() {
       <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 36, paddingBottom: 48 }}>
           <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6e6e73", marginBottom: 12 }}>
-            LED TV Accessories
+            LED TV Remotes
           </p>
           <h1 style={{ fontSize: 40, fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", lineHeight: 1.1, marginBottom: 14 }}>
             Genuine remotes for every EG TV.

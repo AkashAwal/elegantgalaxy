@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CategoryEnergyPage from "@/components/CategoryEnergyPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/air-coolers/energy" },
   title:       "Air Cooler Energy Ratings",
   description: "Motor wattage and running costs across Elegant Galaxy commercial and desert air coolers.",
 };

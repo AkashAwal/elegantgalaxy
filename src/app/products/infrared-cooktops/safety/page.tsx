@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/infrared-cooktops/safety" },
   title:       "Safety Certifications",
   description: "ISI certification and safety features across Elegant Galaxy infrared cooktops.",
 };

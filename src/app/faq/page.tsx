@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import FaqClient from "./FaqClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title:       "FAQs",
   description: "Answers to common questions about Elegant Galaxy products, orders, delivery, warranty, service, and becoming a distributor.",
 };

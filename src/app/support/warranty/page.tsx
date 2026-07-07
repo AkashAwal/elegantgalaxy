@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Shield } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/support/warranty" },
   title:       "Warranty",
   description: "Details on Elegant Galaxy's 1-year warranty coverage for LED TVs, washing machines, air coolers, and infrared cooktops.",
 };

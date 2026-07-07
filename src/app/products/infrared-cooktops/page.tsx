@@ -4,6 +4,7 @@ import InfraredCooktopsClient, { CooktopSvg } from "./InfraredCooktopsClient";
 import { MODELS, BURNER_COUNTS, burnerLabel } from "@/data/infrared-cooktops";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/infrared-cooktops" },
   title: "Infrared Cooktops",
   description:
     "Explore Elegant Galaxy infrared cooktops — single to 4-burner ceramic glass cooktops that heat faster and safer than gas.",

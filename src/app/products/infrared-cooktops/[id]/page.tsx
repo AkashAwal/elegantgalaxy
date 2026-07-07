@@ -16,6 +16,7 @@ export async function generateMetadata(
   return {
     title:       model.name,
     description: `${model.name} — ${model.modelNumber}, ${model.totalWattage}W total, ${model.surface} surface.`,
+    alternates:  { canonical: `/products/infrared-cooktops/${id}` },
   };
 }
 

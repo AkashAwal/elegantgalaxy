@@ -19,7 +19,7 @@ const PRODUCT: Product = {
   label:    'EG 65" Interactive Smart Teaching Board',
   tagline:  '65" screen · 4K Ultra HD',
   href:     "/products/led-tvs/smart-board",
-  imageSrc: "/images/tvs/smart-board-front.webp",
+  imageSrc: "/images/tvs/smart-board-5.svg",
   imageBg:  "#fff",
 };
 

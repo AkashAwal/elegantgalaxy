@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import LatestSection from "@/components/LatestSection";
@@ -8,6 +9,12 @@ import AboutSection from "@/components/AboutSection";
 import DistributorSection from "@/components/DistributorSection";
 import FAQSection from "@/components/FAQSection";
 import TVShowcase from "@/components/TVShowcase";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://elegantgalaxy.in",
+  },
+};
 
 // ── Category data — real product photos ────────────────────────────────────────
 

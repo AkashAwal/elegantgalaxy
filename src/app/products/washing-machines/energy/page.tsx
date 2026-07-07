@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CategoryEnergyPage from "@/components/CategoryEnergyPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/products/washing-machines/energy" },
   title:       "Washing Machine Energy Ratings",
   description: "Energy information for Elegant Galaxy semi-automatic washing machines.",
 };

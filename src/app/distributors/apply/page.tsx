@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import DistributorApplyForm from "@/components/DistributorApplyForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/distributors/apply" },
   title:       "Become a Distributor",
   description: "Join Elegant Galaxy's growing network of 500+ distributors across India. Apply to become a partner.",
 };

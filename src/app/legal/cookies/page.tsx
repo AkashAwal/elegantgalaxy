@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/legal/cookies" },
   title:       "Cookie Policy — Elegant Galaxy",
   description: "How Elegant Galaxy uses cookies and similar technologies on its website.",
 };
@@ -229,10 +230,10 @@ export default function CookiesPage() {
         fontSize: 14, lineHeight: 1.8, color: "#3a3a3c",
       }}>
         <strong style={{ color: "#1d1d1f" }}>Elegant Galaxy Pvt Ltd</strong><br />
-        Attn: Privacy Officer<br />
-        New Delhi, India<br />
-        <a href="mailto:privacy@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
-          privacy@elegantgalaxy.in
+        Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi,<br />
+        Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003<br />
+        <a href="mailto:support@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
+          support@elegantgalaxy.in
         </a>
       </div>
 
