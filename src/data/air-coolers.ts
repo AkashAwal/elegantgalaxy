@@ -1,7 +1,7 @@
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 export type FrontGrill = "spiral" | "louver";
-export type CoolerType = "commercial" | "desert";
+export type CoolerType = "commercial" | "domestic";
 
 export interface CapacitySpec {
   modelNumber: string;
@@ -36,12 +36,12 @@ export interface CoolerModel {
 
 const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.jpg" };
 const LOUVER_IMAGE: { front: string } = { front: "/images/air-coolers/ice-storm-front.jpg" };
-const DESERT_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.jpg" };
+const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.jpg" };
 
 /** Representative photo for each cooler type's category tile. */
 export const TYPE_IMAGES: Record<CoolerType, string> = {
   commercial: "/images/air-coolers/commercial-front.jpg",
-  desert:     "/images/air-coolers/desert-front.jpg",
+  domestic:   "/images/air-coolers/desert-front.jpg",
 };
 
 const COMMERCIAL_BASE = {
@@ -56,8 +56,8 @@ const COMMERCIAL_BASE = {
   motorMount: "CLAMP",
 };
 
-const DESERT_BASE = {
-  type: "desert" as CoolerType,
+const DOMESTIC_BASE = {
+  type: "domestic" as CoolerType,
   honeycombSides: 3 as const,
   bodyMaterial: "PPCP",
   motor: "93W Nirosha",
@@ -69,7 +69,7 @@ const DESERT_BASE = {
   cordLength: "2.5M",
   bladeMaterial: "Plastic ABS",
   motorMount: "PP CP",
-  images: DESERT_IMAGE,
+  images: DOMESTIC_IMAGE,
 };
 
 export const MODELS: CoolerModel[] = [
@@ -139,9 +139,9 @@ export const MODELS: CoolerModel[] = [
       160: { modelNumber: "LFGM35-H3-160L-DG", pumpWattage: 25, airThrow: 80, dimensions: "610 × 800 × 1455 mm", packDimensions: "665 × 875 × 1420 mm" },
     },
   },
-  // ── Desert ────────────────────────────────────────────────────────────────
+  // ── Domestic ──────────────────────────────────────────────────────────────
   {
-    ...DESERT_BASE,
+    ...DOMESTIC_BASE,
     id: "d-ice-wind",
     name: "ICE WIND",
     frontGrill: "louver",
@@ -151,7 +151,7 @@ export const MODELS: CoolerModel[] = [
     },
   },
   {
-    ...DESERT_BASE,
+    ...DOMESTIC_BASE,
     id: "d-ice-wind-plus",
     name: "ICE WIND+",
     frontGrill: "louver",
@@ -161,7 +161,7 @@ export const MODELS: CoolerModel[] = [
     },
   },
   {
-    ...DESERT_BASE,
+    ...DOMESTIC_BASE,
     id: "d-wind-storm",
     name: "WIND STORM",
     frontGrill: "louver",
@@ -171,7 +171,7 @@ export const MODELS: CoolerModel[] = [
     },
   },
   {
-    ...DESERT_BASE,
+    ...DOMESTIC_BASE,
     id: "d-wind-storm-plus",
     name: "WIND STORM+",
     frontGrill: "louver",
@@ -189,7 +189,7 @@ export const WA_NUMBER     = "+919540064444";
 export const WA_BASE       = `https://wa.me/${WA_NUMBER}`;
 
 export const coolerName = (model: CoolerModel, capacity: number) =>
-  `${model.name} ${capacity}L ${model.type === "commercial" ? "Commercial" : "Desert"} Cooler`;
+  `EG ${model.name} ${capacity}L Air Cooler`;
 
 export const entryKey = (modelId: string, capacity: number) => `${modelId}::${capacity}`;
 export const parseKey = (key: string) => {

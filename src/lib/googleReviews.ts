@@ -35,7 +35,7 @@ const FALLBACK_REVIEWS: ReviewItem[] = [
     rating: 5,
   },
   {
-    quote:  "Bought the desert cooler for our shop and it handles the summer heat effortlessly. Runs quiet enough that customers don't even notice it.",
+    quote:  "Bought the commercial cooler for our shop and it handles the summer heat effortlessly. Runs quiet enough that customers don't even notice it.",
     name:   "Anitha Reddy",
     rating: 5,
   },

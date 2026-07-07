@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { MODELS, PHONE, PHONE_DISPLAY } from "@/data/led-tvs";
+import EnquireButton from "@/components/EnquireButton";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/products/led-tvs/remotes" },
@@ -130,23 +131,23 @@ export default function LedTvsRemotesPage() {
                   >
                     View Now
                   </Link>
-                  <Link
-                    href={`/contact?enquire=${encodeURIComponent(r.name)}`}
+                  <EnquireButton
+                    product={r.name}
                     style={{
                       flex:           1,
                       textAlign:      "center",
                       padding:        "7px 0",
                       borderRadius:   7,
                       border:         "1.5px solid #0071e3",
+                      background:     "transparent",
                       color:          "#0071e3",
                       fontSize:       12,
                       fontWeight:     500,
-                      textDecoration: "none",
                       display:        "block",
                     }}
                   >
                     Enquire
-                  </Link>
+                  </EnquireButton>
                 </div>
               </div>
             </div>

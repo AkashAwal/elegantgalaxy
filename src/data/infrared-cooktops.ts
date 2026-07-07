@@ -1,4 +1,4 @@
-export const NAME         = "Elegant Single Burner Cooktop";
+export const NAME         = "EG Infrared Cooktop";
 export const MODEL_NUMBER = "EGIR-1000S";
 export const WATTS        = 2400;
 

@@ -35,7 +35,7 @@ const CATEGORIES = [
   },
   {
     label:       "Air Coolers",
-    description: "Commercial and desert coolers, 90L to 160L.",
+    description: "Commercial and domestic coolers, 90L to 160L.",
     href:        "/products/air-coolers",
     image:       "/images/air-coolers/commercial-front-homepage.png",
     width:       476,

@@ -54,7 +54,7 @@ const JSON_LD = {
     itemListElement: [
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "LED Televisions",    description: "32 to 75 inch displays in HD, Full HD, and 4K" } },
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "Washing Machines",   description: "Semi-automatic models from 7 kg to 12 kg" } },
-      { "@type": "Offer", itemOffered: { "@type": "Product", name: "Air Coolers",        description: "Personal, tower, and desert coolers from 15 L to 60 L" } },
+      { "@type": "Offer", itemOffered: { "@type": "Product", name: "Air Coolers",        description: "Commercial and domestic coolers from 90 L to 160 L" } },
       { "@type": "Offer", itemOffered: { "@type": "Product", name: "Infrared Cooktops",  description: "Single and double-burner cooktops with touch controls" } },
     ],
   },
@@ -87,9 +87,9 @@ const PRODUCTS = [
   {
     icon:  "❄️",
     name:  "Air Coolers",
-    range: "15 L – 60 L",
-    body:  "Personal, tower, and desert coolers engineered for India's dry-heat seasons. High-efficiency honeycomb pads, multi-speed fans, and large-tank models designed for uninterrupted overnight use.",
-    href:  "/products/air-cooler",
+    range: "90 L – 160 L",
+    body:  "Commercial and domestic coolers engineered for India's dry-heat seasons. High-efficiency honeycomb pads, multi-speed fans, and large-tank models designed for uninterrupted overnight use.",
+    href:  "/products/air-coolers",
   },
   {
     icon:  "🍳",

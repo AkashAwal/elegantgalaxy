@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import { ArrowRight, Check, X } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
+import EnquireButton from "@/components/EnquireButton";
 
 // ─── Real product data & illustrations (shared with the category pages) ──────
 
 import { MODELS as TV_MODELS, tvName } from "@/data/led-tvs";
 import { CAPACITY_SPECS as WASHER_SPECS, washerName } from "@/data/washing-machines";
-import { MODELS as COOLER_MODELS } from "@/data/air-coolers";
+import { MODELS as COOLER_MODELS, coolerName } from "@/data/air-coolers";
 import { CoolerIllustration } from "@/app/products/air-coolers/AirCoolersClient";
 import { NAME as COOKTOP_NAME, WATTS as COOKTOP_WATTS, IMAGES as COOKTOP_IMAGES } from "@/data/infrared-cooktops";
 
@@ -71,10 +72,10 @@ const SHELVES: Shelf[] = [
     category:     "Air Coolers",
     categoryHref: "/products/air-coolers",
     products: [
-      { id: iceCool100.id,    name: iceCool100.name,    subtitle: `Commercial · 100L`,    href: `/products/air-coolers/${iceCool100.id}?cap=100`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
-      { id: iceStorm160.id,   name: iceStorm160.name,   subtitle: `Commercial · 160L`,   href: `/products/air-coolers/${iceStorm160.id}?cap=160`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
-      { id: iceWind90.id,     name: iceWind90.name,     subtitle: `Desert · 90L`,         href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
-      { id: windStormPlus.id, name: windStormPlus.name, subtitle: `Desert · 110L`,     href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
+      { id: iceCool100.id,    name: coolerName(iceCool100, 100),    subtitle: `Commercial · 100L`,  href: `/products/air-coolers/${iceCool100.id}?cap=100`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
+      { id: iceStorm160.id,   name: coolerName(iceStorm160, 160),   subtitle: `Commercial · 160L`,  href: `/products/air-coolers/${iceStorm160.id}?cap=160`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
+      { id: iceWind90.id,     name: coolerName(iceWind90, 90),      subtitle: `Domestic · 90L`,     href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
+      { id: windStormPlus.id, name: coolerName(windStormPlus, 110), subtitle: `Domestic · 110L`,    href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
     ],
   },
   {
@@ -110,17 +111,7 @@ function ProductIllustration({ product }: { product: Product }) {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 
-function ProductCard({
-  product,
-  isCompared,
-  onToggleCompare,
-  maxReached,
-}: {
-  product:         Product;
-  isCompared:      boolean;
-  onToggleCompare: () => void;
-  maxReached:      boolean;
-}) {
+function ProductCard({ product }: { product: Product }) {
   return (
     <div
       style={{
@@ -128,9 +119,6 @@ function ProductCard({
         borderRadius: 16,
         overflow:     "hidden",
         boxShadow:    "0 2px 10px rgba(0,0,0,0.07)",
-        outline:      isCompared ? "2px solid #0071e3" : "2px solid transparent",
-        outlineOffset: "-1px",
-        transition:   "outline-color 0.15s ease",
         display:      "flex",
         flexDirection:"column",
         flex:         1,
@@ -191,339 +179,23 @@ function ProductCard({
           >
             View Now
           </Link>
-          <Link
-            href={`/contact?enquire=${encodeURIComponent(product.name)}`}
+          <EnquireButton
+            product={product.name}
             style={{
               textAlign:      "center",
               padding:        "7px 0",
               borderRadius:   7,
               border:         "1.5px solid #0071e3",
+              background:     "transparent",
               color:          "#0071e3",
               fontSize:       12,
               fontWeight:     500,
-              textDecoration: "none",
+              width:          "100%",
               display:        "block",
             }}
           >
             Enquire
-          </Link>
-        </div>
-
-        {/* Compare toggle */}
-        <button
-          onClick={onToggleCompare}
-          disabled={maxReached && !isCompared}
-          aria-label={isCompared
-            ? `Remove ${product.name} from comparison`
-            : `Add ${product.name} to comparison`}
-          aria-pressed={isCompared}
-          style={{
-            marginTop:      8,
-            width:          "100%",
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "center",
-            gap:            5,
-            padding:        "5px 0",
-            border:         "none",
-            background:     "none",
-            cursor:         maxReached && !isCompared ? "not-allowed" : "pointer",
-            opacity:        maxReached && !isCompared ? 0.38 : 1,
-            color:          isCompared ? "#0071e3" : "#6e6e73",
-            fontSize:       12,
-            fontWeight:     500,
-            transition:     "color 0.15s ease, opacity 0.15s ease",
-          }}
-        >
-          <span style={{
-            width:          14,
-            height:         14,
-            borderRadius:   3,
-            border:         `1.5px solid ${isCompared ? "#0071e3" : "#8e8e93"}`,
-            background:     isCompared ? "#0071e3" : "transparent",
-            display:        "inline-flex",
-            alignItems:     "center",
-            justifyContent: "center",
-            transition:     "background 0.15s ease, border-color 0.15s ease",
-            flexShrink:     0,
-          }}>
-            {isCompared && <Check size={9} color="#fff" strokeWidth={3} />}
-          </span>
-          Compare
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ─── Compare bar (appears below the grid when ≥ 2 selected) ──────────────────
-
-function CompareBar({
-  products,
-  onRemove,
-  onClear,
-  onCompare,
-}: {
-  products:  Product[];
-  onRemove:  (id: string) => void;
-  onClear:   () => void;
-  onCompare: () => void;
-}) {
-  return (
-    <div
-      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-3.5"
-      style={{
-        marginTop:    16,
-        padding:      "14px 16px",
-        background:   "#fff",
-        border:       "1.5px solid #0071e3",
-        borderRadius: 14,
-        boxShadow:    "0 4px 16px rgba(0,113,227,0.1)",
-      }}
-    >
-      <div className="flex items-start sm:items-center gap-3 sm:flex-1 min-w-0">
-        <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em", paddingTop: 6 }}>
-          COMPARING
-        </span>
-
-        {/* Product chips */}
-        <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
-          {products.map(p => (
-            <div key={p.id} style={{
-              display:    "flex",
-              alignItems: "center",
-              gap:        6,
-              padding:    "5px 8px 5px 10px",
-              background: "#eff6ff",
-              borderRadius: 7,
-              border:     "1px solid #bfdbfe",
-            }}>
-              <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
-                {p.name}
-              </span>
-              <button
-                onClick={() => onRemove(p.id)}
-                aria-label={`Remove ${p.name} from comparison`}
-                style={{
-                  border:     "none",
-                  background: "none",
-                  cursor:     "pointer",
-                  padding:    0,
-                  display:    "flex",
-                  alignItems: "center",
-                  color:      "#6e6e73",
-                  lineHeight: 1,
-                }}
-              >
-                <X size={12} strokeWidth={2.5} />
-              </button>
-            </div>
-          ))}
-          {products.length < 3 && (
-            <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
-              Add 1 more to compare
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between sm:justify-end gap-3 sm:flex-shrink-0">
-        <button
-          onClick={onClear}
-          style={{
-            border:     "none",
-            background: "none",
-            cursor:     "pointer",
-            fontSize:   12,
-            color:      "#6e6e73",
-            fontWeight: 500,
-            flexShrink: 0,
-            padding:    "0 4px",
-          }}
-        >
-          Clear
-        </button>
-
-        <button
-          onClick={onCompare}
-          className="flex-1 sm:flex-none"
-          style={{
-            padding:      "9px 18px",
-            borderRadius: 8,
-            background:   "#0071e3",
-            color:        "#fff",
-            border:       "none",
-            cursor:       "pointer",
-            fontSize:     13,
-            fontWeight:   500,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          Compare {products.length}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ─── Compare modal ────────────────────────────────────────────────────────────
-
-function CompareModal({
-  products,
-  category,
-  onClose,
-}: {
-  products: Product[];
-  category: string;
-  onClose:  () => void;
-}) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeRef  = useRef<HTMLButtonElement>(null);
-  const returnRef = useRef<HTMLElement | null>(null);
-  const TITLE_ID  = "compare-modal-title";
-
-  // On mount: remember where focus came from, move it to the close button.
-  // On unmount: give focus back to the opener.
-  useEffect(() => {
-    returnRef.current = document.activeElement as HTMLElement;
-    closeRef.current?.focus();
-    return () => { returnRef.current?.focus(); };
-  }, []);
-
-  // Escape key → close (document-level so it fires even if nothing inside is focused)
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  // Tab focus trap — keep keyboard focus cycling within the dialog
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== "Tab") return;
-    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-    );
-    if (!focusable?.length) return;
-    const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
-    if (e.shiftKey) {
-      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-    } else {
-      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
-    }
-  };
-
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position:       "fixed",
-        inset:          0,
-        background:     "rgba(0,0,0,0.48)",
-        zIndex:         9000,
-        display:        "flex",
-        alignItems:     "center",
-        justifyContent: "center",
-        padding:        24,
-      }}
-    >
-      <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={TITLE_ID}
-        onClick={e => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
-        style={{
-          background:   "#fff",
-          borderRadius: 20,
-          padding:      "28px 28px 32px",
-          width:        "100%",
-          maxWidth:     860,
-          maxHeight:    "88vh",
-          overflowY:    "auto",
-        }}
-      >
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-          <div>
-            <h2
-              id={TITLE_ID}
-              style={{ fontSize: 21, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em" }}
-            >
-              Compare {category}
-            </h2>
-            <p style={{ fontSize: 12, color: "#6e6e73", marginTop: 2 }}>
-              {products.length} products selected
-            </p>
-          </div>
-          <button
-            ref={closeRef}
-            onClick={onClose}
-            aria-label="Close comparison"
-            style={{
-              width:       36,
-              height:      36,
-              borderRadius:"50%",
-              border:      "none",
-              background:  "#f2f2f7",
-              cursor:      "pointer",
-              display:     "flex",
-              alignItems:  "center",
-              justifyContent: "center",
-              flexShrink:  0,
-            }}
-          >
-            <X size={17} color="#1d1d1f" />
-          </button>
-        </div>
-
-        {/* Comparison columns — horizontal scroll on mobile, even grid from sm+ */}
-        <div
-          className="grid grid-flow-col auto-cols-[75%] overflow-x-auto pb-2 sm:grid-flow-row sm:auto-cols-auto sm:overflow-visible sm:pb-0 sm:[grid-template-columns:repeat(var(--cols),1fr)]"
-          style={{ gap: 16, ["--cols" as string]: products.length }}
-        >
-          {products.map(p => (
-            <div key={p.id} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
-              {/* Illustration */}
-              <div style={{
-                background: p.bg,
-                height:     160,
-                position:   "relative",
-                display:    "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-                <ProductIllustration product={p} />
-              </div>
-
-              {/* Details */}
-              <div style={{ padding: "16px" }}>
-                <p style={{ fontSize: 9.5, fontWeight: 600, color: "#6e6e73", letterSpacing: "0.07em", marginBottom: 4 }}>
-                  {p.subtitle}
-                </p>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16, lineHeight: 1.3 }}>
-                  {p.name}
-                </p>
-                <Link
-                  href={p.href}
-                  style={{
-                    display:        "block",
-                    textAlign:      "center",
-                    padding:        "9px 0",
-                    borderRadius:   8,
-                    background:     "#0071e3",
-                    color:          "#fff",
-                    fontSize:       13,
-                    fontWeight:     500,
-                    textDecoration: "none",
-                  }}
-                >
-                  View Now
-                </Link>
-              </div>
-            </div>
-          ))}
+          </EnquireButton>
         </div>
       </div>
     </div>
@@ -533,19 +205,7 @@ function CompareModal({
 // ─── Single shelf row ─────────────────────────────────────────────────────────
 
 function ShelfRow({ shelf }: { shelf: Shelf }) {
-  const [btnHovered,  setBtnHovered]  = useState(false);
-  const [compareIds,  setCompareIds]  = useState<string[]>([]);
-  const [showModal,   setShowModal]   = useState(false);
-
-  const toggleCompare = (id: string) =>
-    setCompareIds(prev =>
-      prev.includes(id)
-        ? prev.filter(x => x !== id)
-        : prev.length >= 3 ? prev : [...prev, id]
-    );
-
-  const maxReached     = compareIds.length >= 3;
-  const compareProducts = shelf.products.filter(p => compareIds.includes(p.id));
+  const [btnHovered, setBtnHovered] = useState(false);
 
   return (
     <div>
@@ -565,25 +225,9 @@ function ShelfRow({ shelf }: { shelf: Shelf }) {
           photo at a usable size), 2-up from sm, 4 equal-width cards from lg */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
         {shelf.products.map(p => (
-          <ProductCard
-            key={p.id}
-            product={p}
-            isCompared={compareIds.includes(p.id)}
-            onToggleCompare={() => toggleCompare(p.id)}
-            maxReached={maxReached}
-          />
+          <ProductCard key={p.id} product={p} />
         ))}
       </div>
-
-      {/* Compare bar — shown when ≥ 2 selected */}
-      {compareIds.length >= 2 && (
-        <CompareBar
-          products={compareProducts}
-          onRemove={id => setCompareIds(prev => prev.filter(x => x !== id))}
-          onClear={() => setCompareIds([])}
-          onCompare={() => setShowModal(true)}
-        />
-      )}
 
       {/* View All button */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
@@ -611,15 +255,6 @@ function ShelfRow({ shelf }: { shelf: Shelf }) {
           <ArrowRight size={14} strokeWidth={2} />
         </Link>
       </div>
-
-      {/* Compare modal */}
-      {showModal && (
-        <CompareModal
-          products={compareProducts}
-          category={shelf.category}
-          onClose={() => setShowModal(false)}
-        />
-      )}
     </div>
   );
 }

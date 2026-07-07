@@ -15,6 +15,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
+import EnquireButton from "@/components/EnquireButton";
 
 // ─── Public types ─────────────────────────────────────────────────────────────
 
@@ -75,8 +76,6 @@ export type ProductShowcaseConfig = {
   price:        string;
   /** href for the "Shop Now" button. */
   href:         string;
-  /** href for the "Enquire" button. Defaults to "/contact". */
-  enquireHref?: string;
 };
 
 // ─── Internal hooks ───────────────────────────────────────────────────────────
@@ -622,8 +621,7 @@ function SpecsSection({
   name,
   price,
   href,
-  enquireHref,
-}: Pick<ProductShowcaseConfig, "views" | "specs" | "specsHeading" | "name" | "price" | "href" | "enquireHref">) {
+}: Pick<ProductShowcaseConfig, "views" | "specs" | "specsHeading" | "name" | "price" | "href">) {
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, 0.1);
 
@@ -699,18 +697,18 @@ function SpecsSection({
               }}>
                 Shop Now
               </Link>
-              <Link href={enquireHref ?? "/contact"} style={{
+              <EnquireButton product={name} style={{
                 padding:        "10px 26px",
                 border:         "1.5px solid #0071e3",
+                background:     "transparent",
                 color:          "#0071e3",
                 borderRadius:   "50px",
                 fontSize:       14,
                 fontWeight:     500,
-                textDecoration: "none",
                 letterSpacing:  "-0.01em",
               }}>
                 Enquire
-              </Link>
+              </EnquireButton>
             </div>
           </div>
         </div>
@@ -784,7 +782,7 @@ export default function ProductShowcase({
   sections?:  ShowcaseSection[];
 }) {
   const { views, featuresLeft, featuresRight, featuresHeading,
-          specs, specsHeading, name, price, href, enquireHref,
+          specs, specsHeading, name, price, href,
           parallaxTitle, parallaxSubtitle, parallaxDesc } = config;
 
   const show = (s: ShowcaseSection) => sections.includes(s);
@@ -818,7 +816,6 @@ export default function ProductShowcase({
           name={name}
           price={price}
           href={href}
-          enquireHref={enquireHref}
         />
       )}
     </>

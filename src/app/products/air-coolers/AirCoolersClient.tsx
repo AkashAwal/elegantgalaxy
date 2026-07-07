@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, FileText, X, ChevronDown, ChevronUp, Check } from "lucide-react";
+import { Phone, FileText, X, ChevronDown, ChevronUp } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // ── SVG Illustrations ─────────────────────────────────────────────────────────
@@ -93,7 +93,7 @@ function LouverCooler() {
   );
 }
 
-function DesertCoolerSvg() {
+function DomesticCoolerSvg() {
   return (
     <svg viewBox="0 0 200 172" width={160} height={138} fill="none" aria-hidden>
       <rect x="8" y="16" width="184" height="130" rx="12" fill="#e5e5ea" />
@@ -139,10 +139,10 @@ function DesertCoolerSvg() {
 
 import {
   MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES,
-  coolerName, entryKey,
+  coolerName,
   type FrontGrill, type CoolerType, type CoolerModel,
 } from "@/data/air-coolers";
-export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES, coolerName, entryKey };
+export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES, coolerName };
 export type { FrontGrill, CoolerType, CoolerModel };
 
 // ── Illustration ──────────────────────────────────────────────────────────────
@@ -161,7 +161,7 @@ export function CoolerIllustration({ model }: { model: CoolerModel }) {
       </div>
     );
   }
-  if (model.type !== "commercial") return <DesertCoolerSvg />;
+  if (model.type !== "commercial") return <DomesticCoolerSvg />;
   return model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />;
 }
 
@@ -172,7 +172,7 @@ export function getSpecRows(model: CoolerModel, capacity: number): Array<{ label
   if (!cap) return [];
   return [
     { label: "Model Number",       value: cap.modelNumber },
-    { label: "Type",               value: model.type === "commercial" ? "Commercial Air Cooler" : "Desert Cooler" },
+    { label: "Type",               value: model.type === "commercial" ? "Commercial Air Cooler" : "Domestic Cooler" },
     { label: "Capacity",           value: `${capacity} L` },
     { label: "Body Material",      value: model.bodyMaterial },
     { label: "Motor",              value: model.motor },
@@ -196,9 +196,10 @@ export function getSpecRows(model: CoolerModel, capacity: number): Array<{ label
 
 export function EnquireModal({ model, capacity, onClose }: { model: CoolerModel; capacity: number; onClose: () => void }) {
   const cap    = model.capacitySpecs[capacity];
-  const text   = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${capacity}L) Air Cooler${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
+  const name   = coolerName(model, capacity);
+  const text   = `Hi, I'm interested in the ${name}${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
   const waUrl  = `${WA_BASE}?text=${encodeURIComponent(text)}`;
-  const formUrl = `/contact?product=air-cooler&model=${encodeURIComponent(model.id)}&cap=${capacity}`;
+  const formUrl = `/contact?enquire=${encodeURIComponent(name)}&product=air-cooler&model=${encodeURIComponent(model.id)}&cap=${capacity}`;
 
   return (
     <div
@@ -214,9 +215,9 @@ export function EnquireModal({ model, capacity, onClose }: { model: CoolerModel;
         </button>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6e6e73", marginBottom: 8 }}>Enquire About</p>
         <p style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 4, letterSpacing: "-0.02em" }}>
-          {model.name} · {capacity}L
+          {name}
         </p>
-        <p style={{ fontSize: 14, color: "#6e6e73", marginBottom: 28 }}>{cap?.modelNumber} &middot; {model.type === "commercial" ? "Commercial" : "Desert"} Cooler</p>
+        <p style={{ fontSize: 14, color: "#6e6e73", marginBottom: 28 }}>{cap?.modelNumber} &middot; {model.type === "commercial" ? "Commercial" : "Domestic"} Cooler</p>
 
         <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: "#25D366", color: "#fff", textDecoration: "none", marginBottom: 10 }}>
           <WhatsAppIcon size={20} />
@@ -246,243 +247,18 @@ export function EnquireModal({ model, capacity, onClose }: { model: CoolerModel;
   );
 }
 
-// ── Compare bar (fixed at viewport bottom) ─────────────────────────────────────
+// ── Cooler Card ───────────────────────────────────────────────────────────────
 
 type Entry = { model: CoolerModel; capacity: number };
-
-function CompareBar({
-  entries,
-  onRemove,
-  onClear,
-  onCompare,
-}: {
-  entries:   Entry[];
-  onRemove:  (key: string) => void;
-  onClear:   () => void;
-  onCompare: () => void;
-}) {
-  return (
-    <div
-      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-3.5"
-      style={{
-        padding:      "14px 16px",
-        background:   "#fff",
-        border:       "1.5px solid #0071e3",
-        borderRadius: 14,
-        boxShadow:    "0 4px 16px rgba(0,113,227,0.1)",
-      }}
-    >
-      <div className="flex items-start sm:items-center gap-3 sm:flex-1 min-w-0">
-        <span style={{ fontSize: 12, fontWeight: 600, color: "#6e6e73", flexShrink: 0, letterSpacing: "0.04em", paddingTop: 6 }}>
-          COMPARING
-        </span>
-
-        <div style={{ display: "flex", gap: 8, flex: 1, alignItems: "center", flexWrap: "wrap" }}>
-          {entries.map(({ model, capacity }) => {
-            const key = entryKey(model.id, capacity);
-            return (
-              <div key={key} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 8px 5px 10px", background: "#eff6ff", borderRadius: 7, border: "1px solid #bfdbfe" }}>
-                <span style={{ fontSize: 12, fontWeight: 500, color: "#1d1d1f" }}>
-                  {model.name} · {capacity}L
-                </span>
-                <button
-                  onClick={() => onRemove(key)}
-                  aria-label={`Remove ${model.name} ${capacity}L from comparison`}
-                  style={{ border: "none", background: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", color: "#6e6e73", lineHeight: 1 }}
-                >
-                  <X size={12} strokeWidth={2.5} />
-                </button>
-              </div>
-            );
-          })}
-          {entries.length < 3 && (
-            <span style={{ fontSize: 12, color: "#6e6e73", fontStyle: "italic" }}>
-              Add {3 - entries.length} more to compare
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between sm:justify-end gap-3 sm:flex-shrink-0">
-        <button onClick={onClear} style={{ border: "none", background: "none", cursor: "pointer", fontSize: 12, color: "#6e6e73", fontWeight: 500, flexShrink: 0, padding: "0 4px" }}>
-          Clear
-        </button>
-        <button
-          onClick={onCompare}
-          className="flex-1 sm:flex-none"
-          style={{ padding: "9px 18px", borderRadius: 8, background: "#0071e3", color: "#fff", border: "none", cursor: "pointer", fontSize: 13, fontWeight: 500, letterSpacing: "-0.01em" }}
-        >
-          Compare {entries.length}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ── Compare modal ─────────────────────────────────────────────────────────────
-
-function CompareModal({
-  entries,
-  onClose,
-  onEnquire,
-}: {
-  entries:   Entry[];
-  onClose:   () => void;
-  onEnquire: (entry: Entry) => void;
-}) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeRef  = useRef<HTMLButtonElement>(null);
-  const returnRef = useRef<HTMLElement | null>(null);
-  const TITLE_ID  = "cooler-compare-modal-title";
-
-  useEffect(() => {
-    returnRef.current = document.activeElement as HTMLElement;
-    closeRef.current?.focus();
-    return () => { returnRef.current?.focus(); };
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== "Tab") return;
-    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    );
-    if (!focusable?.length) return;
-    const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
-    if (e.shiftKey) {
-      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-    } else {
-      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
-    }
-  };
-
-  const allLabels = entries.length > 0 ? getSpecRows(entries[0].model, entries[0].capacity).map((r) => r.label) : [];
-
-  return (
-    <div
-      onClick={onClose}
-      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.48)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}
-    >
-      <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={TITLE_ID}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
-        style={{ background: "#fff", borderRadius: 20, padding: "28px 28px 32px", width: "100%", maxWidth: 900, maxHeight: "88vh", overflowY: "auto" }}
-      >
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-          <div>
-            <h2 id={TITLE_ID} style={{ fontSize: 21, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.015em" }}>
-              Compare Air Coolers
-            </h2>
-            <p style={{ fontSize: 12, color: "#6e6e73", marginTop: 2 }}>{entries.length} products selected</p>
-          </div>
-          <button
-            ref={closeRef}
-            onClick={onClose}
-            aria-label="Close comparison"
-            style={{ width: 36, height: 36, borderRadius: "50%", border: "none", background: "#f2f2f7", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
-          >
-            <X size={17} color="#1d1d1f" />
-          </button>
-        </div>
-
-        {/* Columns + spec rows scroll together horizontally on mobile */}
-        <div className="overflow-x-auto -mx-1 px-1">
-        <div style={{ minWidth: entries.length > 1 ? entries.length * 200 : undefined }}>
-        {/* Columns */}
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${entries.length}, 1fr)`, gap: 16, marginBottom: 24 }}>
-          {entries.map(({ model, capacity }) => {
-            const key = entryKey(model.id, capacity);
-            return (
-              <div key={key} style={{ borderRadius: 14, border: "1.5px solid #e8e8ed", overflow: "hidden" }}>
-                <div style={{
-                  background:     model.type === "commercial" ? "#1d1d1f" : "#e0f2fe",
-                  height:         160,
-                  display:        "flex",
-                  alignItems:     "center",
-                  justifyContent: "center",
-                }}>
-                  <CoolerIllustration model={model} />
-                </div>
-                <div style={{ padding: 16 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: "#6e6e73", marginBottom: 4 }}>
-                    {model.type === "commercial" ? "Commercial" : "Desert"} · <span style={{ color: "#0071e3" }}>{capacity}L</span>
-                  </p>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16, lineHeight: 1.3 }}>
-                    {model.name}
-                  </p>
-                  <button
-                    onClick={() => { onClose(); onEnquire({ model, capacity }); }}
-                    style={{ display: "block", width: "100%", textAlign: "center", padding: "9px 0", borderRadius: 8, border: "1.5px solid #0071e3", background: "transparent", color: "#0071e3", fontSize: 13, fontWeight: 500, cursor: "pointer" }}
-                  >
-                    Enquire
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Spec rows */}
-        <div style={{ borderRadius: 12, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden" }}>
-          {allLabels.map((label, i) => (
-            <div
-              key={label}
-              style={{
-                display:             "grid",
-                gridTemplateColumns: `160px repeat(${entries.length}, 1fr)`,
-                gap:                 8,
-                padding:             "9px 14px",
-                background:          i % 2 === 0 ? "#fafafa" : "#fff",
-                borderBottom:        i < allLabels.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
-              }}
-            >
-              <span style={{ fontSize: 12, color: "#6e6e73", flexShrink: 0, textAlign: "center" }}>{label}</span>
-              {entries.map(({ model, capacity }) => {
-                const rows = getSpecRows(model, capacity);
-                const row  = rows.find((r) => r.label === label);
-                return (
-                  <span key={entryKey(model.id, capacity)} style={{ fontSize: 12, fontWeight: 600, color: "#1d1d1f", textAlign: "center" }}>
-                    {row?.value ?? "—"}
-                  </span>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Cooler Card ───────────────────────────────────────────────────────────────
 
 function CoolerCard({
   model,
   capacity,
-  isCompared,
-  maxReached,
-  onToggleCompare,
   onEnquire,
 }: {
-  model:           CoolerModel;
-  capacity:        number;
-  isCompared:      boolean;
-  maxReached:      boolean;
-  onToggleCompare: () => void;
-  onEnquire:       () => void;
+  model:     CoolerModel;
+  capacity:  number;
+  onEnquire: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const isDark = model.type === "commercial";
@@ -496,10 +272,7 @@ function CoolerCard({
         borderRadius: 18,
         position:     "relative",
         zIndex:       expanded ? 20 : 1,
-        outline:      isCompared ? "2px solid #0071e3" : "2px solid transparent",
-        outlineOffset: "-1px",
         boxShadow:    "0 2px 16px rgba(0,0,0,0.07)",
-        transition:   "outline-color 0.15s ease",
       }}
     >
       {/* Illustration — clips top corners independently */}
@@ -549,19 +322,19 @@ function CoolerCard({
 
         {model.type === "commercial"
           ? model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />
-          : <DesertCoolerSvg />
+          : <DomesticCoolerSvg />
         }
       </div>
 
       {/* Content */}
       <div style={{ padding: "18px 20px 16px" }}>
         <p style={{ fontSize: 12, color: "#6e6e73", fontWeight: 500, marginBottom: 4 }}>
-          {model.type === "commercial" ? "Commercial Air Cooler" : "Desert Cooler"}
+          {model.type === "commercial" ? "Commercial Air Cooler" : "Domestic Cooler"}
           {" · "}
           <span style={{ color: "#0071e3", fontWeight: 600 }}>{capacity}L</span>
         </p>
         <p style={{ fontSize: 18, fontWeight: 700, color: "#1d1d1f", marginBottom: 2, letterSpacing: "-0.01em", lineHeight: 1.2 }}>
-          {model.name}
+          {coolerName(model, capacity)}
         </p>
         <p style={{ fontSize: 12, color: "#8e8e93", marginBottom: 14 }}>{cap?.modelNumber}</p>
 
@@ -691,36 +464,6 @@ function CoolerCard({
             Enquire Now
           </button>
         </div>
-
-        {/* Compare toggle — matches ProductShelves/LED TVs style */}
-        <button
-          onClick={onToggleCompare}
-          disabled={maxReached && !isCompared}
-          aria-label={isCompared ? `Remove ${model.name} ${capacity}L from comparison` : `Add ${model.name} ${capacity}L to comparison`}
-          aria-pressed={isCompared}
-          style={{
-            marginTop:      8,
-            width:          "100%",
-            display:        "flex",
-            alignItems:     "center",
-            justifyContent: "center",
-            gap:            5,
-            padding:        "6px 0",
-            border:         "none",
-            background:     "none",
-            cursor:         maxReached && !isCompared ? "not-allowed" : "pointer",
-            opacity:        maxReached && !isCompared ? 0.38 : 1,
-            color:          isCompared ? "#0071e3" : "#6e6e73",
-            fontSize:       13,
-            fontWeight:     500,
-            transition:     "color 0.15s ease, opacity 0.15s ease",
-          }}
-        >
-          <span style={{ width: 14, height: 14, borderRadius: 3, border: `1.5px solid ${isCompared ? "#0071e3" : "#8e8e93"}`, background: isCompared ? "#0071e3" : "transparent", display: "inline-flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s ease, border-color 0.15s ease", flexShrink: 0 }}>
-            {isCompared && <Check size={9} color="#fff" strokeWidth={3} />}
-          </span>
-          Compare
-        </button>
       </div>
     </div>
   );
@@ -736,24 +479,11 @@ export default function AirCoolersClient({
   initialCap?:  number | null;
 }) {
   const [typeFilter,    setTypeFilter]    = useState<CoolerType | null>(
-    initialType === "commercial" || initialType === "desert" ? initialType : null
+    initialType === "commercial" || initialType === "domestic" ? initialType : null
   );
   const [capFilter,     setCapFilter]     = useState<number | null>(initialCap);
   const [modelFilter,   setModelFilter]   = useState<string | null>(null);
   const [enquireTarget, setEnquireTarget] = useState<Entry | null>(null);
-  const [compared,        setCompared]        = useState<Set<string>>(new Set());
-  const [showCompareModal, setShowCompareModal] = useState(false);
-
-  const toggleCompare = useCallback((key: string) => {
-    setCompared((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) { next.delete(key); }
-      else if (next.size < 3) { next.add(key); }
-      return next;
-    });
-  }, []);
-
-  const maxReached = compared.size >= 3;
 
   const allEntries: Entry[] = [];
   for (const model of MODELS) {
@@ -761,8 +491,6 @@ export default function AirCoolersClient({
       allEntries.push({ model, capacity });
     }
   }
-
-  const comparedEntries = allEntries.filter((e) => compared.has(entryKey(e.model.id, e.capacity)));
 
   const visible = allEntries.filter(({ model, capacity }) => {
     if (typeFilter  && model.type !== typeFilter) return false;
@@ -782,7 +510,7 @@ export default function AirCoolersClient({
             Stay Cool, Work Smart.
           </h1>
           <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.65, maxWidth: 540 }}>
-            Commercial and desert coolers built for Indian summers - high air delivery, honeycomb cooling pads, and durable PPCP bodies.
+            Commercial and domestic coolers built for Indian summers - high air delivery, honeycomb cooling pads, and durable PPCP bodies.
           </p>
         </div>
       </section>
@@ -839,7 +567,7 @@ export default function AirCoolersClient({
 
       {/* Grid */}
       <section>
-        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: comparedEntries.length >= 2 ? 140 : 80 }}>
+        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 80 }}>
           {visible.length === 0 ? (
             <div style={{ textAlign: "center", paddingTop: 56, paddingBottom: 56 }}>
               <p style={{ fontSize: 22, fontWeight: 700, color: "#1d1d1f", marginBottom: 10, letterSpacing: "-0.02em" }}>
@@ -849,47 +577,18 @@ export default function AirCoolersClient({
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>
-              {visible.map(({ model, capacity }) => {
-                const key = entryKey(model.id, capacity);
-                return (
-                  <CoolerCard
-                    key={key}
-                    model={model}
-                    capacity={capacity}
-                    isCompared={compared.has(key)}
-                    maxReached={maxReached}
-                    onToggleCompare={() => toggleCompare(key)}
-                    onEnquire={() => setEnquireTarget({ model, capacity })}
-                  />
-                );
-              })}
+              {visible.map(({ model, capacity }) => (
+                <CoolerCard
+                  key={`${model.id}::${capacity}`}
+                  model={model}
+                  capacity={capacity}
+                  onEnquire={() => setEnquireTarget({ model, capacity })}
+                />
+              ))}
             </div>
           )}
         </div>
       </section>
-
-      {/* ── Compare bar — fixed at viewport bottom ────────────────────────────── */}
-      {comparedEntries.length >= 2 && (
-        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 100, padding: "0 24px 20px" }}>
-          <div style={{ maxWidth: 1440, margin: "0 auto" }}>
-            <CompareBar
-              entries={comparedEntries}
-              onRemove={(key) => setCompared((prev) => { const next = new Set(prev); next.delete(key); return next; })}
-              onClear={() => setCompared(new Set())}
-              onCompare={() => setShowCompareModal(true)}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ── Compare modal ────────────────────────────────────────────────────── */}
-      {showCompareModal && (
-        <CompareModal
-          entries={comparedEntries}
-          onClose={() => setShowCompareModal(false)}
-          onEnquire={(entry) => setEnquireTarget(entry)}
-        />
-      )}
 
       {enquireTarget && (
         <EnquireModal

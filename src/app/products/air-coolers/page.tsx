@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products/air-coolers" },
   title: "Air Coolers",
   description:
-    "Explore Elegant Galaxy commercial and desert air coolers - 100L to 160L commercial models and 90L–110L desert coolers with honeycomb cooling pads and high air delivery.",
+    "Explore Elegant Galaxy commercial and domestic air coolers - 100L to 160L commercial models and 90L–110L domestic coolers with honeycomb cooling pads and high air delivery.",
   openGraph: {
     title:       "Air Coolers",
-    description: "Commercial and desert air coolers for Indian summers. High air delivery, 7090 honeycomb pads, and durable PPCP bodies.",
+    description: "Commercial and domestic air coolers for Indian summers. High air delivery, 7090 honeycomb pads, and durable PPCP bodies.",
     type:        "website",
   },
 };
@@ -23,7 +23,7 @@ export default async function AirCoolersPage({
   const { type, cap } = await searchParams;
   const parsedCap     = cap ? parseInt(cap, 10) : null;
   const initialCap    = parsedCap && !Number.isNaN(parsedCap) ? parsedCap : null;
-  const initialType   = type === "commercial" || type === "desert" ? (type as CoolerType) : null;
+  const initialType   = type === "commercial" || type === "domestic" ? (type as CoolerType) : null;
 
   if (initialType || initialCap) {
     return <AirCoolersClient initialType={initialType} initialCap={initialCap} />;
@@ -75,7 +75,7 @@ export default async function AirCoolersPage({
                     {model.name}
                   </p>
                   <p style={{ fontSize: 13, color: "#6e6e73" }}>
-                    {model.type === "commercial" ? "Commercial" : "Desert"} &middot; {model.capacities.length > 1
+                    {model.type === "commercial" ? "Commercial" : "Domestic"} &middot; {model.capacities.length > 1
                       ? `${model.capacities[0]}L–${model.capacities[model.capacities.length - 1]}L`
                       : `${model.capacities[0]}L`}
                   </p>

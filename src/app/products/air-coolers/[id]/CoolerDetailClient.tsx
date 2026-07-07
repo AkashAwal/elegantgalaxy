@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChevronRight, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, type CoolerModel } from "@/data/air-coolers";
+import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, coolerName, type CoolerModel } from "@/data/air-coolers";
 import { CoolerIllustration, EnquireModal, getSpecRows } from "../AirCoolersClient";
 
 export default function CoolerDetailClient({ model, initialCap }: { model: CoolerModel; initialCap: number | null }) {
@@ -14,7 +14,8 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
   const [showEnquire, setShowEnquire] = useState(false);
 
   const cap     = model.capacitySpecs[capacity];
-  const waText  = `Hi, I'm interested in the Elegant Galaxy ${model.name} (${capacity}L)${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
+  const name    = coolerName(model, capacity);
+  const waText  = `Hi, I'm interested in the ${name}${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
   const isDark  = model.type === "commercial";
   const specRows = getSpecRows(model, capacity);
@@ -31,7 +32,7 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
           <ChevronRight size={13} />
           <Link href="/products/air-coolers" style={{ color: "#6e6e73", textDecoration: "none" }}>Air Coolers</Link>
           <ChevronRight size={13} />
-          <span style={{ color: "#1d1d1f", fontWeight: 500 }}>{model.name}</span>
+          <span style={{ color: "#1d1d1f", fontWeight: 500 }}>{name}</span>
         </div>
       </div>
 
@@ -57,10 +58,10 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
               display: "inline-block", fontSize: 11, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
               background: "rgba(0,113,227,0.1)", color: "#0071e3", padding: "4px 10px", borderRadius: 20, marginBottom: 14,
             }}>
-              {model.type === "commercial" ? "Commercial Air Cooler" : "Desert Cooler"}
+              {model.type === "commercial" ? "Commercial Air Cooler" : "Domestic Cooler"}
             </span>
             <h1 style={{ fontSize: 34, fontWeight: 700, letterSpacing: "-0.02em", color: "#1d1d1f", lineHeight: 1.15, marginBottom: 10 }}>
-              {model.name}
+              {name}
             </h1>
             <p style={{ fontSize: 15, color: "#6e6e73", marginBottom: 28 }}>
               {cap?.modelNumber} &middot; <span style={{ color: "#0071e3", fontWeight: 600 }}>{capacity}L</span>
@@ -136,7 +137,7 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
             </a>
 
             <Link href="/products/air-coolers" style={{ fontSize: 14, color: "#0071e3", fontWeight: 500 }}>
-              Compare with other air coolers →
+              Browse other air coolers →
             </Link>
           </div>
         </div>
@@ -162,7 +163,7 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
         <section style={{ background: "#fff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
           <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 40, paddingBottom: 56 }}>
             <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 20 }}>
-              More {model.type === "commercial" ? "Commercial" : "Desert"} Coolers
+              More {model.type === "commercial" ? "Commercial" : "Domestic"} Coolers
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: 16 }}>
               {otherModels.map((m) => (
@@ -175,7 +176,7 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
                     <CoolerIllustration model={m} />
                   </div>
                   <div style={{ padding: "12px 14px" }}>
-                    <p style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f" }}>{m.name}</p>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: "#1d1d1f" }}>{coolerName(m, m.capacities[0])}</p>
                   </div>
                 </Link>
               ))}

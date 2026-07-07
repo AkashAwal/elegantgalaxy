@@ -1,4 +1,4 @@
-import Link from "next/link";
+import EnquireButton from "@/components/EnquireButton";
 
 // ── Remote illustration ─────────────────────────────────────────────────────────
 
@@ -72,8 +72,8 @@ export default function RemotesSection() {
 
         {/* CTA */}
         <div style={{ flexShrink: 0 }}>
-          <Link
-            href="/contact?enquire=TV%20Remote"
+          <EnquireButton
+            product="TV Remote"
             style={{
               display:        "inline-flex",
               alignItems:     "center",
@@ -84,12 +84,12 @@ export default function RemotesSection() {
               fontWeight:     600,
               color:          "#1d1d1f",
               background:     "#f5f5f7",
-              textDecoration: "none",
+              border:         "none",
               whiteSpace:     "nowrap",
             }}
           >
             Enquire Now
-          </Link>
+          </EnquireButton>
         </div>
       </div>
     </section>

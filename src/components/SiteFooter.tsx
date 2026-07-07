@@ -30,7 +30,7 @@ const PRODUCT_COLS = [
     href:    "/products/air-coolers",
     links: [
       { label: "Commercial Coolers", href: "/products/air-coolers?type=commercial" },
-      { label: "Desert Coolers",     href: "/products/air-coolers?type=desert"     },
+      { label: "Domestic Coolers",   href: "/products/air-coolers?type=domestic"   },
     ],
   },
   {

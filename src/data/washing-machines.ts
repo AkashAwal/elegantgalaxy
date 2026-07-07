@@ -28,7 +28,7 @@ export const COMMON_SPECS = {
   buzzer:       true,
 };
 
-export const washerName = (capacity: number) => `Elegant ${capacity}kg Semi-Automatic Washer`;
+export const washerName = (capacity: number) => `EG ${capacity}kg Semi-Automatic Washer`;
 
 export const PHONE         = "+919540064444";
 export const PHONE_DISPLAY = "+91 95400 64444";

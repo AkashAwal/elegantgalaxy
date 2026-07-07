@@ -108,7 +108,7 @@ const NAV: NavItem[] = [
         primary: [
           { label: "Explore All Air Coolers", href: "/products/air-coolers" },
           { label: "Commercial Coolers",      href: "/products/air-coolers?type=commercial" },
-          { label: "Desert Coolers",          href: "/products/air-coolers?type=desert" },
+          { label: "Domestic Coolers",        href: "/products/air-coolers?type=domestic" },
         ],
         links: [],
       },

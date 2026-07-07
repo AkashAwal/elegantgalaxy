@@ -18,7 +18,7 @@ export { NAME, MODEL_NUMBER, WATTS, COMMON_SPECS, IMAGES, PHONE, PHONE_DISPLAY, 
 export function EnquireModal({ onClose }: { onClose: () => void }) {
   const text    = `Hi, I'm interested in the ${NAME} - model ${MODEL_NUMBER}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
-  const formUrl = `/contact?product=infrared-cooktop`;
+  const formUrl = `/contact?enquire=${encodeURIComponent(NAME)}&product=infrared-cooktop`;
 
   return (
     <div

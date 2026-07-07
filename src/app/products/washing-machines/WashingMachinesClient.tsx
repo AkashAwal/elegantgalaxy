@@ -20,7 +20,7 @@ export function EnquireModal({ capacity, onClose }: { capacity: number; onClose:
   const name    = washerName(capacity);
   const text    = `Hi, I'm interested in the ${name} - model ${spec.modelNumber}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
-  const formUrl = `/contact?product=washing-machine&capacity=${capacity}`;
+  const formUrl = `/contact?enquire=${encodeURIComponent(name)}&product=washing-machine&capacity=${capacity}`;
 
   return (
     <div

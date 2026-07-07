@@ -58,7 +58,7 @@ export function EnquireModal({ model, size, onClose }: EnquireModalProps) {
   const res     = model.resolution[size] ?? "Full HD";
   const text    = `Hi, I'm interested in the ${name}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(text)}`;
-  const formUrl = `/contact?product=led-tv&model=${model.id}&size=${size}`;
+  const formUrl = `/contact?enquire=${encodeURIComponent(name)}&product=led-tv&model=${model.id}&size=${size}`;
 
   return (
     <div
