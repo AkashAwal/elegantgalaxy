@@ -6,9 +6,11 @@ import path from "path";
 // so the CSP below can stay tight (self + inline styles, which the app
 // relies on heavily via React's `style` prop and a couple of static
 // <style> tags for shimmer/loading animations).
+// Next.js dev mode (Turbopack HMR, React debugging) requires 'unsafe-eval' in
+// script-src — it's never used in production builds, so only relax it here.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import RemotesSection from "@/components/RemotesSection";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName, type TvModel } from "@/data/led-tvs";
 import { TvIcon, EnquireModal } from "../LedTvsClient";
 
@@ -294,6 +295,10 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
           </div>
         </div>
       </section>
+
+      <div style={{ paddingTop: 40 }}>
+        <RemotesSection />
+      </div>
 
       {showEnquire && (
         <EnquireModal model={model} size={size} onClose={() => setShowEnquire(false)} />

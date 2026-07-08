@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MODELS } from "@/data/led-tvs";
 import { TvIcon } from "./LedTvsClient";
+import RemotesSection from "@/components/RemotesSection";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/products/led-tvs" },
@@ -81,6 +82,8 @@ export default function LedTvsPage() {
           </div>
         </div>
       </section>
+
+      <RemotesSection />
 
     </main>
   );

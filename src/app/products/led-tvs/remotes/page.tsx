@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { MODELS, PHONE, PHONE_DISPLAY } from "@/data/led-tvs";
@@ -7,28 +8,27 @@ import EnquireButton from "@/components/EnquireButton";
 export const metadata: Metadata = {
   alternates: { canonical: "/products/led-tvs/remotes" },
   title:       "LED TV Remotes",
-  description: "Genuine replacement remotes for every Elegant Galaxy LED TV and Interactive Smart Board model.",
+  description: "Precision-crafted remotes for every Elegant Galaxy LED TV and Interactive Smart Board model.",
 };
 
-function RemoteIcon() {
-  return (
-    <svg viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", maxWidth: 84 }} aria-hidden>
-      <rect x="4" y="4" width="72" height="192" rx="24" fill="#2c2c2e" />
-      <circle cx="40" cy="32" r="10" fill="#111113" />
-      <rect x="18" y="56" width="44" height="30" rx="8" fill="#111113" />
-      <circle cx="40" cy="104" r="16" fill="#111113" />
-      <rect x="18" y="132" width="44" height="14" rx="7" fill="#111113" />
-      <rect x="18" y="154" width="44" height="14" rx="7" fill="#111113" />
-      <rect x="18" y="176" width="44" height="10" rx="5" fill="#111113" />
-    </svg>
-  );
-}
+// One real remote photo per model, in MODELS order.
+const REMOTE_IMAGES = [
+  "/remote images/remote_1.webp",
+  "/remote images/remote_2.webp",
+  "/remote images/remote_3.webp",
+  "/remote images/remote_5.webp",
+  "/remote images/remote_6.webp",
+  "/remote images/remote_7.webp",
+  "/remote images/remote_8.webp",
+  "/remote images/remote_9.webp",
+];
 
 export default function LedTvsRemotesPage() {
-  const remotes = MODELS.map((m) => ({
+  const remotes = MODELS.map((m, i) => ({
     id:       m.id,
-    subtitle: `Genuine · Factory-Matched`,
-    name:     `EG ${m.platform} Remote`,
+    subtitle: "Precision-Crafted",
+    name:     `EG TV Remote ${i + 1}`,
+    image:    REMOTE_IMAGES[i % REMOTE_IMAGES.length],
   }));
 
   return (
@@ -52,11 +52,11 @@ export default function LedTvsRemotesPage() {
             LED TV Remotes
           </p>
           <h1 style={{ fontSize: 40, fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", lineHeight: 1.1, marginBottom: 14 }}>
-            Genuine remotes for every EG TV.
+            Precision-crafted remotes.
           </h1>
           <p style={{ fontSize: 16, color: "#6e6e73", lineHeight: 1.65, maxWidth: 560 }}>
-            We stock and supply the exact remote for every Elegant Galaxy LED TV and Interactive
-            Smart Board platform we sell - factory-matched for full function, no universal-remote guesswork.
+            Every Elegant Galaxy LED TV and Interactive Smart Board platform we sell pairs with a
+            remote built to match - sleek, responsive, and made to last.
           </p>
         </div>
       </section>
@@ -78,9 +78,10 @@ export default function LedTvsRemotesPage() {
                 minWidth:     0,
               }}
             >
-              {/* Illustration area */}
+              {/* Photo area — remote photos have an opaque white background baked in */}
               <div style={{
-                background:     "#1d1d1f",
+                background:     "#fff",
+                borderBottom:   "1px solid rgba(0,0,0,0.06)",
                 height:         192,
                 display:        "flex",
                 alignItems:     "center",
@@ -88,7 +89,13 @@ export default function LedTvsRemotesPage() {
                 position:       "relative",
                 flexShrink:     0,
               }}>
-                <RemoteIcon />
+                <Image
+                  src={r.image}
+                  alt={r.name}
+                  width={72}
+                  height={176}
+                  style={{ height: "88%", width: "auto", objectFit: "contain" }}
+                />
               </div>
 
               {/* Info */}
@@ -114,8 +121,8 @@ export default function LedTvsRemotesPage() {
                   {r.name}
                 </p>
                 <div style={{ display: "flex", gap: 7, marginTop: 4 }}>
-                  <Link
-                    href={`/products/led-tvs/${r.id}`}
+                  <EnquireButton
+                    product={r.name}
                     style={{
                       flex:           1,
                       textAlign:      "center",
@@ -125,24 +132,7 @@ export default function LedTvsRemotesPage() {
                       color:          "#fff",
                       fontSize:       12,
                       fontWeight:     500,
-                      textDecoration: "none",
-                      display:        "block",
-                    }}
-                  >
-                    View Now
-                  </Link>
-                  <EnquireButton
-                    product={r.name}
-                    style={{
-                      flex:           1,
-                      textAlign:      "center",
-                      padding:        "7px 0",
-                      borderRadius:   7,
-                      border:         "1.5px solid #0071e3",
-                      background:     "transparent",
-                      color:          "#0071e3",
-                      fontSize:       12,
-                      fontWeight:     500,
+                      border:         "none",
                       display:        "block",
                     }}
                   >
@@ -159,7 +149,7 @@ export default function LedTvsRemotesPage() {
       <section style={{ background: "#fff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 40, paddingBottom: 56, textAlign: "center" }}>
           <p style={{ fontSize: 15, color: "#6e6e73", marginBottom: 20 }}>
-            Need a remote for a model not listed here? Our team can source it for you.
+            Don&apos;t see your model? Our team can match you with the right remote.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <Link

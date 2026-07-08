@@ -1,22 +1,39 @@
+import Image from "next/image";
+import Link from "next/link";
 import EnquireButton from "@/components/EnquireButton";
 
-// ── Remote illustration ─────────────────────────────────────────────────────────
+// ── Remote photos ─────────────────────────────────────────────────────────────
 
-function RemoteIcon() {
+const FEATURED_REMOTES = [
+  "/remote images/remote_1.webp",
+  "/remote images/remote_6.webp",
+  "/remote images/remote_8.webp",
+];
+
+function RemotePhotos() {
   return (
-    <svg viewBox="0 0 90 220" width="90" height="220" fill="none">
-      <rect x="4" y="4" width="82" height="212" rx="22" fill="#1d1d1f" />
-      <rect x="12" y="14" width="66" height="192" rx="14" fill="#2c2c2e" />
-      <circle cx="45" cy="40" r="10" fill="#3a3a3c" />
-      <rect x="27" y="66" width="36" height="36" rx="18" fill="#3a3a3c" />
-      <circle cx="45" cy="84" r="7" fill="#6e6e73" />
-      <rect x="27" y="114" width="16" height="16" rx="4" fill="#3a3a3c" />
-      <rect x="47" y="114" width="16" height="16" rx="4" fill="#3a3a3c" />
-      <rect x="27" y="136" width="16" height="16" rx="4" fill="#3a3a3c" />
-      <rect x="47" y="136" width="16" height="16" rx="4" fill="#3a3a3c" />
-      <rect x="27" y="164" width="36" height="12" rx="6" fill="#3a3a3c" />
-      <rect x="27" y="182" width="36" height="12" rx="6" fill="#3a3a3c" />
-    </svg>
+    <div style={{ display: "flex", alignItems: "flex-end", gap: -10 }}>
+      {FEATURED_REMOTES.map((src, i) => (
+        <div
+          key={src}
+          style={{
+            marginLeft: i === 0 ? 0 : -22,
+            transform:  `rotate(${(i - 1) * 8}deg)`,
+            zIndex:     FEATURED_REMOTES.length - Math.abs(i - 1),
+          }}
+        >
+          {/* mix-blend-mode multiplies the photo's opaque white background into
+              the dark panel behind it, so the white edges read as transparent. */}
+          <Image
+            src={src}
+            alt="Elegant Galaxy TV remote"
+            width={62}
+            height={150}
+            style={{ height: 150, width: "auto", objectFit: "contain", mixBlendMode: "multiply" }}
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -33,9 +50,9 @@ export default function RemotesSection() {
           padding:      "40px 44px",
         }}
       >
-        {/* Icon */}
+        {/* Photos */}
         <div style={{ flexShrink: 0 }}>
-          <RemoteIcon />
+          <RemotePhotos />
         </div>
 
         {/* Copy */}
@@ -57,7 +74,7 @@ export default function RemotesSection() {
             color:         "#f5f5f7",
             marginBottom:  10,
           }}>
-            Lost or broken remote?
+            Precision-crafted remotes.
           </h2>
           <p style={{
             fontSize:   15,
@@ -65,13 +82,31 @@ export default function RemotesSection() {
             color:      "rgba(245,245,247,0.55)",
             maxWidth:   480,
           }}>
-            We stock replacement remotes for every Elegant Galaxy TV model. Reach out with
-            your model number and we&apos;ll sort you out.
+            Every Elegant Galaxy TV pairs with a remote built to match - sleek, responsive,
+            and made to last. Reach out with your model number to get yours.
           </p>
         </div>
 
         {/* CTA */}
-        <div style={{ flexShrink: 0 }}>
+        <div style={{ flexShrink: 0, display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+          <Link
+            href="/products/led-tvs/remotes"
+            style={{
+              display:        "inline-flex",
+              alignItems:     "center",
+              height:         44,
+              padding:        "0 26px",
+              borderRadius:   980,
+              fontSize:       15,
+              fontWeight:     600,
+              color:          "#f5f5f7",
+              border:         "1.5px solid rgba(245,245,247,0.3)",
+              textDecoration: "none",
+              whiteSpace:     "nowrap",
+            }}
+          >
+            View Remotes
+          </Link>
           <EnquireButton
             product="TV Remote"
             style={{

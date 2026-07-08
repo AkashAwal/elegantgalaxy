@@ -342,6 +342,7 @@ export default function SiteFooter() {
           <p style={{ fontSize: 12, color: "rgba(245,245,247,0.28)" }}>
             Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi, Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003
             {" · "}GSTIN: 09AAFCE8346R1ZR
+            {" · "}MSME: UDYAM-UP-28-0011627
           </p>
         </div>
       </div>
