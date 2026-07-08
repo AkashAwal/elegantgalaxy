@@ -345,6 +345,18 @@ export default function SiteFooter() {
             {" · "}MSME: UDYAM-UP-28-0011627
           </p>
         </div>
+        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 18 }}>
+          <a
+            href="https://akashawal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: 12, color: "rgba(245,245,247,0.28)", textDecoration: "none" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#f5f5f7")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,245,247,0.28)")}
+          >
+            Website Developed by Akash Awal
+          </a>
+        </div>
       </div>
 
     </footer>

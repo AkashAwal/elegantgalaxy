@@ -658,7 +658,7 @@ export default function Navbar() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search Elegant Galaxy"
-                className="flex-1 min-w-0 bg-transparent text-[#1d1d1f] placeholder:text-[#6e6e73]"
+                className="flex-1 min-w-0 bg-transparent text-[#1d1d1f] placeholder:text-[#6e6e73] outline-none"
                 style={{ fontSize: 26 }}
                 autoComplete="off"
               />
