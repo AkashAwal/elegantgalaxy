@@ -343,6 +343,7 @@ export default function SiteFooter() {
             Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi, Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003
             {" · "}GSTIN: 09AAFCE8346R1ZR
             {" · "}MSME: UDYAM-UP-28-0011627
+            {" · "}ISO 9001:2015
           </p>
         </div>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 18 }}>

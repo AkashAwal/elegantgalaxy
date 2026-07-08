@@ -275,6 +275,9 @@ export default function ContactClient() {
               <p style={{ fontSize: 13, color: "#1d1d1f", lineHeight: 1.55 }}>
                 Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi,
                 Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003
+                <br />GSTIN: 09AAFCE8346R1ZR
+                <br />MSME: UDYAM-UP-28-0011627
+                <br />ISO 9001:2015
               </p>
             </div>
           </div>

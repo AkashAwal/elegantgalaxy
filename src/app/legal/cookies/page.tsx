@@ -232,6 +232,9 @@ export default function CookiesPage() {
         <strong style={{ color: "#1d1d1f" }}>Elegant Galaxy Pvt Ltd</strong><br />
         Garhi Guldhar, Pillar No. 639, M-112, Meerut Rd, opposite Crown Honda Delhi,<br />
         Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003<br />
+        GSTIN: 09AAFCE8346R1ZR<br />
+        MSME: UDYAM-UP-28-0011627<br />
+        ISO 9001:2015<br />
         <a href="mailto:support@elegantgalaxy.in" style={{ color: "#0071e3", textDecoration: "none" }}>
           support@elegantgalaxy.in
         </a>
