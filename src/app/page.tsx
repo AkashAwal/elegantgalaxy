@@ -16,6 +16,23 @@ export const metadata: Metadata = {
   },
 };
 
+// ── Structured data ───────────────────────────────────────────────────────────
+// Tells search engines the site's official name, so results show "Elegant
+// Galaxy" instead of the bare domain above the title.
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@type":    "WebSite",
+  name:       "Elegant Galaxy",
+  url:        "https://elegantgalaxy.in",
+  publisher: {
+    "@type": "Organization",
+    name:    "Elegant Galaxy",
+    url:     "https://elegantgalaxy.in",
+    logo:    "https://elegantgalaxy.in/logo.png",
+  },
+};
+
 // ── Category data — real product photos ────────────────────────────────────────
 
 // Each image below is pre-cropped to its content's bounding box (no baked-in
@@ -58,6 +75,11 @@ const CATEGORIES = [
 export default function Home() {
   return (
     <main id="main-content" className="bg-[#f5f5f7] min-h-screen">
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
 
       {/* ── TV Showcase hero ─────────────────────────────────────────── */}
       <TVShowcase />
