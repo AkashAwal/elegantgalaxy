@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LOCATIONS, getLocation } from "@/data/locations";
-import DistributorApplyForm from "@/components/DistributorApplyForm";
+import { PHONE, PHONE_DISPLAY, WA_BASE } from "@/data/led-tvs";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // ── Static params / metadata ─────────────────────────────────────────────────
 
@@ -17,8 +18,8 @@ export async function generateMetadata(
   const location = getLocation(state);
   if (!location) return {};
 
-  const title       = `Bulk LED TV & Home Appliance Distributor in ${location.state}`;
-  const description = `Become an authorised Elegant Galaxy distributor in ${location.state}. Bulk LED TVs, washing machines, air coolers, and infrared cooktops with GST invoicing, delivered to ${location.cities.slice(0, 3).join(", ")} and across the state.`;
+  const title       = `Bulk LED TVs & Home Appliances Supply in ${location.state}`;
+  const description = `Bulk supply of LED TVs, washing machines, air coolers, and infrared cooktops in ${location.state}. GST invoicing, delivered to ${location.cities.slice(0, 3).join(", ")} and across the state - WhatsApp us for a quote.`;
 
   return {
     title,
@@ -53,6 +54,9 @@ export default async function DistributorStatePage(
   const { state } = await params;
   const location = getLocation(state);
   if (!location) notFound();
+
+  const waText = `Hi Elegant Galaxy, I'd like a bulk quote for LED TVs / home appliances in ${location.state}.`;
+  const waHref = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -125,24 +129,27 @@ export default async function DistributorStatePage(
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <a
-              href="#apply"
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                display: "inline-flex", alignItems: "center", height: 46, padding: "0 28px",
+                display: "inline-flex", alignItems: "center", gap: 9, height: 46, padding: "0 26px",
                 borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#fff",
-                background: "#0071e3", textDecoration: "none",
+                background: "#25D366", textDecoration: "none",
               }}
             >
-              Apply as a Distributor
+              <WhatsAppIcon size={17} />
+              WhatsApp for Bulk Quote
             </a>
             <a
-              href="#faq"
+              href={`tel:${PHONE}`}
               style={{
                 display: "inline-flex", alignItems: "center", height: 46, padding: "0 28px",
                 borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#f5f5f7",
                 background: "rgba(255,255,255,0.1)", textDecoration: "none",
               }}
             >
-              Read FAQs
+              Call {PHONE_DISPLAY}
             </a>
           </div>
         </div>
@@ -243,17 +250,48 @@ export default async function DistributorStatePage(
         </div>
       </section>
 
-      {/* ── Apply form ───────────────────────────────────────────────────── */}
-      <section id="apply" style={{ background: "#f5f5f7" }}>
+      {/* ── Bulk enquiry CTA ─────────────────────────────────────────────── */}
+      <section id="enquire" style={{ background: "#f5f5f7" }}>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 72, paddingBottom: 88 }}>
-          <div style={{ maxWidth: 640, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 30, fontWeight: 700, letterSpacing: "-0.025em", color: "#1d1d1f", marginBottom: 8, textAlign: "center" }}>
-              Apply to distribute in {location.state}.
+          <div style={{ maxWidth: 560, margin: "0 auto", textAlign: "center" }}>
+            <h2 style={{ fontSize: 30, fontWeight: 700, letterSpacing: "-0.025em", color: "#1d1d1f", marginBottom: 10 }}>
+              Get a bulk quote for {location.state}.
             </h2>
-            <p style={{ fontSize: 15, color: "#6e6e73", textAlign: "center", marginBottom: 40 }}>
-              Our distribution team responds within 3-5 business days.
+            <p style={{ fontSize: 15, lineHeight: 1.65, color: "#6e6e73", marginBottom: 32 }}>
+              Tell us the product, quantity, and city - our team replies with pricing and lead time,
+              usually within a few hours during business hours.
             </p>
-            <DistributorApplyForm defaultState={location.state} />
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 9, height: 48, padding: "0 28px",
+                  borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#fff",
+                  background: "#25D366", textDecoration: "none",
+                }}
+              >
+                <WhatsAppIcon size={18} />
+                WhatsApp for Bulk Quote
+              </a>
+              <a
+                href={`tel:${PHONE}`}
+                style={{
+                  display: "inline-flex", alignItems: "center", height: 48, padding: "0 28px",
+                  borderRadius: 980, fontSize: 15, fontWeight: 600, color: "#1d1d1f",
+                  background: "#fff", border: "1.5px solid rgba(0,0,0,0.12)", textDecoration: "none",
+                }}
+              >
+                Call {PHONE_DISPLAY}
+              </a>
+            </div>
+            <p style={{ fontSize: 13.5, color: "#6e6e73", marginTop: 28 }}>
+              Looking to become an official distributor instead of a one-time bulk order?{" "}
+              <Link href="/distributors/apply" style={{ color: "#0071e3", textDecoration: "none", fontWeight: 500 }}>
+                Apply as a distributor
+              </Link>.
+            </p>
           </div>
         </div>
       </section>

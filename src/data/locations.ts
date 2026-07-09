@@ -53,7 +53,7 @@ export const LOCATIONS: Location[] = [
       },
       {
         q: "How do I become an authorised distributor in Rajasthan?",
-        a: "Fill out the distributor application below with your business and GST details. Our distribution team reviews every application and responds within 3-5 business days.",
+        a: "WhatsApp or call us for a one-time bulk order, or fill out the distributor application if you want an ongoing partnership - our team reviews every application and responds within 3-5 business days.",
       },
     ],
   },
