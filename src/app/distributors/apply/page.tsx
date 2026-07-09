@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import DistributorApplyForm from "@/components/DistributorApplyForm";
 
 export const metadata: Metadata = {
@@ -51,21 +50,9 @@ export default function DistributorApplyPage() {
       </section>
 
       {/* Application form */}
-      <section id="apply" className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 64, paddingBottom: 56 }}>
+      <section id="apply" className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 64, paddingBottom: 88 }}>
         <div style={{ maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
           <DistributorApplyForm />
-        </div>
-      </section>
-
-      {/* State-specific distribution pages */}
-      <section className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 88 }}>
-        <div style={{ maxWidth: 640, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
-          <p style={{ fontSize: 13.5, color: "#6e6e73" }}>
-            Looking for bulk supply in a specific state?{" "}
-            <Link href="/distributors/rajasthan" style={{ color: "#0071e3", textDecoration: "none", fontWeight: 500 }}>
-              See Rajasthan distribution details
-            </Link>.
-          </p>
         </div>
       </section>
 

@@ -60,10 +60,8 @@ const INITIAL_FORM = {
   ownerDesignation: "", gstNo: "", panNo: "", brandsText: "", website: "",
 };
 
-export default function DistributorApplyForm({ defaultState }: { defaultState?: string } = {}) {
-  const [form, setForm]               = useState(
-    defaultState ? { ...INITIAL_FORM, state: defaultState } : INITIAL_FORM
-  );
+export default function DistributorApplyForm() {
+  const [form, setForm]               = useState(INITIAL_FORM);
   const [errors, setErrors]           = useState<Record<string, string>>({});
   const [focused, setFocused]         = useState<Record<string, boolean>>({});
   const [status, setStatus]           = useState<"idle" | "loading" | "success" | "error">("idle");
