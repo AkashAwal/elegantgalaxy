@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://elegantgalaxy.in"),
 
   title: {
-    default:  "Elegant Galaxy - Adding Smiles to Life",
-    template: "%s - Elegant Galaxy",
+    default:  "Elegant Galaxy | Adding Smiles to Life",
+    template: "%s | Elegant Galaxy",
   },
   description:
     "Elegant Galaxy makes LED TVs, washing machines, air coolers, and infrared cooktops for Indian homes - sold in 500+ cities since 2012.",
@@ -42,21 +42,21 @@ export const metadata: Metadata = {
     locale:      "en_IN",
     url:         "https://elegantgalaxy.in",
     siteName:    "Elegant Galaxy",
-    title:       "Elegant Galaxy - Adding Smiles to Life",
+    title:       "Elegant Galaxy | Adding Smiles to Life",
     description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
     images: [
       {
         url:    "/og-image.png",
         width:  1200,
         height: 630,
-        alt:    "Elegant Galaxy - Adding Smiles to Life",
+        alt:    "Elegant Galaxy | Adding Smiles to Life",
       },
     ],
   },
 
   twitter: {
     card:        "summary_large_image",
-    title:       "Elegant Galaxy - Adding Smiles to Life",
+    title:       "Elegant Galaxy | Adding Smiles to Life",
     description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
     images:      ["/og-image.png"],
   },
