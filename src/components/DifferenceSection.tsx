@@ -85,7 +85,7 @@ const CARDS: DiffCard[] = [
   { icon: <IconWarranty />,  title: "1-Year Warranty",       desc: "Every product backed by our industry-leading 1-year warranty."          },
   { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power." },
   { icon: <IconService />,   title: "Factory Repairs",        desc: "Every repair handled in-house by our own technicians - never outsourced." },
-  { icon: <IconCertified />, title: "ISI Certified",          desc: "Safety and quality certified by the Bureau of Indian Standards."         },
+  { icon: <IconCertified />, title: "Certified Quality",       desc: "Every product tested and certified to meet strict safety standards."     },
   { icon: <IconSupport />,   title: "Real Customer Care",     desc: "Reach our support team Mon-Sat, 9 AM - 6 PM IST - always a real person." },
   { icon: <IconDelivery />,  title: "Pan-India Delivery",     desc: "Fast, tracked delivery to every pin code across the country."            },
   { icon: <IconTrusted />,   title: "Trusted Since 2012",     desc: "Over 2 million homes across 500+ Indian cities trust Elegant Galaxy."     },
