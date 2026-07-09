@@ -1,77 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { ReactNode, CSSProperties } from "react";
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
 
-function IconWarranty() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <path d="M18 3L5 8v10c0 8.28 5.6 16.02 13 18 7.4-1.98 13-9.72 13-18V8L18 3z"
-        fill="#C8A951" fillOpacity="0.15" stroke="#C8A951" strokeWidth="1.8" strokeLinejoin="round" />
-      <path d="M13 18l3.5 3.5L23 14" stroke="#C8A951" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+function CardIcon({ src, alt }: { src: string; alt: string }) {
+  return <Image src={src} alt={alt} width={36} height={36} />;
 }
-function IconEnergy() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#bbf7d0" />
-      <path d="M20 6l-8 14h7l-3 10 8-14h-7l3-10z" fill="#16a34a" />
-    </svg>
-  );
-}
-function IconService() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#ede9fe" />
-      <path d="M18 9a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" fill="#7c3aed" />
-      <path d="M9 27c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconCertified() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#fce7f3" />
-      <path d="M18 6l2.5 6.5H27l-5.5 4 2 6.5L18 19l-5.5 4 2-6.5L9 12.5h6.5L18 6z"
-        fill="#db2777" />
-    </svg>
-  );
-}
-function IconSupport() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#ccfbf1" />
-      <path d="M10 18a8 8 0 0 1 16 0" stroke="#0d9488" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <rect x="8" y="18" width="4" height="6" rx="2" fill="#0d9488" />
-      <rect x="24" y="18" width="4" height="6" rx="2" fill="#0d9488" />
-    </svg>
-  );
-}
-function IconDelivery() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#dbeafe" />
-      <rect x="7" y="14" width="14" height="10" rx="2" fill="#2563eb" />
-      <path d="M21 16h4l4 4v4h-8V16z" fill="#1d4ed8" />
-      <circle cx="12" cy="26" r="2.5" fill="#1e40af" />
-      <circle cx="26" cy="26" r="2.5" fill="#1e40af" />
-    </svg>
-  );
-}
-function IconTrusted() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="14" fill="#fef3c7" />
-      <path d="M18 10.5c1.8 1.6 4.2 2.5 6.4 2.5v6.2c0 4.6-2.9 7.9-6.4 8.8-3.5-.9-6.4-4.2-6.4-8.8V13c2.2 0 4.6-.9 6.4-2.5z"
-        stroke="#d97706" strokeWidth="1.8" strokeLinejoin="round" fill="none" />
-      <path d="M14.7 18.3l2.3 2.3 4.3-4.3" stroke="#d97706" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </svg>
-  );
-}
+const IconWarranty  = () => <CardIcon src="/card icons/warranty.png"       alt="" />;
+const IconEnergy    = () => <CardIcon src="/card icons/energy.png"         alt="" />;
+const IconService   = () => <CardIcon src="/card icons/repair.png"         alt="" />;
+const IconCertified = () => <CardIcon src="/card icons/certified.png"      alt="" />;
+const IconSupport   = () => <CardIcon src="/card icons/customer-care.png"  alt="" />;
+const IconDelivery  = () => <CardIcon src="/card icons/delivery.png"       alt="" />;
+const IconTrusted   = () => <CardIcon src="/card icons/trust.png"          alt="" />;
 
 // ── Card data ──────────────────────────────────────────────────────────────────
 
@@ -82,7 +27,7 @@ type DiffCard = {
 };
 
 const CARDS: DiffCard[] = [
-  { icon: <IconWarranty />,  title: "1-Year Warranty",       desc: "Every product backed by our industry-leading 1-year warranty."          },
+  { icon: <IconWarranty />,  title: "2-Year Warranty",       desc: "Every product backed by our industry-leading 2-year warranty."          },
   { icon: <IconEnergy />,    title: "Energy Efficient",       desc: "5-star rated appliances that save electricity without sacrificing power." },
   { icon: <IconService />,   title: "Factory Repairs",        desc: "Every repair handled in-house by our own technicians - never outsourced." },
   { icon: <IconCertified />, title: "Certified Quality",       desc: "Every product tested and certified to meet strict safety standards."     },

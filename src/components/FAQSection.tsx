@@ -8,7 +8,7 @@ import { Plus, Minus } from "lucide-react";
 const FAQS = [
   {
     q: "What warranty do Elegant Galaxy products come with?",
-    a: "All Elegant Galaxy products carry a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available for additional peace of mind.",
+    a: "All Elegant Galaxy products carry a comprehensive 2-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available for additional peace of mind.",
   },
   {
     q: "Do you offer no-cost EMI?",

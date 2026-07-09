@@ -50,7 +50,7 @@ const CATEGORIES = [
     faqs: [
       {
         q: "What warranty do Elegant Galaxy products come with?",
-        a: "All Elegant Galaxy products carry a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available.",
+        a: "All Elegant Galaxy products carry a comprehensive 2-year manufacturer warranty covering manufacturing defects and component failures. Extended warranty plans are also available.",
       },
       {
         q: "How do I get my product repaired?",

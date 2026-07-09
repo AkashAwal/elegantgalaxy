@@ -14,7 +14,7 @@ const FAQS = [
   },
   {
     q: "What warranty do Elegant Galaxy products carry?",
-    a: "All products come with a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures.",
+    a: "All products come with a comprehensive 2-year manufacturer warranty covering manufacturing defects and component failures.",
   },
   {
     q: "Do you offer no-cost EMI?",

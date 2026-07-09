@@ -37,7 +37,7 @@ const JSON_LD = {
     {
       "@type": "Question",
       name:    "What warranty do Elegant Galaxy products come with?",
-      acceptedAnswer: { "@type": "Answer", text: "All Elegant Galaxy products carry a comprehensive 1-year manufacturer warranty covering manufacturing defects and component failures." },
+      acceptedAnswer: { "@type": "Answer", text: "All Elegant Galaxy products carry a comprehensive 2-year manufacturer warranty covering manufacturing defects and component failures." },
     },
     {
       "@type": "Question",

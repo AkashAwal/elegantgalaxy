@@ -5,14 +5,14 @@ import { Shield } from "lucide-react";
 export const metadata: Metadata = {
   alternates: { canonical: "/support/warranty" },
   title:       "Warranty",
-  description: "Details on Elegant Galaxy's 1-year warranty coverage for LED TVs, washing machines, air coolers, and infrared cooktops.",
+  description: "Details on Elegant Galaxy's 2-year warranty coverage for LED TVs, washing machines, air coolers, and infrared cooktops.",
 };
 
 const COVERAGE = [
-  { category: "LED TVs",             term: "1 year", note: "Covers panel, mainboard, and power supply defects" },
-  { category: "Washing Machines",    term: "1 year", note: "Covers motor, drum, and electronics defects" },
-  { category: "Air Coolers",         term: "1 year", note: "Covers motor, pump, and body defects" },
-  { category: "Infrared Cooktops",   term: "1 year", note: "Covers heating element and control panel defects" },
+  { category: "LED TVs",             term: "2 years", note: "Covers panel, mainboard, and power supply defects" },
+  { category: "Washing Machines",    term: "2 years", note: "Covers motor, drum, and electronics defects" },
+  { category: "Air Coolers",         term: "2 years", note: "Covers motor, pump, and body defects" },
+  { category: "Infrared Cooktops",   term: "2 years", note: "Covers heating element and control panel defects" },
 ];
 
 const EXCLUSIONS = [

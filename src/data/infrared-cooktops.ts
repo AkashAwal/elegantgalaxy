@@ -8,7 +8,7 @@ export const COMMON_SPECS = {
   controls:     "Touch Panel",
   timerMinutes: 180,
   bodyMaterial: "Tempered Glass + ABS",
-  warranty:     "1 Year",
+  warranty:     "2 Years",
   dimensions:   "355 × 295 × 60 mm",
 };
 
