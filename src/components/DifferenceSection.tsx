@@ -108,7 +108,7 @@ export default function DifferenceSection() {
     <section className="w-full pb-16">
 
       {/* Heading */}
-      <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 10, marginBottom: 10 }}>
+      <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 28, marginBottom: 28 }}>
         <h2 style={{ fontSize: 28, fontWeight: 600, letterSpacing: "-0.02em" }}>
           <span className="text-[#1d1d1f]">The Elegant difference.&nbsp;</span>
           <span className="text-[#6e6e73]">Even more reasons to shop with us.</span>
