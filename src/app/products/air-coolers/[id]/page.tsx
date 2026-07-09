@@ -22,18 +22,12 @@ export async function generateMetadata(
 
 export default async function CoolerDetailPage({
   params,
-  searchParams,
 }: {
-  params:       Promise<{ id: string }>;
-  searchParams: Promise<{ cap?: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { id }  = await params;
-  const { cap } = await searchParams;
-  const model   = MODELS.find((m) => m.id === id);
+  const { id } = await params;
+  const model  = MODELS.find((m) => m.id === id);
   if (!model) notFound();
 
-  const parsedCap  = cap ? parseInt(cap, 10) : null;
-  const initialCap = parsedCap && !Number.isNaN(parsedCap) ? parsedCap : null;
-
-  return <CoolerDetailClient model={model} initialCap={initialCap} />;
+  return <CoolerDetailClient model={model} />;
 }

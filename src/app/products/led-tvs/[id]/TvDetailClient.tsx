@@ -1,18 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import RemotesSection from "@/components/RemotesSection";
+import SearchParamSync from "@/components/SearchParamSync";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, tvName, type TvModel } from "@/data/led-tvs";
 import { TvIcon, EnquireModal } from "../LedTvsClient";
 
-export default function TvDetailClient({ model, initialSize }: { model: TvModel; initialSize: number | null }) {
-  const [size, setSize] = useState<number>(
-    initialSize && model.sizes.includes(initialSize) ? initialSize : model.sizes[0]
-  );
+export default function TvDetailClient({ model }: { model: TvModel }) {
+  const [size, setSize] = useState<number>(model.sizes[0]);
+
+  const syncSize = useCallback((params: URLSearchParams) => {
+    const parsed = parseInt(params.get("size") ?? "", 10);
+    if (!Number.isNaN(parsed) && model.sizes.includes(parsed)) setSize(parsed);
+  }, [model.sizes]);
   const [showEnquire, setShowEnquire] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [hoveredThumb, setHoveredThumb] = useState<number | null>(null);
@@ -32,6 +36,7 @@ export default function TvDetailClient({ model, initialSize }: { model: TvModel;
 
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
+      <SearchParamSync onParams={syncSize} />
 
       {/* Breadcrumb */}
       <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 20, paddingBottom: 8 }}>

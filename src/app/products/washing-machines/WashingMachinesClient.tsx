@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, X, ChevronLeft, ChevronRight } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import SearchParamSync from "@/components/SearchParamSync";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -70,20 +71,22 @@ export function EnquireModal({ capacity, onClose }: { capacity: number; onClose:
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function WashingMachinesClient({
-  initialCap = null,
-}: {
-  initialCap?: number | null;
-}) {
-  const [capacity, setCapacity] = useState<number>(
-    initialCap && CAPACITIES.includes(initialCap) ? initialCap : CAPACITIES[0]
-  );
+export default function WashingMachinesClient() {
+  const [capacity, setCapacity] = useState<number>(CAPACITIES[0]);
   // The design on display — independent of capacity. Clicking a gallery thumbnail
   // only swaps this; it does not change the selected capacity/size.
   const [previewDesignCap, setPreviewDesignCap] = useState<number>(capacity);
   const [previewAngle,     setPreviewAngle]     = useState<"front" | "angle">("front");
   const [showEnquire, setShowEnquire] = useState(false);
   const [hoveredThumb, setHoveredThumb] = useState<number | null>(null);
+
+  const syncCapacity = useCallback((params: URLSearchParams) => {
+    const parsed = parseInt(params.get("cap") ?? "", 10);
+    if (!Number.isNaN(parsed) && CAPACITIES.includes(parsed)) {
+      setCapacity(parsed);
+      setPreviewDesignCap(parsed);
+    }
+  }, []);
 
   const previewImage = previewAngle === "front"
     ? CAPACITY_SPECS[previewDesignCap].image
@@ -128,6 +131,7 @@ export default function WashingMachinesClient({
 
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
+      <SearchParamSync onParams={syncCapacity} />
 
       {/* Header */}
       <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>

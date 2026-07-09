@@ -1,17 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { ChevronRight, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import SearchParamSync from "@/components/SearchParamSync";
 import { MODELS, PHONE, PHONE_DISPLAY, WA_BASE, coolerName, type CoolerModel } from "@/data/air-coolers";
 import { CoolerIllustration, EnquireModal, getSpecRows } from "../AirCoolersClient";
 
-export default function CoolerDetailClient({ model, initialCap }: { model: CoolerModel; initialCap: number | null }) {
-  const [capacity, setCapacity] = useState<number>(
-    initialCap && model.capacities.includes(initialCap) ? initialCap : model.capacities[0]
-  );
+export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
+  const [capacity, setCapacity] = useState<number>(model.capacities[0]);
   const [showEnquire, setShowEnquire] = useState(false);
+
+  const syncCapacity = useCallback((params: URLSearchParams) => {
+    const parsed = parseInt(params.get("cap") ?? "", 10);
+    if (!Number.isNaN(parsed) && model.capacities.includes(parsed)) setCapacity(parsed);
+  }, [model.capacities]);
 
   const cap     = model.capacitySpecs[capacity];
   const name    = coolerName(model, capacity);
@@ -24,6 +28,7 @@ export default function CoolerDetailClient({ model, initialCap }: { model: Coole
 
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
+      <SearchParamSync onParams={syncCapacity} />
 
       {/* Breadcrumb */}
       <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 20, paddingBottom: 8 }}>

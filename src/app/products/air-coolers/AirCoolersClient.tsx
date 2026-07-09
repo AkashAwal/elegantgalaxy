@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, X, ChevronDown, ChevronUp } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import SearchParamSync from "@/components/SearchParamSync";
 
 // ── SVG Illustrations ─────────────────────────────────────────────────────────
 
@@ -471,19 +472,18 @@ function CoolerCard({
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function AirCoolersClient({
-  initialType = null,
-  initialCap  = null,
-}: {
-  initialType?: string | null;
-  initialCap?:  number | null;
-}) {
-  const [typeFilter,    setTypeFilter]    = useState<CoolerType | null>(
-    initialType === "commercial" || initialType === "domestic" ? initialType : null
-  );
-  const [capFilter,     setCapFilter]     = useState<number | null>(initialCap);
+export default function AirCoolersClient() {
+  const [typeFilter,    setTypeFilter]    = useState<CoolerType | null>(null);
+  const [capFilter,     setCapFilter]     = useState<number | null>(null);
   const [modelFilter,   setModelFilter]   = useState<string | null>(null);
   const [enquireTarget, setEnquireTarget] = useState<Entry | null>(null);
+
+  const syncFilters = useCallback((params: URLSearchParams) => {
+    const type = params.get("type");
+    if (type === "commercial" || type === "domestic") setTypeFilter(type);
+    const cap = parseInt(params.get("cap") ?? "", 10);
+    if (!Number.isNaN(cap)) setCapFilter(cap);
+  }, []);
 
   const allEntries: Entry[] = [];
   for (const model of MODELS) {
@@ -501,6 +501,7 @@ export default function AirCoolersClient({
 
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
+      <SearchParamSync onParams={syncFilters} />
 
       {/* Header */}
       <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>

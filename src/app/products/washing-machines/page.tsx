@@ -13,14 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function WashingMachinesPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ cap?: string }>;
-}) {
-  const { cap } = await searchParams;
-  const parsedCap  = cap ? parseInt(cap, 10) : null;
-  const initialCap = parsedCap && !Number.isNaN(parsedCap) ? parsedCap : null;
-
-  return <WashingMachinesClient initialCap={initialCap} />;
+export default function WashingMachinesPage() {
+  return <WashingMachinesClient />;
 }

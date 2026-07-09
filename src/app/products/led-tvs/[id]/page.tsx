@@ -22,18 +22,12 @@ export async function generateMetadata(
 
 export default async function TvDetailPage({
   params,
-  searchParams,
 }: {
-  params:       Promise<{ id: string }>;
-  searchParams: Promise<{ size?: string }>;
+  params: Promise<{ id: string }>;
 }) {
-  const { id }   = await params;
-  const { size } = await searchParams;
-  const model    = MODELS.find((m) => m.id === id);
+  const { id } = await params;
+  const model  = MODELS.find((m) => m.id === id);
   if (!model) notFound();
 
-  const parsedSize    = size ? parseInt(size, 10) : null;
-  const initialSize   = parsedSize && !Number.isNaN(parsedSize) ? parsedSize : null;
-
-  return <TvDetailClient model={model} initialSize={initialSize} />;
+  return <TvDetailClient model={model} />;
 }
