@@ -3,6 +3,7 @@ import { BLOG_POSTS }  from "@/data/blog-posts";
 import { ARTICLES }    from "@/data/support-articles";
 import { MODELS as TV_MODELS }      from "@/data/led-tvs";
 import { MODELS as COOLER_MODELS }  from "@/data/air-coolers";
+import { LOCATIONS }                from "@/data/locations";
 
 const BASE = "https://elegantgalaxy.in";
 
@@ -134,5 +135,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.65,
   }));
 
-  return [...core, ...productCategories, ...productSubPages, ...productDetails, ...blog, ...support];
+  // ── Distributor location pages ───────────────────────────────────────────
+  const distributorLocations: MetadataRoute.Sitemap = LOCATIONS.map((loc) => ({
+    url:             `${BASE}/distributors/${loc.slug}`,
+    lastModified:    now,
+    changeFrequency: "monthly" as const,
+    priority:        0.7,
+  }));
+
+  return [...core, ...productCategories, ...productSubPages, ...productDetails, ...blog, ...support, ...distributorLocations];
 }
