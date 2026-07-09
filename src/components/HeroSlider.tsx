@@ -56,7 +56,7 @@ export default function HeroSlider({
 
       {/* Crossfading images — stacked above text on mobile, centered overlay from lg+ */}
       <div
-        className="relative lg:absolute lg:inset-0 flex items-center justify-center mb-10 lg:mb-0"
+        className="relative lg:absolute lg:inset-0 flex items-center justify-center lg:justify-end mb-10 lg:mb-0 lg:pr-[clamp(24px,6vw,100px)]"
         style={{ zIndex: 1 }}
       >
         {views.map((v, i) => (
@@ -85,7 +85,7 @@ export default function HeroSlider({
       <div
         className="relative text-center px-6 mx-auto lg:absolute lg:text-left lg:px-0 lg:mx-0 lg:top-1/2 lg:-translate-y-1/2 lg:left-[clamp(24px,5vw,80px)]"
         style={{
-          maxWidth:  300,
+          maxWidth:  360,
           zIndex:    2,
         }}
       >
@@ -107,7 +107,7 @@ export default function HeroSlider({
           key={`title-${active}`}
           className="tv-fadein-d1"
           style={{
-            fontSize:      "clamp(26px, 2.8vw, 48px)",
+            fontSize:      "clamp(32px, 3.6vw, 60px)",
             fontWeight:    700,
             color:         "#f5f5f7",
             lineHeight:    1.1,
@@ -121,7 +121,7 @@ export default function HeroSlider({
           key={`desc-${active}`}
           className="tv-fadein-d2"
           style={{
-            fontSize:   14,
+            fontSize:   "clamp(15px, 1.1vw, 18px)",
             color:      "rgba(245,245,247,0.58)",
             lineHeight: 1.68,
           }}
