@@ -392,7 +392,7 @@ export default function Navbar() {
           completely independently of the logo or button sizes.
           Logo and buttons stay in normal flow (z-10) and never compete.
         */}
-        <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between h-14">
+        <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between h-[50px]">
 
           {/* ── Logo — extreme left ───────────────────────────────────────── */}
           <Link
@@ -428,7 +428,7 @@ export default function Navbar() {
               const dimmed = hoveredId !== null && item.id !== hoveredId;
 
               const linkCls = `
-                relative px-[9px] h-14 inline-flex items-center
+                relative px-[9px] h-[50px] inline-flex items-center
                 text-[14px] text-[#1d1d1f] whitespace-nowrap
                 cursor-pointer select-none
                 transition-opacity duration-150
@@ -536,14 +536,14 @@ export default function Navbar() {
             {/* Mobile controls */}
             <button
               onClick={toggleSearch}
-              className="lg:hidden flex items-center justify-center w-10 h-14 text-[#1d1d1f] opacity-80"
+              className="lg:hidden flex items-center justify-center w-10 h-[50px] text-[#1d1d1f] opacity-80"
               aria-label="Search"
             >
               <Search size={18} strokeWidth={1.75} />
             </button>
             <button
               onClick={() => { setMobile((o) => !o); setMobileExpandedId(null); }}
-              className="lg:hidden flex items-center justify-center w-10 h-14 text-[#1d1d1f] opacity-80"
+              className="lg:hidden flex items-center justify-center w-10 h-[50px] text-[#1d1d1f] opacity-80"
               aria-label="Menu"
             >
               {mobileOpen ? <X size={18} strokeWidth={1.75} /> : <Menu size={18} strokeWidth={1.75} />}
@@ -705,7 +705,7 @@ export default function Navbar() {
       <div
         className="fixed inset-0 z-40"
         style={{
-          top: 57, /* nav bar (56px) + border (1px) */
+          top: 51, /* nav bar (50px) + border (1px) */
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
           background: "rgba(0,0,0,0.12)",
@@ -721,7 +721,7 @@ export default function Navbar() {
         <div
           className="lg:hidden fixed inset-0 z-40 flex flex-col overflow-y-auto"
           style={{
-            top: 57,   /* nav bar height + border */
+            top: 51,   /* nav bar height + border */
             background: "rgba(245,245,247,0.97)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
