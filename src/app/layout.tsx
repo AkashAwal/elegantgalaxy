@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Elegant Galaxy",
   },
   description:
-    "Elegant Galaxy makes LED TVs, washing machines, air coolers, and infrared cooktops for Indian homes - sold in 500+ cities since 2012.",
+    "Elegant Galaxy is an Indian manufacturer of LED TVs, washing machines, air coolers, and infrared cooktops, built in our own factories and sold in 500+ cities since 2012.",
 
   keywords: [
     "home appliances India",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     url:         "https://elegantgalaxy.in",
     siteName:    "Elegant Galaxy",
     title:       "Elegant Galaxy | Adding Smiles to Life",
-    description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
+    description: "Indian-manufactured LED TVs, washing machines, air coolers, and infrared cooktops, built in our own factories for Indian households.",
     images: [
       {
         url:    "/og-image.png",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card:        "summary_large_image",
     title:       "Elegant Galaxy | Adding Smiles to Life",
-    description: "LED TVs, washing machines, air coolers, and infrared cooktops built for Indian households.",
+    description: "Indian-manufactured LED TVs, washing machines, air coolers, and infrared cooktops, built in our own factories for Indian households.",
     images:      ["/og-image.png"],
   },
 
