@@ -66,8 +66,9 @@ function IconTrusted() {
   return (
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
       <circle cx="18" cy="18" r="14" fill="#fef3c7" />
-      <path d="M18 9a9 9 0 1 0 9 9" stroke="#d97706" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <path d="M18 9v9l6 3" stroke="#d97706" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 10.5c1.8 1.6 4.2 2.5 6.4 2.5v6.2c0 4.6-2.9 7.9-6.4 8.8-3.5-.9-6.4-4.2-6.4-8.8V13c2.2 0 4.6-.9 6.4-2.5z"
+        stroke="#d97706" strokeWidth="1.8" strokeLinejoin="round" fill="none" />
+      <path d="M14.7 18.3l2.3 2.3 4.3-4.3" stroke="#d97706" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
 }
