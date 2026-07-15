@@ -34,13 +34,13 @@ export interface CoolerModel {
   capacitySpecs: Record<number, CapacitySpec>;
 }
 
-const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.webp" };
-const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.webp" };
+const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.png" };
+const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.png" };
 
 /** Representative photo for each cooler type's category tile. */
 export const TYPE_IMAGES: Record<CoolerType, string> = {
-  commercial: "/images/air-coolers/ice-cool-front.webp",
-  domestic:   "/images/air-coolers/desert-front.webp",
+  commercial: "/images/air-coolers/ice-cool-front.png",
+  domestic:   "/images/air-coolers/desert-front.png",
 };
 
 const COMMERCIAL_BASE = {

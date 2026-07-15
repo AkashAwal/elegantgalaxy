@@ -321,10 +321,7 @@ function CoolerCard({
           {model.frontGrill === "spiral" ? "Spiral Grill" : "Louver Grill"}
         </span>
 
-        {model.type === "commercial"
-          ? model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />
-          : <DomesticCoolerSvg />
-        }
+        <CoolerIllustration model={model} />
       </div>
 
       {/* Content */}

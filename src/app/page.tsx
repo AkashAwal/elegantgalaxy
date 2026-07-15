@@ -57,7 +57,7 @@ const CATEGORIES = [
   {
     label:  "Air Coolers",
     href:   "/products/air-coolers",
-    image:  "/images/air-coolers/ice-cool-front.webp",
+    image:  "/images/air-coolers/ice-cool-front.png",
     width:  476,
     height: 761,
   },
