@@ -37,7 +37,7 @@ const CATEGORIES = [
     label:       "Air Coolers",
     description: "Commercial and domestic coolers, 90L to 160L.",
     href:        "/products/air-coolers",
-    image:       "/images/air-coolers/commercial-front-homepage.png",
+    image:       "/images/air-coolers/ice-cool-front.webp",
     width:       476,
     height:      761,
     bg:          "#f0f0f5",

@@ -34,14 +34,13 @@ export interface CoolerModel {
   capacitySpecs: Record<number, CapacitySpec>;
 }
 
-const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.jpg" };
-const LOUVER_IMAGE: { front: string } = { front: "/images/air-coolers/ice-storm-front.jpg" };
-const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.jpg" };
+const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.webp" };
+const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.webp" };
 
 /** Representative photo for each cooler type's category tile. */
 export const TYPE_IMAGES: Record<CoolerType, string> = {
-  commercial: "/images/air-coolers/commercial-front.jpg",
-  domestic:   "/images/air-coolers/desert-front.jpg",
+  commercial: "/images/air-coolers/ice-cool-front.webp",
+  domestic:   "/images/air-coolers/desert-front.webp",
 };
 
 const COMMERCIAL_BASE = {
@@ -112,7 +111,6 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-storm",
     name: "ICE STORM",
     frontGrill: "louver",
-    images: LOUVER_IMAGE,
     honeycombSides: 1,
     fanSize: '18.5"',
     airDelivery: 8000,
@@ -128,7 +126,6 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-storm-plus",
     name: "ICE STORM+",
     frontGrill: "louver",
-    images: LOUVER_IMAGE,
     honeycombSides: 3,
     fanSize: '18.5"',
     airDelivery: 8000,
