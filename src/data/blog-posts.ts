@@ -52,6 +52,7 @@ type QuoteSection = { type: "quote";   body: string; attribution?: string };
 type TableSection = {
   type: "table"; heading?: string; headers: string[]; rows: string[][];
 };
+type CtaSection = { type: "cta"; heading?: string; body: string; href: string; label: string };
 
 export type BlogSection =
   | TextSection
@@ -59,7 +60,8 @@ export type BlogSection =
   | TipSection
   | WarnSection
   | QuoteSection
-  | TableSection;
+  | TableSection
+  | CtaSection;
 
 // ── BlogPost shape ────────────────────────────────────────────────────────────
 
@@ -117,7 +119,7 @@ export const BLOG_POSTS: BlogPost[] = [
     featured:    true,
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["LED TV", "buying guide", "home theatre", "room size"],
-    relatedSlugs: ["smart-home-appliances-2025", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["led-tv-buying-guide-features", "smart-home-appliances-2025", "lower-electricity-bill-appliances"],
     content: [
       {
         type: "text",
@@ -172,7 +174,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-03-28",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["air cooler", "buying guide", "summer", "humidity", "India"],
-    relatedSlugs: ["air-cooler-care-season", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["commercial-vs-domestic-air-cooler", "air-cooler-care-season", "lower-electricity-bill-appliances"],
     content: [
       {
         type: "text",
@@ -224,7 +226,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-02-10",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["infrared cooktop", "gas burner", "kitchen", "comparison", "cooking"],
-    relatedSlugs: ["lower-electricity-bill-appliances", "how-to-choose-tv-size"],
+    relatedSlugs: ["infrared-cooktop-buying-guide", "lower-electricity-bill-appliances", "how-to-choose-tv-size"],
     content: [
       {
         type: "text",
@@ -297,7 +299,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-01-22",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["washing machine", "maintenance", "lifespan", "care", "tips"],
-    relatedSlugs: ["lower-electricity-bill-appliances", "air-cooler-buying-tips"],
+    relatedSlugs: ["front-load-vs-top-load-washing-machine", "lower-electricity-bill-appliances", "air-cooler-buying-tips"],
     content: [
       {
         type: "text",
@@ -394,7 +396,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: "quote",
         body: "The best smart features are the ones that work even when you don't actively use them - energy monitoring, error alerts, and firmware updates run in the background and pay off consistently.",
-        attribution: "Rohan Mehta, Product Specialist, Elegant Galaxy",
+        attribution: "Sanjeev Awal, Owner and Founder, Elegant Galaxy",
       },
       {
         type: "text",
@@ -483,7 +485,371 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: "quote",
         body: "The best time to care about a star rating is before you buy - not after. Every year you run a low-efficiency appliance is a year you pay for the cheaper purchase price.",
-        attribution: "Priya Sharma, Customer Experience Lead, Elegant Galaxy",
+        attribution: "Ansh Awal, Operations Manager, Elegant Galaxy",
+      },
+    ],
+  },
+
+  // ── 7 ── Commercial vs domestic air cooler ────────────────────────────────
+  {
+    slug:        "commercial-vs-domestic-air-cooler",
+    title:       "Commercial Air Cooler vs Domestic Air Cooler: Which One Do You Need?",
+    excerpt:     "A commercial air cooler and a domestic air cooler solve different problems. Pick the wrong one and you either overpay or undercool. Here's how to tell them apart.",
+    category:    "buying-guide",
+    readTime:    5,
+    publishedAt: "2025-06-04",
+    featured:    true,
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["commercial air cooler", "domestic air cooler", "industrial air cooler", "buying guide"],
+    relatedSlugs: ["air-cooler-buying-tips", "become-appliance-distributor-india", "lower-electricity-bill-appliances"],
+    content: [
+      {
+        type: "text",
+        body: "Search for an air cooler today and you will see two very different product families: the commercial air cooler built for shops, factories, and large halls, and the domestic air cooler built for bedrooms and living rooms. They look similar from a distance, but the engineering underneath is not. Choosing the right category matters more than choosing the right brand.",
+      },
+      {
+        type: "text",
+        heading: "What Makes an Air Cooler Commercial",
+        body: "A commercial air cooler is built around a bigger tank, a stronger motor, and a taller cabinet designed to move a large volume of air across an open floor. Elegant Galaxy commercial models range from 100 litres to 160 litres, with air delivery around 8,000 CMH and a 120W motor rated for continuous, all day operation. These units are meant to run for 10 to 14 hours a day in a shop, warehouse, or workshop without strain.",
+      },
+      {
+        type: "text",
+        heading: "What Makes an Air Cooler Domestic",
+        body: "A domestic air cooler is compact by design. Our domestic range runs from 90 litres to 110 litres, uses a 93W motor, and is tuned for a bedroom or living room rather than an open hall. Domestic units typically run 6 to 10 hours a day, often overnight, so quieter operation and a smaller footprint matter more than raw air delivery.",
+      },
+      {
+        type: "table",
+        heading: "Commercial vs Domestic: A Direct Comparison",
+        headers: ["Factor", "Commercial Air Cooler", "Domestic Air Cooler"],
+        rows: [
+          ["Tank capacity", "100L to 160L", "90L to 110L"],
+          ["Motor", "120W Nirosha", "93W Nirosha"],
+          ["Air delivery", "About 8,000 CMH", "About 5,000 CMH"],
+          ["Typical daily use", "10 to 14 hours", "6 to 10 hours"],
+          ["Best suited for", "Shops, factories, halls, godowns", "Bedrooms, living rooms, small offices"],
+          ["Honeycomb sides", "1 or 3 side options", "3 side (all round cooling)"],
+        ],
+      },
+      {
+        type: "list",
+        heading: "Questions to Ask Before You Choose",
+        items: [
+          "What is the floor area of the space? Above 300 sq ft, a commercial air cooler is almost always the better fit",
+          "How many hours a day will it run? Continuous, long duration use favours a commercial motor and a bigger tank",
+          "Is the space open or enclosed? Godowns, showrooms, and shop floors need higher air throw",
+          "Do you need it to run quietly overnight? Domestic models are tuned for bedroom use",
+          "Will one unit serve multiple rooms or one dedicated space? Multi room coverage usually needs a commercial unit per zone",
+        ],
+      },
+      {
+        type: "tip",
+        body: "If you are cooling a retail counter, workshop floor, or godown, always size up rather than down. A commercial air cooler running comfortably below its maximum setting lasts longer than a smaller unit pushed to its limit all day.",
+      },
+      {
+        type: "warning",
+        body: "Do not use a domestic air cooler in a commercial space to save on cost. The smaller motor and tank are not built for long duty cycles, and the pump and blower wear out far sooner than expected.",
+      },
+      {
+        type: "cta",
+        heading: "Compare Every Model Side by Side",
+        body: "Elegant Galaxy makes both ranges: commercial air coolers with ICE COOL and ICE STORM series, and domestic air coolers with ICE WIND and WIND STORM series. See full specifications, capacities, and pricing for every model.",
+        href: "/products/air-coolers",
+        label: "View All Air Coolers",
+      },
+      {
+        type: "quote",
+        body: "Most complaints about air coolers not performing come down to one thing: the wrong category was bought for the space. A commercial and a domestic cooler are not interchangeable, they are two different tools.",
+        attribution: "Sanjeev Awal, Owner and Founder, Elegant Galaxy",
+      },
+    ],
+  },
+
+  // ── 8 ── LED TV buying guide ───────────────────────────────────────────────
+  {
+    slug:        "led-tv-buying-guide-features",
+    title:       "LED TV Buying Guide: The Features Actually Worth Paying For",
+    excerpt:     "Every LED TV spec sheet reads like a checklist of impressive sounding words. Here is which LED TV features genuinely improve what you watch, and which ones you can skip.",
+    category:    "buying-guide",
+    readTime:    5,
+    publishedAt: "2025-06-18",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["LED TV", "smart TV", "4K TV", "buying guide"],
+    relatedSlugs: ["how-to-choose-tv-size", "smart-home-appliances-2025", "lower-electricity-bill-appliances"],
+    content: [
+      {
+        type: "text",
+        body: "Walk into any electronics store and every LED TV on the wall claims to have the sharpest picture and the smartest features. Some of those claims genuinely change how good your TV looks and feels to use every day. Others are marketing language that rarely gets used after the first week. This guide separates the two before you spend a rupee.",
+      },
+      {
+        type: "text",
+        heading: "Resolution: 4K Is Worth It Above 43 Inches",
+        body: "A Full HD LED TV has 1920 by 1080 pixels. A 4K LED TV has close to four times that detail. On a screen 43 inches or smaller viewed from a normal living room distance, the human eye struggles to tell the difference. On 50 inches and above, 4K becomes clearly visible, especially with streaming content and sports.",
+      },
+      {
+        type: "text",
+        heading: "Smart TV Platform: Check the App Support First",
+        body: "A smart TV is only as good as the apps it runs. Before buying, confirm the platform supports the streaming services your household actually uses, plus regular software updates. A smart TV that stops receiving updates after two years will feel outdated fast, no matter how good the panel is.",
+      },
+      {
+        type: "list",
+        heading: "LED TV Features Worth Paying Extra For",
+        items: [
+          "Higher refresh rate (50Hz or above) for smoother motion during sports and action scenes",
+          "HDR support for better contrast between bright and dark areas of the picture",
+          "Multiple HDMI ports, at least three, for a set top box, gaming console, and soundbar together",
+          "Voice remote with Google Assistant or Alexa built in",
+          "Dolby Audio passthrough so an external soundbar reproduces sound properly",
+        ],
+      },
+      {
+        type: "list",
+        heading: "Features That Rarely Get Used Day to Day",
+        items: [
+          "8K resolution, since almost no content is filmed or streamed in 8K yet",
+          "Curved screens, which mainly help on very large displays viewed up close",
+          "Built in cameras for video calling, used by a small fraction of buyers",
+          "Extremely high peak brightness ratings that only matter in very bright rooms",
+        ],
+      },
+      {
+        type: "tip",
+        body: "Ask to see the TV playing fast motion content in the store, not a still demo image. Motion handling and upscaling quality vary far more between models than the spec sheet suggests.",
+      },
+      {
+        type: "table",
+        heading: "Quick Reference by Room",
+        headers: ["Room", "Recommended Resolution", "Refresh Rate"],
+        rows: [
+          ["Bedroom (32 to 43 inch)", "Full HD is fine", "50Hz"],
+          ["Living room (43 to 55 inch)", "4K recommended", "50Hz or 60Hz"],
+          ["Large hall (55 inch and above)", "4K essential", "60Hz preferred"],
+        ],
+      },
+      {
+        type: "cta",
+        heading: "See the Full LED TV Range",
+        body: "Elegant Galaxy LED TVs pair 4K and Full HD panels with a smart platform, Dolby Audio passthrough, and a voice enabled remote. Compare screen sizes, panel types, and pricing across the full lineup.",
+        href: "/products/led-tvs",
+        label: "Browse LED TVs",
+      },
+      {
+        type: "text",
+        heading: "Warranty Matters More Than an Extra Feature",
+        body: "A panel defect or backlight issue is expensive to repair outside warranty. Before comparing features between two similarly priced LED TVs, compare the warranty period and what it actually covers, including the panel itself and not just the frame and remote.",
+      },
+    ],
+  },
+
+  // ── 9 ── Front load vs top load washing machine ───────────────────────────
+  {
+    slug:        "front-load-vs-top-load-washing-machine",
+    title:       "Front Load vs Top Load Washing Machine: A Complete Buying Guide",
+    excerpt:     "The front load versus top load washing machine debate comes down to your water pressure, laundry habits, and floor space. Here is how to decide with confidence.",
+    category:    "comparison",
+    readTime:    5,
+    publishedAt: "2025-07-01",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["washing machine", "front load", "top load", "comparison", "buying guide"],
+    relatedSlugs: ["washing-machine-care-tips", "lower-electricity-bill-appliances", "commercial-vs-domestic-air-cooler"],
+    content: [
+      {
+        type: "text",
+        body: "A front load washing machine and a top load washing machine both clean clothes well, but they get there in different ways, and each suits a different household. Before choosing a washing machine, it helps to understand what actually changes between the two designs, beyond just how the door opens.",
+      },
+      {
+        type: "text",
+        heading: "How Each Washing Machine Type Works",
+        body: "A top load washing machine uses a central agitator or an impeller that moves water and clothes around a vertical drum. A front load washing machine tumbles clothes through a smaller amount of water in a horizontal drum, using gravity instead of an agitator. This single difference explains almost every gap between the two categories.",
+      },
+      {
+        type: "table",
+        heading: "Front Load vs Top Load at a Glance",
+        headers: ["Factor", "Front Load Washing Machine", "Top Load Washing Machine"],
+        rows: [
+          ["Water usage", "Lower", "Higher"],
+          ["Wash quality", "Gentler on fabric, thorough", "Fast, effective for everyday loads"],
+          ["Water pressure needed", "Higher pressure preferred", "Works with low pressure"],
+          ["Loading and unloading", "Requires bending down", "Easier at standing height"],
+          ["Wash cycle time", "Longer, 60 to 120 minutes", "Shorter, 30 to 60 minutes"],
+          ["Detergent required", "HE detergent only", "Regular or HE detergent"],
+          ["Typical price range", "Higher", "Lower"],
+        ],
+      },
+      {
+        type: "text",
+        heading: "Choose Front Load If",
+        body: "You have consistent water pressure, want the gentlest possible wash for good clothes, and are comfortable paying more for lower water and energy use over the machine's life. A front load washing machine is also the better choice in homes where laundry space is limited, since units can often be stacked with a dryer.",
+      },
+      {
+        type: "text",
+        heading: "Choose Top Load If",
+        body: "You want faster wash cycles, easier loading without bending, and water pressure that fluctuates through the day. A top load washing machine is generally the simpler, more forgiving choice for large families doing frequent, quick loads of everyday clothing.",
+      },
+      {
+        type: "tip",
+        body: "If you are unsure about your home's water pressure, run a simple test: fill a one litre bottle from the tap and time it. Under 10 seconds is strong pressure, suited to either type. Over 20 seconds means a top load washing machine will likely perform more reliably.",
+      },
+      {
+        type: "warning",
+        body: "Never use regular detergent in a front load washing machine. It is a low suds design, and regular detergent causes overflowing foam, damaged door seals, and repeated error codes.",
+      },
+      {
+        type: "list",
+        heading: "Capacity Guide by Household Size",
+        items: [
+          "2 to 3 members: 6 to 7 kg washing machine",
+          "4 to 5 members: 7 to 8 kg washing machine",
+          "6 or more members, or frequent bedding washes: 8 kg and above",
+        ],
+      },
+      {
+        type: "cta",
+        heading: "Compare Elegant Galaxy Washing Machines",
+        body: "See capacities, wash programs, and pricing across our full washing machine range before you decide.",
+        href: "/products/washing-machines",
+        label: "View Washing Machines",
+      },
+    ],
+  },
+
+  // ── 10 ── Infrared cooktop buying guide ────────────────────────────────────
+  {
+    slug:        "infrared-cooktop-buying-guide",
+    title:       "Infrared Cooktop Buying Guide: Wattage, Safety, and What to Check",
+    excerpt:     "An infrared cooktop looks simple on the shelf, but wattage, cookware compatibility, and safety features vary a lot between models. Here is what actually matters.",
+    category:    "buying-guide",
+    readTime:    4,
+    publishedAt: "2025-07-10",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["infrared cooktop", "induction alternative", "kitchen appliances", "buying guide"],
+    relatedSlugs: ["infrared-vs-gas-cooktop", "lower-electricity-bill-appliances", "led-tv-buying-guide-features"],
+    content: [
+      {
+        type: "text",
+        body: "An infrared cooktop is one of the simplest kitchen upgrades a household can make, but not every model on the shelf is built the same way. Wattage, glass surface quality, and safety cut offs vary widely between budget and better built infrared cooktops. Here is what to actually check before buying.",
+      },
+      {
+        type: "text",
+        heading: "Wattage: Match It to How You Cook",
+        body: "Most infrared cooktops sit between 1200W and 2000W. A higher wattage infrared cooktop boils water faster and handles bulk cooking better, while a lower wattage model is fine for a single person or a household that mostly simmers and reheats. If you regularly cook for a family of four or more, choose 1800W or above.",
+      },
+      {
+        type: "list",
+        heading: "What to Check Before Buying an Infrared Cooktop",
+        items: [
+          "Flat glass ceramic surface rated for daily, repeated heating and cooling",
+          "Multiple power levels, not just high, medium, and low",
+          "Automatic shut off if the cooktop overheats or is left on too long",
+          "A residual heat indicator so you know the surface is still hot after switching off",
+          "Compatibility with flat bottomed cookware you already own, or a plan to buy some",
+        ],
+      },
+      {
+        type: "text",
+        heading: "Cookware Compatibility Is the Real Deciding Factor",
+        body: "An infrared cooktop transfers heat through direct surface contact, so a flat bottomed tawa, kadai, or pot performs far better than a curved or warped one. Before buying, check whether your existing cookware sits flush against a flat surface. If most of it does not, budget for one flat tawa and one flat kadai alongside the cooktop.",
+      },
+      {
+        type: "tip",
+        body: "Test cookware compatibility with a simple trick: place the pot upside down on a flat table. If it wobbles or rocks, the base is not flat enough for efficient infrared cooking.",
+      },
+      {
+        type: "warning",
+        body: "Never place empty cookware on an infrared cooktop at high power for more than a few seconds. Empty vessels heat up far faster than expected and can warp or scorch quickly.",
+      },
+      {
+        type: "table",
+        heading: "Infrared Cooktop Wattage Guide",
+        headers: ["Household Size", "Recommended Wattage", "Best For"],
+        rows: [
+          ["1 to 2 people", "1200W to 1400W", "Daily cooking, simmering, reheating"],
+          ["3 to 4 people", "1600W to 1800W", "Regular family cooking, roti, rice, dal"],
+          ["5 or more people", "2000W and above", "Bulk cooking, faster boiling"],
+        ],
+      },
+      {
+        type: "cta",
+        heading: "See Elegant Galaxy Infrared Cooktops",
+        body: "Check wattage options, safety features, and pricing across our infrared cooktop range.",
+        href: "/products/infrared-cooktops",
+        label: "View Infrared Cooktops",
+      },
+      {
+        type: "quote",
+        body: "The biggest infrared cooktop complaints we hear are almost always about cookware, not the cooktop itself. Get the cookware right and the appliance performs exactly as expected.",
+        attribution: "Ansh Awal, Operations Manager, Elegant Galaxy",
+      },
+    ],
+  },
+
+  // ── 11 ── Becoming an appliance distributor ────────────────────────────────
+  {
+    slug:        "become-appliance-distributor-india",
+    title:       "How to Become an Appliance Distributor in India: A Practical Guide",
+    excerpt:     "Home appliance distribution remains one of the steadiest retail businesses in India. Here is what it actually takes to become an appliance distributor and what to look for in a manufacturer partner.",
+    category:    "trends",
+    readTime:    5,
+    publishedAt: "2025-07-15",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["appliance distributor", "distributorship", "business", "India"],
+    relatedSlugs: ["commercial-vs-domestic-air-cooler", "smart-home-appliances-2025", "lower-electricity-bill-appliances"],
+    content: [
+      {
+        type: "text",
+        body: "Home appliance demand in India keeps climbing every summer and festival season, and manufacturers are constantly looking for reliable regional and city level distributors. Becoming an appliance distributor is a real, steady business opportunity, but it requires more than just capital. Here is what actually goes into it.",
+      },
+      {
+        type: "text",
+        heading: "What an Appliance Distributor Actually Does",
+        body: "An appliance distributor buys stock from a manufacturer at wholesale rates and supplies it to retailers, dealers, or directly to bulk buyers in a defined territory. The role includes warehousing, local logistics, after sales support coordination, and building relationships with retail shops in the region.",
+      },
+      {
+        type: "list",
+        heading: "What You Need to Get Started",
+        items: [
+          "Warehouse or godown space to store stock, sized to your territory's demand",
+          "Working capital for initial stock purchase and ongoing inventory",
+          "A local delivery and logistics setup, owned or outsourced",
+          "GST registration and the standard business documentation a manufacturer will require",
+          "Existing or reachable relationships with local retailers and electronics shops",
+        ],
+      },
+      {
+        type: "text",
+        heading: "Choosing the Right Manufacturer Partner",
+        body: "Not every manufacturer offers the same distributor terms. Before committing, compare margin structure, minimum order quantity, marketing support, and how disputes or damaged stock are handled. A manufacturer that offers a genuinely exclusive territory protects your investment far better than one that appoints multiple distributors in the same city.",
+      },
+      {
+        type: "table",
+        heading: "What to Compare Between Manufacturer Offers",
+        headers: ["Factor", "Why It Matters"],
+        rows: [
+          ["Margin structure", "Determines your actual profit per unit sold"],
+          ["Minimum order quantity", "Affects how much capital you need upfront"],
+          ["Territory exclusivity", "Protects you from being undercut locally"],
+          ["Marketing and promotional support", "Reduces your own marketing spend"],
+          ["After sales and warranty support", "Impacts retailer and customer trust in your territory"],
+        ],
+      },
+      {
+        type: "tip",
+        body: "Ask any prospective manufacturer partner for the contact details of two or three existing distributors in other territories. A manufacturer confident in its distributor relationships will share this without hesitation.",
+      },
+      {
+        type: "warning",
+        body: "Be cautious of any distributorship offer that asks for a large upfront fee before sharing clear margin and territory terms in writing. Legitimate manufacturers put these terms on paper before any payment changes hands.",
+      },
+      {
+        type: "text",
+        heading: "Product Categories Worth Distributing",
+        body: "Home appliances with year round or seasonal demand, such as air coolers, washing machines, LED TVs, and infrared cooktops, tend to give distributors steadier cash flow than single season products alone. A manufacturer with a diverse product range across these categories lets one distributor cover multiple demand cycles through the year.",
+      },
+      {
+        type: "cta",
+        heading: "Partner With Elegant Galaxy",
+        body: "Elegant Galaxy is actively appointing distributors across air coolers, washing machines, LED TVs, and infrared cooktops. Learn about territory availability, margins, and how to apply.",
+        href: "/distributors",
+        label: "Apply as a Distributor",
       },
     ],
   },
