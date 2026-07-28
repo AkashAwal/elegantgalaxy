@@ -174,7 +174,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-03-28",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["air cooler", "buying guide", "summer", "humidity", "India"],
-    relatedSlugs: ["commercial-vs-domestic-air-cooler", "air-cooler-care-season", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["commercial-vs-domestic-air-cooler", "lower-electricity-bill-appliances"],
     content: [
       {
         type: "text",
