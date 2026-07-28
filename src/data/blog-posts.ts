@@ -117,7 +117,7 @@ export const BLOG_POSTS: BlogPost[] = [
     featured:    true,
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["LED TV", "buying guide", "home theatre", "room size"],
-    relatedSlugs: ["smart-home-appliances-2025", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["android-tv-vs-google-tv-vs-webos", "smart-home-appliances-2025"],
     content: [
       {
         type: "text",
@@ -297,7 +297,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-01-22",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["washing machine", "maintenance", "lifespan", "care", "tips"],
-    relatedSlugs: ["lower-electricity-bill-appliances", "air-cooler-buying-tips"],
+    relatedSlugs: ["semi-automatic-vs-fully-automatic-washing-machine", "lower-electricity-bill-appliances"],
     content: [
       {
         type: "text",
@@ -484,6 +484,163 @@ export const BLOG_POSTS: BlogPost[] = [
         type: "quote",
         body: "The best time to care about a star rating is before you buy - not after. Every year you run a low-efficiency appliance is a year you pay for the cheaper purchase price.",
         attribution: "Priya Sharma, Customer Experience Lead, Elegant Galaxy",
+      },
+    ],
+  },
+
+  // ── 7 ── Semi vs fully automatic washing machine ──────────────────────────
+  {
+    slug:        "semi-automatic-vs-fully-automatic-washing-machine",
+    title:       "Semi-Automatic vs Fully-Automatic Washing Machine: Which Should You Buy?",
+    excerpt:     "It's one of the most searched washing machine questions in India, and the right answer depends on your water supply and budget, not just the price tag.",
+    category:    "comparison",
+    readTime:    5,
+    publishedAt: "2025-06-05",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["washing machine", "semi-automatic", "fully-automatic", "comparison", "buying guide"],
+    relatedSlugs: ["washing-machine-care-tips", "lower-electricity-bill-appliances"],
+    content: [
+      {
+        type: "text",
+        body: "\"Semi-automatic vs fully-automatic washing machine\" is one of the most searched appliance questions in India, and for good reason. The two designs solve different problems, and picking the wrong one means paying for features you won't use or missing ones you actually need.",
+      },
+      {
+        type: "text",
+        heading: "How They Actually Work",
+        body: "A fully-automatic machine handles washing, rinsing, and spinning in a single drum with zero manual intervention. A semi-automatic machine has two tubs, one for washing and rinsing, one for spinning, and you move clothes between them by hand. That single difference explains almost every other gap between the two.",
+      },
+      {
+        type: "list",
+        heading: "Where Semi-Automatic Wins",
+        items: [
+          "Lower price than a fully-automatic machine of the same capacity",
+          "You control exactly how much water goes in per wash, which matters when supply is irregular",
+          "Simpler mechanics mean cheaper, faster local repairs, and parts are easy to find",
+          "Works fine with low water pressure, since no pump is needed to fill the drum",
+          "Faster wash cycles, often finishing in 20 to 30 minutes",
+        ],
+      },
+      {
+        type: "list",
+        heading: "Where Fully-Automatic Wins",
+        items: [
+          "Zero manual effort, load it, select a program, and walk away",
+          "Dedicated wash programs reduce wear on delicate fabrics",
+          "No lifting wet clothes between tubs partway through the cycle",
+          "Bigger drums handle larger loads in one go, useful for bigger households",
+        ],
+      },
+      {
+        type: "table",
+        heading: "Side-by-Side Comparison",
+        headers: ["Factor", "Semi-Automatic", "Fully-Automatic"],
+        rows: [
+          ["Price (same capacity)", "Lower, typically 30-40% less", "Higher upfront cost"],
+          ["Water usage",           "Low, user-controlled",         "Higher, fixed per program"],
+          ["Manual effort",         "Moderate",                     "Minimal"],
+          ["Wash time",             "20 - 30 minutes",              "45 - 90 minutes"],
+          ["Repair cost",           "Low",                          "Moderate to high"],
+          ["Best for",              "Water-scarce areas, budget buyers", "Convenience-first households"],
+        ],
+      },
+      {
+        type: "text",
+        heading: "Water Supply Should Decide This, Not Budget Alone",
+        body: "Most buying guides lead with price, but water supply matters just as much. If your area gets water only at fixed hours through a municipal line or tanker, a semi-automatic machine lets you store and use water exactly when it's available. A fully-automatic machine expects steady water pressure through the day, which not every home has. Our [semi-automatic washing machine range](/products/washing-machines) is built specifically for this reality, from 7kg to 12kg.",
+      },
+      {
+        type: "tip",
+        body: "Unsure which capacity to pick? Count your household size: 7kg suits 2 to 3 people, 9 to 10kg suits a family of 4 to 5, and 12kg fits larger joint families or heavy weekly loads.",
+      },
+      {
+        type: "text",
+        heading: "Running Costs Add Up Differently",
+        body: "Electricity use follows the same pattern as price. Semi-automatic machines draw less power because there's no pump and fewer automated cycles. For a full breakdown of what actually drives your appliance electricity bill, see our guide on [cutting your electricity bill without sacrificing comfort](/blog/lower-electricity-bill-appliances).",
+      },
+      {
+        type: "text",
+        heading: "Our Recommendation",
+        body: "For most Indian households, especially in cities with variable water supply, a semi-automatic machine remains the smarter buy: lower upfront cost, lower running cost, and repairs that rarely need a service centre visit. If your home has strong, uninterrupted water pressure and you value convenience over cost, a fully-automatic machine is worth the premium. Either way, look after it properly. Our guide on [habits that double your washing machine's lifespan](/blog/washing-machine-care-tips) covers the basics most owners skip. Have questions about which capacity fits your household? [Get in touch](/contact) and our team will help you decide.",
+      },
+    ],
+  },
+
+  // ── 8 ── Android TV vs Google TV vs webOS ─────────────────────────────────
+  {
+    slug:        "android-tv-vs-google-tv-vs-webos",
+    title:       "Android TV vs Google TV vs webOS: Which Smart TV Platform Should You Buy?",
+    excerpt:     "It's one of the first questions every TV buyer searches, and the platform you pick affects daily use far more than the screen specs do.",
+    category:    "comparison",
+    readTime:    5,
+    publishedAt: "2025-06-18",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["LED TV", "Android TV", "Google TV", "webOS", "smart TV", "comparison"],
+    relatedSlugs: ["how-to-choose-tv-size", "smart-home-appliances-2025"],
+    content: [
+      {
+        type: "text",
+        body: "Ask ten people which smart TV platform is best and you'll get ten different answers, because the right platform depends on what you actually watch and how you use a TV, not raw specs. Here's a practical breakdown of the three platforms we build our LED TVs on.",
+      },
+      {
+        type: "text",
+        heading: "What Each Platform Actually Is",
+        body: "Android TV runs on Google's open Android operating system, giving it the widest app selection of the three. Google TV is Google's newer interface layered on the same Android base, built around content recommendations instead of an app grid. webOS is LG's platform, known for a fast, lightweight interface and a card-based launcher that's easy for non-technical users to navigate.",
+      },
+      {
+        type: "list",
+        heading: "Android TV: Best For",
+        items: [
+          "Widest app selection, including regional and niche streaming apps",
+          "Google Play Store access for games and utilities",
+          "Chromecast built in, for casting from any phone",
+          "Buyers who already use Android phones and Google accounts daily",
+        ],
+      },
+      {
+        type: "list",
+        heading: "Google TV: Best For",
+        items: [
+          "Households that want content suggestions instead of hunting through apps",
+          "A cleaner home screen with recommendations pulled across services",
+          "Multiple user profiles, each with separate recommendations",
+          "Voice search across apps with a single remote button",
+        ],
+      },
+      {
+        type: "list",
+        heading: "webOS: Best For",
+        items: [
+          "The fastest, most responsive everyday interface of the three",
+          "Buyers who mainly use 5 to 6 core apps and don't need a huge app store",
+          "A simpler learning curve for elderly family members",
+          "Quick app switching without long load times",
+        ],
+      },
+      {
+        type: "table",
+        heading: "Side-by-Side Comparison",
+        headers: ["Factor", "Android TV", "Google TV", "webOS"],
+        rows: [
+          ["App store size",   "Largest",           "Large",              "Moderate"],
+          ["Interface style",  "App grid",          "Recommendation-first", "Card launcher"],
+          ["Speed",            "Good",              "Good",               "Fastest"],
+          ["Best for",         "App variety",       "Content discovery",  "Simplicity and speed"],
+          ["Learning curve",   "Moderate",          "Easy",               "Easiest"],
+        ],
+      },
+      {
+        type: "text",
+        heading: "App Availability Matters More Than the Logo",
+        body: "Before choosing a platform, check that the apps you actually use are available and regularly updated. All major Indian OTT apps run well on all three platforms. Where it gets specific: some niche regional and sports-streaming apps launch on Android TV first. If you rely on one of these, Android TV is the safer pick.",
+      },
+      {
+        type: "tip",
+        body: "Whichever platform you choose, connect to Wi-Fi during setup and let it install pending updates before first use. A day-one firmware update usually fixes the small interface lag some users notice out of the box.",
+      },
+      {
+        type: "text",
+        heading: "Our Recommendation",
+        body: "If you want maximum flexibility and don't mind a slightly busier home screen, choose [Android TV](/products/led-tvs/android). If you prefer a curated, recommendation-driven experience, [Google TV](/products/led-tvs/google) is the better fit. If speed and simplicity matter most, especially for a bedroom or a shared family TV, [webOS](/products/led-tvs/webos-4k) is hard to beat. Not sure which screen size pairs best with your room? Our guide on [how to choose the right TV size](/blog/how-to-choose-tv-size) walks through the exact formula. You can browse our [full LED TV range](/products/led-tvs) across all three platforms and compare specs side by side.",
       },
     ],
   },

@@ -27,6 +27,27 @@ export async function generateMetadata(
   };
 }
 
+// ── Inline links ───────────────────────────────────────────────────────────────
+
+/** Parses `[label](/internal-path)` markdown-style links out of plain body text. */
+function renderInlineLinks(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\(\/[^)]+\))/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\((\/[^)]+)\)$/);
+    if (!match) return part;
+    const [, label, href] = match;
+    return (
+      <Link
+        key={i}
+        href={href}
+        style={{ color: "#0071e3", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 2 }}
+      >
+        {label}
+      </Link>
+    );
+  });
+}
+
 // ── Section renderers ─────────────────────────────────────────────────────────
 
 function RenderSection({ section }: { section: BlogSection }) {
@@ -49,7 +70,7 @@ function RenderSection({ section }: { section: BlogSection }) {
             </h2>
           )}
           <p style={{ fontSize: 16, lineHeight: 1.8, color: "#3a3a3c" }}>
-            {section.body}
+            {renderInlineLinks(section.body)}
           </p>
         </div>
       );
@@ -79,7 +100,7 @@ function RenderSection({ section }: { section: BlogSection }) {
                   background:   "#0071e3",
                   marginTop:    10,
                 }} />
-                <p style={{ fontSize: 16, lineHeight: 1.7, color: "#3a3a3c" }}>{item}</p>
+                <p style={{ fontSize: 16, lineHeight: 1.7, color: "#3a3a3c" }}>{renderInlineLinks(item)}</p>
               </li>
             ))}
           </ul>
@@ -99,7 +120,7 @@ function RenderSection({ section }: { section: BlogSection }) {
           marginBottom: 28,
         }}>
           <Lightbulb size={18} color="#0071e3" style={{ flexShrink: 0, marginTop: 2 }} />
-          <p style={{ fontSize: 15, lineHeight: 1.65, color: "#1e40af" }}>{section.body}</p>
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: "#1e40af" }}>{renderInlineLinks(section.body)}</p>
         </div>
       );
 
@@ -116,7 +137,7 @@ function RenderSection({ section }: { section: BlogSection }) {
           marginBottom: 28,
         }}>
           <AlertTriangle size={18} color="#ea580c" style={{ flexShrink: 0, marginTop: 2 }} />
-          <p style={{ fontSize: 15, lineHeight: 1.65, color: "#9a3412" }}>{section.body}</p>
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: "#9a3412" }}>{renderInlineLinks(section.body)}</p>
         </div>
       );
 
