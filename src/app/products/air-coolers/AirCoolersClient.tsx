@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, FileText, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Phone, FileText, X, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import SearchParamSync from "@/components/SearchParamSync";
 
@@ -139,21 +139,24 @@ function DomesticCoolerSvg() {
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 import {
-  MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES,
+  MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES, TYPE_GALLERY,
   coolerName,
   type FrontGrill, type CoolerType, type CoolerModel,
 } from "@/data/air-coolers";
-export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES, coolerName };
+export { MODELS, CAPACITIES, PHONE, PHONE_DISPLAY, WA_BASE, TYPE_IMAGES, TYPE_GALLERY, coolerName };
 export type { FrontGrill, CoolerType, CoolerModel };
 
 // ── Illustration ──────────────────────────────────────────────────────────────
 
-export function CoolerIllustration({ model }: { model: CoolerModel }) {
+export function CoolerIllustration({
+  model, size = 100, angle = "front",
+}: { model: CoolerModel; size?: number; angle?: "front" | "side" }) {
   if (model.images) {
+    const src = angle === "side" ? (model.images.side ?? model.images.front) : model.images.front;
     return (
-      <div style={{ width: "100%", maxWidth: 100 }}>
+      <div style={{ width: "100%", maxWidth: size }}>
         <Image
-          src={model.images.front}
+          src={src}
           alt={`${model.name} Air Cooler`}
           width={476}
           height={761}
@@ -162,8 +165,12 @@ export function CoolerIllustration({ model }: { model: CoolerModel }) {
       </div>
     );
   }
-  if (model.type !== "commercial") return <DomesticCoolerSvg />;
-  return model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />;
+  const svg = model.type !== "commercial"
+    ? <DomesticCoolerSvg />
+    : model.frontGrill === "spiral" ? <SpiralCooler /> : <LouverCooler />;
+  return size === 100 ? svg : (
+    <div style={{ transform: `scale(${size / 100})` }}>{svg}</div>
+  );
 }
 
 // ── Spec rows ─────────────────────────────────────────────────────────────────
@@ -248,6 +255,84 @@ export function EnquireModal({ model, capacity, onClose }: { model: CoolerModel;
   );
 }
 
+// ── Spec Modal ────────────────────────────────────────────────────────────────
+
+export function SpecModal({ model, capacity, onClose }: { model: CoolerModel; capacity: number; onClose: () => void }) {
+  const cap      = model.capacitySpecs[capacity];
+  const specRows = getSpecRows(model, capacity);
+
+  return (
+    <div
+      style={{ position: "fixed", inset: 0, zIndex: 300, background: "rgba(0,0,0,0.52)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}
+      onClick={onClose}
+    >
+      <div
+        style={{ background: "#fff", borderRadius: 20, width: "100%", maxWidth: 760, maxHeight: "88vh", overflowY: "auto", position: "relative" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button onClick={onClose} aria-label="Close" style={{ position: "absolute", top: 16, right: 16, zIndex: 1, background: "rgba(255,255,255,0.9)", borderRadius: "50%", border: "none", cursor: "pointer", color: "#1d1d1f", width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <X size={18} strokeWidth={1.75} />
+        </button>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2">
+          {/* Large picture */}
+          <div style={{
+            background:     "#fff",
+            borderRadius:   "20px 20px 0 0",
+            display:        "flex",
+            alignItems:     "center",
+            justifyContent: "center",
+            padding:        40,
+            minHeight:      280,
+            borderBottom:   "1px solid rgba(0,0,0,0.06)",
+          }}>
+            <CoolerIllustration model={model} size={220} />
+          </div>
+
+          {/* Specifications */}
+          <div style={{ padding: "28px 24px" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6e6e73", marginBottom: 8 }}>
+              Full Specifications
+            </p>
+            <p style={{ fontSize: 20, fontWeight: 700, color: "#1d1d1f", marginBottom: 4, letterSpacing: "-0.02em" }}>
+              {coolerName(model, capacity)}
+            </p>
+            <p style={{ fontSize: 13, color: "#8e8e93", marginBottom: 18 }}>{cap?.modelNumber}</p>
+
+            <div style={{ borderRadius: 10, border: "1px solid rgba(0,0,0,0.08)", overflow: "hidden" }}>
+              {specRows.map(({ label, value }, i) => (
+                <div
+                  key={label}
+                  style={{
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    padding: "9px 12px",
+                    background: i % 2 === 0 ? "#fafafa" : "#fff",
+                    borderBottom: i < specRows.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
+                    gap: 8,
+                  }}
+                >
+                  <span style={{ fontSize: 12.5, color: "#6e6e73", flexShrink: 0 }}>{label}</span>
+                  <span style={{ fontSize: 12.5, fontWeight: 600, color: "#1d1d1f", textAlign: "right" }}>
+                    {value}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href={`/products/air-coolers/${model.id}?cap=${capacity}`}
+              onClick={onClose}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 44, borderRadius: 980, background: "#0071e3", color: "#fff", textDecoration: "none", fontSize: 14, fontWeight: 600, marginTop: 18 }}
+            >
+              View Full Page
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Cooler Card ───────────────────────────────────────────────────────────────
 
 type Entry = { model: CoolerModel; capacity: number };
@@ -256,13 +341,14 @@ function CoolerCard({
   model,
   capacity,
   onEnquire,
+  onViewSpecs,
 }: {
-  model:     CoolerModel;
-  capacity:  number;
-  onEnquire: () => void;
+  model:       CoolerModel;
+  capacity:    number;
+  onEnquire:   () => void;
+  onViewSpecs: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const isDark = model.type === "commercial";
   const cap    = model.capacitySpecs[capacity];
   const specRows = getSpecRows(model, capacity);
 
@@ -276,18 +362,26 @@ function CoolerCard({
         boxShadow:    "0 2px 16px rgba(0,0,0,0.07)",
       }}
     >
-      {/* Illustration — clips top corners independently */}
-      <div style={{
-        background:     isDark ? "#1d1d1f" : "#e0f2fe",
-        borderRadius:   "18px 18px 0 0",
-        overflow:       "hidden",
-        padding:        "28px 24px 20px",
-        display:        "flex",
-        justifyContent: "center",
-        alignItems:     "center",
-        minHeight:      200,
-        position:       "relative",
-      }}>
+      {/* Illustration — clips top corners independently; click opens the full spec modal */}
+      <button
+        type="button"
+        onClick={onViewSpecs}
+        aria-label={`View specifications for ${coolerName(model, capacity)}`}
+        style={{
+          background:     "#fff",
+          borderRadius:   "18px 18px 0 0",
+          overflow:       "hidden",
+          padding:        "28px 24px 20px",
+          display:        "flex",
+          justifyContent: "center",
+          alignItems:     "center",
+          minHeight:      200,
+          position:       "relative",
+          width:          "100%",
+          border:         "none",
+          borderBottom:   "1px solid rgba(0,0,0,0.06)",
+          cursor:         "pointer",
+        }}>
         {/* Honeycomb sides badge */}
         <span style={{
           position:      "absolute",
@@ -297,8 +391,8 @@ function CoolerCard({
           fontWeight:    700,
           letterSpacing: "0.07em",
           textTransform: "uppercase",
-          background:    isDark ? "rgba(255,255,255,0.1)" : "rgba(0,113,227,0.12)",
-          color:         isDark ? "rgba(255,255,255,0.8)" : "#0071e3",
+          background:    "rgba(0,113,227,0.1)",
+          color:         "#0071e3",
           padding:       "3px 8px",
           borderRadius:  20,
         }}>
@@ -313,8 +407,8 @@ function CoolerCard({
           fontWeight:    700,
           letterSpacing: "0.07em",
           textTransform: "uppercase",
-          background:    isDark ? "rgba(255,255,255,0.1)" : "rgba(0,113,227,0.12)",
-          color:         isDark ? "rgba(255,255,255,0.8)" : "#0071e3",
+          background:    "rgba(0,113,227,0.1)",
+          color:         "#0071e3",
           padding:       "3px 8px",
           borderRadius:  20,
         }}>
@@ -322,7 +416,7 @@ function CoolerCard({
         </span>
 
         <CoolerIllustration model={model} />
-      </div>
+      </button>
 
       {/* Content */}
       <div style={{ padding: "18px 20px 16px" }}>
@@ -471,16 +565,22 @@ function CoolerCard({
 
 export default function AirCoolersClient() {
   const [typeFilter,    setTypeFilter]    = useState<CoolerType | null>(null);
-  const [capFilter,     setCapFilter]     = useState<number | null>(null);
-  const [modelFilter,   setModelFilter]   = useState<string | null>(null);
   const [enquireTarget, setEnquireTarget] = useState<Entry | null>(null);
+  const [specTarget,    setSpecTarget]    = useState<Entry | null>(null);
+  const [previewIndex,  setPreviewIndex]  = useState(0);
 
   const syncFilters = useCallback((params: URLSearchParams) => {
     const type = params.get("type");
     if (type === "commercial" || type === "domestic") setTypeFilter(type);
-    const cap = parseInt(params.get("cap") ?? "", 10);
-    if (!Number.isNaN(cap)) setCapFilter(cap);
   }, []);
+
+  // Gallery — fixed photo set for the current type (falls back to both sets, unfiltered).
+  const galleryImages = typeFilter ? TYPE_GALLERY[typeFilter] : [...TYPE_GALLERY.domestic, ...TYPE_GALLERY.commercial];
+  const galleryLabel = typeFilter === "commercial" ? "Commercial Air Cooler" : typeFilter === "domestic" ? "Domestic Air Cooler" : "Air Cooler";
+  const previewSrc = galleryImages[previewIndex] ?? galleryImages[0];
+  const stepPreview = (dir: 1 | -1) => {
+    setPreviewIndex((i) => (i + dir + galleryImages.length) % galleryImages.length);
+  };
 
   const allEntries: Entry[] = [];
   for (const model of MODELS) {
@@ -489,12 +589,7 @@ export default function AirCoolersClient() {
     }
   }
 
-  const visible = allEntries.filter(({ model, capacity }) => {
-    if (typeFilter  && model.type !== typeFilter) return false;
-    if (capFilter    && capacity !== capFilter)   return false;
-    if (modelFilter  && model.id !== modelFilter) return false;
-    return true;
-  });
+  const visible = allEntries.filter(({ model }) => !typeFilter || model.type === typeFilter);
 
   return (
     <main id="main-content" style={{ background: "#f5f5f7", minHeight: "100vh" }}>
@@ -503,6 +598,13 @@ export default function AirCoolersClient() {
       {/* Header */}
       <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 56, paddingBottom: 48 }}>
+          <Link
+            href="/products/air-coolers"
+            style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 500, color: "#0071e3", textDecoration: "none", marginBottom: 20 }}
+          >
+            <ArrowLeft size={16} strokeWidth={2} />
+            Back to Air Coolers
+          </Link>
           <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6e6e73", marginBottom: 12 }}>Air Coolers</p>
           <h1 style={{ fontSize: 46, fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", lineHeight: 1.08, marginBottom: 14 }}>
             Stay Cool, Work Smart.
@@ -513,78 +615,117 @@ export default function AirCoolersClient() {
         </div>
       </section>
 
-      {/* Capacity + Model selector */}
-      <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-        <div className="mx-auto max-w-[1440px] px-8" style={{ paddingBottom: 36 }}>
-          <div className="flex flex-col lg:flex-row lg:gap-10">
-
-            {/* Capacities */}
-            <div style={{ flex: "1 1 0%", minWidth: 0 }}>
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Select a Capacity</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-                <button onClick={() => setCapFilter(null)} aria-pressed={capFilter === null} style={{ height: 46, minWidth: 60, padding: "0 16px", borderRadius: 12, border: capFilter === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: capFilter === null ? "#0071e3" : "#fff", color: capFilter === null ? "#fff" : "#1d1d1f", fontSize: 14, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
-                  All
+      {/* Gallery — one large preview photo with a thumbnail strip below, like a product listing */}
+      {previewSrc && (
+        <section style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+          <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 40, paddingBottom: 40 }}>
+            <div style={{
+              background:   "#fff",
+              border:       "1px solid rgba(0,0,0,0.06)",
+              borderRadius: 20,
+              minHeight:    340,
+              display:      "flex", alignItems: "center", justifyContent: "center",
+              padding:      32,
+              marginBottom: 14,
+              position:     "relative",
+            }}>
+              {galleryImages.length > 1 && (
+                <button
+                  onClick={() => stepPreview(-1)}
+                  aria-label="Previous photo"
+                  style={{
+                    position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+                    width: 36, height: 36, borderRadius: "50%", border: "none",
+                    background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                  }}
+                >
+                  <ChevronLeft size={18} />
                 </button>
-                {CAPACITIES.map((cap) => {
-                  const isSelected = capFilter === cap;
+              )}
+
+              <div style={{ width: "100%", maxWidth: 260 }}>
+                <Image
+                  src={previewSrc}
+                  alt={galleryLabel}
+                  width={476}
+                  height={761}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </div>
+
+              {galleryImages.length > 1 && (
+                <button
+                  onClick={() => stepPreview(1)}
+                  aria-label="Next photo"
+                  style={{
+                    position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                    width: 36, height: 36, borderRadius: "50%", border: "none",
+                    background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.14)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    cursor: "pointer", color: "#1d1d1f", zIndex: 1,
+                  }}
+                >
+                  <ChevronRight size={18} />
+                </button>
+              )}
+            </div>
+
+            <p style={{ fontSize: 13, color: "#6e6e73", textAlign: "center", marginBottom: 16 }}>
+              {galleryLabel}
+            </p>
+
+            {galleryImages.length > 1 && (
+              <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8" style={{ gap: 8 }}>
+                {galleryImages.map((src, i) => {
+                  const isSelected = i === previewIndex;
                   return (
-                    <button key={cap} onClick={() => setCapFilter(isSelected ? null : cap)} aria-pressed={isSelected}
-                      style={{ height: 46, minWidth: 60, padding: "0 16px", borderRadius: 12, border: isSelected ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isSelected ? "#0071e3" : "#fff", color: isSelected ? "#fff" : "#1d1d1f", fontSize: 14, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}
+                    <button
+                      key={src}
+                      onClick={() => setPreviewIndex(i)}
+                      aria-pressed={isSelected}
+                      aria-label={`Show photo ${i + 1}`}
+                      style={{
+                        background:     "#fff",
+                        borderRadius:   10,
+                        padding:        6,
+                        border:         isSelected ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.08)",
+                        boxShadow:      isSelected ? "0 3px 10px rgba(0,113,227,0.18)" : "none",
+                        cursor:         "pointer",
+                        transition:     "border-color 0.2s ease, box-shadow 0.2s ease",
+                        height:         76,
+                        display:        "flex",
+                        alignItems:     "center",
+                        justifyContent: "center",
+                      }}
                     >
-                      {cap}L
+                      <div style={{ width: "100%", maxWidth: 56 }}>
+                        <Image src={src} alt="" width={476} height={761} style={{ width: "100%", height: "auto" }} />
+                      </div>
                     </button>
                   );
                 })}
               </div>
-            </div>
-
-            <div className="hidden lg:block" style={{ width: 1, background: "rgba(0,0,0,0.08)", alignSelf: "stretch", flexShrink: 0 }} />
-
-            {/* Model filter */}
-            <div style={{ flex: "1 1 0%", minWidth: 0 }} className="mt-6 lg:mt-0">
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#1d1d1f", marginBottom: 16 }}>Filter by Model</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                <button onClick={() => setModelFilter(null)} aria-pressed={modelFilter === null} style={{ height: 40, padding: "0 16px", borderRadius: 980, border: modelFilter === null ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: modelFilter === null ? "#0071e3" : "#fff", color: modelFilter === null ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
-                  All Models
-                </button>
-                {MODELS.map((m) => {
-                  const isActive = modelFilter === m.id;
-                  return (
-                    <button key={m.id} onClick={() => setModelFilter(isActive ? null : m.id)} aria-pressed={isActive}
-                      style={{ height: 40, padding: "0 16px", borderRadius: 980, border: isActive ? "2px solid #0071e3" : "2px solid rgba(0,0,0,0.12)", background: isActive ? "#0071e3" : "#fff", color: isActive ? "#fff" : "#1d1d1f", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease", whiteSpace: "nowrap" }}
-                    >
-                      {m.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Grid */}
       <section>
         <div className="mx-auto max-w-[1440px] px-8" style={{ paddingTop: 48, paddingBottom: 80 }}>
-          {visible.length === 0 ? (
-            <div style={{ textAlign: "center", paddingTop: 56, paddingBottom: 56 }}>
-              <p style={{ fontSize: 22, fontWeight: 700, color: "#1d1d1f", marginBottom: 10, letterSpacing: "-0.02em" }}>
-                No models match this selection
-              </p>
-              <p style={{ fontSize: 16, color: "#6e6e73" }}>Try a different capacity or model.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>
-              {visible.map(({ model, capacity }) => (
-                <CoolerCard
-                  key={`${model.id}::${capacity}`}
-                  model={model}
-                  capacity={capacity}
-                  onEnquire={() => setEnquireTarget({ model, capacity })}
-                />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style={{ gap: 20 }}>
+            {visible.map(({ model, capacity }) => (
+              <CoolerCard
+                key={`${model.id}::${capacity}`}
+                model={model}
+                capacity={capacity}
+                onEnquire={() => setEnquireTarget({ model, capacity })}
+                onViewSpecs={() => setSpecTarget({ model, capacity })}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -593,6 +734,14 @@ export default function AirCoolersClient() {
           model={enquireTarget.model}
           capacity={enquireTarget.capacity}
           onClose={() => setEnquireTarget(null)}
+        />
+      )}
+
+      {specTarget && (
+        <SpecModal
+          model={specTarget.model}
+          capacity={specTarget.capacity}
+          onClose={() => setSpecTarget(null)}
         />
       )}
     </main>

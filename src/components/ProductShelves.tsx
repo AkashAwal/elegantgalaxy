@@ -72,10 +72,10 @@ const SHELVES: Shelf[] = [
     category:     "Air Coolers",
     categoryHref: "/products/air-coolers",
     products: [
-      { id: iceCool100.id,    name: coolerName(iceCool100, 100),    subtitle: `Commercial · 100L`,  href: `/products/air-coolers/${iceCool100.id}?cap=100`,    bg: "#1d1d1f", illustration: <CoolerIllustration model={iceCool100} /> },
-      { id: iceStorm160.id,   name: coolerName(iceStorm160, 160),   subtitle: `Commercial · 160L`,  href: `/products/air-coolers/${iceStorm160.id}?cap=160`,   bg: "#1d1d1f", illustration: <CoolerIllustration model={iceStorm160} /> },
-      { id: iceWind90.id,     name: coolerName(iceWind90, 90),      subtitle: `Domestic · 90L`,     href: `/products/air-coolers/${iceWind90.id}`,     bg: "#e0f2fe", illustration: <CoolerIllustration model={iceWind90} /> },
-      { id: windStormPlus.id, name: coolerName(windStormPlus, 110), subtitle: `Domestic · 110L`,    href: `/products/air-coolers/${windStormPlus.id}`, bg: "#e0f2fe", illustration: <CoolerIllustration model={windStormPlus} /> },
+      { id: iceCool100.id,    name: coolerName(iceCool100, 100),    subtitle: `Commercial · 100L`,  href: `/products/air-coolers/${iceCool100.id}?cap=100`,    bg: "#fff", illustration: <CoolerIllustration model={iceCool100} /> },
+      { id: iceStorm160.id,   name: coolerName(iceStorm160, 160),   subtitle: `Commercial · 160L`,  href: `/products/air-coolers/${iceStorm160.id}?cap=160`,   bg: "#fff", illustration: <CoolerIllustration model={iceStorm160} /> },
+      { id: iceWind90.id,     name: coolerName(iceWind90, 90),      subtitle: `Domestic · 90L`,     href: `/products/air-coolers/${iceWind90.id}`,     bg: "#fff", illustration: <CoolerIllustration model={iceWind90} /> },
+      { id: windStormPlus.id, name: coolerName(windStormPlus, 110), subtitle: `Domestic · 110L`,    href: `/products/air-coolers/${windStormPlus.id}`, bg: "#fff", illustration: <CoolerIllustration model={windStormPlus} /> },
     ],
   },
   {

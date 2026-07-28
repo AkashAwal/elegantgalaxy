@@ -21,7 +21,6 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
   const name    = coolerName(model, capacity);
   const waText  = `Hi, I'm interested in the ${name}${cap ? ` - model ${cap.modelNumber}` : ""}. Could you share more details?`;
   const waUrl   = `${WA_BASE}?text=${encodeURIComponent(waText)}`;
-  const isDark  = model.type === "commercial";
   const specRows = getSpecRows(model, capacity);
 
   const otherModels = MODELS.filter((m) => m.id !== model.id && m.type === model.type).slice(0, 4);
@@ -47,14 +46,14 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
 
           {/* Image */}
           <div style={{
-            background: isDark ? "#1d1d1f" : "#e0f2fe",
+            background: "#fff",
             borderRadius: 20,
             minHeight: 380,
             display: "flex", alignItems: "center", justifyContent: "center",
             padding: 32,
             border: "1px solid rgba(0,0,0,0.06)",
           }}>
-            <CoolerIllustration model={model} />
+            <CoolerIllustration model={model} size={320} />
           </div>
 
           {/* Details */}
@@ -177,7 +176,7 @@ export default function CoolerDetailClient({ model }: { model: CoolerModel }) {
                   href={`/products/air-coolers/${m.id}`}
                   style={{ display: "block", borderRadius: 14, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", textDecoration: "none" }}
                 >
-                  <div style={{ background: m.type === "commercial" ? "#1d1d1f" : "#e0f2fe", height: 140, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+                  <div style={{ background: "#fff", borderBottom: "1px solid rgba(0,0,0,0.06)", height: 140, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
                     <CoolerIllustration model={m} />
                   </div>
                   <div style={{ padding: "12px 14px" }}>

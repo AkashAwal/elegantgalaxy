@@ -28,19 +28,40 @@ export interface CoolerModel {
   cordLength: string;
   bladeMaterial: string;
   motorMount: string;
-  /** Real product photo under /public. When set, shown instead of the generic cooler illustration. */
-  images?: { front: string };
+  /** Real product photos under /public. When set, shown instead of the generic cooler illustration. */
+  images?: { front: string; side?: string };
   /** Specs that vary by capacity. */
   capacitySpecs: Record<number, CapacitySpec>;
 }
 
-const SPIRAL_IMAGE: { front: string } = { front: "/images/air-coolers/ice-cool-front.png" };
-const DOMESTIC_IMAGE: { front: string } = { front: "/images/air-coolers/desert-front.png" };
+const COMMERCIAL_IMAGE: { front: string; side: string } = {
+  front: "/images/air-coolers/6.svg",
+  side:  "/images/air-coolers/5.svg",
+};
+const DOMESTIC_IMAGE: { front: string; side: string } = {
+  front: "/images/air-coolers/4.svg",
+  side:  "/images/air-coolers/2.svg",
+};
 
 /** Representative photo for each cooler type's category tile. */
 export const TYPE_IMAGES: Record<CoolerType, string> = {
-  commercial: "/images/air-coolers/ice-cool-front.png",
-  domestic:   "/images/air-coolers/desert-front.png",
+  commercial: "/images/air-coolers/6.svg",
+  domestic:   "/images/air-coolers/4.svg",
+};
+
+/** Photo gallery shown on each type's listing page. */
+export const TYPE_GALLERY: Record<CoolerType, string[]> = {
+  domestic: [
+    "/images/air-coolers/1.svg",
+    "/images/air-coolers/2.svg",
+    "/images/air-coolers/3.svg",
+    "/images/air-coolers/4.svg",
+  ],
+  commercial: [
+    "/images/air-coolers/5.svg",
+    "/images/air-coolers/6.svg",
+    "/images/air-coolers/7.svg",
+  ],
 };
 
 const COMMERCIAL_BASE = {
@@ -78,7 +99,7 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-cool",
     name: "ICE COOL",
     frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
+    images: COMMERCIAL_IMAGE,
     honeycombSides: 1,
     fanSize: '19"',
     airDelivery: 8200,
@@ -94,7 +115,7 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-cool-plus",
     name: "ICE COOL+",
     frontGrill: "spiral",
-    images: SPIRAL_IMAGE,
+    images: COMMERCIAL_IMAGE,
     honeycombSides: 3,
     fanSize: '19"',
     airDelivery: 8200,
@@ -111,6 +132,7 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-storm",
     name: "ICE STORM",
     frontGrill: "louver",
+    images: COMMERCIAL_IMAGE,
     honeycombSides: 1,
     fanSize: '18.5"',
     airDelivery: 8000,
@@ -126,6 +148,7 @@ export const MODELS: CoolerModel[] = [
     id: "c-ice-storm-plus",
     name: "ICE STORM+",
     frontGrill: "louver",
+    images: COMMERCIAL_IMAGE,
     honeycombSides: 3,
     fanSize: '18.5"',
     airDelivery: 8000,

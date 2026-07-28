@@ -14,7 +14,7 @@ export default function AirCoolersLanding() {
   const [filtered, setFiltered] = useState(false);
 
   const syncMode = useCallback((params: URLSearchParams) => {
-    if (params.get("type") || params.get("cap")) setFiltered(true);
+    setFiltered(Boolean(params.get("type") || params.get("cap")));
   }, []);
 
   return (
