@@ -215,6 +215,46 @@ function RenderSection({ section }: { section: BlogSection }) {
         </div>
       );
 
+    case "cta":
+      return (
+        <div style={{
+          padding:      "22px 24px",
+          background:   "#f0f7ff",
+          borderRadius: 14,
+          border:       "1px solid #bfdbfe",
+          marginBottom: 28,
+        }}>
+          {section.heading && (
+            <h2 style={{
+              fontSize:      18,
+              fontWeight:    700,
+              color:         "#1d1d1f",
+              letterSpacing: "-0.015em",
+              marginBottom:  8,
+            }}>
+              {section.heading}
+            </h2>
+          )}
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: "#3a3a3c", marginBottom: 16 }}>
+            {section.body}
+          </p>
+          <Link href={section.href} style={{
+            display:        "inline-flex",
+            alignItems:     "center",
+            gap:            6,
+            padding:        "10px 20px",
+            borderRadius:   980,
+            background:     "#0071e3",
+            color:          "#fff",
+            fontSize:       14,
+            fontWeight:     600,
+            textDecoration: "none",
+          }}>
+            {section.label} <ChevronRight size={14} strokeWidth={2.5} />
+          </Link>
+        </div>
+      );
+
     default:
       return null;
   }
