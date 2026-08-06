@@ -282,7 +282,7 @@ export default function DistributorApplyForm() {
                 </span>
                 <input
                   ref={phoneRef}
-                  type="tel" placeholder="9876543210"
+                  type="tel" placeholder="xxxxxxxxxx"
                   value={form.phone}
                   onChange={e => set("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
                   onFocus={() => focus("phone")} onBlur={handlePhoneBlur}
