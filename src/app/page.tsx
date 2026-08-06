@@ -112,6 +112,13 @@ export default function Home() {
             >
               Customer Care ↗
             </Link>
+            <Link
+              href="/distributors/find"
+              className="block text-[#0071e3] hover:underline"
+              style={{ fontSize: 14, marginTop: 6 }}
+            >
+              Find Nearby Distributor ↗
+            </Link>
           </div>
 
         </div>
