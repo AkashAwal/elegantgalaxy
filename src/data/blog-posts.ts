@@ -792,7 +792,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-07-15",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["appliance distributor", "distributorship", "business", "India"],
-    relatedSlugs: ["commercial-vs-domestic-air-cooler", "smart-home-appliances-2025", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["find-nearby-distributor-pin-code", "why-buy-from-authorised-distributor", "commercial-vs-domestic-air-cooler"],
     content: [
       {
         type: "text",
@@ -1007,6 +1007,156 @@ export const BLOG_POSTS: BlogPost[] = [
         type: "text",
         heading: "Our Recommendation",
         body: "If you want maximum flexibility and don't mind a slightly busier home screen, choose [Android TV](/products/led-tvs/android). If you prefer a curated, recommendation-driven experience, [Google TV](/products/led-tvs/google) is the better fit. If speed and simplicity matter most, especially for a bedroom or a shared family TV, [webOS](/products/led-tvs/webos-4k) is hard to beat. Not sure which screen size pairs best with your room? Our guide on [how to choose the right TV size](/blog/how-to-choose-tv-size) walks through the exact formula. You can browse our [full LED TV range](/products/led-tvs) across all three platforms and compare specs side by side.",
+      },
+    ],
+  },
+
+  // ── 12 ── Find nearby distributor by PIN code ─────────────────────────────
+  {
+    slug:        "find-nearby-distributor-pin-code",
+    title:       "How to Find Your Nearest Elegant Galaxy Distributor Using Your PIN Code",
+    excerpt:     "Type your area's PIN code into our distributor finder and see exactly who to call for genuine Elegant Galaxy products and support near you.",
+    category:    "tips",
+    readTime:    4,
+    publishedAt: "2026-08-06",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["distributor", "PIN code", "customer support", "buying guide"],
+    relatedSlugs: ["why-buy-from-authorised-distributor", "become-appliance-distributor-india"],
+    content: [
+      {
+        type: "text",
+        body: "Buying an appliance well is only half the job. Knowing exactly who supplies, delivers, and stands behind that appliance in your own area matters just as much. That is exactly what our distributor network exists for, and we built a simple PIN code search so anyone in India can find their nearest Elegant Galaxy distributor in under a minute.",
+      },
+      {
+        type: "text",
+        heading: "Why Look Up Your Local Distributor First",
+        body: "Elegant Galaxy sells through a network of authorised distributors spread across more than seventy locations in India, from Dehradun and Jaipur to Patna and Hyderabad. Each distributor stocks genuine products, understands local pricing, and can point you toward nearby service support if something ever needs attention. Buying through your nearest listed distributor usually means faster delivery, a real person to call, and none of the guesswork that comes with an unknown online seller.",
+      },
+      {
+        type: "text",
+        heading: "How the PIN Code Search Works",
+        body: "Head to our [distributor finder](/distributors/find) and type in the six digit PIN code for your area. The tool checks that number against our full distributor list and shows every match immediately. No forms, no waiting, no email required.",
+      },
+      {
+        type: "list",
+        heading: "What You'll See for Each Match",
+        items: [
+          "The distributor's business name and the town or city they serve",
+          "A direct contact person and mobile number you can call right away",
+          "The full address so you know exactly where to visit or where a delivery will come from",
+        ],
+      },
+      {
+        type: "tip",
+        body: "Check the PIN code on a recent utility bill or courier receipt before searching. A single wrong digit is the most common reason a search comes back empty.",
+      },
+      {
+        type: "text",
+        heading: "If Your PIN Code Doesn't Return a Match",
+        body: "Our distributor network grows every quarter, so a handful of PIN codes, mostly in smaller towns, do not have a dedicated distributor listed yet. If that happens to you, reach our [customer care team](/contact) directly. They can point you to the nearest active distributor in a neighbouring area or help arrange delivery another way.",
+      },
+      {
+        type: "text",
+        heading: "A Distributor vs an Unverified Online Seller",
+        body: "Marketplaces are convenient, but an authorised distributor gives you something a marketplace listing usually cannot: a local, accountable point of contact who has every reason to keep you happy long after the sale. We cover exactly why that difference matters in [why buying from an authorised Elegant Galaxy distributor matters](/blog/why-buy-from-authorised-distributor).",
+      },
+      {
+        type: "warning",
+        body: "Be cautious of sellers claiming to be Elegant Galaxy distributors outside our official list. If a contact number does not match what our distributor finder or customer care team confirms, treat the offer with caution before paying anything.",
+      },
+      {
+        type: "cta",
+        heading: "Find Your Nearest Distributor",
+        body: "Enter your area's PIN code and see every authorised Elegant Galaxy distributor near you, complete with contact details and address.",
+        href: "/distributors/find",
+        label: "Search by PIN Code",
+      },
+      {
+        type: "text",
+        heading: "Interested in Becoming a Distributor Yourself",
+        body: "If you run a retail or wholesale electronics business and want to stock Elegant Galaxy products in an area we do not yet cover, our guide on [how to become an appliance distributor in India](/blog/become-appliance-distributor-india) walks through exactly what is required and how to apply.",
+      },
+    ],
+  },
+
+  // ── 13 ── Why buy from an authorised distributor ──────────────────────────
+  {
+    slug:        "why-buy-from-authorised-distributor",
+    title:       "Why Buying From an Authorised Elegant Galaxy Distributor Matters",
+    excerpt:     "Genuine warranty coverage, real after sales support, and fair pricing all come down to one decision: buying from an authorised Elegant Galaxy distributor instead of an unverified reseller.",
+    category:    "buying-guide",
+    readTime:    5,
+    publishedAt: "2026-08-06",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["distributor", "authorised dealer", "warranty", "buying guide"],
+    relatedSlugs: ["find-nearby-distributor-pin-code", "become-appliance-distributor-india"],
+    content: [
+      {
+        type: "text",
+        body: "Every appliance sold under the Elegant Galaxy name is built to the same standard, but the buying experience around it can differ enormously depending on who you buy from. An authorised distributor is not just a convenient nearby shop. It is your guarantee that the product, the price, and the support behind it are all genuine.",
+      },
+      {
+        type: "text",
+        heading: "Warranty Coverage That Actually Holds Up",
+        body: "Every product bought through an authorised Elegant Galaxy distributor carries our full manufacturer warranty from day one, backed by proper billing and serial number registration. Products bought through unverified sellers sometimes arrive without valid billing, which can complicate or even block a warranty claim later. A distributor listed in our official [distributor finder](/distributors/find) is registered with us directly, so your warranty paperwork is never in question.",
+      },
+      {
+        type: "text",
+        heading: "Real After Sales Support, Not a Support Ticket",
+        body: "An authorised distributor knows the products they sell and usually knows the local service network too. If your washing machine needs a technician or your air cooler pump needs a part, a local distributor can point you to the right person immediately, often faster than a generic support line. It is the difference between a phone call and a support ticket sitting in a queue.",
+      },
+      {
+        type: "list",
+        heading: "What an Authorised Distributor Guarantees",
+        items: [
+          "Genuine, unaltered products straight from Elegant Galaxy stock",
+          "Pricing that reflects our actual manufacturer rates, not an inflated resale markup",
+          "Valid billing and warranty registration from the day of purchase",
+          "A real, local point of contact for service, spares, and questions",
+          "Accountability, since every distributor operates under an agreement with us",
+        ],
+      },
+      {
+        type: "table",
+        heading: "Authorised Distributor vs an Unverified Seller",
+        headers: ["Factor", "Authorised Distributor", "Unverified Seller"],
+        rows: [
+          ["Warranty validity",   "Guaranteed from day one",        "Often uncertain or void"],
+          ["Pricing",             "Fair and in line with our rates","Can be inflated or unclear"],
+          ["Product authenticity","Guaranteed genuine",             "Cannot be confirmed"],
+          ["Local support",       "Direct contact available",       "Rarely available"],
+          ["Billing",             "Proper GST billing provided",    "Sometimes missing or incomplete"],
+        ],
+      },
+      {
+        type: "tip",
+        body: "Before buying, ask any seller for their distributor details and check them against our [distributor finder](/distributors/find). A genuine distributor will never hesitate to confirm this.",
+      },
+      {
+        type: "quote",
+        body: "A distributor relationship only works when both sides are accountable. We back every listed distributor with genuine stock and full warranty support, and in return they back every customer with honest pricing and real service.",
+        attribution: "Sanjeev Awal, Owner and Founder, Elegant Galaxy",
+      },
+      {
+        type: "warning",
+        body: "If a seller claims to be an Elegant Galaxy distributor but does not appear in our distributor finder, do not treat that as official. Confirm directly with our [customer care team](/contact) before making a purchase.",
+      },
+      {
+        type: "text",
+        heading: "How to Find Your Authorised Distributor",
+        body: "Locating your nearest authorised distributor takes under a minute. Our guide on [how to find your nearest Elegant Galaxy distributor using your PIN code](/blog/find-nearby-distributor-pin-code) walks through the exact steps, including what to do if your area does not return a match yet.",
+      },
+      {
+        type: "cta",
+        heading: "Search Your Area Now",
+        body: "Type in your PIN code and see every authorised Elegant Galaxy distributor near you, complete with contact details you can call today.",
+        href: "/distributors/find",
+        label: "Find a Distributor",
+      },
+      {
+        type: "text",
+        heading: "Considering the Distribution Business Yourself",
+        body: "If you are on the other side of this decision and thinking about stocking Elegant Galaxy products in your own shop or warehouse, our guide on [how to become an appliance distributor in India](/blog/become-appliance-distributor-india) covers what the role involves and what we look for in a partner.",
       },
     ],
   },
