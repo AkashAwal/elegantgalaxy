@@ -1256,7 +1256,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         type: "tip",
-        body: "Match motor wattage to household size rather than picking the biggest number. 135W on the 7-8kg models and 180-200W on the 9-12kg models are both sized correctly for their tub capacity, a bigger motor on a smaller tub doesn't wash any better.",
+        body: "Match motor wattage to household size rather than picking the biggest number. 135W on the 7kg and 8kg models and 180W to 200W on the 9kg to 12kg models are both sized correctly for their tub capacity, a bigger motor on a smaller tub doesn't wash any better.",
       },
       {
         type: "quote",
