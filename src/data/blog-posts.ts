@@ -299,7 +299,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-01-22",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["washing machine", "maintenance", "lifespan", "care", "tips"],
-    relatedSlugs: ["semi-automatic-vs-fully-automatic-washing-machine", "front-load-vs-top-load-washing-machine", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["semi-automatic-vs-fully-automatic-washing-machine", "semi-automatic-washing-machine-features-explained", "front-load-vs-top-load-washing-machine"],
     content: [
       {
         type: "text",
@@ -864,7 +864,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2025-06-05",
     author:      { name: "Elegant Galaxy", role: "Team" },
     tags:        ["washing machine", "semi-automatic", "fully-automatic", "comparison", "buying guide"],
-    relatedSlugs: ["washing-machine-care-tips", "lower-electricity-bill-appliances"],
+    relatedSlugs: ["semi-automatic-washing-machine-features-explained", "washing-machine-care-tips", "lower-electricity-bill-appliances"],
     content: [
       {
         type: "text",
@@ -1187,6 +1187,93 @@ export const BLOG_POSTS: BlogPost[] = [
         type: "text",
         heading: "A Full Home Maintenance Routine",
         body: "Good appliance habits tend to carry across the whole home. If you are cooling your home with an air cooler through the summer, our [air cooler maintenance checklist](/blog/air-cooler-maintenance-checklist) covers the same kind of simple, regular care, and our tips on [washing machine care](/blog/washing-machine-care-tips) complete the picture for the rest of the house.",
+      },
+    ],
+  },
+
+  // ── 14 ── Semi-automatic washing machine features explained ───────────────
+  {
+    slug:        "semi-automatic-washing-machine-features-explained",
+    title:       "Every Feature on Our Semi-Automatic Washing Machines, Explained",
+    excerpt:     "From the heavy wash pulsator to the double magic filter, here's what each feature on our semi-automatic range actually does and why it matters.",
+    category:    "buying-guide",
+    readTime:    5,
+    publishedAt: "2026-08-14",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["washing machine", "semi-automatic", "features", "buying guide"],
+    relatedSlugs: ["semi-automatic-vs-fully-automatic-washing-machine", "washing-machine-care-tips", "front-load-vs-top-load-washing-machine"],
+    content: [
+      {
+        type: "text",
+        body: "Spec sheets list a semi-automatic washing machine's features in a couple of lines, a pulsator, a steel drum, a filter, a buzzer, without saying what any of it actually does for your wash. Here's a closer look at each feature on our range, from the 7kg EGWM-7.0 up to the 12kg EGWM-12.0, and why it's there.",
+      },
+      {
+        type: "text",
+        heading: "The Heavy Wash Pulsator Does the Real Work",
+        body: "At the base of the wash tub sits a disc-shaped pulsator that spins back and forth rather than continuously in one direction. That reversing motion drives clothes through a strong current of water and detergent, which is what actually lifts dirt out of the fabric. It's a simpler mechanism than a motor-driven tumbling drum, and that simplicity is exactly why it handles heavily soiled work clothes, bedsheets, and towels well without needing a long automated cycle.",
+      },
+      {
+        type: "text",
+        heading: "Diamond Steel Drum",
+        body: "The wash tub itself is a Diamond Steel Drum across every capacity in our range, from 7kg to 12kg. Steel doesn't rust or crack the way some budget plastic tubs do over a few years of daily use, and the diamond-cut surface pattern helps water and detergent circulate evenly around the load instead of pooling in one spot.",
+      },
+      {
+        type: "text",
+        heading: "ABS Body Construction",
+        body: "The outer body is moulded from ABS plastic rather than sheet metal. It won't dent from a knock while moving the machine between rooms or floors, doesn't corrode in humid bathrooms or balconies, and keeps the overall unit lighter, which matters if your washing machine doesn't have one permanent spot.",
+      },
+      {
+        type: "list",
+        heading: "Filter Type Changes With Capacity",
+        items: [
+          "7kg (EGWM-7.0) and 8kg (EGWM-8.0) models use a Lint Filter, a mesh bag that catches loose threads and fibre during the wash",
+          "9kg and above (EGWM-9.0 through EGWM-12.0) step up to a Double Magic Filter, a two-stage filter that catches finer lint and hair more thoroughly",
+          "The upgrade tracks load size logically, since bigger loads shed more lint per wash and benefit most from the extra filtering stage",
+        ],
+      },
+      {
+        type: "table",
+        heading: "What Changes Across the Range",
+        headers: ["Capacity", "Model", "Motor", "Filter Type"],
+        rows: [
+          ["7kg",  "EGWM-7.0",  "135W", "Lint Filter"],
+          ["8kg",  "EGWM-8.0",  "135W", "Lint Filter"],
+          ["9kg",  "EGWM-9.0",  "180W", "Double Magic Filter"],
+          ["10kg", "EGWM-10.0", "180W", "Double Magic Filter"],
+          ["11kg", "EGWM-11.0", "200W", "Double Magic Filter"],
+          ["12kg", "EGWM-12.0", "200W", "Double Magic Filter"],
+        ],
+      },
+      {
+        type: "text",
+        heading: "Two Wash Programs, Not a Single Fixed Cycle",
+        body: "Every capacity ships with 2 wash programs rather than one fixed cycle, so you can match the wash to the load instead of running delicate fabrics through the same setting as heavily soiled ones. That's the main practical control you lose with a fully-automatic machine, where the program logic is built in and harder to override.",
+      },
+      {
+        type: "text",
+        heading: "The Buzzer",
+        body: "Because a semi-automatic machine needs you to move clothes from the wash tub to the spin tub by hand, timing matters more than it does on a fully-automatic machine. The built-in buzzer sounds when a cycle finishes, so clothes don't sit soaking longer than intended while you're in another room.",
+      },
+      {
+        type: "tip",
+        body: "Match motor wattage to household size rather than picking the biggest number. 135W on the 7-8kg models and 180-200W on the 9-12kg models are both sized correctly for their tub capacity, a bigger motor on a smaller tub doesn't wash any better.",
+      },
+      {
+        type: "quote",
+        body: "People assume more features means more to go wrong. On a semi-automatic machine it's the opposite, every feature here, the pulsator, the filter, the buzzer, exists to make the manual steps easier, not to add complexity.",
+        attribution: "Ansh Awal, Operations Manager, Elegant Galaxy",
+      },
+      {
+        type: "cta",
+        heading: "Compare All Six Capacities",
+        body: "See full specifications, designs, and pricing across the entire semi-automatic range, from 7kg to 12kg.",
+        href: "/products/washing-machines",
+        label: "View Washing Machines",
+      },
+      {
+        type: "text",
+        heading: "Still Deciding Between Semi and Fully-Automatic?",
+        body: "If you're still weighing the two designs against each other, our [semi-automatic vs fully-automatic comparison](/blog/semi-automatic-vs-fully-automatic-washing-machine) breaks down price, water usage, and running cost side by side. Once you've picked a machine, our guide on [habits that double your washing machine's lifespan](/blog/washing-machine-care-tips) covers the care routine that keeps these features working properly for years.",
       },
     ],
   },
