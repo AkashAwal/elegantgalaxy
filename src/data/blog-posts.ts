@@ -1278,4 +1278,88 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
 
+  // ── 15 ── Air cooler features explained ────────────────────────────────────
+  {
+    slug:        "air-cooler-features-explained",
+    title:       "Every Feature on Our Air Coolers, Explained",
+    excerpt:     "From honeycomb pad sides to the Nirosha motor, here's what each feature on our air cooler range actually does and why it matters.",
+    category:    "buying-guide",
+    readTime:    5,
+    publishedAt: "2026-08-20",
+    author:      { name: "Elegant Galaxy", role: "Team" },
+    tags:        ["air cooler", "features", "buying guide", "honeycomb pads"],
+    relatedSlugs: ["commercial-vs-domestic-air-cooler", "air-cooler-buying-tips", "air-cooler-maintenance-checklist"],
+    content: [
+      {
+        type: "text",
+        body: "A spec sheet lists an air cooler's features in a handful of words, a motor rating, a pad type, a grill style, without explaining what any of it means for how the cooler actually performs in your home or shop. Here's a closer look at each feature across our range, from the domestic ICE WIND to the commercial ICE STORM+, and why it's there.",
+      },
+      {
+        type: "text",
+        heading: "Honeycomb Pads: Why the Number of Sides Matters",
+        body: "The honeycomb pad is where warm air passes through wet cellulose and comes out cooled. Our commercial ICE COOL and ICE STORM models offer both a single side pad option and a three side, all round option, while every domestic model uses three side pads as standard. A single side pad concentrates air delivery in one direction, useful for a shop counter or a fixed spot facing a hall. Three side pads pull air in from all around the unit, which suits an open room where the cooler sits in the middle rather than against a wall.",
+      },
+      {
+        type: "text",
+        heading: "The Nirosha Motor: Sized Differently for Each Range",
+        body: "Every cooler in our lineup runs on a Nirosha motor, but the wattage changes with the job. Domestic models use a 93W motor turning clockwise at 1350 RPM, built for six to ten hours of typical bedroom or living room use. Commercial models step up to a 120W motor running anti clockwise at the same 1350 RPM, rated for continuous, all day operation on a shop floor or in a warehouse. Matching motor size to duty cycle, not just to cooling area, is what keeps a cooler running for years instead of burning out early.",
+      },
+      {
+        type: "list",
+        heading: "Spiral Grill vs Louver Grill",
+        items: [
+          "Spiral grill, used on ICE COOL and ICE COOL+, spreads air in a wide, even pattern suited to open floors",
+          "Louver grill, used on ICE STORM, ICE STORM+, and every domestic model, directs air in a more focused throw",
+          "Both grill styles use the same fan and motor sizing within their range, so the choice comes down to how you want air distributed in the room",
+        ],
+      },
+      {
+        type: "table",
+        heading: "What Changes Across the Range",
+        headers: ["Model", "Type", "Grill", "Motor", "Fan Size"],
+        rows: [
+          ["ICE WIND",     "Domestic",   "Louver", "93W Nirosha",  '16"'],
+          ["WIND STORM",   "Domestic",   "Louver", "93W Nirosha",  '16"'],
+          ["ICE COOL",     "Commercial", "Spiral", "120W Nirosha", '19"'],
+          ["ICE STORM",    "Commercial", "Louver", "120W Nirosha", '18.5"'],
+        ],
+      },
+      {
+        type: "text",
+        heading: "Body and Blade Material",
+        body: "Every cooler in the range uses a PPCP body, a plastic that resists cracking and fading under sun exposure better than painted sheet metal. Blade material is where domestic and commercial models split: domestic coolers use plastic ABS blades, light enough for the smaller 93W motor to spin efficiently, while commercial coolers use aluminium blades, stiffer and better suited to the higher air delivery a 120W motor pushes through them.",
+      },
+      {
+        type: "tip",
+        body: "If you're comparing two coolers with similar tank sizes, check the fan size and motor wattage together rather than either on its own. A bigger fan on a small motor won't move as much air as the spec sheet implies, and our range is built so the two are always matched.",
+      },
+      {
+        type: "text",
+        heading: "Air Delivery and What CMH Actually Tells You",
+        body: "Air delivery is measured in CMH, cubic metres per hour, and it's a better predictor of real world cooling than tank size alone. Domestic models deliver around 5000 CMH, enough for a bedroom or living room with reasonable cross ventilation. Commercial models deliver up to 8200 CMH, built to push air across an open shop floor or godown where the space is much larger and less enclosed. Our [comparison of commercial and domestic air coolers](/blog/commercial-vs-domestic-air-cooler) covers how to match this figure to your actual floor area.",
+      },
+      {
+        type: "quote",
+        body: "People assume a bigger tank is the main thing to check. It isn't. Motor wattage, fan size, and air delivery working together is what actually determines whether a cooler keeps up with your space, the tank just decides how often you refill it.",
+        attribution: "Sanjeev Awal, Owner and Founder, Elegant Galaxy",
+      },
+      {
+        type: "warning",
+        body: "Don't judge two coolers by tank capacity alone. A large tank paired with a small motor and fan will run longer between refills but won't cool a large or poorly ventilated space any faster.",
+      },
+      {
+        type: "cta",
+        heading: "Compare Every Model Side by Side",
+        body: "See full specifications, capacities, and pricing across every Elegant Galaxy air cooler, commercial and domestic.",
+        href: "/products/air-coolers",
+        label: "View All Air Coolers",
+      },
+      {
+        type: "text",
+        heading: "Choosing and Then Looking After Your Cooler",
+        body: "Once you've matched a model's features to your space, fit and running habits matter just as much as the spec sheet. Our guide on [what to check before you buy an air cooler](/blog/air-cooler-buying-tips) covers the practical details a spec sheet leaves out, and our [seasonal maintenance checklist](/blog/air-cooler-maintenance-checklist) keeps the pads, pump, and motor performing the way they're built to for years. Still unsure which model fits your space? [Get in touch](/contact) and our team will help you decide.",
+      },
+    ],
+  },
+
 ];
